@@ -1,0 +1,105 @@
+legacy
+legacy/**
+
+
+
+*.orig
+
+
+# compiled source
+# ---------------
+*.py[co]
+__pycache__
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyo
+*.pyc
+python
+
+
+# archives
+# --------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+
+# packages
+# --------
+*.egg
+*.egg-info
+*-eggs
+.eggs
+dist
+build
+.build
+parts
+sdist
+develop-eggs
+.installed.cfg
+
+
+# installer logs
+pip-log.txt
+
+# logs, dbs
+# ---------
+*.log
+*.sql
+*.sqlite
+sqlite.db
+
+
+# test, coverage output
+# ---------------------
+cover
+.noseids
+.coverage
+.tox
+
+
+# translations
+# ------------
+*.mo
+
+
+# sphinx build
+# ------------
+docs/_build
+docs/build
+.nojekyll
+searchindex.js
+objects.inv
+/*.html
+_static
+_sources
+*.rst
+
+
+# os files
+# --------
+.DS_Store
+._*
+.Spotlight-*
+.Trashes
+Icon?
+Thumbs.db
+
+
+# editors
+# -------
+*.idea
+*.swp
+.project
+.pydevproject
+.buildpath
+.mr.developer.cfg
