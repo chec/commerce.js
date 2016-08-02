@@ -17,14 +17,14 @@ class Commerce.Cart
           return data.cart_token
 
 
-    add: (data, callback) ->
-      return @m.Request 'cart/' + @cart_id, 'POST', data, callback
+    add: (data, callback, error) ->
+      return @m.Request 'cart/' + @cart_id, 'POST', data, callback, error
 
-    retrieve: (data, callback) ->
-      return @m.Request 'cart/' + @cart_id, 'GET', null, callback
+    retrieve: (data, callback, error) ->
+      return @m.Request 'cart/' + @cart_id, 'GET', null, callback, error
 
-		capture: (token, data, callback) ->
-		  return @m.Request 'checkout/'+token, 'POST', data, callback
+		capture: (token, data, callback, error) ->
+		  return @m.Request 'checkout/'+token, 'POST', data, callback, error
 
     ###
     Will do later

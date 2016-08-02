@@ -141,11 +141,15 @@ class Commerce
           return r
       error: (r, c, e) =>
         if typeof error == 'function'
-          error 'error', r.error, c
+          error r
         else
           if @options.debug is true
-            @Error r
+              @Error r
+          if typeof callback == 'function'
+              callback r, if typeof r.pagination != 'undefined' then r.pagination else null
+          else
+            return r
         _data = r;
 
     if typeof callback == 'undefined'
-      return _data.result
+      return _data.r

@@ -2,28 +2,28 @@
 
 		constructor: (@m) ->
 
-		generateToken: (identifier, callback) ->
-			return @m.Request 'checkout/'+identifier, 'GET', null, callback
+		generateToken: (identifier, callback, error) ->
+			return @m.Request 'checkout/'+identifier, 'GET', null, callback, error
 
-		capture: (token, data, callback) ->
-		  return @m.Request 'checkout/'+token, 'POST', data, callback
+		capture: (token, data, callback, error) ->
+		  return @m.Request 'checkout/'+token, 'POST', data, callback, error
 
-	  checkPaypalStatus: (token, callback) ->
-	    @m.Request 'checkout/' + token + '/check/paypal/payment', 'GET', {}, callback
+	  checkPaypalStatus: (token, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/paypal/payment', 'GET', {}, callback, error
 
-	  checkPaypalOrderCaptured: (token, callback) ->
-	    @m.Request 'checkout/' + token + '/check/paypal/captured', 'GET', {}, callback
+	  checkPaypalOrderCaptured: (token, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/paypal/captured', 'GET', {}, callback, error
 
-	  receipt: (token, callback) ->
+	  receipt: (token, callback, error) ->
 	    @m.Request 'checkout/' + token + '/receipt', 'GET', {}, callback
 
-	  checkPayWhatYouWant: (token, amount, callback) ->
-	    @m.Request 'checkout/' + token + '/check/pay_what_you_want', 'GET', { amount: amount }, callback
+	  checkPayWhatYouWant: (token, amount, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/pay_what_you_want', 'GET', { amount: amount }, callback, error
 
-	  fields: (identifier, callback) ->
-	    @m.Request 'checkout/' + identifier + '/fields', 'GET', null, callback
+	  fields: (identifier, callback, error) ->
+	    @m.Request 'checkout/' + identifier + '/fields', 'GET', null, callback, error
 
-	  setTaxZone: (identifier, location, callback) ->
+	  setTaxZone: (identifier, location, callback, error) ->
 	    country = undefined
 	    ip_address = undefined
 	    postal_zip_code = undefined
@@ -37,39 +37,39 @@
 	      'country': country
 	      'region': region
 	      'postal_zip_code': postal_zip_code
-	    }, callback
+	    }, callback, error
 
-	  getLocationFromIP: (token, ip_address, callback) ->
+	  getLocationFromIP: (token, ip_address, callback, error) ->
 	    if ip_address == null
 	      ip_address = ''
 	    if typeof ip_address == 'function'
-	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address
+	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error
 	    else
-	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', { ip: ip_address }, callback
+	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', { ip: ip_address }, callback, error
 
-	  isFree: (token, callback) ->
-	    @m.Request 'checkout/' + token + '/check/is_free', 'GET', null, callback
+	  isFree: (token, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/is_free', 'GET', null, callback, error
 
-	  checkVariant: (token, line_item_id, variant_id, option_id, callback) ->
+	  checkVariant: (token, line_item_id, variant_id, option_id, callback, error) ->
 	    @m.Request 'checkout/' + token + '/check/' + line_item_id + '/variant', 'GET', {
 	      'variant_id': variant_id
 	      'option_id': option_id
-	    }, callback
+	    }, callback, error
 
-	  checkDiscount: (token, code, callback) ->
-	    @m.Request 'checkout/' + token + '/check/discount', 'GET', { 'code': code }, callback
+	  checkDiscount: (token, code, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/discount', 'GET', { 'code': code }, callback, error
 
-	  checkShippingOption: (token, shipping_country, id, callback) ->
+	  checkShippingOption: (token, shipping_country, id, callback, error) ->
 	    @m.Request 'checkout/' + token + '/check/shipping', 'GET', {
 	      'country': shipping_country
 	      'id': id
-	    }, callback
+	    }, callback, error
 
-	  checkQuantity: (token, line_item, amount, callback) ->
-	    @m.Request 'checkout/' + token + '/check/' + line_item + '/quantity', 'GET', { 'amount': amount }, callback
+	  checkQuantity: (token, line_item, amount, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/' + line_item + '/quantity', 'GET', { 'amount': amount }, callback, error
 
-	  helperValidation: (token, callback) ->
-	    @m.Request 'checkout/' + token + '/helper/validation', 'GET', null, callback
+	  helperValidation: (token, callback, error) ->
+	    @m.Request 'checkout/' + token + '/helper/validation', 'GET', null, callback, error
 
-	  getLive: (token, callback) ->
-	    @m.Request 'checkout/' + token + '/live', 'GET', null, callback
+	  getLive: (token, callback, error) ->
+	    @m.Request 'checkout/' + token + '/live', 'GET', null, callback, error
