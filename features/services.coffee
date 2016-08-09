@@ -3,8 +3,8 @@ class Commerce.Services
     constructor: (@m) ->
 
     localeListCountries: (return_as_options, callback, error) ->
-        if return_as_options == null
-              return_as_options = false
+        if typeof return_as_options == 'function'  
+              callback = return_as_options
         @m.Request 'services/locale/countries', 'GET', null, callback, error
 
     localeListSubdivisions: (country_code, callback, error) ->
