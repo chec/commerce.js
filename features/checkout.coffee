@@ -2,6 +2,13 @@
 
 		constructor: (@m) ->
 
+		protect: (token) ->
+			@m.Request 'checkout/'+token+'/protect',
+								 'GET',
+								 null,
+								 (data) ->
+									 eval data.sift_js;
+
 		generateToken: (identifier, callback, error) ->
 			return @m.Request 'checkout/'+identifier, 'GET', null, callback, error
 
