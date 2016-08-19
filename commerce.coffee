@@ -7,6 +7,7 @@ class Commerce
     auth: {}
     version: 'v1'
     methods: ['GET', 'POST', 'PUT', 'DELETE']
+    debug: false
 
   constructor: (publicKey, debug = false) ->
 
@@ -138,7 +139,7 @@ class Commerce
       async: true
       headers: _headers
       success: (r, c, e) =>
-        if typeof r._console == 'object'
+        if @options.debug is true and typeof r._console == 'object'
             ChecConsoleHelper r._console[0], r._console[1], r._console[2]
         if typeof callback == 'function'
             callback r, if typeof r.pagination != 'undefined' then r.pagination else null
