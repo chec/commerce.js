@@ -22,7 +22,7 @@
 	    @m.Request 'checkout/' + token + '/check/paypal/captured', 'GET', {}, callback, error
 
 	  receipt: (token, callback, error) ->
-	    @m.Request 'checkout/' + token + '/receipt', 'GET', {}, callback
+	    @m.Request 'checkout/' + token + '/receipt', 'GET', {}, callback, error
 
 	  checkPayWhatYouWant: (token, amount, callback, error) ->
 	    @m.Request 'checkout/' + token + '/check/pay_what_you_want', 'GET', { amount: amount }, callback, error
