@@ -39,7 +39,6 @@ python
 *.egg-info
 *-eggs
 .eggs
-dist
 build
 .build
 parts
@@ -70,7 +69,7 @@ cover
 # translations
 # ------------
 *.mo
-
+node_modules
 
 # sphinx build
 # ------------
