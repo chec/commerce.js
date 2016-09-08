@@ -77,15 +77,11 @@ Commerce = (function() {
   };
 
   function Commerce(publicKey, debug) {
-    var ascii;
     if (debug == null) {
       debug = false;
     }
     if (debug) {
-      ascii = "\r\n \r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Che\ \ \ \ \ \ \ \ \ EcC\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....c2\ \ \ \ 2c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ c............................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ c.......:E2\ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ c........h\ \ $$\ \ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ c.........:C\ \ $cc$\ \ E....................c2\ \ \ 2c.....:C\r\n \ \ \ \ c............h\ \ \ \ $$\ \ c......................c2\ \ \ 2c.....:C\r\n \ \ c...............:E\ \ \ \ E:.........................c2\ \ \ 2c.....:C\r\n \ \ E............................:C\ c..................h2\ \ \ 2c...:C\r\n \ \ \ \ E........................:C\ \ \ \ \ \c..................h2\ \ \ 2hC\r\n \ \ \ \ \ \ E....................:C\ \ \ \ \ \ \ \ \ c..................h2\r\n \ \ \ \ \ \ \ \ E................:C\ \ \ \ \ \ \ \ \ \ \ \ \ c................:C\r\n \ \ \ \ \ \ \ \ \ \ E............:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ E........:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ E....:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\r\n \r\n\ \r\n \r\n";
-      console.log("%c" + ascii, "font-family: 'Courier New', Courier, monospace; color: #788ba4; font-weight:bold; font-size: 11px;");
-      console.log("%cCommerce.js console debugger is on! \ 🎉", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px");
-      console.log("%c💬 \ \ Need some help? Join our Slack channel - https://chec-commercejs-community.herokuapp.com \r\n", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px");
+      this.DebuggerIsLive();
     }
     this.options = this.Merge(this.options, {
       publicKey: publicKey,
@@ -113,6 +109,14 @@ Commerce = (function() {
     this.Products = new Commerce.Products(this);
     this.Services = new Commerce.Services(this);
   }
+
+  Commerce.prototype.DebuggerIsLive = function() {
+    var ascii;
+    ascii = "\r\n \r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Che\ \ \ \ \ \ \ \ \ EcC\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....c2\ \ \ \ 2c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ c............................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ c.......:E2\ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ c........h\ \ $$\ \ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ c.........:C\ \ $cc$\ \ E....................c2\ \ \ 2c.....:C\r\n \ \ \ \ c............h\ \ \ \ $$\ \ c......................c2\ \ \ 2c.....:C\r\n \ \ c...............:E\ \ \ \ E:.........................c2\ \ \ 2c.....:C\r\n \ \ E............................:C\ c..................h2\ \ \ 2c...:C\r\n \ \ \ \ E........................:C\ \ \ \ \ \c..................h2\ \ \ 2hC\r\n \ \ \ \ \ \ E....................:C\ \ \ \ \ \ \ \ \ c..................h2\r\n \ \ \ \ \ \ \ \ E................:C\ \ \ \ \ \ \ \ \ \ \ \ \ c................:C\r\n \ \ \ \ \ \ \ \ \ \ E............:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ E........:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ E....:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\r\n \r\n\ \r\n \r\n";
+    console.log("%c" + ascii, "font-family: 'Courier New', Courier, monospace; color: #788ba4; font-weight:bold; font-size: 11px;");
+    console.log("%cCommerce.js console debugger is on! \ 🎉", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px");
+    return console.log("%c💬 \ \ Need some help? Join our Slack channel - https://chec-commercejs-community.herokuapp.com \r\n", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px");
+  };
 
   Commerce.prototype.Merge = function(o1, o2) {
     var k, o3, v;
@@ -410,8 +414,10 @@ Commerce.Checkout = (function() {
     });
   };
 
-  Checkout.prototype.generateToken = function(identifier, callback, error) {
-    return this.m.Request('checkout/' + identifier, 'GET', null, callback, error);
+  Checkout.prototype.generateToken = function(identifier, identifier_type, callback, error) {
+    return this.m.Request('checkout/' + identifier, 'GET', {
+      'type': identifier_type
+    }, callback, error);
   };
 
   Checkout.prototype.capture = function(token, data, callback, error) {
@@ -430,9 +436,9 @@ Commerce.Checkout = (function() {
     return this.m.Request('checkout/' + token + '/receipt', 'GET', {}, callback, error);
   };
 
-  Checkout.prototype.checkPayWhatYouWant = function(token, amount, callback, error) {
+  Checkout.prototype.checkPayWhatYouWant = function(token, customer_set_price, callback, error) {
     return this.m.Request('checkout/' + token + '/check/pay_what_you_want', 'GET', {
-      amount: amount
+      'customer_set_price': customer_set_price
     }, callback, error);
   };
 
@@ -466,7 +472,7 @@ Commerce.Checkout = (function() {
       return this.m.Request('checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error);
     } else {
       return this.m.Request('checkout/' + token + '/helper/location_from_ip', 'GET', {
-        ip: ip_address
+        'ip_address': ip_address
       }, callback, error);
     }
   };
@@ -522,8 +528,10 @@ Commerce.Products = (function() {
     return this.m.Request('products', 'GET', null, callback, error);
   };
 
-  Products.prototype.retrieve = function(permalink, callback, error) {
-    return this.m.Request('products/' + permalink, 'GET', null, callback, error);
+  Products.prototype.retrieve = function(permalink, identifier_type, callback, error) {
+    return this.m.Request('products/' + permalink, 'GET', {
+      'type': identifier_type
+    }, callback, error);
   };
 
   return Products;
@@ -535,10 +543,7 @@ Commerce.Services = (function() {
     this.m = m;
   }
 
-  Services.prototype.localeListCountries = function(return_as_options, callback, error) {
-    if (typeof return_as_options === 'function') {
-      callback = return_as_options;
-    }
+  Services.prototype.localeListCountries = function(callback, error) {
     return this.m.Request('services/locale/countries', 'GET', null, callback, error);
   };
 

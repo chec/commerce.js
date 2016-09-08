@@ -34,12 +34,13 @@
            options: {
         mangle: true,
         compress: {
-            drop_console: true
+            drop_console: false
           }
       },
     my_target: {
       files: {
-        'dist/commerce.js': ['dist/commerce.unminified.js']
+        'dist/commerce.js': ['dist/commerce.unminified.js'],
+        '../checkout.v1/public/js/commerce.js': ['dist/commerce.unminified.js']
       }
     }
   },

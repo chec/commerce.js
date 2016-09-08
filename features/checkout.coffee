@@ -9,8 +9,8 @@
 								 (data) ->
 									 eval data.sift_js;
 
-		generateToken: (identifier, callback, error) ->
-			return @m.Request 'checkout/'+identifier, 'GET', null, callback, error
+		generateToken: (identifier, identifier_type, callback, error) ->
+			return @m.Request 'checkout/'+identifier, 'GET', {'type':identifier_type}, callback, error
 
 		capture: (token, data, callback, error) ->
 		  return @m.Request 'checkout/'+token, 'POST', data, callback, error
@@ -24,8 +24,8 @@
 	  receipt: (token, callback, error) ->
 	    @m.Request 'checkout/' + token + '/receipt', 'GET', {}, callback, error
 
-	  checkPayWhatYouWant: (token, amount, callback, error) ->
-	    @m.Request 'checkout/' + token + '/check/pay_what_you_want', 'GET', { amount: amount }, callback, error
+	  checkPayWhatYouWant: (token, customer_set_price, callback, error) ->
+	    @m.Request 'checkout/' + token + '/check/pay_what_you_want', 'GET', { 'customer_set_price': customer_set_price }, callback, error
 
 	  fields: (identifier, callback, error) ->
 	    @m.Request 'checkout/' + identifier + '/fields', 'GET', null, callback, error
@@ -52,7 +52,7 @@
 	    if typeof ip_address == 'function'
 	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error
 	    else
-	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', { ip: ip_address }, callback, error
+	      @m.Request 'checkout/' + token + '/helper/location_from_ip', 'GET', { 'ip_address': ip_address }, callback, error
 
 	  isFree: (token, callback, error) ->
 	    @m.Request 'checkout/' + token + '/check/is_free', 'GET', null, callback, error
