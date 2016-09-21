@@ -331,18 +331,18 @@ Commerce.Storage = (function() {
 })();
 
 Commerce.Cart = (function() {
-  function Cart(m) {
-    this.m = m;
+  function Cart(c) {
+    this.c = c;
     this.cart_id = this.id();
   }
 
   Cart.prototype.id = function() {
     var self;
-    if (this.m.Storage.get('commercejs_cart_id') !== null) {
-      return this.m.Storage.get('commercejs_cart_id');
+    if (this.c.Storage.get('commercejs_cart_id') !== null) {
+      return this.c.Storage.get('commercejs_cart_id');
     } else {
-      self = this.m;
-      return this.m.Request('cart', 'GET', null, function(data) {
+      self = this.c;
+      return this.c.Request('cart', 'GET', null, function(data) {
         self.Storage.set('commercejs_cart_id', data.cart_token);
         return data.cart_token;
       });
@@ -350,11 +350,11 @@ Commerce.Cart = (function() {
   };
 
   Cart.prototype.add = function(data, callback, error) {
-    return this.m.Request('cart/' + this.cart_id, 'POST', data, callback, error);
+    return this.c.Request('cart/' + this.cart_id, 'POST', data, callback, error);
   };
 
   Cart.prototype.retrieve = function(data, callback, error) {
-    return this.m.Request('cart/' + this.cart_id, 'GET', null, callback, error);
+    return this.c.Request('cart/' + this.cart_id, 'GET', null, callback, error);
   };
 
   return Cart;
@@ -363,7 +363,7 @@ Commerce.Cart = (function() {
 
 ({
   capture: function(token, data, callback, error) {
-    return this.m.Request('checkout/' + token, 'POST', data, callback, error);
+    return this.c.Request('checkout/' + token, 'POST', data, callback, error);
     return {
 
       /*
@@ -371,18 +371,18 @@ Commerce.Cart = (function() {
       id: (reset = false, cart_token = false) ->
       
         #If using current cart token
-        if not reset and not cart_token and @m.Storage.get('commercejs_cart_id') != null
-          return @m.Storage.get('commercejs_cart_id');
+        if not reset and not cart_token and @c.Storage.get('commercejs_cart_id') != null
+          return @c.Storage.get('commercejs_cart_id');
       
         #if no cart token set to activate
         if not cart_token
-          return @m.Request 'cart', 'GET', null, (data) ->
+          return @c.Request 'cart', 'GET', null, (data) ->
             new Commerce.Storage().set('commercejs_cart_id', data.cart_token)
             return data.cart_token
       
         #if cart token set
         if cart_token
-          @m.Storage.set 'commercejs_cart_id', cart_token
+          @c.Storage.set 'commercejs_cart_id', cart_token
           @cartId = cart_token
           return cart_token
        */
@@ -404,46 +404,46 @@ Commerce.Cart = (function() {
 });
 
 Commerce.Checkout = (function() {
-  function Checkout(m) {
-    this.m = m;
+  function Checkout(c) {
+    this.c = c;
   }
 
   Checkout.prototype.protect = function(token) {
-    return this.m.Request('checkout/' + token + '/protect', 'GET', null, function(data) {
+    return this.c.Request('checkout/' + token + '/protect', 'GET', null, function(data) {
       return eval(data.sift_js);
     });
   };
 
   Checkout.prototype.generateToken = function(identifier, identifier_type, callback, error) {
-    return this.m.Request('checkout/' + identifier, 'GET', {
+    return this.c.Request('checkout/' + identifier, 'GET', {
       'type': identifier_type
     }, callback, error);
   };
 
   Checkout.prototype.capture = function(token, data, callback, error) {
-    return this.m.Request('checkout/' + token, 'POST', data, callback, error);
+    return this.c.Request('checkout/' + token, 'POST', data, callback, error);
   };
 
   Checkout.prototype.checkPaypalStatus = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/paypal/payment', 'GET', {}, callback, error);
+    return this.c.Request('checkout/' + token + '/check/paypal/payment', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.checkPaypalOrderCaptured = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/paypal/captured', 'GET', {}, callback, error);
+    return this.c.Request('checkout/' + token + '/check/paypal/captured', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.receipt = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/receipt', 'GET', {}, callback, error);
+    return this.c.Request('checkout/' + token + '/receipt', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.checkPayWhatYouWant = function(token, customer_set_price, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/pay_what_you_want', 'GET', {
+    return this.c.Request('checkout/' + token + '/check/pay_what_you_want', 'GET', {
       'customer_set_price': customer_set_price
     }, callback, error);
   };
 
   Checkout.prototype.fields = function(identifier, callback, error) {
-    return this.m.Request('checkout/' + identifier + '/fields', 'GET', null, callback, error);
+    return this.c.Request('checkout/' + identifier + '/fields', 'GET', null, callback, error);
   };
 
   Checkout.prototype.setTaxZone = function(identifier, location, callback, error) {
@@ -456,7 +456,7 @@ Commerce.Checkout = (function() {
     country = typeof location.country !== 'undefined' ? location.country : '';
     region = typeof location.region !== 'undefined' ? location.region : '';
     postal_zip_code = typeof location.postal_zip_code !== 'undefined' ? location.postal_zip_code : '';
-    return this.m.Request('checkout/' + identifier + '/helper/set_tax_zone', 'GET', {
+    return this.c.Request('checkout/' + identifier + '/helper/set_tax_zone', 'GET', {
       'ip_address': ip_address,
       'country': country,
       'region': region,
@@ -469,50 +469,50 @@ Commerce.Checkout = (function() {
       ip_address = '';
     }
     if (typeof ip_address === 'function') {
-      return this.m.Request('checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error);
+      return this.c.Request('checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error);
     } else {
-      return this.m.Request('checkout/' + token + '/helper/location_from_ip', 'GET', {
+      return this.c.Request('checkout/' + token + '/helper/location_from_ip', 'GET', {
         'ip_address': ip_address
       }, callback, error);
     }
   };
 
   Checkout.prototype.isFree = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/is_free', 'GET', null, callback, error);
+    return this.c.Request('checkout/' + token + '/check/is_free', 'GET', null, callback, error);
   };
 
   Checkout.prototype.checkVariant = function(token, line_item_id, variant_id, option_id, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/' + line_item_id + '/variant', 'GET', {
+    return this.c.Request('checkout/' + token + '/check/' + line_item_id + '/variant', 'GET', {
       'variant_id': variant_id,
       'option_id': option_id
     }, callback, error);
   };
 
   Checkout.prototype.checkDiscount = function(token, code, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/discount', 'GET', {
+    return this.c.Request('checkout/' + token + '/check/discount', 'GET', {
       'code': code
     }, callback, error);
   };
 
   Checkout.prototype.checkShippingOption = function(token, shipping_country, id, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/shipping', 'GET', {
+    return this.c.Request('checkout/' + token + '/check/shipping', 'GET', {
       'country': shipping_country,
       'id': id
     }, callback, error);
   };
 
   Checkout.prototype.checkQuantity = function(token, line_item, amount, callback, error) {
-    return this.m.Request('checkout/' + token + '/check/' + line_item + '/quantity', 'GET', {
+    return this.c.Request('checkout/' + token + '/check/' + line_item + '/quantity', 'GET', {
       'amount': amount
     }, callback, error);
   };
 
   Checkout.prototype.helperValidation = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/helper/validation', 'GET', null, callback, error);
+    return this.c.Request('checkout/' + token + '/helper/validation', 'GET', null, callback, error);
   };
 
   Checkout.prototype.getLive = function(token, callback, error) {
-    return this.m.Request('checkout/' + token + '/live', 'GET', null, callback, error);
+    return this.c.Request('checkout/' + token + '/live', 'GET', null, callback, error);
   };
 
   return Checkout;
@@ -520,16 +520,16 @@ Commerce.Checkout = (function() {
 })();
 
 Commerce.Products = (function() {
-  function Products(m) {
-    this.m = m;
+  function Products(c) {
+    this.c = c;
   }
 
   Products.prototype.list = function(callback, error) {
-    return this.m.Request('products', 'GET', null, callback, error);
+    return this.c.Request('products', 'GET', null, callback, error);
   };
 
   Products.prototype.retrieve = function(permalink, identifier_type, callback, error) {
-    return this.m.Request('products/' + permalink, 'GET', {
+    return this.c.Request('products/' + permalink, 'GET', {
       'type': identifier_type
     }, callback, error);
   };
@@ -539,16 +539,16 @@ Commerce.Products = (function() {
 })();
 
 Commerce.Services = (function() {
-  function Services(m) {
-    this.m = m;
+  function Services(c) {
+    this.c = c;
   }
 
   Services.prototype.localeListCountries = function(callback, error) {
-    return this.m.Request('services/locale/countries', 'GET', null, callback, error);
+    return this.c.Request('services/locale/countries', 'GET', null, callback, error);
   };
 
   Services.prototype.localeListSubdivisions = function(country_code, callback, error) {
-    return this.m.Request('services/locale/' + country_code + '/subdivisions', 'GET', {}, callback, error);
+    return this.c.Request('services/locale/' + country_code + '/subdivisions', 'GET', {}, callback, error);
   };
 
   return Services;

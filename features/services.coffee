@@ -1,9 +1,9 @@
 class Commerce.Services
 
-    constructor: (@m) ->
+    constructor: (@c) ->
 
     localeListCountries: (callback, error) ->
-        @m.Request 'services/locale/countries', 'GET', null, callback, error
+        @c.Request 'services/locale/countries', 'GET', null, callback, error
 
     localeListSubdivisions: (country_code, callback, error) ->
-        @m.Request 'services/locale/' + country_code + '/subdivisions', 'GET', {}, callback, error
+        @c.Request 'services/locale/' + country_code + '/subdivisions', 'GET', {}, callback, error
