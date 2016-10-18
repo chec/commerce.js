@@ -132,6 +132,10 @@ Commerce = (function() {
     return o3;
   };
 
+  Commerce.prototype.Event = function(e) {
+    return window.dispatchEvent(new CustomEvent("Commercejs." + e));
+  };
+
   Commerce.prototype.InArray = function(key, arr) {
     if (!arr || indexOf.call(arr, key) < 0) {
       return false;
@@ -333,75 +337,70 @@ Commerce.Storage = (function() {
 Commerce.Cart = (function() {
   function Cart(c) {
     this.c = c;
-    this.cart_id = this.id();
+    this.init();
   }
 
-  Cart.prototype.id = function() {
-    var self;
-    if (this.c.Storage.get('commercejs_cart_id') !== null) {
-      return this.c.Storage.get('commercejs_cart_id');
-    } else {
-      self = this.c;
-      return this.c.Request('cart', 'GET', null, function(data) {
-        self.Storage.set('commercejs_cart_id', data.cart_token);
-        return data.cart_token;
-      });
+  Cart.prototype.init = function(id) {
+    var cjs;
+    if (id == null) {
+      id = false;
     }
+    cjs = this.c;
+    if (!id && this.c.Storage.get('commercejs_cart_id') !== null) {
+      return this.c.Request('cart/' + this.c.Storage.get('commercejs_cart_id'), 'GET', null, function(data) {
+        cjs.Cart.cart_id = data.id;
+        return cjs.Event('Cart.Ready');
+      }, function(error) {
+        return cjs.Cart.refresh();
+      });
+    } else {
+      if (id) {
+        return this.c.Request('cart/' + id, 'GET', null, function(data) {
+          cjs.Storage.set('commercejs_cart_id', data.id, 30);
+          cjs.Cart.cart_id = data.id;
+          return cjs.Event('Cart.Ready');
+        }, function(error) {
+          return cjs.Cart.refresh();
+        });
+      } else {
+        return this.refresh();
+      }
+    }
+  };
+
+  Cart.prototype.refresh = function(callback, error) {
+    var cjs;
+    cjs = this.c;
+    return this.c.Request('cart', 'GET', null, function(data) {
+      cjs.Storage.set('commercejs_cart_id', data.id, 30);
+      cjs.Cart.cart_id = data.id;
+      return cjs.Event('Cart.Ready');
+    });
+  };
+
+  Cart.prototype.id = function() {
+    return this.cart_id;
   };
 
   Cart.prototype.add = function(data, callback, error) {
     return this.c.Request('cart/' + this.cart_id, 'POST', data, callback, error);
   };
 
-  Cart.prototype.retrieve = function(data, callback, error) {
+  Cart.prototype.contents = function(callback, error) {
     return this.c.Request('cart/' + this.cart_id, 'GET', null, callback, error);
+  };
+
+  Cart.prototype.remove = function(line_id, callback, error) {
+    return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'DELETE', null, callback, error);
+  };
+
+  Cart.prototype.update = function(line_id, data, callback, error) {
+    return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'PUT', data, callback, error);
   };
 
   return Cart;
 
 })();
-
-({
-  capture: function(token, data, callback, error) {
-    return this.c.Request('checkout/' + token, 'POST', data, callback, error);
-    return {
-
-      /*
-      Will do later
-      id: (reset = false, cart_token = false) ->
-      
-        #If using current cart token
-        if not reset and not cart_token and @c.Storage.get('commercejs_cart_id') != null
-          return @c.Storage.get('commercejs_cart_id');
-      
-        #if no cart token set to activate
-        if not cart_token
-          return @c.Request 'cart', 'GET', null, (data) ->
-            new Commerce.Storage().set('commercejs_cart_id', data.cart_token)
-            return data.cart_token
-      
-        #if cart token set
-        if cart_token
-          @c.Storage.set 'commercejs_cart_id', cart_token
-          @cartId = cart_token
-          return cart_token
-       */
-      Event: function() {
-
-        /*
-        myEvent = new CustomEvent('Chec',
-                                  'detail': {
-                                            first: "Chalupa",
-                                            last: "Batman",
-                                            random: Math.round(Math.random() * 1000)
-                                            }
-                                  )
-        document.dispatchEvent myEvent
-         */
-      }
-    };
-  }
-});
 
 Commerce.Checkout = (function() {
   function Checkout(c) {
@@ -501,6 +500,12 @@ Commerce.Checkout = (function() {
     }, callback, error);
   };
 
+  Checkout.prototype.getShippingOptions = function(token, shipping_country, callback, error) {
+    return this.c.Request('checkout/' + token + '/helper/shipping_options', 'GET', {
+      'country': shipping_country
+    }, callback, error);
+  };
+
   Checkout.prototype.checkQuantity = function(token, line_item, amount, callback, error) {
     return this.c.Request('checkout/' + token + '/check/' + line_item + '/quantity', 'GET', {
       'amount': amount
@@ -545,6 +550,10 @@ Commerce.Services = (function() {
 
   Services.prototype.localeListCountries = function(callback, error) {
     return this.c.Request('services/locale/countries', 'GET', null, callback, error);
+  };
+
+  Services.prototype.localeListShippingCountries = function(token, callback, error) {
+    return this.c.Request('services/locale/' + token + '/countries', 'GET', null, callback, error);
   };
 
   Services.prototype.localeListSubdivisions = function(country_code, callback, error) {

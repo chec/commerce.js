@@ -72,6 +72,11 @@
 	      'id': id
 	    }, callback, error
 
+		getShippingOptions: (token, shipping_country, callback, error) ->
+	    @c.Request 'checkout/' + token + '/helper/shipping_options', 'GET', {
+	      'country': shipping_country
+	    }, callback, error
+
 	  checkQuantity: (token, line_item, amount, callback, error) ->
 	    @c.Request 'checkout/' + token + '/check/' + line_item + '/quantity', 'GET', { 'amount': amount }, callback, error
 
