@@ -386,7 +386,7 @@ Commerce.Cart = (function() {
     return this.c.Request('cart/' + this.cart_id, 'POST', data, callback, error);
   };
 
-  Cart.prototype.contents = function(callback, error) {
+  Cart.prototype.retrieve = function(callback, error) {
     return this.c.Request('cart/' + this.cart_id, 'GET', null, callback, error);
   };
 

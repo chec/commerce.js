@@ -35,7 +35,7 @@ class Commerce.Cart
     add: (data, callback, error) ->
         return @c.Request 'cart/' + @cart_id, 'POST', data, callback, error
 
-    contents: (callback, error) ->
+    retrieve: (callback, error) ->
         return @c.Request 'cart/' + @cart_id, 'GET', null, callback, error
 
     remove: (line_id, callback, error) ->
