@@ -394,6 +394,10 @@ Commerce.Cart = (function() {
     return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'DELETE', null, callback, error);
   };
 
+  Cart.prototype["delete"] = function(callback, error) {
+    return this.c.Request('cart/' + this.cart_id, 'DELETE', null, callback, error);
+  };
+
   Cart.prototype.update = function(line_id, data, callback, error) {
     return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'PUT', data, callback, error);
   };
