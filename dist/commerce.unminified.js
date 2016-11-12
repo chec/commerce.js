@@ -533,8 +533,12 @@ Commerce.Products = (function() {
     this.c = c;
   }
 
-  Products.prototype.list = function(callback, error) {
-    return this.c.Request('products', 'GET', null, callback, error);
+  Products.prototype.list = function(params, callback, error) {
+    if (typeof params === 'function') {
+      return this.c.Request('products', 'GET', null, params, callback);
+    } else {
+      return this.c.Request('products', 'GET', params, callback, error);
+    }
   };
 
   Products.prototype.retrieve = function(permalink, identifier_type, callback, error) {
