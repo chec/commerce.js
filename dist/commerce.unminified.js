@@ -418,9 +418,13 @@ Commerce.Checkout = (function() {
   };
 
   Checkout.prototype.generateToken = function(identifier, identifier_type, callback, error) {
-    return this.c.Request('checkout/' + identifier, 'GET', {
-      'type': identifier_type
-    }, callback, error);
+    if (typeof identifier_type === 'function') {
+      return this.c.Request('checkout/' + identifier, 'GET', null, identifier_type, callback);
+    } else {
+      return this.c.Request('checkout/' + identifier, 'GET', {
+        'type': identifier_type
+      }, callback, error);
+    }
   };
 
   Checkout.prototype.capture = function(token, data, callback, error) {

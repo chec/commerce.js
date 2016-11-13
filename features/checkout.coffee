@@ -10,7 +10,10 @@
 									 eval data.sift_js;
 
 		generateToken: (identifier, identifier_type, callback, error) ->
-			return @c.Request 'checkout/'+identifier, 'GET', {'type':identifier_type}, callback, error
+			if typeof identifier_type == 'function'
+				return @c.Request 'checkout/'+identifier, 'GET', null, identifier_type, callback
+			else
+				return @c.Request 'checkout/'+identifier, 'GET', {'type':identifier_type}, callback, error
 
 		capture: (token, data, callback, error) ->
 		  return @c.Request 'checkout/'+token, 'POST', data, callback, error
