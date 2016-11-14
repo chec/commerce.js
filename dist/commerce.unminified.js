@@ -347,7 +347,7 @@ Commerce.Cart = (function() {
     }
     cjs = this.c;
     if (!id && this.c.Storage.get('commercejs_cart_id') !== null) {
-      return this.c.Request('cart/' + this.c.Storage.get('commercejs_cart_id'), 'GET', null, function(data) {
+      return this.c.Request('carts/' + this.c.Storage.get('commercejs_cart_id'), 'GET', null, function(data) {
         cjs.Cart.cart_id = data.id;
         return cjs.Event('Cart.Ready');
       }, function(error) {
@@ -355,7 +355,7 @@ Commerce.Cart = (function() {
       });
     } else {
       if (id) {
-        return this.c.Request('cart/' + id, 'GET', null, function(data) {
+        return this.c.Request('carts/' + id, 'GET', null, function(data) {
           cjs.Storage.set('commercejs_cart_id', data.id, 30);
           cjs.Cart.cart_id = data.id;
           return cjs.Event('Cart.Ready');
@@ -383,23 +383,23 @@ Commerce.Cart = (function() {
   };
 
   Cart.prototype.add = function(data, callback, error) {
-    return this.c.Request('cart/' + this.cart_id, 'POST', data, callback, error);
+    return this.c.Request('carts/' + this.cart_id, 'POST', data, callback, error);
   };
 
   Cart.prototype.retrieve = function(callback, error) {
-    return this.c.Request('cart/' + this.cart_id, 'GET', null, callback, error);
+    return this.c.Request('carts/' + this.cart_id, 'GET', null, callback, error);
   };
 
   Cart.prototype.remove = function(line_id, callback, error) {
-    return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'DELETE', null, callback, error);
+    return this.c.Request('carts/' + this.cart_id + '/item/' + line_id, 'DELETE', null, callback, error);
   };
 
   Cart.prototype["delete"] = function(callback, error) {
-    return this.c.Request('cart/' + this.cart_id, 'DELETE', null, callback, error);
+    return this.c.Request('carts/' + this.cart_id, 'DELETE', null, callback, error);
   };
 
   Cart.prototype.update = function(line_id, data, callback, error) {
-    return this.c.Request('cart/' + this.cart_id + '/item/' + line_id, 'PUT', data, callback, error);
+    return this.c.Request('carts/' + this.cart_id + '/item/' + line_id, 'PUT', data, callback, error);
   };
 
   return Cart;
@@ -412,45 +412,45 @@ Commerce.Checkout = (function() {
   }
 
   Checkout.prototype.protect = function(token) {
-    return this.c.Request('checkout/' + token + '/protect', 'GET', null, function(data) {
+    return this.c.Request('checkouts/' + token + '/protect', 'GET', null, function(data) {
       return eval(data.sift_js);
     });
   };
 
   Checkout.prototype.generateToken = function(identifier, identifier_type, callback, error) {
     if (typeof identifier_type === 'function') {
-      return this.c.Request('checkout/' + identifier, 'GET', null, identifier_type, callback);
+      return this.c.Request('checkouts/' + identifier, 'GET', null, identifier_type, callback);
     } else {
-      return this.c.Request('checkout/' + identifier, 'GET', {
+      return this.c.Request('checkouts/' + identifier, 'GET', {
         'type': identifier_type
       }, callback, error);
     }
   };
 
   Checkout.prototype.capture = function(token, data, callback, error) {
-    return this.c.Request('checkout/' + token, 'POST', data, callback, error);
+    return this.c.Request('checkouts/' + token, 'POST', data, callback, error);
   };
 
   Checkout.prototype.checkPaypalStatus = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/paypal/payment', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/check/paypal/payment', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.checkPaypalOrderCaptured = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/paypal/captured', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/check/paypal/captured', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.receipt = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/receipt', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/receipt', 'GET', {}, callback, error);
   };
 
   Checkout.prototype.checkPayWhatYouWant = function(token, customer_set_price, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/pay_what_you_want', 'GET', {
+    return this.c.Request('checkouts/' + token + '/check/pay_what_you_want', 'GET', {
       'customer_set_price': customer_set_price
     }, callback, error);
   };
 
   Checkout.prototype.fields = function(identifier, callback, error) {
-    return this.c.Request('checkout/' + identifier + '/fields', 'GET', null, callback, error);
+    return this.c.Request('checkouts/' + identifier + '/fields', 'GET', null, callback, error);
   };
 
   Checkout.prototype.setTaxZone = function(identifier, location, callback, error) {
@@ -463,7 +463,7 @@ Commerce.Checkout = (function() {
     country = typeof location.country !== 'undefined' ? location.country : '';
     region = typeof location.region !== 'undefined' ? location.region : '';
     postal_zip_code = typeof location.postal_zip_code !== 'undefined' ? location.postal_zip_code : '';
-    return this.c.Request('checkout/' + identifier + '/helper/set_tax_zone', 'GET', {
+    return this.c.Request('checkouts/' + identifier + '/helper/set_tax_zone', 'GET', {
       'ip_address': ip_address,
       'country': country,
       'region': region,
@@ -476,56 +476,56 @@ Commerce.Checkout = (function() {
       ip_address = '';
     }
     if (typeof ip_address === 'function') {
-      return this.c.Request('checkout/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error);
+      return this.c.Request('checkouts/' + token + '/helper/location_from_ip', 'GET', null, ip_address, error);
     } else {
-      return this.c.Request('checkout/' + token + '/helper/location_from_ip', 'GET', {
+      return this.c.Request('checkouts/' + token + '/helper/location_from_ip', 'GET', {
         'ip_address': ip_address
       }, callback, error);
     }
   };
 
   Checkout.prototype.isFree = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/is_free', 'GET', null, callback, error);
+    return this.c.Request('checkouts/' + token + '/check/is_free', 'GET', null, callback, error);
   };
 
   Checkout.prototype.checkVariant = function(token, line_item_id, variant_id, option_id, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/' + line_item_id + '/variant', 'GET', {
+    return this.c.Request('checkouts/' + token + '/check/' + line_item_id + '/variant', 'GET', {
       'variant_id': variant_id,
       'option_id': option_id
     }, callback, error);
   };
 
   Checkout.prototype.checkDiscount = function(token, code, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/discount', 'GET', {
+    return this.c.Request('checkouts/' + token + '/check/discount', 'GET', {
       'code': code
     }, callback, error);
   };
 
   Checkout.prototype.checkShippingOption = function(token, shipping_country, id, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/shipping', 'GET', {
+    return this.c.Request('checkouts/' + token + '/check/shipping', 'GET', {
       'country': shipping_country,
       'id': id
     }, callback, error);
   };
 
   Checkout.prototype.getShippingOptions = function(token, shipping_country, callback, error) {
-    return this.c.Request('checkout/' + token + '/helper/shipping_options', 'GET', {
+    return this.c.Request('checkouts/' + token + '/helper/shipping_options', 'GET', {
       'country': shipping_country
     }, callback, error);
   };
 
   Checkout.prototype.checkQuantity = function(token, line_item, amount, callback, error) {
-    return this.c.Request('checkout/' + token + '/check/' + line_item + '/quantity', 'GET', {
+    return this.c.Request('checkouts/' + token + '/check/' + line_item + '/quantity', 'GET', {
       'amount': amount
     }, callback, error);
   };
 
   Checkout.prototype.helperValidation = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/helper/validation', 'GET', null, callback, error);
+    return this.c.Request('checkouts/' + token + '/helper/validation', 'GET', null, callback, error);
   };
 
   Checkout.prototype.getLive = function(token, callback, error) {
-    return this.c.Request('checkout/' + token + '/live', 'GET', null, callback, error);
+    return this.c.Request('checkouts/' + token + '/live', 'GET', null, callback, error);
   };
 
   return Checkout;
