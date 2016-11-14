@@ -371,7 +371,7 @@ Commerce.Cart = (function() {
   Cart.prototype.refresh = function(callback, error) {
     var cjs;
     cjs = this.c;
-    return this.c.Request('cart', 'GET', null, function(data) {
+    return this.c.Request('carts', 'GET', null, function(data) {
       cjs.Storage.set('commercejs_cart_id', data.id, 30);
       cjs.Cart.cart_id = data.id;
       return cjs.Event('Cart.Ready');

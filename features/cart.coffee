@@ -24,7 +24,7 @@ class Commerce.Cart
 
     refresh: (callback, error) ->
       cjs = @c
-      return @c.Request 'cart', 'GET', null, (data) ->
+      return @c.Request 'carts', 'GET', null, (data) ->
         cjs.Storage.set('commercejs_cart_id', data.id, 30)
         cjs.Cart.cart_id = data.id
         cjs.Event 'Cart.Ready'
