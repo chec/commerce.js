@@ -34,20 +34,7 @@
 	    @c.Request 'checkouts/' + identifier + '/fields', 'GET', null, callback, error
 
 	  setTaxZone: (identifier, location, callback, error) ->
-	    country = undefined
-	    ip_address = undefined
-	    postal_zip_code = undefined
-	    region = undefined
-	    ip_address = if typeof location.ip_address != 'undefined' then location.ip_address else ''
-	    country = if typeof location.country != 'undefined' then location.country else ''
-	    region = if typeof location.region != 'undefined' then location.region else ''
-	    postal_zip_code = if typeof location.postal_zip_code != 'undefined' then location.postal_zip_code else ''
-	    @c.Request 'checkouts/' + identifier + '/helper/set_tax_zone', 'GET', {
-	      'ip_address': ip_address
-	      'country': country
-	      'region': region
-	      'postal_zip_code': postal_zip_code
-	    }, callback, error
+	    @c.Request 'checkouts/' + identifier + '/helper/set_tax_zone', 'GET', location, callback, error
 
 	  getLocationFromIP: (token, ip_address, callback, error) ->
 	    if ip_address == null
@@ -88,3 +75,6 @@
 
 	  getLive: (token, callback, error) ->
 	    @c.Request 'checkouts/' + token + '/live', 'GET', null, callback, error
+
+	  getToken: (token, callback, error) ->
+	    @c.Request 'checkouts/tokens/' + token, 'GET', null, callback, error

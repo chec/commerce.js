@@ -39,10 +39,16 @@ class Commerce.Cart
         return @c.Request 'carts/' + @cart_id, 'GET', null, callback, error
 
     remove: (line_id, callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/item/' + line_id, 'DELETE', null, callback, error
+        return @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'DELETE', null, callback, error
 
     delete: (callback, error) ->
         return @c.Request 'carts/' + @cart_id, 'DELETE', null, callback, error
 
     update: (line_id, data, callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/item/' + line_id, 'PUT', data, callback, error
+        return @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'PUT', data, callback, error
+
+    contents: (callback, error) ->
+        return @c.Request 'carts/' + @cart_id + '/items', 'GET', null, callback, error
+
+    empty:  (callback, error) ->
+        return @c.Request 'carts/' + @cart_id + '/items', 'DELETE', null, callback, error

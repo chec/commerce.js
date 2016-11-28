@@ -391,7 +391,7 @@ Commerce.Cart = (function() {
   };
 
   Cart.prototype.remove = function(line_id, callback, error) {
-    return this.c.Request('carts/' + this.cart_id + '/item/' + line_id, 'DELETE', null, callback, error);
+    return this.c.Request('carts/' + this.cart_id + '/items/' + line_id, 'DELETE', null, callback, error);
   };
 
   Cart.prototype["delete"] = function(callback, error) {
@@ -399,7 +399,15 @@ Commerce.Cart = (function() {
   };
 
   Cart.prototype.update = function(line_id, data, callback, error) {
-    return this.c.Request('carts/' + this.cart_id + '/item/' + line_id, 'PUT', data, callback, error);
+    return this.c.Request('carts/' + this.cart_id + '/items/' + line_id, 'PUT', data, callback, error);
+  };
+
+  Cart.prototype.contents = function(callback, error) {
+    return this.c.Request('carts/' + this.cart_id + '/items', 'GET', null, callback, error);
+  };
+
+  Cart.prototype.empty = function(callback, error) {
+    return this.c.Request('carts/' + this.cart_id + '/items', 'DELETE', null, callback, error);
   };
 
   return Cart;
@@ -454,21 +462,7 @@ Commerce.Checkout = (function() {
   };
 
   Checkout.prototype.setTaxZone = function(identifier, location, callback, error) {
-    var country, ip_address, postal_zip_code, region;
-    country = void 0;
-    ip_address = void 0;
-    postal_zip_code = void 0;
-    region = void 0;
-    ip_address = typeof location.ip_address !== 'undefined' ? location.ip_address : '';
-    country = typeof location.country !== 'undefined' ? location.country : '';
-    region = typeof location.region !== 'undefined' ? location.region : '';
-    postal_zip_code = typeof location.postal_zip_code !== 'undefined' ? location.postal_zip_code : '';
-    return this.c.Request('checkouts/' + identifier + '/helper/set_tax_zone', 'GET', {
-      'ip_address': ip_address,
-      'country': country,
-      'region': region,
-      'postal_zip_code': postal_zip_code
-    }, callback, error);
+    return this.c.Request('checkouts/' + identifier + '/helper/set_tax_zone', 'GET', location, callback, error);
   };
 
   Checkout.prototype.getLocationFromIP = function(token, ip_address, callback, error) {
@@ -526,6 +520,10 @@ Commerce.Checkout = (function() {
 
   Checkout.prototype.getLive = function(token, callback, error) {
     return this.c.Request('checkouts/' + token + '/live', 'GET', null, callback, error);
+  };
+
+  Checkout.prototype.getToken = function(token, callback, error) {
+    return this.c.Request('checkouts/tokens/' + token, 'GET', null, callback, error);
   };
 
   return Checkout;
