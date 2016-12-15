@@ -22,7 +22,7 @@ class Commerce.Cart
         else
           @refresh()
 
-    refresh: (callback, error) ->
+    refresh: () ->
       cjs = @c
       return @c.Request 'carts', 'GET', null, (data) ->
         cjs.Storage.set('commercejs_cart_id', data.id, 30)
@@ -33,22 +33,22 @@ class Commerce.Cart
       return @cart_id
 
     add: (data, callback, error) ->
-        return @c.Request 'carts/' + @cart_id, 'POST', data, callback, error
+      @c.Request 'carts/' + @cart_id, 'POST', data, callback, error
 
     retrieve: (callback, error) ->
-        return @c.Request 'carts/' + @cart_id, 'GET', null, callback, error
+      @c.Request 'carts/' + @cart_id, 'GET', null, callback, error
 
     remove: (line_id, callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'DELETE', null, callback, error
+      @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'DELETE', null, callback, error
 
     delete: (callback, error) ->
-        return @c.Request 'carts/' + @cart_id, 'DELETE', null, callback, error
+      @c.Request 'carts/' + @cart_id, 'DELETE', null, callback, error
 
     update: (line_id, data, callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'PUT', data, callback, error
+      @c.Request 'carts/' + @cart_id + '/items/' + line_id, 'PUT', data, callback, error
 
     contents: (callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/items', 'GET', null, callback, error
+      @c.Request 'carts/' + @cart_id + '/items', 'GET', null, callback, error
 
     empty:  (callback, error) ->
-        return @c.Request 'carts/' + @cart_id + '/items', 'DELETE', null, callback, error
+      @c.Request 'carts/' + @cart_id + '/items', 'DELETE', null, callback, error
