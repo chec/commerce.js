@@ -19,7 +19,7 @@
                      bare: true
                  },
                  files: {
-                     'dist/commerce.unminified.js': ['js/debug.coffee',
+                     'dist/commerce.unminified.js': [
                          'commerce.coffee',
                          'js/ajax.coffee',
                          'js/storage.coffee',

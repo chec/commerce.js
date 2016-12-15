@@ -9,32 +9,29 @@
 								 (data) ->
 									 eval data.sift_js;
 
-		generateToken: (identifier, identifier_type, callback, error) ->
-			if typeof identifier_type == 'function'
-				return @c.Request 'checkouts/'+identifier, 'GET', null, identifier_type, callback
-			else
-				return @c.Request 'checkouts/'+identifier, 'GET', {'type':identifier_type}, callback, error
+		generateToken: (identifier, data, callback, error) ->
+			return @c.Request 'checkouts/'+identifier, 'GET', data, callback, error
 
 		capture: (token, data, callback, error) ->
 		  return @c.Request 'checkouts/'+token, 'POST', data, callback, error
 
 	  checkPaypalStatus: (token, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/paypal/payment', 'GET', {}, callback, error
+	    @c.Request 'checkouts/' + token + '/check/paypal/payment', 'GET', null, callback, error
 
 	  checkPaypalOrderCaptured: (token, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/paypal/captured', 'GET', {}, callback, error
+	    @c.Request 'checkouts/' + token + '/check/paypal/captured', 'GET', null, callback, error
 
 	  receipt: (token, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/receipt', 'GET', {}, callback, error
+	    @c.Request 'checkouts/' + token + '/receipt', 'GET', null, callback, error
 
-	  checkPayWhatYouWant: (token, customer_set_price, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/pay_what_you_want', 'GET', { 'customer_set_price': customer_set_price }, callback, error
+	  checkPayWhatYouWant: (token, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/pay_what_you_want', 'GET', data, callback, error
 
 	  fields: (identifier, callback, error) ->
 	    @c.Request 'checkouts/' + identifier + '/fields', 'GET', null, callback, error
 
-	  setTaxZone: (identifier, location, callback, error) ->
-	    @c.Request 'checkouts/' + identifier + '/helper/set_tax_zone', 'GET', location, callback, error
+	  setTaxZone: (identifier, data, callback, error) ->
+	    @c.Request 'checkouts/' + identifier + '/helper/set_tax_zone', 'GET', data, callback, error
 
 	  getLocationFromIP: (token, ip_address, callback, error) ->
 	    if ip_address == null
@@ -47,28 +44,20 @@
 	  isFree: (token, callback, error) ->
 	    @c.Request 'checkouts/' + token + '/check/is_free', 'GET', null, callback, error
 
-	  checkVariant: (token, line_item_id, variant_id, option_id, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/' + line_item_id + '/variant', 'GET', {
-	      'variant_id': variant_id
-	      'option_id': option_id
-	    }, callback, error
+	  checkVariant: (token, line_item_id, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/' + line_item_id + '/variant', 'GET', data, callback, error
 
-	  checkDiscount: (token, code, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/discount', 'GET', { 'code': code }, callback, error
+	  checkDiscount: (token, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/discount', 'GET', data, callback, error
 
-	  checkShippingOption: (token, shipping_country, id, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/shipping', 'GET', {
-	      'country': shipping_country
-	      'id': id
-	    }, callback, error
+	  checkShippingOption: (token, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/shipping', 'GET', data, callback, error
 
-		getShippingOptions: (token, shipping_country, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/helper/shipping_options', 'GET', {
-	      'country': shipping_country
-	    }, callback, error
+		getShippingOptions: (token, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/helper/shipping_options', 'GET', data, callback, error
 
-	  checkQuantity: (token, line_item, amount, callback, error) ->
-	    @c.Request 'checkouts/' + token + '/check/' + line_item + '/quantity', 'GET', { 'amount': amount }, callback, error
+	  checkQuantity: (token, line_item, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/' + line_item + '/quantity', 'GET', data, callback, error
 
 	  helperValidation: (token, callback, error) ->
 	    @c.Request 'checkouts/' + token + '/helper/validation', 'GET', null, callback, error

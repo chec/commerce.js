@@ -1,68 +1,3 @@
-window.ChecConsoleHelper = function(color, a, b, c) {
-  var bgc, emoji, i, is_error, len, messages, results;
-  bgc = void 0;
-  emoji = void 0;
-  i = void 0;
-  is_error = void 0;
-  len = void 0;
-  messages = void 0;
-  results = void 0;
-  color = color || 'black';
-  bgc = 'White';
-  is_error = false;
-  switch (color) {
-    case 'success':
-      color = '#488f5a';
-      emoji = '✅ \ \ ';
-      break;
-    case 'info':
-      color = 'DodgerBlue';
-      emoji = '';
-      break;
-    case 'error':
-      if (c.error.type === 'validation') {
-        color = 'rgba(244, 67, 54, 1)';
-        emoji = '🚫 Validation/Missing Fields';
-        a = '';
-      } else {
-        color = 'rgba(244, 67, 54, 1)';
-        emoji = '❌ HTTP ERROR ';
-        bgc = 'rgba(244, 67, 54, 0.15)';
-      }
-      is_error = true;
-      break;
-    case 'warning':
-      color = 'rgba(208, 154, 35, 1)';
-      emoji = '⚠️ \ ';
-  }
-  if (is_error === true) {
-    console.log('%c' + emoji + a, 'color:' + color + ';display:block; width: 100%;padding:2px 2px 2px 0px;font-family: Open Sans, Helvetica, Sans-serif;font-weight:bold;background-color:' + bgc + ';');
-    if (typeof c.error.message === 'object') {
-      messages = c.error.message;
-      i = 0;
-      len = messages.length;
-      results = [];
-      while (i < len) {
-        console.log('%c' + messages[i].field + ' %c' + messages[i].error, 'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:800;', 'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;');
-        results.push(i++);
-      }
-      return results;
-    } else {
-      return console.log('%c' + c.error.message, 'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;');
-    }
-  } else {
-    if (typeof color === 'object') {
-      console.log('%c' + a, 'color: PowderBlue;font-weight:bold;font-family: Open Sans, Helvetica, Sans-serif; background-color: RoyalBlue;');
-      console.log(color);
-    } else {
-      console.log('%c' + emoji + a, 'color:' + color + ';display:block;font-family: Open Sans, Helvetica, Sans-serif;line-height:28px; width: 100%;padding:2px 2px 2px 0px;font-weight:bold;background-color:' + bgc + ';');
-      if (b) {
-        console.log('%c' + b, 'color:#515D6D;line-height:22px;font-weight:400; font-family: Open Sans, Helvetica, Sans-serif;');
-      }
-    }
-  }
-};
-
 var Commerce,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -79,9 +14,6 @@ Commerce = (function() {
   function Commerce(publicKey, debug) {
     if (debug == null) {
       debug = false;
-    }
-    if (debug) {
-      this.DebuggerIsLive();
     }
     this.options = this.Merge(this.options, {
       publicKey: publicKey,
@@ -108,15 +40,12 @@ Commerce = (function() {
     this.Checkout = new Commerce.Checkout(this);
     this.Products = new Commerce.Products(this);
     this.Services = new Commerce.Services(this);
+    if (debug) {
+      this.Request('tools/console_debugger', 'GET', null, function(data) {
+        return eval(data["eval"]);
+      });
+    }
   }
-
-  Commerce.prototype.DebuggerIsLive = function() {
-    var ascii;
-    ascii = "\r\n \r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Che\ \ \ \ \ \ \ \ \ EcC\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....c2\ \ \ \ 2c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ c............................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ \ \ c.......:E2\ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ \ \ c........h\ \ $$\ \ \ 2c..................c2\ \ \ 2c.....:C\r\n \ \ \ \ \ \ c.........:C\ \ $cc$\ \ E....................c2\ \ \ 2c.....:C\r\n \ \ \ \ c............h\ \ \ \ $$\ \ c......................c2\ \ \ 2c.....:C\r\n \ \ c...............:E\ \ \ \ E:.........................c2\ \ \ 2c.....:C\r\n \ \ E............................:C\ c..................h2\ \ \ 2c...:C\r\n \ \ \ \ E........................:C\ \ \ \ \ \c..................h2\ \ \ 2hC\r\n \ \ \ \ \ \ E....................:C\ \ \ \ \ \ \ \ \ c..................h2\r\n \ \ \ \ \ \ \ \ E................:C\ \ \ \ \ \ \ \ \ \ \ \ \ c................:C\r\n \ \ \ \ \ \ \ \ \ \ E............:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c............:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ E........:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c........:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ E....:C\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ c....:C\r\n \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EcC\r\n \r\n\ \r\n \r\n";
-    console.log("%c" + ascii, "font-family: 'Courier New', Courier, monospace; color: #788ba4; font-weight:bold; font-size: 11px;");
-    console.log("%cCommerce.js console debugger is on! \ 🎉", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px");
-    return console.log("%c💬 \ \ Need some help? Join our Slack channel - https://chec-commercejs-community.herokuapp.com \r\n", "text-align:center; display:block; font-family: 'Open Sans', Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px");
-  };
 
   Commerce.prototype.Merge = function(o1, o2) {
     var k, o3, v;
@@ -260,6 +189,9 @@ Commerce = (function() {
           if (_this.options.debug === true && typeof r._console === 'object') {
             ChecConsoleHelper(r._console[0], r._console[1], r._console[2]);
           }
+          if (typeof r._event === 'string') {
+            _this.Event(r._event);
+          }
           if (typeof callback === 'function') {
             return callback(r, typeof r.pagination !== 'undefined' ? r.pagination : null);
           } else {
@@ -368,7 +300,7 @@ Commerce.Cart = (function() {
     }
   };
 
-  Cart.prototype.refresh = function(callback, error) {
+  Cart.prototype.refresh = function() {
     var cjs;
     cjs = this.c;
     return this.c.Request('carts', 'GET', null, function(data) {
@@ -425,14 +357,8 @@ Commerce.Checkout = (function() {
     });
   };
 
-  Checkout.prototype.generateToken = function(identifier, identifier_type, callback, error) {
-    if (typeof identifier_type === 'function') {
-      return this.c.Request('checkouts/' + identifier, 'GET', null, identifier_type, callback);
-    } else {
-      return this.c.Request('checkouts/' + identifier, 'GET', {
-        'type': identifier_type
-      }, callback, error);
-    }
+  Checkout.prototype.generateToken = function(identifier, data, callback, error) {
+    return this.c.Request('checkouts/' + identifier, 'GET', data, callback, error);
   };
 
   Checkout.prototype.capture = function(token, data, callback, error) {
@@ -440,29 +366,27 @@ Commerce.Checkout = (function() {
   };
 
   Checkout.prototype.checkPaypalStatus = function(token, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/paypal/payment', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/check/paypal/payment', 'GET', null, callback, error);
   };
 
   Checkout.prototype.checkPaypalOrderCaptured = function(token, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/paypal/captured', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/check/paypal/captured', 'GET', null, callback, error);
   };
 
   Checkout.prototype.receipt = function(token, callback, error) {
-    return this.c.Request('checkouts/' + token + '/receipt', 'GET', {}, callback, error);
+    return this.c.Request('checkouts/' + token + '/receipt', 'GET', null, callback, error);
   };
 
-  Checkout.prototype.checkPayWhatYouWant = function(token, customer_set_price, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/pay_what_you_want', 'GET', {
-      'customer_set_price': customer_set_price
-    }, callback, error);
+  Checkout.prototype.checkPayWhatYouWant = function(token, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/pay_what_you_want', 'GET', data, callback, error);
   };
 
   Checkout.prototype.fields = function(identifier, callback, error) {
     return this.c.Request('checkouts/' + identifier + '/fields', 'GET', null, callback, error);
   };
 
-  Checkout.prototype.setTaxZone = function(identifier, location, callback, error) {
-    return this.c.Request('checkouts/' + identifier + '/helper/set_tax_zone', 'GET', location, callback, error);
+  Checkout.prototype.setTaxZone = function(identifier, data, callback, error) {
+    return this.c.Request('checkouts/' + identifier + '/helper/set_tax_zone', 'GET', data, callback, error);
   };
 
   Checkout.prototype.getLocationFromIP = function(token, ip_address, callback, error) {
@@ -482,36 +406,24 @@ Commerce.Checkout = (function() {
     return this.c.Request('checkouts/' + token + '/check/is_free', 'GET', null, callback, error);
   };
 
-  Checkout.prototype.checkVariant = function(token, line_item_id, variant_id, option_id, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/' + line_item_id + '/variant', 'GET', {
-      'variant_id': variant_id,
-      'option_id': option_id
-    }, callback, error);
+  Checkout.prototype.checkVariant = function(token, line_item_id, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/' + line_item_id + '/variant', 'GET', data, callback, error);
   };
 
-  Checkout.prototype.checkDiscount = function(token, code, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/discount', 'GET', {
-      'code': code
-    }, callback, error);
+  Checkout.prototype.checkDiscount = function(token, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/discount', 'GET', data, callback, error);
   };
 
-  Checkout.prototype.checkShippingOption = function(token, shipping_country, id, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/shipping', 'GET', {
-      'country': shipping_country,
-      'id': id
-    }, callback, error);
+  Checkout.prototype.checkShippingOption = function(token, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/shipping', 'GET', data, callback, error);
   };
 
-  Checkout.prototype.getShippingOptions = function(token, shipping_country, callback, error) {
-    return this.c.Request('checkouts/' + token + '/helper/shipping_options', 'GET', {
-      'country': shipping_country
-    }, callback, error);
+  Checkout.prototype.getShippingOptions = function(token, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/helper/shipping_options', 'GET', data, callback, error);
   };
 
-  Checkout.prototype.checkQuantity = function(token, line_item, amount, callback, error) {
-    return this.c.Request('checkouts/' + token + '/check/' + line_item + '/quantity', 'GET', {
-      'amount': amount
-    }, callback, error);
+  Checkout.prototype.checkQuantity = function(token, line_item, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/' + line_item + '/quantity', 'GET', data, callback, error);
   };
 
   Checkout.prototype.helperValidation = function(token, callback, error) {
@@ -543,10 +455,8 @@ Commerce.Products = (function() {
     }
   };
 
-  Products.prototype.retrieve = function(permalink, identifier_type, callback, error) {
-    return this.c.Request('products/' + permalink, 'GET', {
-      'type': identifier_type
-    }, callback, error);
+  Products.prototype.retrieve = function(permalink, data, callback, error) {
+    return this.c.Request('products/' + permalink, 'GET', data, callback, error);
   };
 
   return Products;
