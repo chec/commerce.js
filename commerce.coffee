@@ -8,14 +8,16 @@ class Commerce
     version: 'v1'
     methods: ['GET', 'POST', 'PUT', 'DELETE']
     debug: false
+    config: {}
 
-  constructor: (publicKey, debug = false) ->
+  constructor: (publicKey, debug = false, config = {}) ->
 
-    @options = @Merge @options, { publicKey: publicKey, debug: debug }
-    @Storage = new Commerce.Storage
+    @options = @Merge @options, { publicKey: publicKey, debug: debug, config: config }
+    @Storage = new Commerce.Storage @
 
     switch window.location.hostname
         when 'checkout.chec.dev' then @options.url = 'api.chec.dev'
+        when 'localhost' then @options.url = 'api.chec.dev'
         when 'spaces.chec.dev' then @options.url = 'api.chec.dev'
         when 'stage.checkout.chec.io' then @options.url = 'stage.api.chec.io'
         when 'checkout.chec.io' then @options.url = 'api.chec.io'
