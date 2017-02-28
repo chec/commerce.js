@@ -8,20 +8,28 @@ Commerce = (function() {
     auth: {},
     version: 'v1',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    debug: false
+    debug: false,
+    config: {}
   };
 
-  function Commerce(publicKey, debug) {
+  function Commerce(publicKey, debug, config) {
     if (debug == null) {
       debug = false;
     }
+    if (config == null) {
+      config = {};
+    }
     this.options = this.Merge(this.options, {
       publicKey: publicKey,
-      debug: debug
+      debug: debug,
+      config: config
     });
-    this.Storage = new Commerce.Storage;
+    this.Storage = new Commerce.Storage(this);
     switch (window.location.hostname) {
       case 'checkout.chec.dev':
+        this.options.url = 'api.chec.dev';
+        break;
+      case 'localhost':
         this.options.url = 'api.chec.dev';
         break;
       case 'spaces.chec.dev':
@@ -227,19 +235,26 @@ Commerce = (function() {
 })();
 
 Commerce.Storage = (function() {
-  function Storage() {}
+  function Storage(c1) {
+    this.c = c1;
+  }
 
   Storage.prototype.set = function(key, value, days) {
-    var date, expires;
+    var date, expires, path;
     date = void 0;
     expires = void 0;
     expires = '';
+    if (typeof this.c.options.config.cookie_path === 'undefined') {
+      path = '/';
+    } else {
+      path = this.c.options.config.cookie_path;
+    }
     if (days) {
       date = new Date;
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = '; expires=' + date.toGMTString();
     }
-    return document.cookie = key + '=' + value + expires + '; path=/';
+    return document.cookie = key + '=' + value + expires + '; path=' + path;
   };
 
   Storage.prototype.get = function(key) {
