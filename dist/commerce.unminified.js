@@ -29,9 +29,6 @@ Commerce = (function() {
       case 'checkout.chec.dev':
         this.options.url = 'api.chec.dev';
         break;
-      case 'localhost':
-        this.options.url = 'api.chec.dev';
-        break;
       case 'spaces.chec.dev':
         this.options.url = 'api.chec.dev';
         break;

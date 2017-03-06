@@ -17,7 +17,6 @@ class Commerce
 
     switch window.location.hostname
         when 'checkout.chec.dev' then @options.url = 'api.chec.dev'
-        when 'localhost' then @options.url = 'api.chec.dev'
         when 'spaces.chec.dev' then @options.url = 'api.chec.dev'
         when 'stage.checkout.chec.io' then @options.url = 'stage.api.chec.io'
         when 'checkout.chec.io' then @options.url = 'api.chec.io'
