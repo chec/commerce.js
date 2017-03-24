@@ -488,6 +488,10 @@ Commerce.Services = (function() {
     return this.c.Request('services/locale/' + token + '/countries', 'GET', null, callback, error);
   };
 
+  Services.prototype.localeListShippingSubdivisions = function(token, country_code, callback, error) {
+    return this.c.Request('services/locale/' + token + '/countries/' + country_code + '/subdivisions', 'GET', null, callback, error);
+  };
+
   Services.prototype.localeListSubdivisions = function(country_code, callback, error) {
     return this.c.Request('services/locale/' + country_code + '/subdivisions', 'GET', {}, callback, error);
   };
