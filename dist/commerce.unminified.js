@@ -45,6 +45,8 @@ Commerce = (function() {
     this.Checkout = new Commerce.Checkout(this);
     this.Products = new Commerce.Products(this);
     this.Services = new Commerce.Services(this);
+    this.Categories = new Commerce.Categories(this);
+    this.Merchants = new Commerce.Merchants(this);
     if (debug) {
       this.Request('tools/console_debugger', 'GET', null, function(data) {
         return eval(data["eval"]);
@@ -67,7 +69,10 @@ Commerce = (function() {
   };
 
   Commerce.prototype.Event = function(e) {
-    return window.dispatchEvent(new CustomEvent("Commercejs." + e));
+    var _e;
+    _e = document.createEvent('CustomEvent');
+    _e.initCustomEvent("Commercejs." + e, false, false, this);
+    return window.dispatchEvent(_e);
   };
 
   Commerce.prototype.InArray = function(key, arr) {
@@ -358,6 +363,27 @@ Commerce.Cart = (function() {
 
 })();
 
+Commerce.Categories = (function() {
+  function Categories(c) {
+    this.c = c;
+  }
+
+  Categories.prototype.list = function(params, callback, error) {
+    if (typeof params === 'function') {
+      return this.c.Request('categories', 'GET', null, params, callback);
+    } else {
+      return this.c.Request('categories', 'GET', params, callback, error);
+    }
+  };
+
+  Categories.prototype.retrieve = function(slug, data, callback, error) {
+    return this.c.Request('categories/' + slug, 'GET', data, callback, error);
+  };
+
+  return Categories;
+
+})();
+
 Commerce.Checkout = (function() {
   function Checkout(c) {
     this.c = c;
@@ -451,6 +477,19 @@ Commerce.Checkout = (function() {
   };
 
   return Checkout;
+
+})();
+
+Commerce.Merchants = (function() {
+  function Merchants(c) {
+    this.c = c;
+  }
+
+  Merchants.prototype.about = function(callback, error) {
+    return this.c.Request('merchants', 'GET', null, callback, error);
+  };
+
+  return Merchants;
 
 })();
 

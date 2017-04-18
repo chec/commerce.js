@@ -26,6 +26,8 @@ class Commerce
     @Checkout = new Commerce.Checkout @
     @Products = new Commerce.Products @
     @Services = new Commerce.Services @
+    @Categories = new Commerce.Categories @
+    @Merchants = new Commerce.Merchants @
 
     if debug
       @.Request 'tools/console_debugger', 'GET', null, (data) -> eval data.eval;
@@ -38,7 +40,9 @@ class Commerce
     return o3
 
   Event: (e) ->
-    window.dispatchEvent(new CustomEvent("Commercejs.#{e}"))
+    _e = document.createEvent 'CustomEvent'
+    _e.initCustomEvent "Commercejs.#{e}", false, false, @
+    window.dispatchEvent _e
 
   InArray: (key, arr) ->
 
