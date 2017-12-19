@@ -67,3 +67,6 @@
 
 	  getToken: (token, callback, error) ->
 	    @c.Request 'checkouts/tokens/' + token, 'GET', null, callback, error
+
+	  checkGiftcard: (token, data, callback, error) ->
+	    @c.Request 'checkouts/' + token + '/check/giftcard', 'GET', data, callback, error

@@ -26,11 +26,11 @@ Commerce = (function() {
     });
     this.Storage = new Commerce.Storage(this);
     switch (window.location.hostname) {
-      case 'checkout.chec.dev':
-        this.options.url = 'api.chec.dev';
+      case 'checkout.chec.local':
+        this.options.url = 'api.chec.local';
         break;
-      case 'spaces.chec.dev':
-        this.options.url = 'api.chec.dev';
+      case 'spaces.chec.local':
+        this.options.url = 'api.chec.local';
         break;
       case 'stage.checkout.chec.io':
         this.options.url = 'stage.api.chec.io';
@@ -474,6 +474,10 @@ Commerce.Checkout = (function() {
 
   Checkout.prototype.getToken = function(token, callback, error) {
     return this.c.Request('checkouts/tokens/' + token, 'GET', null, callback, error);
+  };
+
+  Checkout.prototype.checkGiftcard = function(token, data, callback, error) {
+    return this.c.Request('checkouts/' + token + '/check/giftcard', 'GET', data, callback, error);
   };
 
   return Checkout;
