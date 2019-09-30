@@ -26,6 +26,14 @@
                          'js/abstract.coffee',
                          'features/*.coffee'
                      ],
+                   'dist/commerce.export.js': [
+                     'commerce.coffee',
+                     'js/ajax.coffee',
+                     'js/storage.coffee',
+                     'js/abstract.coffee',
+                     'features/*.coffee',
+                     'js/export.coffee'
+                   ],
                  }
              },
          },
