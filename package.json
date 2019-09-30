@@ -1,13 +1,28 @@
 {
-  "private": true,
+  "name": "@chec/commerce",
+  "version": "1.0.0",
+  "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
+  "homepage": "https://commercejs.com",
+  "keywords": [
+    "commerce", "shop", "ecommerce", "chec", "chec.io", "sdk"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chec/commerce.js"
+  },
+  "bugs": {
+    "url": "https://github.com/chec/commerce.js/issues/new"
+  },
+  "author": "Chec Platform Inc",
+  "license": "BSD-3-Clause",
+  "main": "dist/commerce.export.js",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-contrib-coffee": "*",
+    "grunt-contrib-coffee": "^1.0.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "*",
     "grunt-notify": "^0.4.5",
     "grunt-obfuscator": "^0.1.0"
-  },
-  "dependencies": {}
+  }
 }

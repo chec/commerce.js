@@ -26,6 +26,14 @@
                          'js/abstract.coffee',
                          'features/*.coffee'
                      ],
+                   'dist/commerce.unminified.export.js': [
+                     'commerce.coffee',
+                     'js/ajax.coffee',
+                     'js/storage.coffee',
+                     'js/abstract.coffee',
+                     'features/*.coffee',
+                     'js/export.coffee'
+                   ],
                  }
              },
          },
@@ -40,7 +48,7 @@
     my_target: {
       files: {
         'dist/commerce.js': ['dist/commerce.unminified.js'],
-        '../checkout.v1/public/js/commerce.js': ['dist/commerce.unminified.js']
+        'dist/commerce.export.js': ['dist/commerce.unminified.export.js']
       }
     }
   },
