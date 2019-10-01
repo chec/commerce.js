@@ -39,7 +39,7 @@
     "jest-cli": "^24.9.0"
   },
   "jest": {
-    "testRegex": ".*-test\\.jsx?$"
+    "testRegex": ".*-test.jsx?$"
   },
   "babel": {
     "presets": [
