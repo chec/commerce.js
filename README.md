@@ -1,4 +1,4 @@
-# Commerce.js
+# commerce.js
 
 [![CircleCI](https://circleci.com/gh/chec/commerce.js.svg?style=svg)](https://circleci.com/gh/chec/commerce.js)
 
