@@ -1,6 +1,6 @@
 {
   "name": "@chec/commerce",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
   "homepage": "https://commercejs.com",
   "keywords": [
