@@ -44,8 +44,5 @@
     "presets": [
       "@babel/preset-env"
     ]
-  },
-  "dependencies": {
-    "eslint": "^6.5.1"
   }
 }
