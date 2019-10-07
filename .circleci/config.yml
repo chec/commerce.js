@@ -11,4 +11,7 @@ jobs:
 
       - run: npm install
       - run: npm run lint
-      - run: npm run test
+      - run: npm run test:coverage
+
+      # Upload coverage
+      - run: bash <(curl -s https://codecov.io/bash) -F js
