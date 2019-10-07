@@ -26,21 +26,31 @@ class Cart {
     );
   }
 
+  /**
+   * Request a new cart ID. This method persists the new ID to the cart and local storage,
+   * before firing a `Cart.Ready` event.
+   */
   refresh() {
-    return this.commerce.request('carts', 'GET', null, ({ id }) => {
+    this.commerce.request('carts', 'GET', null, ({ id }) => {
       this.commerce.storage.set('commercejs_cart_id', id, 30);
       this.commerce.cart.cart_id = id;
       return this.commerce.event('Cart.Ready');
     });
   }
 
+  /**
+   * Returns the cart identifier being used in the current request, or null if none
+   * has been created yet.
+   *
+   * @returns {string|null}
+   */
   id() {
-    return this.cart_id;
+    return this.commerce.cart.cart_id || null;
   }
 
   add(data, callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}`,
+      `carts/${this.id()}`,
       'POST',
       data,
       callback,
@@ -50,7 +60,7 @@ class Cart {
 
   retrieve(callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}`,
+      `carts/${this.id()}`,
       'GET',
       null,
       callback,
@@ -60,7 +70,7 @@ class Cart {
 
   remove(lineId, callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}/items/${lineId}`,
+      `carts/${this.id()}/items/${lineId}`,
       'DELETE',
       null,
       callback,
@@ -70,7 +80,7 @@ class Cart {
 
   delete(callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}`,
+      `carts/${this.id()}`,
       'DELETE',
       null,
       callback,
@@ -80,7 +90,7 @@ class Cart {
 
   update(lineId, data, callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}/items/${lineId}`,
+      `carts/${this.id()}/items/${lineId}`,
       'PUT',
       data,
       callback,
@@ -90,7 +100,7 @@ class Cart {
 
   contents(callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}/items`,
+      `carts/${this.id()}/items`,
       'GET',
       null,
       callback,
@@ -100,7 +110,7 @@ class Cart {
 
   empty(callback, error) {
     return this.commerce.request(
-      `carts/${this.cart_id}/items`,
+      `carts/${this.id()}/items`,
       'DELETE',
       null,
       callback,

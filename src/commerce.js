@@ -209,7 +209,11 @@ class Commerce {
       headers: _headers,
       success: (r, c, e) => {
         if (this.options.debug === true && typeof r._console === 'object') {
-          return this.consoleHelper(r._console[0], r._console[1], r._console[2]);
+          return this.consoleHelper(
+            r._console[0],
+            r._console[1],
+            r._console[2]
+          );
         }
 
         if (typeof r._event === 'string') {
