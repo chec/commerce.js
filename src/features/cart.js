@@ -1,3 +1,5 @@
+import Commerce from '../commerce';
+
 class Cart {
   /**
    * @param {Commerce} commerce
@@ -7,46 +9,28 @@ class Cart {
     this.init();
   }
 
-  init(id = false) {
-    const cjs = this.commerce;
-
-    if (!id && this.commerce.storage.get('commercejs_cart_id') !== null) {
-      return this.commerce.request(
-        `carts/${this.commerce.storage.get('commercejs_cart_id')}`,
-        'GET',
-        null,
-        data => {
-          cjs.cart.cart_id = data.id;
-          return cjs.event('Cart.Ready');
-        },
-        error => cjs.cart.refresh()
-      );
+  init() {
+    if (this.commerce.storage.get('commercejs_cart_id') === null) {
+      return this.refresh();
     }
 
-    if (id) {
-      return this.commerce.request(
-        `carts/${id}`,
-        'GET',
-        null,
-        data => {
-          cjs.storage.set('commercejs_cart_id', data.id, 30);
-          cjs.cart.cart_id = data.id;
-          return cjs.event('Cart.Ready');
-        },
-        error => cjs.cart.refresh()
-      );
-    }
-
-    return this.refresh();
+    return this.commerce.request(
+      `carts/${this.commerce.storage.get('commercejs_cart_id')}`,
+      'GET',
+      null,
+      ({ id }) => {
+        this.commerce.cart.cart_id = id;
+        return this.commerce.event('Cart.Ready');
+      },
+      error => this.commerce.cart.refresh()
+    );
   }
 
   refresh() {
-    const cjs = this.commerce;
-
-    return this.commerce.request('carts', 'GET', null, data => {
-      cjs.storage.set('commercejs_cart_id', data.id, 30);
-      cjs.cart.cart_id = data.id;
-      return cjs.event('Cart.Ready');
+    return this.commerce.request('carts', 'GET', null, ({ id }) => {
+      this.commerce.storage.set('commercejs_cart_id', id, 30);
+      this.commerce.cart.cart_id = id;
+      return this.commerce.event('Cart.Ready');
     });
   }
 
