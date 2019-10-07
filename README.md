@@ -1,5 +1,7 @@
 # Commerce.js
 
+[![CircleCI](https://circleci.com/gh/chec/commerce.js.svg?style=svg)](https://circleci.com/gh/chec/commerce.js)
+
 Easy to use JavaScript SDK for managing carts and selling products from your chec.io store
 
 https://commercejs.com
