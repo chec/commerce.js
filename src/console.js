@@ -40,7 +40,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
         color +
         ';display:block; width: 100%;padding:2px 2px 2px 0px;font-family: Open Sans, Helvetica, Sans-serif;font-weight:bold;background-color:' +
         bgc +
-        ';'
+        ';',
     );
     if (typeof c.error.message === 'object') {
       messages = c.error.message;
@@ -51,7 +51,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
         console.log(
           '%c' + messages[i].field + ' %c' + messages[i].error,
           'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:800;',
-          'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;'
+          'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;',
         );
         results.push(i++);
       }
@@ -60,14 +60,14 @@ const consoleHelper = (color = 'black', a, b, c) => {
 
     return console.log(
       '%c' + c.error.message,
-      'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;'
+      'color:#515D6D;font-family: Open Sans, Helvetica, Sans-serif;font-weight:400;',
     );
   }
 
   if (typeof color === 'object') {
     console.log(
       '%c' + a,
-      'color: PowderBlue;font-weight:bold;font-family: Open Sans, Helvetica, Sans-serif; background-color: RoyalBlue;'
+      'color: PowderBlue;font-weight:bold;font-family: Open Sans, Helvetica, Sans-serif; background-color: RoyalBlue;',
     );
     console.log(color);
     return;
@@ -79,12 +79,12 @@ const consoleHelper = (color = 'black', a, b, c) => {
       color +
       ';display:block;font-family: Open Sans, Helvetica, Sans-serif;line-height:28px; width: 100%;padding:2px 2px 2px 0px;font-weight:bold;background-color:' +
       bgc +
-      ';'
+      ';',
   );
   if (b) {
     console.log(
       '%c' + b,
-      'color:#515D6D;line-height:22px;font-weight:400; font-family: Open Sans, Helvetica, Sans-serif;'
+      'color:#515D6D;line-height:22px;font-weight:400; font-family: Open Sans, Helvetica, Sans-serif;',
     );
   }
 };
@@ -95,15 +95,15 @@ const debuggerOnNotice = () => {
 
   console.log(
     '%c' + ascii,
-    'font-family: Courier New, Courier, monospace; color: #788ba4; font-weight:bold; font-size: 11px;'
+    'font-family: Courier New, Courier, monospace; color: #788ba4; font-weight:bold; font-size: 11px;',
   );
   console.log(
     '%cCommerce.js console debugger is on!  🎉',
-    'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px'
+    'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px',
   );
   console.log(
     '%c💬   Need some help? Join our Slack channel - https://chec-commercejs-community.herokuapp.com \r\n',
-    'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px'
+    'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px',
   );
 };
 

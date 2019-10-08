@@ -18,7 +18,7 @@ beforeEach(() => {
 
   Commerce.mockImplementation(() => {
     return {
-      request: requestMock
+      request: requestMock,
     };
   });
 
@@ -40,7 +40,7 @@ describe('Services', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -51,7 +51,7 @@ describe('Services', () => {
       services.localeListShippingCountries(
         'foo123',
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -59,7 +59,7 @@ describe('Services', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -71,7 +71,7 @@ describe('Services', () => {
         'foo123',
         'nz',
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -79,7 +79,7 @@ describe('Services', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -94,7 +94,7 @@ describe('Services', () => {
         'GET',
         {},
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });

@@ -10,6 +10,7 @@ module.exports = {
     'prettier',
   ],
   parserOptions: {
+    ecmaVersion: 9,
     sourceType: 'module',
   },
   rules: {

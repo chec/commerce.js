@@ -18,7 +18,7 @@ beforeEach(() => {
 
   Commerce.mockImplementation(() => {
     return {
-      request: requestMock
+      request: requestMock,
     };
   });
 
@@ -40,7 +40,7 @@ describe('Merchants', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });

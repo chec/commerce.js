@@ -16,7 +16,7 @@ class Checkout {
       `checkouts/${token}/protect`,
       'GET',
       null,
-      data => eval(data.sift_js) // todo remove this, or document if it is safe
+      data => eval(data.sift_js), // todo remove this, or document if it is safe
     );
   }
 
@@ -34,7 +34,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -63,7 +63,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -80,7 +80,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -97,7 +97,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -115,7 +115,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -130,7 +130,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -148,7 +148,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -168,7 +168,7 @@ class Checkout {
         'GET',
         null,
         ipAddress,
-        error
+        error,
       );
       return;
     }
@@ -178,7 +178,7 @@ class Checkout {
       'GET',
       { ip_address: ipAddress },
       callback,
-      error
+      error,
     );
   }
 
@@ -195,7 +195,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -214,7 +214,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -232,7 +232,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -250,7 +250,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -268,7 +268,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -287,7 +287,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 
@@ -304,7 +304,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -321,7 +321,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -338,7 +338,7 @@ class Checkout {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -356,7 +356,7 @@ class Checkout {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 }

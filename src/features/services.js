@@ -20,7 +20,7 @@ class Services {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -37,7 +37,7 @@ class Services {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -55,7 +55,7 @@ class Services {
       'GET',
       null,
       callback,
-      error
+      error,
     );
   }
 
@@ -72,7 +72,7 @@ class Services {
       'GET',
       {},
       callback,
-      error
+      error,
     );
   }
 }

@@ -18,7 +18,7 @@ beforeEach(() => {
 
   Commerce.mockImplementation(() => {
     return {
-      request: requestMock
+      request: requestMock,
     };
   });
 
@@ -40,7 +40,7 @@ describe('Categories', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
 
@@ -53,7 +53,7 @@ describe('Categories', () => {
         'GET',
         { foo: 'bar' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -65,7 +65,7 @@ describe('Categories', () => {
         'foo',
         { bar: 'baz' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -73,7 +73,7 @@ describe('Categories', () => {
         'GET',
         { bar: 'baz' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });

@@ -1,12 +1,14 @@
 /* global jest, describe, it, expect, beforeEach */
-
-import Cart from '../cart';
-import Commerce from '../../commerce';
-
+jest.mock('axios');
 jest.mock('../../commerce');
 
+import Cart from '../cart';
+import MockCommerce from '../../commerce';
+import axios from 'axios';
+
+const Commerce = jest.requireActual('../../commerce').default;
+
 let eventMock;
-let requestMock;
 let storageGetMock;
 let storageSetMock;
 let mockCommerce;
@@ -14,201 +16,203 @@ let mockCallback;
 let mockErrorCallback;
 
 beforeEach(() => {
-  Commerce.mockClear();
+  MockCommerce.mockClear();
 
-  // Commerce mock internals
-  requestMock = jest
-    .fn()
-    .mockImplementation((endpoint, method, data, callback) =>
-      callback({
-        id: '12345'
-      })
-    );
   eventMock = jest.fn();
   storageGetMock = jest.fn();
   storageSetMock = jest.fn();
 
-  Commerce.mockImplementation(() => {
-    return {
-      cart: {
-        cart_id: null
-      },
-      event: eventMock,
-      request: requestMock,
-      storage: {
-        get: storageGetMock,
-        set: storageSetMock
-      }
-    };
-  });
+  const commerceImpl = {
+    options: {
+      url: 'http://localhost/',
+      publicKey: 'test',
+      version: 'v1',
+    },
+    cart: {
+      cart_id: null,
+    },
+    event: eventMock,
+    storage: {
+      get: storageGetMock,
+      set: storageSetMock,
+    },
+  };
 
-  mockCommerce = new Commerce('foo', true);
+  commerceImpl.request = Commerce.prototype.request.bind(commerceImpl);
+
+  MockCommerce.mockImplementation(() => commerceImpl);
+
+  mockCommerce = new MockCommerce('foo', true);
 
   // Used for API proxy methods
   mockCallback = jest.fn();
   mockErrorCallback = jest.fn();
+
+  axios.mockClear();
+  axios.mockImplementation(() =>
+    Promise.resolve({ status: 200, data: { id: '12345' } }),
+  );
 });
 
 describe('Cart', () => {
-  describe('init', () => {
-    it('initializes a new ID when none is stored', () => {
+  describe('id', () => {
+    it('initializes a new ID when none is stored', async () => {
       storageGetMock.mockReturnValue(null);
 
-      new Cart(mockCommerce);
+      const cart = new Cart(mockCommerce);
+
+      await cart.id();
 
       expect(mockCommerce.storage.get).toHaveBeenCalled();
       // Ensure that `Cart.refresh()` was called
-      expect(mockCommerce.request).toHaveBeenCalledWith(
-        'carts',
-        'GET',
-        null,
-        expect.any(Function)
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts',
+        }),
       );
     });
 
-    it('initializes from the stored ID', () => {
+    it('initializes from the stored ID', async () => {
       storageGetMock.mockReturnValue('123');
 
-      new Cart(mockCommerce);
+      const cart = new Cart(mockCommerce);
+
+      await cart.id();
 
       expect(mockCommerce.storage.get).toHaveBeenCalled();
-      expect(mockCommerce.request).toHaveBeenCalledWith(
-        'carts/123',
-        'GET',
-        null,
-        expect.any(Function),
-        expect.any(Function)
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/123',
+          method: 'get',
+        }),
       );
     });
   });
 
   describe('refresh', () => {
-    it('sets the card ID and fires a ready event', () => {
+    it('sets the card ID and fires a ready event', async () => {
       const cart = new Cart(mockCommerce);
-      cart.refresh();
+      await cart.refresh();
 
       expect(storageSetMock).toHaveBeenCalledWith(
         'commercejs_cart_id',
         '12345',
-        30
+        30,
       );
-      expect(eventMock).toHaveBeenCalledWith('Cart.Ready');
     });
   });
 
   describe('id', () => {
-    it('returns the cart ID', () => {
+    it('returns the cart ID', async () => {
       const cart = new Cart(mockCommerce);
 
-      expect(cart.id()).toBe('12345');
+      expect(await cart.id()).toBe('12345');
     });
   });
 
   describe('add', () => {
-    it('proxies the request method', () => {
-      const cart = new Cart(mockCommerce);
-      const data = { foo: 'bar' };
-      cart.add(data, mockCallback, mockErrorCallback);
+    it('proxies the request method', async () => {
+      storageGetMock.mockReturnValue('12345');
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345',
-        'POST',
-        data,
-        mockCallback,
-        mockErrorCallback
+      const cart = new Cart(mockCommerce, '12345');
+      const data = { foo: 'bar' };
+
+      await cart.add(data);
+
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'post',
+          data,
+        }),
       );
     });
   });
 
   describe('retrieve', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
-      cart.retrieve(mockCallback, mockErrorCallback);
+      storageGetMock.mockReturnValue('12345');
+      await cart.retrieve();
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345',
-        'GET',
-        null,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+        }),
       );
     });
   });
 
   describe('remove', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
       const lineId = '98765';
-      cart.remove(lineId, mockCallback, mockErrorCallback);
+      await cart.remove(lineId);
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345/items/98765',
-        'DELETE',
-        null,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items/98765',
+          method: 'delete',
+        }),
       );
     });
   });
 
   describe('delete', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
-      cart.delete(mockCallback, mockErrorCallback);
+      await cart.delete();
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345',
-        'DELETE',
-        null,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'delete',
+        }),
       );
     });
   });
 
   describe('update', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
       const lineId = '98765';
       const data = { foo: 'bar' };
-      cart.update(lineId, data, mockCallback, mockErrorCallback);
+      await cart.update(lineId, data);
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345/items/98765',
-        'PUT',
-        data,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items/98765',
+          method: 'put',
+          data,
+        }),
       );
     });
   });
 
   describe('contents', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
-      cart.contents(mockCallback, mockErrorCallback);
+      await cart.contents();
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345/items',
-        'GET',
-        null,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items',
+          method: 'get',
+        }),
       );
     });
   });
 
   describe('empty', () => {
-    it('proxies the request method', () => {
+    it('proxies the request method', async () => {
       const cart = new Cart(mockCommerce);
-      cart.empty(mockCallback, mockErrorCallback);
+      await cart.empty();
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'carts/12345/items',
-        'DELETE',
-        null,
-        mockCallback,
-        mockErrorCallback
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items',
+          method: 'delete',
+        }),
       );
     });
   });

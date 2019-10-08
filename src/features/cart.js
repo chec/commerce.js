@@ -6,24 +6,7 @@ class Cart {
    */
   constructor(commerce) {
     this.commerce = commerce;
-    this.init();
-  }
-
-  init() {
-    if (this.commerce.storage.get('commercejs_cart_id') === null) {
-      return this.refresh();
-    }
-
-    return this.commerce.request(
-      `carts/${this.commerce.storage.get('commercejs_cart_id')}`,
-      'GET',
-      null,
-      ({ id }) => {
-        this.commerce.cart.cart_id = id;
-        return this.commerce.event('Cart.Ready');
-      },
-      error => this.commerce.cart.refresh()
-    );
+    this.cartId = null;
   }
 
   /**
@@ -31,10 +14,10 @@ class Cart {
    * before firing a `Cart.Ready` event.
    */
   refresh() {
-    this.commerce.request('carts', 'GET', null, ({ id }) => {
+    return this.commerce.request('carts').then(({ id }) => {
       this.commerce.storage.set('commercejs_cart_id', id, 30);
-      this.commerce.cart.cart_id = id;
-      return this.commerce.event('Cart.Ready');
+      this.cartId = id;
+      return id;
     });
   }
 
@@ -42,80 +25,72 @@ class Cart {
    * Returns the cart identifier being used in the current request, or null if none
    * has been created yet.
    *
-   * @returns {string|null}
+   * @returns {Promise<string>}
    */
   id() {
-    return this.commerce.cart.cart_id || null;
-  }
+    if (this.cartId !== null) {
+      return Promise.resolve(this.cartId);
+    }
 
-  add(data, callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}`,
-      'POST',
-      data,
-      callback,
-      error
+    const storedCartId = this.commerce.storage.get('commercejs_cart_id');
+
+    if (typeof storedCartId !== 'string' || !storedCartId.length) {
+      return this.refresh();
+    }
+
+    return this.commerce.request(`carts/${storedCartId}`).then(
+      ({ id }) => {
+        this.cartId = id;
+        return id;
+      },
+      async error => await this.refresh(),
     );
   }
 
-  retrieve(callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}`,
-      'GET',
-      null,
-      callback,
-      error
+  request(
+    endpoint = '',
+    method = 'get',
+    data = null,
+    returnFullRequest = false,
+  ) {
+    const suffix =
+      typeof endpoint === 'string' && endpoint.length ? `/${endpoint}` : '';
+    return this.id().then(id =>
+      this.commerce.request(
+        `carts/${id}${suffix}`,
+        method,
+        data,
+        returnFullRequest,
+      ),
     );
   }
 
-  remove(lineId, callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}/items/${lineId}`,
-      'DELETE',
-      null,
-      callback,
-      error
-    );
+  add(data) {
+    return this.request('', 'post', data);
   }
 
-  delete(callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}`,
-      'DELETE',
-      null,
-      callback,
-      error
-    );
+  retrieve() {
+    return this.request();
   }
 
-  update(lineId, data, callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}/items/${lineId}`,
-      'PUT',
-      data,
-      callback,
-      error
-    );
+  remove(lineId) {
+    return this.request(`items/${lineId}`, 'delete');
   }
 
-  contents(callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}/items`,
-      'GET',
-      null,
-      callback,
-      error
-    );
+  delete() {
+    return this.request('', 'delete');
   }
 
-  empty(callback, error) {
-    return this.commerce.request(
-      `carts/${this.id()}/items`,
-      'DELETE',
-      null,
-      callback,
-      error
-    );
+  update(lineId, data) {
+    return this.request(`items/${lineId}`, 'put', data);
+  }
+
+  contents() {
+    return this.request('items');
+  }
+
+  empty() {
+    return this.request('items', 'delete');
   }
 }
 
