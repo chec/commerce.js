@@ -11,5 +11,5 @@ export default {
   Checkout,
   Merchants,
   Products,
-  Services
+  Services,
 };

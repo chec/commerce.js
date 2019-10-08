@@ -43,57 +43,44 @@ class Cart {
         this.cartId = id;
         return id;
       },
-      async error => await this.refresh()
+      async error => await this.refresh(),
     );
   }
 
   add(data) {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}`,
-      'post',
-      data
-    ));
+    return this.id().then(id =>
+      this.commerce.request(`carts/${id}`, 'post', data),
+    );
   }
 
   retrieve() {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}`,
-    ));
+    return this.id().then(id => this.commerce.request(`carts/${id}`));
   }
 
   remove(lineId) {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}/items/${lineId}`,
-      'delete',
-    ));
+    return this.id().then(id =>
+      this.commerce.request(`carts/${id}/items/${lineId}`, 'delete'),
+    );
   }
 
   delete() {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}`,
-      'delete',
-    ));
+    return this.id().then(id => this.commerce.request(`carts/${id}`, 'delete'));
   }
 
   update(lineId, data) {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}/items/${lineId}`,
-      'put',
-      data,
-    ));
+    return this.id().then(id =>
+      this.commerce.request(`carts/${id}/items/${lineId}`, 'put', data),
+    );
   }
 
   contents() {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}/items`,
-    ));
+    return this.id().then(id => this.commerce.request(`carts/${id}/items`));
   }
 
   empty() {
-    return this.id().then(id => this.commerce.request(
-      `carts/${id}/items`,
-      'delete',
-    ));
+    return this.id().then(id =>
+      this.commerce.request(`carts/${id}/items`, 'delete'),
+    );
   }
 }
 

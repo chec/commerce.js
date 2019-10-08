@@ -18,7 +18,7 @@ beforeEach(() => {
 
   Commerce.mockImplementation(() => {
     return {
-      request: requestMock
+      request: requestMock,
     };
   });
 
@@ -39,7 +39,7 @@ describe('Checkout', () => {
         'checkouts/foo/protect',
         'GET',
         null,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
   });
@@ -51,7 +51,7 @@ describe('Checkout', () => {
         'foo',
         { a: 'b' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -59,7 +59,7 @@ describe('Checkout', () => {
         'GET',
         { a: 'b' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -74,7 +74,7 @@ describe('Checkout', () => {
         'POST',
         { a: 'b' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -89,7 +89,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -100,7 +100,7 @@ describe('Checkout', () => {
       checkout.checkPaypalOrderCaptured(
         'abc123',
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -108,7 +108,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -123,7 +123,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -135,7 +135,7 @@ describe('Checkout', () => {
         'bar321',
         { foo: 'baz' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -143,7 +143,7 @@ describe('Checkout', () => {
         'GET',
         { foo: 'baz' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -158,7 +158,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -170,7 +170,7 @@ describe('Checkout', () => {
         'b1lly',
         { zone: 'Cuba' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -178,7 +178,7 @@ describe('Checkout', () => {
         'GET',
         { zone: 'Cuba' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -193,7 +193,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
 
@@ -203,7 +203,7 @@ describe('Checkout', () => {
         'b0b',
         '127.0.0.1',
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -211,7 +211,7 @@ describe('Checkout', () => {
         'GET',
         { ip_address: '127.0.0.1' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -226,7 +226,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -239,7 +239,7 @@ describe('Checkout', () => {
         'h1',
         { hello: 'world' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -247,7 +247,7 @@ describe('Checkout', () => {
         'GET',
         { hello: 'world' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -259,7 +259,7 @@ describe('Checkout', () => {
         'foo123',
         { code: 'A1D2' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -267,7 +267,7 @@ describe('Checkout', () => {
         'GET',
         { code: 'A1D2' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -279,7 +279,7 @@ describe('Checkout', () => {
         'foo123',
         { method: 'A1D2' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -287,7 +287,7 @@ describe('Checkout', () => {
         'GET',
         { method: 'A1D2' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -299,7 +299,7 @@ describe('Checkout', () => {
         'foo123',
         { a: 'b' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -307,7 +307,7 @@ describe('Checkout', () => {
         'GET',
         { a: 'b' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -320,7 +320,7 @@ describe('Checkout', () => {
         'bar234',
         { quantity: 25 },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -328,7 +328,7 @@ describe('Checkout', () => {
         'GET',
         { quantity: 25 },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -343,7 +343,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -358,7 +358,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -373,7 +373,7 @@ describe('Checkout', () => {
         'GET',
         null,
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });
@@ -385,7 +385,7 @@ describe('Checkout', () => {
         'xkcd',
         { card: 'BAR123' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
 
       expect(requestMock).toHaveBeenLastCalledWith(
@@ -393,7 +393,7 @@ describe('Checkout', () => {
         'GET',
         { card: 'BAR123' },
         mockCallback,
-        mockErrorCallback
+        mockErrorCallback,
       );
     });
   });

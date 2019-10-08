@@ -38,7 +38,7 @@ class Products {
       'GET',
       data,
       callback,
-      error
+      error,
     );
   }
 }

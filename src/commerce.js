@@ -50,10 +50,13 @@ class Commerce {
   request(endpoint, method = 'get', data = null, returnFullResponse = false) {
     const headers = {
       'X-Authorization': this.options.publicKey,
-      'X-Chec-Agent': 'commerce.js/v2'
+      'X-Chec-Agent': 'commerce.js/v2',
     };
 
-    const params = method === 'get' && data !== null && Object.entries(data).length ? data : null;
+    const params =
+      method === 'get' && data !== null && Object.entries(data).length
+        ? data
+        : null;
     const parsedData = method !== 'get' ? data : null;
     const timeout = this.options.timeout || 60000;
     const axiosConfig = this.options.axiosConfig || {};
@@ -78,13 +81,15 @@ class Commerce {
         const { _event, ...otherData } = response.data;
 
         if (typeof _event === 'string') {
-          this.event(_event)
+          this.event(_event);
         }
         return otherData;
       }
 
       // Reject the promise by throwing an error
-      throw new Error(`Unsuccessful response (${response.status}: ${response.statusText}) received`);
+      throw new Error(
+        `Unsuccessful response (${response.status}: ${response.statusText}) received`,
+      );
     });
   }
 }

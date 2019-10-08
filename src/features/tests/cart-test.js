@@ -29,13 +29,13 @@ beforeEach(() => {
       version: 'v1',
     },
     cart: {
-      cart_id: null
+      cart_id: null,
     },
     event: eventMock,
     storage: {
       get: storageGetMock,
-      set: storageSetMock
-    }
+      set: storageSetMock,
+    },
   };
 
   commerceImpl.request = realCommerce.prototype.request.bind(commerceImpl);
@@ -48,7 +48,9 @@ beforeEach(() => {
   mockCallback = jest.fn();
   mockErrorCallback = jest.fn();
 
-  axios.mockImplementation(() => Promise.resolve({ status: 200, data: { id: '12345' } }));
+  axios.mockImplementation(() =>
+    Promise.resolve({ status: 200, data: { id: '12345' } }),
+  );
 });
 
 describe('Cart', () => {
@@ -62,9 +64,11 @@ describe('Cart', () => {
 
       expect(mockCommerce.storage.get).toHaveBeenCalled();
       // Ensure that `Cart.refresh()` was called
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts',
+        }),
+      );
     });
 
     it('initializes from the stored ID', async () => {
@@ -75,10 +79,12 @@ describe('Cart', () => {
       await cart.id();
 
       expect(mockCommerce.storage.get).toHaveBeenCalled();
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/123',
-        method: 'get',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/123',
+          method: 'get',
+        }),
+      );
     });
   });
 
@@ -90,7 +96,7 @@ describe('Cart', () => {
       expect(storageSetMock).toHaveBeenCalledWith(
         'commercejs_cart_id',
         '12345',
-        30
+        30,
       );
     });
   });
@@ -112,11 +118,13 @@ describe('Cart', () => {
 
       await cart.add(data);
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345',
-        method: 'post',
-        data,
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'post',
+          data,
+        }),
+      );
     });
   });
 
@@ -126,9 +134,11 @@ describe('Cart', () => {
       storageGetMock.mockReturnValue('12345');
       await cart.retrieve();
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+        }),
+      );
     });
   });
 
@@ -138,10 +148,12 @@ describe('Cart', () => {
       const lineId = '98765';
       await cart.remove(lineId);
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345/items/98765',
-        method: 'delete',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items/98765',
+          method: 'delete',
+        }),
+      );
     });
   });
 
@@ -150,10 +162,12 @@ describe('Cart', () => {
       const cart = new Cart(mockCommerce);
       await cart.delete();
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345',
-        method: 'delete',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'delete',
+        }),
+      );
     });
   });
 
@@ -164,11 +178,13 @@ describe('Cart', () => {
       const data = { foo: 'bar' };
       await cart.update(lineId, data);
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345/items/98765',
-        method: 'put',
-        data,
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items/98765',
+          method: 'put',
+          data,
+        }),
+      );
     });
   });
 
@@ -177,10 +193,12 @@ describe('Cart', () => {
       const cart = new Cart(mockCommerce);
       await cart.contents();
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345/items',
-        method: 'get',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items',
+          method: 'get',
+        }),
+      );
     });
   });
 
@@ -189,10 +207,12 @@ describe('Cart', () => {
       const cart = new Cart(mockCommerce);
       await cart.empty();
 
-      expect(axios).toHaveBeenCalledWith(expect.objectContaining({
-        url: 'carts/12345/items',
-        method: 'delete',
-      }));
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345/items',
+          method: 'delete',
+        }),
+      );
     });
   });
 });
