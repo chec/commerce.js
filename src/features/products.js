@@ -1,18 +1,39 @@
+import Commerce from '../commerce';
+
 class Products {
+  /**
+   * @param {Commerce} commerce
+   */
   constructor(commerce) {
     this.commerce = commerce;
   }
 
+  /**
+   * List products for the current merchant
+   *
+   * @param {object} params
+   * @param {function} callback
+   * @param {function} error
+   */
   list(params, callback, error) {
     if (typeof params === 'function') {
-      return this.commerce.request('products', 'GET', null, params, callback);
+      this.commerce.request('products', 'GET', null, params, callback);
+      return;
     }
 
-    return this.commerce.request('products', 'GET', params, callback, error);
+    this.commerce.request('products', 'GET', params, callback, error);
   }
 
+  /**
+   * Get a specific product for the current merchant
+   *
+   * @param {string} permalink
+   * @param {object} data
+   * @param {function} callback
+   * @param {function} error
+   */
   retrieve(permalink, data, callback, error) {
-    return this.commerce.request(
+    this.commerce.request(
       `products/${permalink}`,
       'GET',
       data,
