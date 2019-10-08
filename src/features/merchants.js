@@ -8,11 +8,10 @@ class Merchants {
   /**
    * Gets information about the currently authorized merchant
    *
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  about(callback, error) {
-    this.commerce.request('merchants', 'GET', null, callback, error);
+  about() {
+    return this.commerce.request('merchants');
   }
 }
 

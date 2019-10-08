@@ -12,16 +12,10 @@ class Products {
    * List products for the current merchant
    *
    * @param {object} params
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  list(params, callback, error) {
-    if (typeof params === 'function') {
-      this.commerce.request('products', 'GET', null, params, callback);
-      return;
-    }
-
-    this.commerce.request('products', 'GET', params, callback, error);
+  list(params) {
+    return this.commerce.request('products', 'get', params);
   }
 
   /**
@@ -29,17 +23,10 @@ class Products {
    *
    * @param {string} permalink
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  retrieve(permalink, data, callback, error) {
-    this.commerce.request(
-      `products/${permalink}`,
-      'GET',
-      data,
-      callback,
-      error,
-    );
+  retrieve(permalink, data) {
+    return this.commerce.request(`products/${permalink}`, 'get', data);
   }
 }
 

@@ -10,12 +10,10 @@ class Checkout {
 
   /**
    * @param {string} token
+   * @return {Promise}
    */
   protect(token) {
-    this.commerce.request(
-      `checkouts/${token}/protect`,
-      'GET',
-      null,
+    return this.commerce.request(`checkouts/${token}/protect`).then(
       data => eval(data.sift_js), // todo remove this, or document if it is safe
     );
   }
@@ -25,17 +23,10 @@ class Checkout {
    *
    * @param {string} identifier
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  generateToken(identifier, data, callback, error) {
-    this.commerce.request(
-      `checkouts/${identifier}`,
-      'GET',
-      data,
-      callback,
-      error,
-    );
+  generateToken(identifier, data) {
+    return this.commerce.request(`checkouts/${identifier}`, 'get', data);
   }
 
   /**
@@ -43,62 +34,40 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  capture(token, data, callback, error) {
-    this.commerce.request(`checkouts/${token}`, 'POST', data, callback, error);
+  capture(token, data) {
+    return this.commerce.request(`checkouts/${token}`, 'post', data);
   }
 
   /**
    * Checks the status of a PayPal payment for the provided checkout token
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkPaypalStatus(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/check/paypal/payment`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  checkPaypalStatus(token) {
+    return this.commerce.request(`checkouts/${token}/check/paypal/payment`);
   }
 
   /**
    * Checks whether the status a PayPal payment for the provided checkout token is captured
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkPaypalOrderCaptured(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/check/paypal/captured`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  checkPaypalOrderCaptured(token) {
+    return this.commerce.request(`checkouts/${token}/check/paypal/captured`);
   }
 
   /**
    * Gets the receipt for the provided checkout token
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  receipt(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/receipt`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  receipt(token) {
+    return this.commerce.request(`checkouts/${token}/receipt`);
   }
 
   /**
@@ -106,32 +75,22 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkPayWhatYouWant(token, data, callback, error) {
-    this.commerce.request(
+  checkPayWhatYouWant(token, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/pay_what_you_want`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
   /**
    * @param {string} identifier
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  fields(identifier, callback, error) {
-    this.commerce.request(
-      `checkouts/${identifier}/fields`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  fields(identifier) {
+    return this.commerce.request(`checkouts/${identifier}/fields`);
   }
 
   /**
@@ -139,16 +98,13 @@ class Checkout {
    *
    * @param {string} identifier
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  setTaxZone(identifier, data, callback, error) {
-    this.commerce.request(
+  setTaxZone(identifier, data) {
+    return this.commerce.request(
       `checkouts/${identifier}/helper/set_tax_zone`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -156,29 +112,13 @@ class Checkout {
    * Gets a location from the provided IP address, either as a callback, or a specific value
    *
    * @param {string} token
-   * @param {callback|string}   ipAddress If used as a callback, the regular callback argument
-   *                            is then treated as the error handler
-   * @param {function} callback Ignored when ipAddress is a callback
-   * @param {function} error
+   * @param {string} ipAddress
+   * @return {Promise}
    */
-  getLocationFromIP(token, ipAddress = '', callback, error) {
-    if (typeof ipAddress === 'function') {
-      this.commerce.request(
-        `checkouts/${token}/helper/location_from_ip`,
-        'GET',
-        null,
-        ipAddress,
-        error,
-      );
-      return;
-    }
-
-    this.commerce.request(
-      `checkouts/${token}/helper/location_from_ip`,
-      'GET',
-      { ip_address: ipAddress },
-      callback,
-      error,
+  getLocationFromIP(token, ipAddress = '') {
+    const urlSuffix = ipAddress.length ? `?ip_address=${ipAddress}` : '';
+    return this.commerce.request(
+      `checkouts/${token}/helper/location_from_ip${urlSuffix}`,
     );
   }
 
@@ -186,17 +126,10 @@ class Checkout {
    * Checks whether the provided checkout has a zero payable balance
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  isFree(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/check/is_free`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  isFree(token) {
+    return this.commerce.request(`checkouts/${token}/check/is_free`);
   }
 
   /**
@@ -205,16 +138,13 @@ class Checkout {
    * @param {string} token
    * @param {string} lineItemId
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkVariant(token, lineItemId, data, callback, error) {
-    this.commerce.request(
+  checkVariant(token, lineItemId, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/${lineItemId}/variant`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -223,16 +153,13 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkDiscount(token, data, callback, error) {
-    this.commerce.request(
+  checkDiscount(token, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/discount`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -241,16 +168,13 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkShippingOption(token, data, callback, error) {
-    this.commerce.request(
+  checkShippingOption(token, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/shipping`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -259,16 +183,13 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  getShippingOptions(token, data, callback, error) {
-    this.commerce.request(
+  getShippingOptions(token, data) {
+    return this.commerce.request(
       `checkouts/${token}/helper/shipping_options`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -278,16 +199,13 @@ class Checkout {
    * @param {string} token
    * @param {string} lineItem
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkQuantity(token, lineItem, data, callback, error) {
-    this.commerce.request(
+  checkQuantity(token, lineItem, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/${lineItem}/quantity`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 
@@ -295,51 +213,30 @@ class Checkout {
    * Gets the validation rules for the provided checkout
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  helperValidation(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/helper/validation`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  helperValidation(token) {
+    return this.commerce.request(`checkouts/${token}/helper/validation`);
   }
 
   /**
    * Gets the live order object for the provided checkout token
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  getLive(token, callback, error) {
-    this.commerce.request(
-      `checkouts/${token}/live`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  getLive(token) {
+    return this.commerce.request(`checkouts/${token}/live`);
   }
 
   /**
    * Gets information about the provided token
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  getToken(token, callback, error) {
-    this.commerce.request(
-      `checkouts/tokens/${token}`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  getToken(token) {
+    return this.commerce.request(`checkouts/tokens/${token}`);
   }
 
   /**
@@ -347,16 +244,13 @@ class Checkout {
    *
    * @param {string} token
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  checkGiftcard(token, data, callback, error) {
-    this.commerce.request(
+  checkGiftcard(token, data) {
+    return this.commerce.request(
       `checkouts/${token}/check/giftcard`,
-      'GET',
+      'get',
       data,
-      callback,
-      error,
     );
   }
 }
