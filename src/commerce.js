@@ -4,11 +4,18 @@ import Features from './features';
 import { consoleHelper, debuggerOnNotice } from './console';
 import axios from 'axios';
 
+const defaultEventCallback = e => {
+  const _e = document.createEvent('CustomEvent');
+  _e.initCustomEvent(`Commercejs.${e}`, false, false, this);
+  return window.dispatchEvent(_e);
+};
+
 class Commerce {
   constructor(publicKey, debug = false, config = {}) {
     this.options = {
       version: 'v1',
       url: 'https://api.chec.io/',
+      eventCallback: defaultEventCallback,
       ...config,
       publicKey: publicKey,
       debug: debug,
@@ -32,18 +39,13 @@ class Commerce {
     }
   }
 
-  event(e) {
-    const _e = document.createEvent('CustomEvent');
-    _e.initCustomEvent(`Commercejs.${e}`, false, false, this);
-    return window.dispatchEvent(_e);
-  }
-
   error(response) {
-    if (!this.consoleHelper) {
+    if (!this.consoleHelper || !this.options.debug) {
       return;
     }
-    const type = `[${response.status_code}] Type: ${response.error.type}`;
-    const msg = `${response.error.message}`;
+    const type = `[${response.status}] Type: ${response.statusText}`;
+    const msg =
+      typeof response.data === 'string' ? response.data : response.statusText;
     return this.consoleHelper('error', type, msg, response);
   }
 
@@ -69,32 +71,41 @@ class Commerce {
       });
     }
 
+    let baseUrl = this.options.url;
+
+    if (baseUrl.substring(baseUrl.length - 1) !== '/') {
+      baseUrl += '/';
+    }
+
     const promise = axios({
       url: endpoint,
       method,
-      baseURL: `${this.options.url}${this.options.version}/`,
-      headers,
+      baseURL: `${baseUrl}${this.options.version}/`,
       params,
       data: parsedData,
       timeout,
       ...axiosConfig,
+      headers: { ...headers, ...axiosConfig.headers },
     });
 
     if (returnFullResponse) {
       return promise;
     }
 
+    const { eventCallback } = this.options;
     return promise.then(response => {
       if (response.status >= 200 && response.status < 300) {
         const { _event, ...otherData } = response.data;
 
-        if (typeof _event === 'string') {
-          this.event(_event);
+        if (typeof _event === 'string' && typeof eventCallback === 'function') {
+          eventCallback(_event);
         }
+
         return otherData;
       }
 
       // Reject the promise by throwing an error
+      this.error(response);
       throw new Error(
         `Unsuccessful response (${response.status}: ${response.statusText}) received`,
       );
