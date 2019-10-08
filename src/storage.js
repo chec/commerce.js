@@ -6,9 +6,7 @@ class Storage {
 
   set(key, value, days) {
     let path;
-    let date = undefined;
-    let expires = undefined;
-    expires = '';
+    let expires = '';
 
     if (typeof this.c.options.config.cookie_path === 'undefined') {
       path = '/';
@@ -17,7 +15,7 @@ class Storage {
     }
 
     if (days) {
-      date = new Date();
+      const date = new Date();
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = '; expires=' + date.toGMTString();
     }
