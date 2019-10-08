@@ -58,7 +58,7 @@ class Commerce {
         ? data
         : null;
     const parsedData = method !== 'get' ? data : null;
-    const timeout = this.options.timeout || 60000;
+    const timeout = this.options.timeoutMs || 60000;
     const axiosConfig = this.options.axiosConfig || {};
 
     const promise = axios({

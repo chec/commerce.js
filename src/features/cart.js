@@ -47,40 +47,50 @@ class Cart {
     );
   }
 
-  add(data) {
+  request(
+    endpoint = '',
+    method = 'get',
+    data = null,
+    returnFullRequest = false,
+  ) {
+    const suffix =
+      typeof endpoint === 'string' && endpoint.length ? `/${endpoint}` : '';
     return this.id().then(id =>
-      this.commerce.request(`carts/${id}`, 'post', data),
+      this.commerce.request(
+        `carts/${id}${suffix}`,
+        method,
+        data,
+        returnFullRequest,
+      ),
     );
+  }
+
+  add(data) {
+    return this.request('', 'post', data);
   }
 
   retrieve() {
-    return this.id().then(id => this.commerce.request(`carts/${id}`));
+    return this.request();
   }
 
   remove(lineId) {
-    return this.id().then(id =>
-      this.commerce.request(`carts/${id}/items/${lineId}`, 'delete'),
-    );
+    return this.request(`items/${lineId}`, 'delete');
   }
 
   delete() {
-    return this.id().then(id => this.commerce.request(`carts/${id}`, 'delete'));
+    return this.request('', 'delete');
   }
 
   update(lineId, data) {
-    return this.id().then(id =>
-      this.commerce.request(`carts/${id}/items/${lineId}`, 'put', data),
-    );
+    return this.request(`items/${lineId}`, 'put', data);
   }
 
   contents() {
-    return this.id().then(id => this.commerce.request(`carts/${id}/items`));
+    return this.request('items');
   }
 
   empty() {
-    return this.id().then(id =>
-      this.commerce.request(`carts/${id}/items`, 'delete'),
-    );
+    return this.request('items', 'delete');
   }
 }
 

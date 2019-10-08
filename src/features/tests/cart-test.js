@@ -3,10 +3,10 @@ jest.mock('axios');
 jest.mock('../../commerce');
 
 import Cart from '../cart';
-import Commerce from '../../commerce';
+import MockCommerce from '../../commerce';
 import axios from 'axios';
 
-const realCommerce = jest.requireActual('../../commerce').default;
+const Commerce = jest.requireActual('../../commerce').default;
 
 let eventMock;
 let storageGetMock;
@@ -16,7 +16,7 @@ let mockCallback;
 let mockErrorCallback;
 
 beforeEach(() => {
-  Commerce.mockClear();
+  MockCommerce.mockClear();
 
   eventMock = jest.fn();
   storageGetMock = jest.fn();
@@ -38,16 +38,17 @@ beforeEach(() => {
     },
   };
 
-  commerceImpl.request = realCommerce.prototype.request.bind(commerceImpl);
+  commerceImpl.request = Commerce.prototype.request.bind(commerceImpl);
 
-  Commerce.mockImplementation(() => commerceImpl);
+  MockCommerce.mockImplementation(() => commerceImpl);
 
-  mockCommerce = new Commerce('foo', true);
+  mockCommerce = new MockCommerce('foo', true);
 
   // Used for API proxy methods
   mockCallback = jest.fn();
   mockErrorCallback = jest.fn();
 
+  axios.mockClear();
   axios.mockImplementation(() =>
     Promise.resolve({ status: 200, data: { id: '12345' } }),
   );
