@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "jest",
-    "prepublish": "grunt coffee"
+    "prepublishOnly": "grunt coffee"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
