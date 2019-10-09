@@ -15,7 +15,7 @@ https://commercejs.com
 
 ### With NPM
 
-`npm install @chec/commerce`
+`npm install @chec.io/commerce`
 
 ## Documentation
 
