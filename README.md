@@ -17,12 +17,6 @@ https://commercejs.com
 
 `npm install @chec/commerce`
 
-### With CDN
-
-```html
-<script type="text/javascript" src="https://cdn.chec.io/v2/commerce.js"></script>
-```
-
 ## Documentation
 
 See the [documentation webpage](https://commercejs.com/docs).
@@ -32,14 +26,16 @@ See the [documentation webpage](https://commercejs.com/docs).
 The major change in Commerce.js v2 is that most methods now return a 
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled 
 when the HTTP request is completed. Instead of providing callbacks to the methods in this module, you will have to use 
-promise syntax instead:
+promise syntax instead.
 
 ```diff
 - Commerce.Cart.retrieve(function (data) {
-+ Commerce.Cart.retrieve().then(function (data) { 
++ Commerce.cart.retrieve().then(function (data) { 
   // ...
 });
 ```
+
+Additionally, the API for the various features are now lower-cased.
 
 ## Contributing
 
