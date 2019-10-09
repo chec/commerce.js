@@ -1,6 +1,7 @@
 {
   "name": "@chec/commerce",
   "version": "2.0.0",
+  "main": "lib/index.js",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
   "homepage": "https://commercejs.com",
   "keywords": [
@@ -23,7 +24,8 @@
     "lint:fix": "eslint src --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublish": "rollup -c"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
@@ -31,26 +33,26 @@
     "@babel/core": "^7.6.2",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
+    "babel-preset-minify": "^0.5.1",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^9.1.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "jest": {
     "testRegex": ".*-test.jsx?$"
   },
   "babel": {
     "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
+      "@babel/preset-env"
     ]
   },
   "dependencies": {

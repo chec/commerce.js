@@ -107,4 +107,4 @@ const debuggerOnNotice = () => {
   );
 };
 
-export default { consoleHelper, debuggerOnNotice };
+export { consoleHelper, debuggerOnNotice };

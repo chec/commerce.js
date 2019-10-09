@@ -57,9 +57,17 @@ class Commerce {
       method === 'get' && data !== null && Object.entries(data).length
         ? data
         : null;
-    const parsedData = method !== 'get' ? data : null;
     const timeout = this.options.timeoutMs || 60000;
     const axiosConfig = this.options.axiosConfig || {};
+
+    let parsedData = null;
+
+    if (method !== 'get' && data) {
+      parsedData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        parsedData.set(key, value);
+      });
+    }
 
     const promise = axios({
       url: endpoint,

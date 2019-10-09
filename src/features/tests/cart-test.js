@@ -2,6 +2,7 @@
 jest.mock('axios');
 jest.mock('../../commerce');
 
+import '@babel/polyfill';
 import Cart from '../cart';
 import MockCommerce from '../../commerce';
 import axios from 'axios';
@@ -123,9 +124,12 @@ describe('Cart', () => {
         expect.objectContaining({
           url: 'carts/12345',
           method: 'post',
-          data,
         }),
       );
+
+      const lastData = axios.mock.calls.pop()[0].data;
+      expect(lastData).toBeInstanceOf(FormData);
+      expect(lastData.get('foo')).toBe('bar');
     });
   });
 
@@ -183,9 +187,12 @@ describe('Cart', () => {
         expect.objectContaining({
           url: 'carts/12345/items/98765',
           method: 'put',
-          data,
         }),
       );
+
+      const lastData = axios.mock.calls.pop()[0].data;
+      expect(lastData).toBeInstanceOf(FormData);
+      expect(lastData.get('foo')).toBe('bar');
     });
   });
 
