@@ -1,6 +1,7 @@
 {
   "name": "@chec/commerce",
   "version": "1.0.0",
+  "main": "dist/commerce.export.js",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
   "homepage": "https://commercejs.com",
   "keywords": [
@@ -19,11 +20,11 @@
     "url": "https://github.com/chec/commerce.js/issues/new"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "grunt coffee"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
-  "main": "dist/commerce.export.js",
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
