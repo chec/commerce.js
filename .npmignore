@@ -1,3 +1,4 @@
-.circleci
-features
-js
+*
+!/dist/*
+!README.md
+!LICENSE.md

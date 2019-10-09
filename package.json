@@ -1,5 +1,5 @@
 {
-  "name": "@chec/commerce",
+  "name": "@chec.io/commerce",
   "version": "1.0.0",
   "main": "dist/commerce.export.js",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
