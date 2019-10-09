@@ -1,1 +1,4 @@
-src
+*
+!/lib/*
+README.md
+LICENSE.md
