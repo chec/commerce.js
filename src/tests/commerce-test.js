@@ -1,6 +1,8 @@
 /* global describe, it, expect */
 jest.mock('axios');
 
+import '@babel/polyfill';
+
 import Commerce from '../commerce';
 import Features from '../features';
 import Storage from '../storage';
@@ -133,15 +135,18 @@ describe('Commerce', () => {
       );
     });
 
-    it('should pass through data for non-GET request', () => {
+    it('should convert data to form data for non-GET requests', () => {
       const commerce = new Commerce('foo');
 
-      let data = { test: true };
+      const data = { test: true };
       commerce.request('test', 'post', data);
+
+      const expectation = new FormData();
+      expectation.set('test', true);
 
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
-          data,
+          data: expectation,
         }),
       );
     });
