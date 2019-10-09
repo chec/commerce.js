@@ -1,5 +1,5 @@
 {
-  "name": "@chec/commerce",
+  "name": "@chec.io/commerce",
   "version": "2.0.0",
   "main": "lib/index.js",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your chec.io store",
@@ -25,7 +25,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublish": "rollup -c"
+    "prepublishOnly": "rollup -c"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
