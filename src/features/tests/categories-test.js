@@ -7,14 +7,13 @@ jest.mock('../../commerce');
 
 let requestMock;
 let mockCommerce;
-let mockCallback;
-let mockErrorCallback;
 
 beforeEach(() => {
   Commerce.mockClear();
 
   // Commerce mock internals
   requestMock = jest.fn();
+  requestMock.mockReturnValue('return');
 
   Commerce.mockImplementation(() => {
     return {
@@ -23,58 +22,30 @@ beforeEach(() => {
   });
 
   mockCommerce = new Commerce('foo', true);
-
-  // Used for API proxy methods
-  mockCallback = jest.fn();
-  mockErrorCallback = jest.fn();
 });
 
 describe('Categories', () => {
   describe('list', () => {
-    it('proxies the request method with callable params', () => {
-      const categories = new Categories(mockCommerce);
-      categories.list(mockCallback, mockErrorCallback, null);
-
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'categories',
-        'GET',
-        null,
-        mockCallback,
-        mockErrorCallback,
-      );
-    });
-
     it('proxies the request method with data as params', () => {
       const categories = new Categories(mockCommerce);
-      categories.list({ foo: 'bar' }, mockCallback, mockErrorCallback);
+      const returnValue = categories.list({ foo: 'bar' });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'categories',
-        'GET',
-        { foo: 'bar' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      expect(requestMock).toHaveBeenLastCalledWith('categories', 'get', {
+        foo: 'bar',
+      });
+      expect(returnValue).toBe('return');
     });
   });
 
   describe('retrieve', () => {
     it('proxies the request method', () => {
       const categories = new Categories(mockCommerce);
-      categories.retrieve(
-        'foo',
-        { bar: 'baz' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      const returnValue = categories.retrieve('foo', { bar: 'baz' });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'categories/foo',
-        'GET',
-        { bar: 'baz' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      expect(requestMock).toHaveBeenLastCalledWith('categories/foo', 'get', {
+        bar: 'baz',
+      });
+      expect(returnValue).toBe('return');
     });
   });
 });

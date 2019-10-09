@@ -11,34 +11,20 @@ class Services {
   /**
    * List all countries
    *
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  localeListCountries(callback, error) {
-    this.commerce.request(
-      'services/locale/countries',
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  localeListCountries() {
+    return this.commerce.request('services/locale/countries');
   }
 
   /**
    * List all available shipping countries
    *
    * @param {string} token
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  localeListShippingCountries(token, callback, error) {
-    this.commerce.request(
-      `services/locale/${token}/countries`,
-      'GET',
-      null,
-      callback,
-      error,
-    );
+  localeListShippingCountries(token) {
+    return this.commerce.request(`services/locale/${token}/countries`);
   }
 
   /**
@@ -46,16 +32,11 @@ class Services {
    *
    * @param {string} token
    * @param {string} countryCode
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  localeListShippingSubdivisions(token, countryCode, callback, error) {
-    this.commerce.request(
+  localeListShippingSubdivisions(token, countryCode) {
+    return this.commerce.request(
       `services/locale/${token}/countries/${countryCode}/subdivisions`,
-      'GET',
-      null,
-      callback,
-      error,
     );
   }
 
@@ -63,17 +44,10 @@ class Services {
    * List all subdivisions for the provided country code
    *
    * @param {string} countryCode
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  localeListSubdivisions(countryCode, callback, error) {
-    this.commerce.request(
-      `services/locale/${countryCode}/subdivisions`,
-      'GET',
-      {},
-      callback,
-      error,
-    );
+  localeListSubdivisions(countryCode) {
+    return this.commerce.request(`services/locale/${countryCode}/subdivisions`);
   }
 }
 

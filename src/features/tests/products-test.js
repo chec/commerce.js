@@ -7,14 +7,13 @@ jest.mock('../../commerce');
 
 let requestMock;
 let mockCommerce;
-let mockCallback;
-let mockErrorCallback;
 
 beforeEach(() => {
   Commerce.mockClear();
 
   // Commerce mock internals
   requestMock = jest.fn();
+  requestMock.mockReturnValue('return');
 
   Commerce.mockImplementation(() => {
     return {
@@ -23,60 +22,30 @@ beforeEach(() => {
   });
 
   mockCommerce = new Commerce('foo', true);
-
-  // Used for API proxy methods
-  mockCallback = jest.fn();
-  mockErrorCallback = jest.fn();
 });
 
 describe('Products', () => {
   describe('list', () => {
-    it('proxies the request method and lists using params as a callback', () => {
+    it('proxies the request method', () => {
       const products = new Products(mockCommerce);
-      const unusedErrorCallback = jest.fn();
-      products.list(mockCallback, mockErrorCallback, unusedErrorCallback);
+      const returnValue = products.list({ foo: 'bar' });
 
-      expect(unusedErrorCallback).not.toHaveBeenCalled();
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'products',
-        'GET',
-        null,
-        mockCallback,
-        mockErrorCallback,
-      );
-    });
-
-    it('proxies the request method and lists using params as an object', () => {
-      const products = new Products(mockCommerce);
-      products.list({ foo: 'bar' }, mockCallback, mockErrorCallback);
-
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'products',
-        'GET',
-        { foo: 'bar' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      expect(requestMock).toHaveBeenLastCalledWith('products', 'get', {
+        foo: 'bar',
+      });
+      expect(returnValue).toBe('return');
     });
   });
 
   describe('retrieve', () => {
     it('proxies the request method', () => {
       const products = new Products(mockCommerce);
-      products.retrieve(
-        'SKU-123',
-        { foo: 'bar' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      const returnValue = products.retrieve('SKU-123', { foo: 'bar' });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'products/SKU-123',
-        'GET',
-        { foo: 'bar' },
-        mockCallback,
-        mockErrorCallback,
-      );
+      expect(requestMock).toHaveBeenLastCalledWith('products/SKU-123', 'get', {
+        foo: 'bar',
+      });
+      expect(returnValue).toBe('return');
     });
   });
 });

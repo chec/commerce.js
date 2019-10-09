@@ -7,14 +7,13 @@ jest.mock('../../commerce');
 
 let requestMock;
 let mockCommerce;
-let mockCallback;
-let mockErrorCallback;
 
 beforeEach(() => {
   Commerce.mockClear();
 
   // Commerce mock internals
   requestMock = jest.fn();
+  requestMock.mockReturnValue('return');
 
   Commerce.mockImplementation(() => {
     return {
@@ -23,25 +22,16 @@ beforeEach(() => {
   });
 
   mockCommerce = new Commerce('foo', true);
-
-  // Used for API proxy methods
-  mockCallback = jest.fn();
-  mockErrorCallback = jest.fn();
 });
 
 describe('Merchants', () => {
   describe('about', () => {
     it('proxies the request method', () => {
       const merchants = new Merchants(mockCommerce);
-      merchants.about(mockCallback, mockErrorCallback);
+      const returnValue = merchants.about();
 
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'merchants',
-        'GET',
-        null,
-        mockCallback,
-        mockErrorCallback,
-      );
+      expect(requestMock).toHaveBeenLastCalledWith('merchants');
+      expect(returnValue).toBe('return');
     });
   });
 });

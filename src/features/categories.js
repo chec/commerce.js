@@ -11,17 +11,15 @@ class Categories {
   /**
    * List the merchant's categories, either by filtered params, or unfiltered.
    *
-   * @param {function|object} params
-   * @param {function} callback
-   * @param {function} error
+   * @param {null|object} params
+   * @return {Promise}
    */
-  list(params, callback, error) {
+  list(params = null) {
     if (typeof params === 'function') {
-      this.commerce.request('categories', 'GET', null, params, callback);
-      return;
+      return this.commerce.request('categories');
     }
 
-    this.commerce.request('categories', 'GET', params, callback, error);
+    return this.commerce.request('categories', 'get', params);
   }
 
   /**
@@ -29,11 +27,10 @@ class Categories {
    *
    * @param {string} slug
    * @param {object} data
-   * @param {function} callback
-   * @param {function} error
+   * @return {Promise}
    */
-  retrieve(slug, data, callback, error) {
-    this.commerce.request(`categories/${slug}`, 'GET', data, callback, error);
+  retrieve(slug, data) {
+    return this.commerce.request(`categories/${slug}`, 'get', data);
   }
 }
 
