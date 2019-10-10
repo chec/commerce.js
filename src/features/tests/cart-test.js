@@ -40,6 +40,7 @@ beforeEach(() => {
   };
 
   commerceImpl.request = Commerce.prototype.request.bind(commerceImpl);
+  commerceImpl._serialize = Commerce.prototype._serialize.bind(commerceImpl);
 
   MockCommerce.mockImplementation(() => commerceImpl);
 
