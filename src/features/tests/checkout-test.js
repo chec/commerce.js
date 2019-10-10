@@ -15,7 +15,7 @@ beforeEach(() => {
 
   // Commerce mock internals
   requestMock = jest.fn();
-  requestMock.mockReturnValue('return');
+  requestMock.mockReturnValue(new Promise(() => 'return'));
 
   Commerce.mockImplementation(() => {
     return {
@@ -50,7 +50,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith('checkouts/foo', 'get', {
         a: 'b',
       });
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -67,7 +67,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith('checkouts/foo123', 'post', {
         a: 'b',
       });
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -83,7 +83,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/abc123/check/paypal/payment',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -95,7 +95,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/abc123/check/paypal/captured',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -109,7 +109,7 @@ describe('Checkout', () => {
       );
 
       expect(requestMock).toHaveBeenLastCalledWith('checkouts/qw3rt1/receipt');
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -125,7 +125,7 @@ describe('Checkout', () => {
         'get',
         { foo: 'baz' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -139,7 +139,7 @@ describe('Checkout', () => {
       );
 
       expect(requestMock).toHaveBeenLastCalledWith('checkouts/foobar/fields');
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -153,7 +153,7 @@ describe('Checkout', () => {
         'get',
         { zone: 'Cuba' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -165,7 +165,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/b0b/helper/location_from_ip',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
 
     it('proxies the request method using the provided IP address string', () => {
@@ -175,7 +175,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/b0b/helper/location_from_ip?ip_address=127.0.0.1',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -191,7 +191,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/a1s2d3/check/is_free',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -207,7 +207,7 @@ describe('Checkout', () => {
         'get',
         { hello: 'world' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -221,7 +221,7 @@ describe('Checkout', () => {
         'get',
         { code: 'A1D2' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -237,7 +237,7 @@ describe('Checkout', () => {
         'get',
         { method: 'A1D2' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -251,7 +251,7 @@ describe('Checkout', () => {
         'get',
         { a: 'b' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -267,7 +267,7 @@ describe('Checkout', () => {
         'get',
         { quantity: 25 },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -283,7 +283,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/helper/validation',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -299,7 +299,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo-123-bar/live',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -315,7 +315,7 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/tokens/foo-123-bar',
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 
@@ -329,7 +329,7 @@ describe('Checkout', () => {
         'get',
         { card: 'BAR123' },
       );
-      expect(returnValue).toBe('return');
+      returnValue.then(result => expect(result).toBe('return'));
     });
   });
 });

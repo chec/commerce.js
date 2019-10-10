@@ -1,17 +1,24 @@
+import Commerce from './commerce';
+
 class Storage {
-  //maybe move to data store later
-  constructor(c) {
-    this.c = c;
+  /**
+   * @param {Commerce} commerce
+   */
+  constructor(commerce) {
+    this.commerce = commerce;
   }
 
   set(key, value, days) {
     let path;
     let expires = '';
 
-    if (typeof this.c.options.config.cookie_path === 'undefined') {
+    if (
+      !this.commerce.options.config ||
+      typeof this.commerce.options.config.cookie_path === 'undefined'
+    ) {
       path = '/';
     } else {
-      path = this.c.options.config.cookie_path;
+      path = this.commerce.options.config.cookie_path;
     }
 
     if (days) {
