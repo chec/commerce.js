@@ -11,10 +11,10 @@ class Products {
   /**
    * List products for the current merchant
    *
-   * @param {object} params
+   * @param {object|null} params
    * @return {Promise}
    */
-  list(params) {
+  list(params = null) {
     return this.commerce.request('products', 'get', params);
   }
 

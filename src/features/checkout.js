@@ -37,7 +37,14 @@ class Checkout {
    * @return {Promise}
    */
   capture(token, data) {
-    return this.commerce.request(`checkouts/${token}`, 'post', data);
+    return this.commerce
+      .request(`checkouts/${token}`, 'post', data)
+      .then(response => {
+        // Refresh the cart on success
+        this.commerce.cart.refresh();
+        // Return the original response
+        return response;
+      });
   }
 
   /**
