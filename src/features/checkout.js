@@ -40,7 +40,7 @@ class Checkout {
     return this.commerce
       .request(`checkouts/${token}`, 'post', data)
       .then(response => {
-        // Clear the cart ID on success
+        // Refresh the cart on success
         this.commerce.cart.refresh();
         // Return the original response
         return response;
