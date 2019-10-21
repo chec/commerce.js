@@ -5,8 +5,10 @@ import { consoleHelper, debuggerOnNotice } from './console';
 import axios from 'axios';
 
 const defaultEventCallback = e => {
-  const _e = document.createEvent('CustomEvent');
-  _e.initCustomEvent(`Commercejs.${e}`, false, false, this);
+  const _e = new CustomEvent(`Commercejs.${e}`, {
+    bubbles: false,
+    cancelable: false,
+  });
   return window.dispatchEvent(_e);
 };
 
