@@ -118,7 +118,7 @@ class Commerce {
     const { eventCallback } = this.options;
     return promise.then(response => {
       if (response.status >= 200 && response.status < 300) {
-        if (response.data.constructor === 'Array') {
+        if (typeof response.data !== 'object' || Array.isArray(response.data)) {
           return response.data;
         }
         const { _event, ...otherData } = response.data;
