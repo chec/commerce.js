@@ -82,7 +82,7 @@ class Commerce {
   request(endpoint, method = 'get', data = null, returnFullResponse = false) {
     const headers = {
       'X-Authorization': this.options.publicKey,
-      'X-Chec-Agent': 'commerce.js/v2',
+      'X-Chec-Agent': this.options.xChecAgent || 'commerce.js/v2',
     };
 
     // Let axios serialize get request payloads
