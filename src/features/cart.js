@@ -6,48 +6,40 @@ class Cart {
    */
   constructor(commerce) {
     this.commerce = commerce;
-    this.cartId = null;
+    this.cart = null;
   }
 
   /**
-   * Request a new cart ID. This method persists the new ID to the cart and local storage,
-   * before firing a `Cart.Ready` event.
+   * Request a new cart ID. This method persists the new ID to the cart and local storage
    */
   refresh() {
-    return this.commerce.request('carts').then(({ id }) => {
+    return this.commerce.request('carts').then(cart => {
+      const { id } = cart;
       this.commerce.storage.set('commercejs_cart_id', id, 30);
-      this.cartId = id;
+      this.cart = cart;
       return id;
     });
   }
 
   /**
-   * Returns the cart identifier being used in the current request, or null if none
-   * has been created yet.
+   * Returns the cart identifier being used in the current request, or null if there is no stored cart ID
    *
-   * @returns {Promise<string>}
+   * @returns {string|null}
    */
   id() {
-    if (this.cartId !== null) {
-      return Promise.resolve(this.cartId);
+    if (this.cart !== null && this.cart.id !== null) {
+      return this.cart.id;
     }
 
     const storedCartId = this.commerce.storage.get('commercejs_cart_id');
-
-    if (typeof storedCartId !== 'string' || !storedCartId.length) {
-      return this.refresh();
+    if (typeof storedCartId === 'string' && storedCartId.length) {
+      return storedCartId;
     }
 
-    return this.commerce.request(`carts/${storedCartId}`).then(
-      ({ id }) => {
-        this.cartId = id;
-        return id;
-      },
-      async error => await this.refresh(),
-    );
+    return null;
   }
 
-  request(
+  async request(
     endpoint = '',
     method = 'get',
     data = null,
@@ -55,14 +47,29 @@ class Cart {
   ) {
     const suffix =
       typeof endpoint === 'string' && endpoint.length ? `/${endpoint}` : '';
-    return this.id().then(id =>
-      this.commerce.request(
-        `carts/${id}${suffix}`,
-        method,
-        data,
-        returnFullRequest,
-      ),
-    );
+
+    if (!this.id()) {
+      await this.refresh();
+    }
+
+    return this.commerce
+      .request(`carts/${this.id()}${suffix}`, method, data, returnFullRequest)
+      .catch(error => {
+        // Catch 404 errors that imply the cart ID has expired
+        if (error.response && error.response.status === 404) {
+          return this.refresh().then(() => {
+            // Note that this repetition of the endpoint cannot be extracted as the `.id()` needs to evaluate both times
+            return this.commerce.request(
+              `carts/${this.id()}${suffix}`,
+              method,
+              data,
+              returnFullRequest,
+            );
+          });
+        }
+
+        throw error;
+      });
   }
 
   add(data) {
@@ -70,7 +77,10 @@ class Cart {
   }
 
   retrieve() {
-    return this.request();
+    return this.request().then(cart => {
+      this.cart = cart;
+      return cart;
+    });
   }
 
   remove(lineId) {
