@@ -132,9 +132,10 @@ class Commerce {
 
       // Reject the promise by throwing an error
       this.error(response);
-      throw new Error(
-        `Unsuccessful response (${response.status}: ${response.statusText}) received`,
-      );
+      throw {
+        message: `Unsuccessful response (${response.status}: ${response.statusText}) received`,
+        response,
+      };
     });
   }
 }

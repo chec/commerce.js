@@ -48,7 +48,8 @@
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "jest": {
-    "testRegex": ".*-test.jsx?$"
+    "testRegex": ".*-test.jsx?$",
+    "setupFiles": ["<rootDir>/jest.init.js"]
   },
   "babel": {
     "presets": [

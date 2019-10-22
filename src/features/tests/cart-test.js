@@ -2,7 +2,6 @@
 jest.mock('axios');
 jest.mock('../../commerce');
 
-import '@babel/polyfill';
 import Cart from '../cart';
 import MockCommerce from '../../commerce';
 import axios from 'axios';
@@ -32,6 +31,7 @@ beforeEach(() => {
     cart: {
       cart_id: null,
     },
+    error(response) {},
     event: eventMock,
     storage: {
       get: storageGetMock,
@@ -58,33 +58,86 @@ beforeEach(() => {
 
 describe('Cart', () => {
   describe('id', () => {
-    it('initializes a new ID when none is stored', async () => {
+    it('does not initialise a new ID when none is stored', () => {
       storageGetMock.mockReturnValue(null);
 
       const cart = new Cart(mockCommerce);
 
-      await cart.id();
-
+      expect(cart.id()).toBe(null);
       expect(mockCommerce.storage.get).toHaveBeenCalled();
-      // Ensure that `Cart.refresh()` was called
-      expect(axios).toHaveBeenCalledWith(
-        expect.objectContaining({
-          url: 'carts',
-        }),
-      );
+      expect(axios).not.toHaveBeenCalled();
     });
 
-    it('initializes from the stored ID', async () => {
+    it('returns a stored ID', async () => {
       storageGetMock.mockReturnValue('123');
 
       const cart = new Cart(mockCommerce);
 
-      await cart.id();
+      expect(cart.id()).toBe('123');
+      expect(mockCommerce.storage.get).toHaveBeenCalled();
+    });
+  });
+
+  describe('request', () => {
+    it('runs refresh if no cart ID is available', async () => {
+      const cart = new Cart(mockCommerce);
+      const refreshSpy = jest.spyOn(cart, 'refresh');
+
+      await cart.request();
+
+      expect(refreshSpy).toHaveBeenCalled();
+    });
+
+    it('does not refresh if the cart ID is available', async () => {
+      storageGetMock.mockReturnValue('123');
+
+      const cart = new Cart(mockCommerce);
+      const refreshSpy = jest.spyOn(cart, 'refresh');
+
+      await cart.request();
 
       expect(mockCommerce.storage.get).toHaveBeenCalled();
+      expect(refreshSpy).not.toHaveBeenCalled();
+      expect(axios).toHaveBeenCalledTimes(1);
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
           url: 'carts/123',
+          method: 'get',
+        }),
+      );
+    });
+
+    it('will refresh if a 404 is returned from a request', async () => {
+      axios.mockClear();
+      axios
+        .mockImplementationOnce(() => Promise.resolve({ status: 404 }))
+        .mockImplementation(() =>
+          Promise.resolve({ status: 200, data: { id: '12345' } }),
+        );
+
+      storageGetMock.mockReturnValue('123');
+
+      const cart = new Cart(mockCommerce);
+      const refreshSpy = jest.spyOn(cart, 'refresh');
+
+      await cart.request();
+
+      expect(mockCommerce.storage.get).toHaveBeenCalled();
+      expect(refreshSpy).toHaveBeenCalled();
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/123',
+          method: 'get',
+        }),
+      );
+      expect(mockCommerce.storage.set).toHaveBeenCalledWith(
+        expect.anything(),
+        '12345',
+        expect.anything(),
+      );
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
           method: 'get',
         }),
       );
@@ -101,14 +154,6 @@ describe('Cart', () => {
         '12345',
         30,
       );
-    });
-  });
-
-  describe('id', () => {
-    it('returns the cart ID', async () => {
-      const cart = new Cart(mockCommerce);
-
-      expect(await cart.id()).toBe('12345');
     });
   });
 

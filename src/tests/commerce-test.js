@@ -1,12 +1,9 @@
 /* global describe, it, expect */
 jest.mock('axios');
 
-import '@babel/polyfill';
-
 import Commerce from '../commerce';
 import Features from '../features';
 import Storage from '../storage';
-
 import axios from 'axios';
 
 describe('Commerce', () => {
