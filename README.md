@@ -1,7 +1,11 @@
 # commerce.js
 
-[![CircleCI](https://circleci.com/gh/chec/commerce.js.svg?style=svg)](https://circleci.com/gh/chec/commerce.js)
-[![codecov](https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg)](https://codecov.io/gh/chec/commerce.js)
+[![CircleCI](https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield)](https://circleci.com/gh/chec/commerce.js/tree/master)
+[![Codecov](https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg)](https://codecov.io/gh/chec/commerce.js)
+[![Version](https://img.shields.io/npm/v/@chec.io/commerce.svg)](https://npmjs.org/package/@chec.io/commerce)
+[![Downloads/week](https://img.shields.io/npm/dw/@chec.io/commerce.svg)](https://npmjs.org/package/@chec.io/commerce)
+[![License](https://img.shields.io/npm/l/@chec.io/commerce.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
+
 
 ## Not production ready!
 
