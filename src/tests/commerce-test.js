@@ -21,6 +21,14 @@ describe('Commerce', () => {
       expect(commerce.products).toBeInstanceOf(Features.Products);
       expect(commerce.services).toBeInstanceOf(Features.Services);
     });
+
+    it('prevents use of a secret key', () => {
+      expect(() => {
+        new Commerce('sk_9w8h598s4t9st');
+      }).toThrowError(
+        'Secret key provided. You must use a public key with Commerce.js!',
+      );
+    });
   });
 
   describe('request', () => {
