@@ -49,7 +49,9 @@
   },
   "jest": {
     "testRegex": ".*-test.jsx?$",
-    "setupFiles": ["<rootDir>/jest.init.js"]
+    "setupFiles": [
+      "<rootDir>/jest.init.js"
+    ]
   },
   "babel": {
     "presets": [
