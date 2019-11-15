@@ -27,7 +27,7 @@ class Commerce {
       console.warn('⚠️ Invalid public key given to Commerce.js client');
     }
 
-    if (publicKey.toLowerCase().substr(0, 3) === 'sk_') {
+    if (publicKey.toLowerCase().substring(0, 3) === 'sk_') {
       throw new Error(
         'Secret key provided. You must use a public key with Commerce.js!',
       );
