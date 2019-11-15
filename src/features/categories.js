@@ -23,7 +23,7 @@ class Categories {
   }
 
   /**
-   * Get a specific category its slug
+   * Get a specific category by its slug
    *
    * @param {string} slug
    * @param {object} data
