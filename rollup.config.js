@@ -13,7 +13,10 @@ export default [
       name: "bundle"
     },
     plugins: [
-      babel(),
+      babel({
+        runtimeHelpers: true,
+        plugins: ["@babel/plugin-transform-runtime"]
+      }),
       rollupMinify({
         comments: false,
       }),
@@ -36,7 +39,9 @@ export default [
         presets: [['minify', {
           builtIns: false
         }]],
-        comments: false
+        comments: false,
+        runtimeHelpers: true,
+        plugins: ["@babel/plugin-transform-runtime"]
       }),
     ]
   }
