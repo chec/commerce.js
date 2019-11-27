@@ -162,7 +162,7 @@ describe('Cart', () => {
       storageGetMock.mockReturnValue('12345');
 
       const cart = new Cart(mockCommerce, '12345');
-      const data = { foo: 'bar' };
+      const data = { id: 'bar' };
 
       await cart.add(data);
 
@@ -175,7 +175,28 @@ describe('Cart', () => {
 
       const lastData = axios.mock.calls.pop()[0].data;
       expect(lastData).toBeInstanceOf(FormData);
-      expect(lastData.get('foo')).toBe('bar');
+      expect(lastData.get('id')).toBe('bar');
+    });
+
+    it('builds a request from given args', async () => {
+      storageGetMock.mockReturnValue('12345');
+
+      const cart = new Cart(mockCommerce, '12345');
+
+      await cart.add('id', 6, { variant: 'option' });
+
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'post',
+        }),
+      );
+
+      const lastData = axios.mock.calls.pop()[0].data;
+      expect(lastData).toBeInstanceOf(FormData);
+      expect(lastData.get('id')).toBe('id');
+      expect(lastData.get('quantity')).toBe('6');
+      expect(lastData.get('variant[variant]')).toBe('option');
     });
   });
 
