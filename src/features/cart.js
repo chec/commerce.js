@@ -73,7 +73,6 @@ class Cart {
   }
 
   /**
-   *
    * @param {Object|number} productId
    * @param {number} quantity
    * @param {Object} variant
