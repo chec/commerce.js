@@ -72,7 +72,19 @@ class Cart {
       });
   }
 
-  add(data) {
+  /**
+   * @param {Object|number} productId
+   * @param {number} quantity
+   * @param {Object} variant
+   * @returns {Promise}
+   */
+  add(productId, quantity = 1, variant = null) {
+    const data = {
+      id: typeof productId === 'object' ? productId.id : productId,
+      quantity,
+      variant,
+    };
+
     return this.request('', 'post', data);
   }
 
