@@ -2,7 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/chec/commerce.js.svg?style=svg)](https://circleci.com/gh/chec/commerce.js)
 
-Easy to use JavaScript SDK for managing carts and selling products from your chec.io store
+Easy to use JavaScript SDK for managing carts and selling products from your Chec store.
+
+**Please note:** version 1.0 is outdated, please use version 2.0 for new projects.
 
 https://commercejs.com
 
@@ -10,7 +12,7 @@ https://commercejs.com
 
 ### With NPM
 
-`npm install @chec/commerce`
+`npm install @chec/commerce.js`
 
 ### With CDN
 
