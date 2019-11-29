@@ -2,9 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield)](https://circleci.com/gh/chec/commerce.js/tree/master)
 [![Codecov](https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg)](https://codecov.io/gh/chec/commerce.js)
-[![Version](https://img.shields.io/npm/v/@chec.io/commerce.svg)](https://npmjs.org/package/@chec.io/commerce)
-[![Downloads/week](https://img.shields.io/npm/dw/@chec.io/commerce.svg)](https://npmjs.org/package/@chec.io/commerce)
-[![License](https://img.shields.io/npm/l/@chec.io/commerce.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
+[![Downloads/week](https://img.shields.io/npm/dw/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
+[![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
 
 
 ## Not production ready!
@@ -19,7 +19,7 @@ https://commercejs.com
 
 ### With NPM
 
-`npm install @chec.io/commerce`
+`npm install @chec/commerce.js`
 
 ## Documentation
 
