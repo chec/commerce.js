@@ -132,9 +132,7 @@ describe('Checkout', () => {
         foo: 'baz',
       });
 
-      expect(
-        requestMock,
-      ).toHaveBeenLastCalledWith(
+      expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/bar321/check/pay_what_you_want',
         'get',
         { foo: 'baz' },
@@ -277,9 +275,7 @@ describe('Checkout', () => {
       const checkout = new Checkout(mockCommerce);
       const returnValue = checkout.getShippingOptions('foo123', { a: 'b' });
 
-      expect(
-        requestMock,
-      ).toHaveBeenLastCalledWith(
+      expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/helper/shipping_options',
         'get',
         { a: 'b' },
@@ -296,9 +292,7 @@ describe('Checkout', () => {
         quantity: 25,
       });
 
-      expect(
-        requestMock,
-      ).toHaveBeenLastCalledWith(
+      expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/bar234/quantity',
         'get',
         { quantity: 25 },
