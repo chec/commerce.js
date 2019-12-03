@@ -110,7 +110,15 @@ describe('Cart', () => {
     it('will refresh if a 404 is returned from a request', async () => {
       axios.mockClear();
       axios
-        .mockImplementationOnce(() => Promise.resolve({ status: 404 }))
+        .mockImplementationOnce(() =>
+          Promise.reject({
+            response: {
+              status: 404,
+              statusText: 'Not found',
+              data: {},
+            },
+          }),
+        )
         .mockImplementation(() =>
           Promise.resolve({ status: 200, data: { id: '12345' } }),
         );

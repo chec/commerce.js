@@ -138,24 +138,22 @@ class Commerce {
           }
 
           // Handle the response
-          if (response.status >= 200 && response.status < 300) {
-            if (
-              typeof response.data !== 'object' ||
-              Array.isArray(response.data)
-            ) {
-              return response.data;
-            }
-            const { _event, ...otherData } = response.data;
-
-            if (
-              typeof _event === 'string' &&
-              typeof eventCallback === 'function'
-            ) {
-              eventCallback(_event);
-            }
-
-            return otherData;
+          if (
+            typeof response.data !== 'object' ||
+            Array.isArray(response.data)
+          ) {
+            return response.data;
           }
+          const { _event, ...otherData } = response.data;
+
+          if (
+            typeof _event === 'string' &&
+            typeof eventCallback === 'function'
+          ) {
+            eventCallback(_event);
+          }
+
+          return otherData;
         })
         // Run our own error handler, then wrap the promise rejection in our own error object
         .catch(error => {

@@ -56,7 +56,7 @@ class Cart {
       .request(`carts/${this.id()}${suffix}`, method, data, returnFullRequest)
       .catch(error => {
         // Catch 404 errors that imply the cart ID has expired
-        if (error.response && error.response.status === 404) {
+        if (error.statusCode && error.statusCode === 404) {
           return this.refresh().then(() => {
             // Note that this repetition of the endpoint cannot be extracted as the `.id()` needs to evaluate both times
             return this.commerce.request(
