@@ -132,7 +132,9 @@ describe('Checkout', () => {
         foo: 'baz',
       });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
+      expect(
+        requestMock,
+      ).toHaveBeenLastCalledWith(
         'checkouts/bar321/check/pay_what_you_want',
         'get',
         { foo: 'baz' },
@@ -165,7 +167,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/b1lly/helper/set_tax_zone',
         'get',
-        { zone: 'Cuba' },
+        {
+          zone: 'Cuba',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -223,7 +227,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/a1s2d3/check/h1/variant',
         'get',
-        { hello: 'world' },
+        {
+          hello: 'world',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -238,7 +244,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/discount',
         'get',
-        { code: 'A1D2' },
+        {
+          code: 'A1D2',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -255,7 +263,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/shipping',
         'get',
-        { method: 'A1D2' },
+        {
+          method: 'A1D2',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -267,7 +277,9 @@ describe('Checkout', () => {
       const checkout = new Checkout(mockCommerce);
       const returnValue = checkout.getShippingOptions('foo123', { a: 'b' });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
+      expect(
+        requestMock,
+      ).toHaveBeenLastCalledWith(
         'checkouts/foo123/helper/shipping_options',
         'get',
         { a: 'b' },
@@ -284,7 +296,9 @@ describe('Checkout', () => {
         quantity: 25,
       });
 
-      expect(requestMock).toHaveBeenLastCalledWith(
+      expect(
+        requestMock,
+      ).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/bar234/quantity',
         'get',
         { quantity: 25 },
@@ -352,7 +366,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/xkcd/check/giftcard',
         'get',
-        { card: 'BAR123' },
+        {
+          card: 'BAR123',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
