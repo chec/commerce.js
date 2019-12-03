@@ -165,7 +165,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/b1lly/helper/set_tax_zone',
         'get',
-        { zone: 'Cuba' },
+        {
+          zone: 'Cuba',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -223,7 +225,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/a1s2d3/check/h1/variant',
         'get',
-        { hello: 'world' },
+        {
+          hello: 'world',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -238,7 +242,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/discount',
         'get',
-        { code: 'A1D2' },
+        {
+          code: 'A1D2',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -255,7 +261,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/foo123/check/shipping',
         'get',
-        { method: 'A1D2' },
+        {
+          method: 'A1D2',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');
@@ -352,7 +360,9 @@ describe('Checkout', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'checkouts/xkcd/check/giftcard',
         'get',
-        { card: 'BAR123' },
+        {
+          card: 'BAR123',
+        },
       );
       const result = await returnValue;
       expect(result).toBe('return');

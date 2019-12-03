@@ -51,10 +51,13 @@ class Commerce {
     if (!this.consoleHelper || !this.options.debug) {
       return;
     }
-    const type = `[${response.status}] Type: ${response.statusText}`;
+    const innerResponse = response.response;
+    const type = `[${innerResponse.status}] Type: ${innerResponse.statusText}`;
     const msg =
-      typeof response.data === 'string' ? response.data : response.statusText;
-    return this.consoleHelper('error', type, msg, response);
+      typeof innerResponse.data === 'string'
+        ? innerResponse.data
+        : innerResponse.statusText;
+    return this.consoleHelper('error', type, msg, innerResponse.data);
   }
 
   /**
@@ -122,27 +125,48 @@ class Commerce {
     }
 
     const { eventCallback } = this.options;
-    return promise.then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        if (typeof response.data !== 'object' || Array.isArray(response.data)) {
-          return response.data;
-        }
-        const { _event, ...otherData } = response.data;
+    return (
+      promise
+        .then(response => {
+          // Feed the console debugger
+          if (
+            this.consoleHelper &&
+            this.options.debug &&
+            typeof response.data._console === 'object'
+          ) {
+            this.consoleHelper(...response.data._console);
+          }
 
-        if (typeof _event === 'string' && typeof eventCallback === 'function') {
-          eventCallback(_event);
-        }
+          // Handle the response
+          if (
+            typeof response.data !== 'object' ||
+            Array.isArray(response.data)
+          ) {
+            return response.data;
+          }
+          const { _event, ...otherData } = response.data;
 
-        return otherData;
-      }
+          if (
+            typeof _event === 'string' &&
+            typeof eventCallback === 'function'
+          ) {
+            eventCallback(_event);
+          }
 
-      // Reject the promise by throwing an error
-      this.error(response);
-      throw {
-        message: `Unsuccessful response (${response.status}: ${response.statusText}) received`,
-        response,
-      };
-    });
+          return otherData;
+        })
+        // Run our own error handler, then wrap the promise rejection in our own error object
+        .catch(error => {
+          this.error(error);
+          throw {
+            message: `Unsuccessful response (${error.response.status}: ${error.response.statusText}) received`,
+            statusCode: error.response.status,
+            statusText: error.response.statusText,
+            data: error.response.data,
+            originalError: error,
+          };
+        })
+    );
   }
 }
 
