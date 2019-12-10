@@ -40,7 +40,6 @@ beforeEach(() => {
   };
 
   commerceImpl.request = Commerce.prototype.request.bind(commerceImpl);
-  commerceImpl._serialize = Commerce.prototype._serialize.bind(commerceImpl);
 
   MockCommerce.mockImplementation(() => commerceImpl);
 
@@ -182,8 +181,7 @@ describe('Cart', () => {
       );
 
       const lastData = axios.mock.calls.pop()[0].data;
-      expect(lastData).toBeInstanceOf(FormData);
-      expect(lastData.get('id')).toBe('bar');
+      expect(lastData.id).toBe('bar');
     });
 
     it('builds a request from given args', async () => {
@@ -201,10 +199,9 @@ describe('Cart', () => {
       );
 
       const lastData = axios.mock.calls.pop()[0].data;
-      expect(lastData).toBeInstanceOf(FormData);
-      expect(lastData.get('id')).toBe('id');
-      expect(lastData.get('quantity')).toBe('6');
-      expect(lastData.get('variant[variant]')).toBe('option');
+      expect(lastData.id).toBe('id');
+      expect(lastData.quantity).toEqual(6);
+      expect(lastData.variant.variant).toBe('option');
     });
   });
 
@@ -266,8 +263,7 @@ describe('Cart', () => {
       );
 
       const lastData = axios.mock.calls.pop()[0].data;
-      expect(lastData).toBeInstanceOf(FormData);
-      expect(lastData.get('foo')).toBe('bar');
+      expect(lastData.foo).toBe('bar');
     });
   });
 

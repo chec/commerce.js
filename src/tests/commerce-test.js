@@ -146,8 +146,7 @@ describe('Commerce', () => {
       const data = { test: true };
       commerce.request('test', 'post', data);
 
-      const expectation = new FormData();
-      expectation.set('test', true);
+      const expectation = { test: true };
 
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -213,78 +212,6 @@ describe('Commerce', () => {
       expect(response).toEqual({
         other: 'data',
       });
-    });
-  });
-
-  describe('_serialize', () => {
-    it('converts a set of key value pairs to FormData', () => {
-      const input = { foo: 'bar', bar: 'baz' };
-      const commerce = new Commerce('foo');
-      const result = commerce._serialize(input);
-
-      expect(commerce._serialize(input)).toBeInstanceOf(FormData);
-      expect(result.get('foo')).toBe('bar');
-      expect(result.get('bar')).toBe('baz');
-    });
-
-    it('handles numbers', () => {
-      const input = { id: 123 };
-      const commerce = new Commerce('foo');
-      const result = commerce._serialize(input);
-
-      expect(result.get('id')).toBe('123'); // Always strings!
-    });
-
-    it('handles booleans', () => {
-      const input = { is_free: true };
-      const commerce = new Commerce('foo');
-      const result = commerce._serialize(input);
-
-      expect(result.get('is_free')).toBe('true'); // Always strings!
-    });
-
-    it('handles nested objects', () => {
-      const input = {
-        conditionals: {
-          is_free: true,
-          prefix: 'sdk',
-          extra: {
-            for: 'the sake of it',
-          },
-        },
-      };
-      const commerce = new Commerce('foo');
-      const result = commerce._serialize(input);
-
-      expect(result.get('conditionals[is_free]')).toBe('true');
-      expect(result.get('conditionals[prefix]')).toBe('sdk');
-      expect(result.get('conditionals[extra][for]')).toBe('the sake of it');
-    });
-
-    it('handles nested arrays', () => {
-      const input = {
-        products: [
-          {
-            name: 'T-shirt',
-          },
-          {
-            name: 'JavaScript SDK',
-          },
-          {
-            variants: [
-              {
-                name: 'Something',
-              },
-            ],
-          },
-        ],
-      };
-      const commerce = new Commerce('foo');
-      const result = commerce._serialize(input);
-
-      expect(result.get('products[0][name]')).toBe('T-shirt');
-      expect(result.get('products[1][name]')).toBe('JavaScript SDK');
-      expect(result.get('products[2][variants][0][name]')).toBe('Something');
     });
   });
 });

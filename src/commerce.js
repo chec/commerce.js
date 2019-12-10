@@ -60,45 +60,15 @@ class Commerce {
     return this.consoleHelper('error', type, msg, innerResponse.data);
   }
 
-  /**
-   * Recursively encodes input data into FormData objects
-   *
-   * @param {string|object} input
-   * @param {string|null} keyNamespace
-   * @param {FormData|null} formData
-   * @returns {FormData|string} Eventually returns a FormData object
-   * @private
-   */
-  _serialize(input, keyNamespace = null, formData = null) {
-    // Return non-iterable input immediately
-    if (typeof input !== 'object') {
-      return input;
-    }
-
-    const data = formData || new FormData();
-    for (let key in input) {
-      const dataKey = keyNamespace === null ? key : `${keyNamespace}[${key}]`;
-
-      // Recursively handle nested objects
-      if (typeof input[key] === 'object') {
-        this._serialize(input[key], dataKey, data);
-      } else {
-        data.append(dataKey, input[key]);
-      }
-    }
-
-    return data;
-  }
-
   request(endpoint, method = 'get', data = null, returnFullResponse = false) {
     const headers = {
       'X-Authorization': this.options.publicKey,
       'X-Chec-Agent': 'commerce.js/v2',
     };
 
-    // Let axios serialize get request payloads
+    // Let axios serialize get request payloads as JSON
     const params = method === 'get' ? data : null;
-    const requestBody = method === 'get' ? null : this._serialize(data);
+    const requestBody = method === 'get' ? null : data;
 
     const timeout = this.options.timeoutMs || 60000;
     const axiosConfig = this.options.axiosConfig || {};
