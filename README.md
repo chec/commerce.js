@@ -41,6 +41,12 @@ promise syntax instead.
 
 Additionally, the API for the various features are now lower-cased.
 
+The `cart.add()` method now separates its arguments:
+
+```diff
+- Commerce.Cart.add({ productId: 1, quantity: 2, variant: { foo: 'bar'} })
++ Commerce.cart.add(1, 2, {foo: 'bar'})
+
 ## Contributing
 
 ### Running the tests
