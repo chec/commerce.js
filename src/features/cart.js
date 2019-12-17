@@ -10,7 +10,7 @@ class Cart {
   }
 
   /**
-   * Request a new cart ID. This method persists the new ID to the cart and local storage
+   * Request a new cart. This method persists the new cart ID to local storage
    *
    * @returns {Promise<object>} A promise that resolves to the new cart
    */
