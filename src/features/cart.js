@@ -6,18 +6,20 @@ class Cart {
    */
   constructor(commerce) {
     this.commerce = commerce;
-    this.cart = null;
+    this.cartId = null;
   }
 
   /**
-   * Request a new cart ID. This method persists the new ID to the cart and local storage
+   * Request a new cart. This method persists the new cart ID to local storage
+   *
+   * @returns {Promise<object>} A promise that resolves to the new cart
    */
   refresh() {
     return this.commerce.request('carts').then(cart => {
       const { id } = cart;
       this.commerce.storage.set('commercejs_cart_id', id, 30);
-      this.cart = cart;
-      return id;
+      this.cartId = id;
+      return cart;
     });
   }
 
@@ -27,8 +29,8 @@ class Cart {
    * @returns {string|null}
    */
   id() {
-    if (this.cart !== null && this.cart.id !== null) {
-      return this.cart.id;
+    if (this.cartId !== null) {
+      return this.cartId;
     }
 
     const storedCartId = this.commerce.storage.get('commercejs_cart_id');
@@ -90,7 +92,7 @@ class Cart {
 
   retrieve() {
     return this.request().then(cart => {
-      this.cart = cart;
+      this.cartId = (cart && cart.id) || null;
       return cart;
     });
   }
