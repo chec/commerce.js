@@ -154,13 +154,14 @@ describe('Cart', () => {
   describe('refresh', () => {
     it('sets the card ID and fires a ready event', async () => {
       const cart = new Cart(mockCommerce);
-      await cart.refresh();
+      const newCart = await cart.refresh();
 
       expect(storageSetMock).toHaveBeenCalledWith(
         'commercejs_cart_id',
         '12345',
         30,
       );
+      expect(newCart).toHaveProperty('id');
     });
   });
 
