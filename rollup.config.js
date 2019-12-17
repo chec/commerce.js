@@ -25,7 +25,7 @@ export default [
   {
     input: "./src/index.js",
     output: {
-      file: "./lib/index.axios.js",
+      file: "./lib/commerce.js",
       format: "iife",
       name: "bundle"
     },
