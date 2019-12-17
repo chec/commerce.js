@@ -92,7 +92,7 @@ class Cart {
 
   retrieve() {
     return this.request().then(cart => {
-      this.cartId = cart && cart.id ? cart.id : null;
+      this.cartId = (cart && cart.id) || null;
       return cart;
     });
   }
