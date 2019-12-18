@@ -26,7 +26,10 @@ jobs:
       - checkout
       - run:
           name: Detect major version
-          command: export COMMERCE_MAJOR=$(echo $CIRCLE_TAG | sed -r 's/([0-9]+)\..*/\1/')
+          command: |
+            echo $CIRCLE_TAG
+            export COMMERCE_MAJOR=$(echo $CIRCLE_TAG | sed -r 's/([0-9]+)\..*/\1/')
+            echo $COMMERCE_MAJOR
       - run: npm install
       - run: npm run prepublishOnly
       - aws-s3/copy:
