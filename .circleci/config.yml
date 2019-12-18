@@ -35,11 +35,15 @@ jobs:
       - aws-s3/copy:
           from: lib/commerce.js
           to: s3://v$COMMERCE_MAJOR/commerce.js
-          arguments: --endpoint $AWS_ENDPOINT
+          arguments: |
+            --endpoint $AWS_ENDPOINT \
+            --acl public-read
       - aws-s3/copy:
           from: lib/commerce.js
           to: s3://commerce/$CIRCLE_TAG.js
-          arguments: --endpoint $AWS_ENDPOINT
+          arguments: |
+            --endpoint $AWS_ENDPOINT \
+            --acl public-read
 
 workflows:
   version: 2
