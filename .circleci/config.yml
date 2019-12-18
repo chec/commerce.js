@@ -26,29 +26,38 @@ jobs:
       - checkout
       - run:
           name: Detect major version
-          command: export COMMERCE_MAJOR=$(echo $CIRCLE_TAG | sed -r 's/([0-9]+)\..*/\1/')
+          command: |
+            export COMMERCE_MAJOR=$(echo $CIRCLE_TAG | sed -r 's/([0-9]+)\..*/\1/')
+            echo "Detected major $COMMERCE_MAJOR from tag $CIRCLE_TAG"
+            echo "export COMMERCE_MAJOR=$COMMERCE_MAJOR" >> $BASH_ENV
       - run: npm install
       - run: npm run prepublishOnly
       - aws-s3/copy:
           from: lib/commerce.js
           to: s3://v$COMMERCE_MAJOR/commerce.js
-          arguments: --endpoint $AWS_ENDPOINT
+          arguments: |
+            --endpoint $AWS_ENDPOINT \
+            --acl public-read
       - aws-s3/copy:
           from: lib/commerce.js
           to: s3://commerce/$CIRCLE_TAG.js
-          arguments: --endpoint $AWS_ENDPOINT
+          arguments: |
+            --endpoint $AWS_ENDPOINT \
+            --acl public-read
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - test
+      - test:
+          filters:
+            tags:
+              only: /.*/
       - deploy:
           requires:
             - test
           filters:
-            branches:
-              ignore: /.*/
             tags:
               only: /.*/
-
+            branches:
+              ignore: /.*/
