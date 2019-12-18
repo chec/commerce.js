@@ -1,7 +1,9 @@
-version: 2
+version: 2.1
 
+orbs:
+  aws-s3: circleci/aws-s3@1.0.12
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:10
     working_directory: ~/repo
@@ -15,3 +17,35 @@ jobs:
 
       # Upload coverage
       - run: bash <(curl -s https://codecov.io/bash) -F js
+
+  deploy:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run prepublishOnly
+      - aws-s3/copy:
+          from: lib/commerce.js
+          to: s3://v2/commerce.js
+          arguments: --endpoint $AWS_ENDPOINT
+      - aws-s3/copy:
+          from: lib/commerce.js
+          to: s3://commerce/$CIRCLE_TAG.js
+          arguments: --endpoint $AWS_ENDPOINT
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+
