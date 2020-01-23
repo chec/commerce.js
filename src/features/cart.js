@@ -90,7 +90,11 @@ class Cart {
     return this.request('', 'post', data);
   }
 
-  retrieve() {
+  retrieve(cartId = null) {
+    if (cartId) {
+      this.cartId = cartId;
+    }
+
     return this.request().then(cart => {
       this.cartId = (cart && cart.id) || null;
       return cart;

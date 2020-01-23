@@ -218,6 +218,18 @@ describe('Cart', () => {
         }),
       );
     });
+
+    it('uses a given cart ID', async () => {
+      const cart = new Cart(mockCommerce);
+      storageGetMock.mockReturnValue('12345');
+      await cart.retrieve(54321);
+
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/54321',
+        }),
+      );
+    });
   });
 
   describe('remove', () => {
