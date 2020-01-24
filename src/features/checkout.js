@@ -30,6 +30,21 @@ class Checkout {
   }
 
   /**
+   * Gets a new checkout token from a specific identifier type
+   *
+   * @param {string} type The type of identifier that will be passed
+   * @param {string} identifier
+   * @return {Promise}
+   */
+  generateTokenFrom(type, identifier) {
+    if (!['product_id', 'cart', 'permalink'].includes(type)) {
+      throw new Error(`Cannot generate a token with unknown "${type}" type`);
+    }
+
+    return this.generateToken(identifier, { identifier_type: type });
+  }
+
+  /**
    * Capture a provided checkout by its token
    *
    * @param {string} token

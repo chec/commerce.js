@@ -61,6 +61,19 @@ describe('Checkout', () => {
     });
   });
 
+  describe('generateTokenFrom', () => {
+    it('proxies the request method', async () => {
+      const checkout = new Checkout(mockCommerce);
+      const returnValue = checkout.generateTokenFrom('cart', 'foo');
+
+      expect(requestMock).toHaveBeenLastCalledWith('checkouts/foo', 'get', {
+        identifier_type: 'cart',
+      });
+      const result = await returnValue;
+      expect(result).toBe('return');
+    });
+  });
+
   describe('capture', () => {
     it('proxies the request method and refreshes the cart', async () => {
       const checkout = new Checkout(mockCommerce);
