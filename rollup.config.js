@@ -27,7 +27,7 @@ export default [
     output: {
       file: "./lib/commerce.js",
       format: "iife",
-      name: "bundle"
+      name: "Commerce"
     },
     plugins: [
       rollupCommonJs({
