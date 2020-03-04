@@ -6,7 +6,7 @@
 [![Downloads/week](https://img.shields.io/npm/dw/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
 [![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
 
-An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec Dashboard. 
+An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API. 
 
 https://commercejs.com
 
