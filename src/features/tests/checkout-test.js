@@ -67,7 +67,7 @@ describe('Checkout', () => {
       const returnValue = checkout.generateTokenFrom('cart', 'foo');
 
       expect(requestMock).toHaveBeenLastCalledWith('checkouts/foo', 'get', {
-        identifier_type: 'cart',
+        type: 'cart',
       });
       const result = await returnValue;
       expect(result).toBe('return');

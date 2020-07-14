@@ -41,7 +41,7 @@ class Checkout {
       throw new Error(`Cannot generate a token with unknown "${type}" type`);
     }
 
-    return this.generateToken(identifier, { identifier_type: type });
+    return this.generateToken(identifier, { type });
   }
 
   /**
