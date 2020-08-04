@@ -1,23 +1,38 @@
 ---
-title: "Getting Started"
+title: Getting Started
+description: ''
+position: 1
+category: Getting started
 ---
 
-**Commerce.js** is a JavaScript SDK built on top of the **Chec API**. The Commerce.js SDK provide helper functions for each core endpoint such as [products](/docs/sdk/products), [cart](/docs/sdk/cart), and [checkout](/docs/sdk/checkout) to cater for common checks you’d normally have to create manually, for example *“is this variant available for this order”* or *“what’s the list of provinces in Canada or regions in New Zealand?”.* \
-\
-Commerce.js is designed to work alongside future server-side SDKs, making the API limited to [public key](/docs/sdk/getting-started#scope) scoped requests. Commerce.js utilizes your public API key which is required to retrieve non-sensitive data such as the products, cart, and checkout resources. It can also be used to capture orders although you will be unable to access the order resource for security reasons. We dive a bit deeper into the authentication of our API keys below. Note that examples provided using the Commerce.js SDK are utilizing the latest version - available on [npm](https://www.npmjs.com/package/@chec/commerce.js).
+**Commerce.js** is a JavaScript SDK built on top of the **Chec platform** to allow for easy interfacing with the **Chec API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that work on any modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce logic of an application, as well as a built-in [console debugger]() that enables a seamless development process.
+
+Here, you will find information on setting up and integrating Chec/Commerce.js into your application.
+
+##### Before installing Commerce.js, you'll first need to create an account to get your API credentials.
+1. Sign up for a Chec account [here](https://dashboard.chec.io/signup).
+2. Navigate to the developer section under settings [here](https://dashboard.chec.io/settings/developer).
+3. Obtain your generated public and secret keys.
 
 <!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
 [Success(note) highight block] Note that examples provided using the Commerce.js SDK are utilizing the latest version - available on [npm](https://www.npmjs.com/package/@chec/commerce.js). We are also working on releasing additional server-side SDKs in other languages (PHP, Ruby, Python, etc).-->
+
+<chec-alert variant="success" inline="true">
+
+Test
+
+</chec-alert>
 
 ---
 
 ## Authentication
 
-When you [create a Chec account](https://dashboard.chec.io/signup), two sets of API authentication keys are generated, a public key and a secret key. The public key is used with Commerce.js to access all core resource endpoints. You can manage your API keys from your dashboard under the developer section.\
+When you [create a Chec account](https://dashboard.chec.io/signup), two sets of API authentication keys are generated, a **public key** and a **secret key**. The public key is used with Commerce.js to access all core resource endpoints. You can manage your API keys from your dashboard under the developer section.
 
 <!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
 [Success(note) highight block] To obtain your API keys, navigate to the developer section from your Chec dashboard (Settings > Developer). -->
-
+\
+While using Commerce.js, the Chec API is limited to [public key scoped]() requests. We developed Commerce.js to to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve non-sensitive data such from [products](), [cart](), and [checkout]() endpoints. It can also be used to capture orders although you will be unable to access the order resource for security reasons.\
 \
 All API requests using live API keys must be made over HTTPS, calls made over plain HTTP will fail. Requests must be authenticated with your [secret key](/docs/sdk/getting-started#scope) by including it in the X-Authorization header when making the requests to sensitive endpoints. However, all API requests made using your sandbox secret key can be made over both HTTP or HTTPS.
 
@@ -28,11 +43,11 @@ All API requests using live API keys must be made over HTTPS, calls made over pl
 
 ## Scope
 
-Scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the resources. Scope provides a way to constrain and consider the granular access clients might need. We define our scope using public and secret keys.
+Scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the resources. Scope provides a way to constrain and consider the granular access a client might need. We define our scope using public and secret keys.
 
 #### Public keys
 
-##### To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason.
+###### To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason. Authenticating with the public key, you will have read and write access to the below resources.
 
 | Read | Write |
 | -------------------- | ----------- |
@@ -47,11 +62,11 @@ Scope defines the varying levels of access a client has to a set of Chec API res
 
 ##### Client side
 
-The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing projects. An example would be to list your products from `product` endpoint.
+The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing projects. An example would be to list your products from the `product` endpoint.
 
 #### Secret keys
 
-##### To be used with server side code. These API keys have the power to access sensitive data such as receipts and order data.
+###### To be used with server side code. These API keys have the power to access sensitive data such as receipts and order data. Authenticating with the secret key will give you read and write access to the below resources.
 
 | Read & write |  |
 | -------------------- | ----------- |
@@ -66,7 +81,9 @@ The public key is to be used with requests that don't require any sensitive acti
 
 ##### Server side
 
-The secret key can be used with requests that require sensitive actions or data to be retrieved as well as all client side requests. You'll use your _secret key_ for these requests. The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. You can find some examples in the [full API reference](/docs/api).\
+The secret key can be used with requests that require sensitive actions or data to be retrieved as well as all client side requests. You'll use your secret key for these requests. The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. An example of a sensitive request would be to make a call to [refund an order](https://commercejs.com/docs/api/?shell#refund-an-order).
+<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
+[Warning highlight block] The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. -->
 \
 When you register for a Chec account, you'll be assigned two sets of these keys: live and sandbox. We highly recommend using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can easily be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
 
@@ -74,9 +91,9 @@ When you register for a Chec account, you'll be assigned two sets of these keys:
 
 ## Installation
 
-#### Install the SDK via a package manager
+#### Install the SDK with a package manager
 
-If you're using npm or yarn, then adding the Commerce.js SDK to your project is real simple. Navigate into your project's root folder in your terminal, and type the following:
+If you're using npm or yarn, then adding the Commerce.js SDK to your project is real simple. Once you've created a directory for your project, navigate into your project's root folder in your terminal `cd your-project-folder`, and type the following:
 
 ```bash
 npm install @chec/commerce.js
@@ -86,11 +103,16 @@ yarn add @chec/commerce.js
 
 #### Installing the SDK via our CDN
 
+Another option would be to install the SDK via our CDN, you'll want to include this script tag in your point of entry file, for instance in your `index.html`.
+
 ```js
 <script type="text/javascript" src="https://assets.chec-cdn.com/v2/commerce.js"></script>
 ```
 
-We're almost ready to go! We just need to create a new Commerce instance and give it our public key (you can get your API keys from the [Chec Dashboard](https://dashboard.chec.io).
+<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
+[Info highlight block] We recommend installing Commerce.js as a package to reap the benefits of all the features included -->
+
+We're almost ready to go! We just need to create a new Commerce instance and give it our public key (you can get your API keys from [Chec Dashboard > Settings > Developer](https://dashboard.chec.io/settings/developer).
 
 ```js
 // Import the Commerce module
@@ -100,21 +122,22 @@ import Commerce from '@chec/commerce.js';
 const commerce = new Commerce('public_api_key');
 ```
 
+Once your Commerce instance is created, you are now able to access the `commerce` object in your application.
+
 ---
 
 ## Console Debugger
 
-We've built in a console debugger into our client-side JavaScript SDK to help out during development.\
-\
-You can also optionally add `true` as the second constructor argument to enable debug mode, which will enable the Commerce.js console debugger.
+We've built in a console debugger in Commerce.js to help you out with debugging during development. To enable the console debugger, add `true` as the second constructor argument when you create your Commerce instance.
 
 ```javascript
 const commerce = new Commerce('public_api_key', true);
 ```
-
 The console debugger only works when you are using a test API key, messages will not be shown if you are using a live API key.
+
+<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
+[Warning highlight block] The console debugger only works when you are using a test API key, messages will not be shown if you are using a live API key. -->
 
 ![Console debugger image](https://i.ibb.co/QQDGRkT/console-debugger.png)
 
->[!WARNING]
->This is a warning
+---

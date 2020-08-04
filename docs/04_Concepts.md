@@ -4,7 +4,7 @@ title: "Concepts"
 
 ## Features
 
-The Commerce.js SDK supports all of the frontend oriented functionality you'll need to get a customer-facing store up and running. All features are accessible from your Commerce object instance, for example from the cart endpoint `commerce.cart.retrieve()` would retrieve your cart data.
+The Commerce.js SDK supports all of the frontend oriented functionality you'll need to get a customer-facing store up and running. The SDK handles all the grunt work to help you build a custom commerce presentation layer. All features are accessible from your Commerce object instance, for example from the cart endpoint `commerce.cart.retrieve()` would retrieve your cart data.
 
 #### Products `products`
 ###### Methods for getting product data, including variant information, shipping settings, assets, etc.
@@ -85,7 +85,7 @@ To generate a checkout token, all you need to provide is the permalink or ID of 
 
 ##### Example request using cURL
 
-```sh
+```bash
 $ curl -X GET
     -G "https://api.chec.io/v1/checkouts/{identifier}?type={identifier_type}"
     -H "X-Authorization: {key}"
@@ -103,78 +103,87 @@ Commerce.checkout.generateToken('{identifier}', '{identifier_type}')
 
 ## Checkout helpers
 
-We created Commerce.js to handle all common commerce logic. Helper functions help you make common eCommerce calls during the checkout.
+We created Commerce.js to make it seamless to handle all common commerce logic that would otherwise be complex. Commerce.js [checkout helper functions](https://commercejs.com/docs/api/?shell#checkout-helpers) are provided to help create custom checkout flows. Below are some examples of various checkpoints during the checkout process:
 
-For example:
+* Check if a requested variant, quantity, or shipping option is available
+* Check if an entered *"Pay What You Want"* amount or discount code is valid
+* Retrieve running totals for a checkout (i.e. subtotals, shipping totals, and grand totals) - [the live object](/docs/sdk/concepts#the-live-object)
+* Generate client side validation rules
+* Get a full list of states/provinces for a country to populate a select field
+* Get the buyer's location from an IP address
+* Set a new tax zone for the checkout when the customer changes their shipping address
 
-  * Checking if a requested variant, quantity, or shipping option is available
-  * Checking if an entered "Pay What You Want" amount or discount code is valid
-  * Retrieving running totals for a checkout (i.e. subtotals, shipping totals, and grand totals) - the live object
-  * Generate client side validation rules for jQuery
-  * Get a full list of states/provinces for a country to populate a `<select>`
-  * Get the buyers location from an IP address
-  * Set a new tax zone for the checkout when the customer changes their shipping address
-
-All helper endpoints on the Checkout resource update the live object. e.g. If you select a variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most responses contain a "live" object which gives you the live running totals and other information relevant to the current checkout session so you can update displayed totals (and more) straight away.
+All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#checkout) resource update the live object. E.g. If you select a variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most responses contain a [live object](https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object) which gives you the live running totals and other information relevant to the current checkout session so you can update displayed totals (and more) straight away.
 
 Helper functions are not required. All totals are recalculated during capture using the checkout data sent.
 
-##### cURL
+<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
+[Warning highight block] Helper functions are not required. All totals are recalculated during capture using the checkout data sent. -->
 
-```sh
+<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
+[Info highight block] For a full list of checkout helpers, see the API reference [here](https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object) -->
+
+##### Example requests using cURL
+
+```bash
 # Get the buyers location from their IP (for preselecting address fields or EU VAT MOSS evidence)
-$ curl https://api.chec.io/v1/checkouts/{checkout_token_id}/helper/location_from_ip \
+$ curl -X GET
+    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/helper/location_from_ip
     -H "X-Authorization: {key}"
 
 # Example - Is the quantity selected valid?
-$ curl https://api.chec.io/v1/checkouts/{checkout_token_id}/check/{line_item_id}/quantity?amount={amount} \
--H "X-Authorization: {key}"
+$ curl -X GET
+    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/check/{line_item_id}/quantity?amount={amount}
+    -H "X-Authorization: {key}"
 
 # Example - Is this order now free? (i.e. after a discount code is entered)
-$ curl https://api.chec.io/v1/checkouts/{checkout_token_id}/check/is_free \
--H "X-Authorization: {key}"
+$ curl -X GET
+    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/check/is_free
+    -H "X-Authorization: {key}"
 
 ```
 
-##### Commerce.js
+##### Example requests using Commerce.js
 
 ```js
 // Get the buyers location from their ip (for pre-selecting address fields or EU VAT MOSS evidence)
-commerce.checkout.getLocationFromIP('{checkout_token_id}').then(response => {
+Commerce.checkout.getLocationFromIP('{checkout_token_id}').then(response => {
 
 });
 
 // Example - Is the quantity selected valid?
-commerce.checkout.checkQuantity('{checkout_token_id}', '{requested-quantity}').then(response => {
+Commerce.checkout.checkQuantity('{checkout_token_id}', '{requested-quantity}').then(response => {
 
 });
 
 // Example - Is this order now free? (i.e. after a discount code is entered)
-commerce.checkout.isFree('{checkout_token_id}').then(response => {
+Commerce.checkout.isFree('{checkout_token_id}').then(response => {
 
 });
-  ```
+```
 
 ---
 
 ## The Live Object
 
-The live object is a living object which adjusts to show the live tax rates, prices, and totals for a checkout token. Every time a checkout helper endpoint is called, this object will be updated. The returned data can be used to display information back to the customer on the checkout. All checkout helpers that affect price (e.g. check quantity, check variant, check discount etc) with return the live object in its payload.
-
-We create the live object to help you (and us!) display up-to-date totals, tax prices, and other dynamic variables which change during the Checkout process and need to displayed back to the customer. You should use the data in the live object to update the displayed totals on your checkout pages when the customer selects a new variant, enters a discount, or selects a different shipping option.
-
-At Chec we do this on our own checkouts by feeding the <span class="hl">live object</span> returned from each helper function into a JavaScript function which associates the data with the correct element.
+The [live object](https://commercejs.com/docs/api/?shell#get-the-live-object) is a living object which adjusts to show the live tax rates, prices, and totals for a checkout token. Every time a checkout helper endpoint is called, this object will be updated. The returned data can be used to display information back to the customer on the checkout. All checkout helpers that affect price (e.g. check quantity, check variant, check discount, etc) will return the live object in its payload.\
+\
+We create the live object to help you (and us!) display up-to-date totals, tax prices, and other dynamic variables which change during the checkout process and need to displayed back to the customer. You should use the data in the live object to update the displayed totals on your checkout pages when the customer selects a new variant, enters a discount, or selects a different shipping option.\
+\
+At Chec we do this on our own checkouts by feeding the live object returned from each helper function into a JavaScript function which then associates the data with the correct element.
 
 ---
 
 ## Multiple price formats
 
-Every price attribute (subtotals, pay what you want minimums, tax totals, etc..) returned from Chec will be an array with four formats:
+Every price attribute (subtotals, pay what you want minimums, tax totals, etc) returned from Chec will be an array with four formats:
 
 - `raw` - No formatting *e.g. 49 or 1234.56*
 - `formatted` - Formatted with no currency symbol or code *e.g. 49.00 or 1,234.56*
 - `formatted_with_symbol` - Formatted with its symbol only *e.g. $49.00 or £1,234.56*
 - `formatted_with_code` -  Formatted with its currency code only *e.g. 49.00 USD or 1,234.56 GBP*
+
+##### Example of a `price` endpoint response
 
 ```json
 {
@@ -192,6 +201,8 @@ Every price attribute (subtotals, pay what you want minimums, tax totals, etc..)
 ## Verb Conditionals
 
 We return all conditionals in the `conditionals` array in most objects. We also return conditionals with their verb as the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.
+
+##### Example of a `conditionals` array
 
 ```json
 {
@@ -224,12 +235,13 @@ We return all conditionals in the `conditionals` array in most objects. We also 
 }
 ```
 
-Why? To (hopefully) make your code easier to write, read, and maintain, by nesting variables under their "verb key" your code reads better e.g. `checkout.conditionals.is_cart_free` vs `checkout.is.cart_free`. This is particularly nicer to work with for designers who are primarily working with JavaScript.
+We created this `conditionals` property to hopefully provide more legibility and maintainability of your code. By nesting variables under their *"verb key"* your code reads better. E.g. `checkout.conditionals.is_cart_free` vs `checkout.is.cart_free`. This is particularly nicer to work with for developers who are primarily working with JavaScript.
 
 It works well for most verb conditionals.
 
-```javascript
+##### Example using JavaScript
 
+```js
 //Few more examples in different syntax
 checkout.is.cart_free
 $checkout['is']['preorder']

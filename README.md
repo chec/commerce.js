@@ -6,7 +6,7 @@
 [![Downloads/week](https://img.shields.io/npm/dw/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
 [![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
 
-An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API. 
+An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API.
 
 https://commercejs.com
 
@@ -20,16 +20,20 @@ https://commercejs.com
 
 See the [documentation webpage](https://commercejs.com/docs).
 
+Our documentation module source code resides in `commerce.js/docs`
+
+If you would like to make contributions to the Commerce.js documentation source, here is a [guide](https://github.com/chec/commerce.js/blob/master/CONTRIBUTING.md) in doing so.
+
 ## Upgrading
 
-The major change in Commerce.js v2 is that most methods now return a 
-[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled 
-when the HTTP request is completed. Instead of providing callbacks to the methods in this module, you will have to use 
+The major change in Commerce.js v2 is that most methods now return a
+[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled
+when the HTTP request is completed. Instead of providing callbacks to the methods in this module, you will have to use
 promise syntax instead.
 
 ```diff
 - Commerce.Cart.retrieve(function (data) {
-+ Commerce.cart.retrieve().then(function (data) { 
++ Commerce.cart.retrieve().then(function (data) {
   // ...
 });
 ```
@@ -54,3 +58,4 @@ to watch for changed and re-run the tests automatically.
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
+
