@@ -23,8 +23,8 @@ class Categories {
   }
 
   /**
-   * Get a specific category by its ID. You may also provide { type: 'slug } as
-   * data and use a category slug instead of an ID.
+   * Get a specific category by its ID. You may also provide `{ type: 'slug' }`
+   * as data and use a category slug instead of an ID.
    *
    * @param {string} id
    * @param {object} data
