@@ -1,8 +1,8 @@
 # Contributing to Commerce.js SDK Documentation
 
-At Chec/Commerce.js, we believe open source developer tools documentation is a collaborative effort to be continuously improved on. We welcome and encourage all kinds of contributions to the Commerce.js documentation from the community, be it small or big. Contributing to the documentation source will require basic knowledge of Markdown formatting and styling.
+At Chec/Commerce.js, we believe open source developer tools documentation is a collaborative effort to be continuously improved on. We welcome and encourage all contributions to the Commerce.js documentation from the community, be it small or big. Contributing to the documentation source will require basic knowledge of Markdown formatting and styling.
 
-The SDK documentation module source code resides in `commerce.js/docs`. The docs source is fetched and added to a root directory in our main [Commerce.js marketing site](https://commercejs.com/). A nuxt module is used to resolve the docs source for Commerce.js, either by looking for it in the parent folder in `docs-source` or downloading it from GitHub at `chec/commerce.js/docs`. You won't need to spin this up locally to make edits and contribute to the documentation source.
+The SDK documentation module source code resides in `commerce.js/docs`. The docs source is fetched and added to a root directory in the [Commerce.js website](https://commercejs.com/).
 
 ## What can you contribute?
 

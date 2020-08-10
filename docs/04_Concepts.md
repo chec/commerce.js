@@ -2,108 +2,92 @@
 title: "Concepts"
 ---
 
-## Features
+## Authentication
 
-The Commerce.js SDK supports all of the frontend oriented functionality you'll need to get a customer-facing store up and running. The SDK handles all the grunt work to help you build a custom commerce presentation layer. All features are accessible from your Commerce object instance, for example from the cart endpoint `commerce.cart.retrieve()` would retrieve your cart data.
+When you [create a Chec account](https://dashboard.chec.io/signup), two sets of API authentication keys are generated, a **public key** and a **secret key**. The public key is used with Commerce.js to access all core resource endpoints. You can manage your API keys from your dashboard under the developer section.
 
-#### Products `products`
-###### Methods for getting product data, including variant information, shipping settings, assets, etc.
-| Method | Description |
-| -------------------- | ----------- |
-| `list(params)`       | List products |
-| `retrieve(permalink, data)`  | Get a specific product |
-| `services`  | Additional checkout helper service methods |
-| `localeListCountries()` | List all countries |
-| `localeListShippingCountries(token)` | List all countries that can be shipped to for a checkout token |
-| `localeListSubdivisions(countryCode)` | List all subdivisions/regions/states for a country |
-| `localeListShippingSubdivisions(token, countryCode)` | List all subdivisions/regions/states for a country that can be shipped to for a checkout token |
+<div class="highlight highlight--note">
+  To obtain your API keys, navigate to the developer section from your Chec dashboard (<a href="https://www.dashboard.chec.io/settings/developer">Settings > Developer</a>).
+</div>
 
-#### Categories `categories`
-###### Manage product categories in order to group your products.
-| Method | Description |
-| -------------------- | ----------- |
-| `list(params)`       | List all categories, either by filtered params or unfiltered |
-| `retrieve(slug, data)`  | Get a specific category by its slug  |
+While using Commerce.js, the Chec API is limited to [public key scoped]() requests. We developed Commerce.js to to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve non-sensitive data such from [products](), [cart](), and [checkout]() endpoints. It can also be used to capture orders although you will be unable to access the order resource for security reasons.
 
-#### Cart `cart`
-###### All aspects of managing a cart for your customer.
-| Method | Description |
-| -------------------- | ----------- |
-| `id()`       | Get the current cart ID, generating a new one if necessary |
-| `refresh()`  | Request a new cart ID |
-| `add(data)`  | Add an item to the cart |
-| `retrieve()` | Get the cart object, including contents |
-| `contents()` | Get the contents of the cart |
-| `update(lineItemId, data)` | Update an existing item in the cart |
-| `remove(lineItemId)` | Remove a line item from the cart |
-| `empty()` | Clear the cart contents but cart is not deleted |
-| `delete()` | Delete the entire cart |
-
-#### Checkout `checkout`
-###### All aspects of managing your checkout, including helper functions.
-| Method | Description |
-| -------------------- | ----------- |
-| `generateToken(identifier, data)` | Gets a new checkout token |
-| `protect(token)`  | Add fraud protection tracking to your checkout  |
-| `capture(token, data)`  | Capture a checkout by its token ID  |
-| `receipt(token)`  | Gets the receipt for the checkout (after it has been captured)  |
-| `getLive(token)`  | Gets the current "live" object  |
-| `getLocationFromIP(token, ipAddress)`  | Gets a location from the provided (or your own) IP address  |
-| `getShippingOptions(token, data)`  | Gets the available shipping options  |
-| `getToken(token)`  | Gets information about the checkout token  |
-| `isFree(token)`  | Checks whether a checkout has a zero payable balance  |
-| `setTaxZone(identifier, data)`  | Sets the geographic zone for tax calculation  |
-| `checkDiscount(token, data)`  | Checks whether a discount code is valid  |
-| `checkGiftcard(token, data)`  | Checks whether a gift card (code) is valid  |
-| `checkPaypalStatus(token)`  | Checks the status of a PayPal payment  |
-| `checkPaypalOrderCaptured(token)`  | Checks whether the status of a PayPal payment is captured  |
-| `checkPayWhatYouWant(token, data)`  | Checks whether a checkout has "pay what you want" enabled  |
-| `checkShippingOption(token, data)`  | Checks whether a shipping method is valid  |
-| `checkVariant(token, lineItemId, data)`  | Checks whether the specified line item ID is still valid/available  |
-| `checkQuantity(token, lineItemId, data)`  | Checks whether the requested quantity is available for a line item  |
-| `helperValidation(token)`  | Gets any applicable validation rules  |
-
-#### Merchants
-###### Access information about your merchant account, e.g. business name, etc.
-| Method | Description |
-| -------------------- | ----------- |
-| `about()`       | Gets information about the merchant |
+<div class="highlight highlight--warn">
+  All API requests using live API keys must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.
+</div>
 
 ---
 
+## Scope
+
+Scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the resources. Scope provides a way to constrain and consider the granular access a client might need. We define our scope using public and secret keys.
+
+#### Public keys
+
+###### To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason. Authenticating with the public key, you will have read and write access to the below resources.
+
+| Read | Write |
+| -------------------- | ----------- |
+| Products       | Carts  |
+| Carts               | Checkout   |
+| Checkout            | Checkout helpers  |
+| Checkout helpers    |
+| Spaces    |
+| Settings    |
+| Categories    |
+| Fulfillment    |
+
+##### Client side
+
+The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing projects. An example would be to list your products from the `product` endpoint.
+
+#### Secret keys
+
+###### To be used with server side code. These API keys have the power to access sensitive data such as receipts and order data. Authenticating with the secret key will give you read and write access to the below resources.
+
+| Read & write |  |
+| -------------------- | ----------- |
+| Products       |
+| Carts               |
+| Checkout            |
+| Checkout helpers    |
+| Spaces    |
+| Settings    |
+| Categories    |
+| Fulfillment    |
+
+##### Server side
+
+The secret key can be used with requests that require sensitive actions or data to be retrieved as well as all client side requests. You'll use your secret key for these requests. The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. An example of a sensitive request would be to make a call to [refund an order](https://commercejs.com/docs/api/?shell#refund-an-order).
+
+<div class="highlight highlight--warn">
+  The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these.
+</div>
+
+When you register for a Chec account, you'll be assigned two sets of these keys: live and sandbox. We highly recommend using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can easily be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
+
+---
+
+
 ## Checkout tokens
 
-Checkout tokens need to be generated before you are able to **capture an order**. With a generated token, the [checkout token](https://commercejs.com/docs/api/?javascript--cjs#generate-token) object is returned which contains everything you would need to implement a checkout process and a unqiue purchasing experience for your users. For example, the returned object will contain properties such as shipping options, discount codes available, or other fields that are needed to be collected.\
+Checkout tokens need to be generated before you are able to **capture an order**. A [checkout token](https://commercejs.com/docs/api/?javascript--cjs#generate-token) contains everything you would need to implement a checkout process and a unqiue purchasing experience for your users. For example, the returned object will contain properties such as shipping options, discount codes available, or other fields that are needed to be collected.\
 \
-To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like to generate a checkout for. See [here](https://commercejs.com/docs/api/#generate-token) for the required parameters. *Checkout tokens can only be used once and expire after 48 hours.*
+To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like to generate a checkout for. See [here](https://commercejs.com/docs/api/#generate-token) for the required parameters.
 
-<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
-[Warning highight block] Checkout tokens can only be used once and expire after 48 hours. -->
+<div class="highlight highlight--warn">
+  Checkout tokens can only be used once and expire after 48 hours.
+</div>
 
-<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
-[Info highight block] Check out an example here on how to generate a checkout token. -->
-
-##### Example request using cURL
-
-```bash
-$ curl -X GET
-    -G "https://api.chec.io/v1/checkouts/{identifier}?type={identifier_type}"
-    -H "X-Authorization: {key}"
-```
-
-##### Example request using Commerce.js
-
-```js
-Commerce.checkout.generateToken('{identifier}', '{identifier_type}')
-  .then(response => console.log(response.id))
-});
-```
+<div class="highlight highlight--info">
+  Check out an example <a href="">here</a> on how to generate a checkout token.
+</div>
 
 ---
 
 ## Checkout helpers
 
-We created Commerce.js to make it seamless to handle all common commerce logic that would otherwise be complex. Commerce.js [checkout helper functions](https://commercejs.com/docs/api/?shell#checkout-helpers) are provided to help create custom checkout flows. Below are some examples of various checkpoints during the checkout process:
+Commerce.js [checkout helper functions](https://commercejs.com/docs/api/?shell#checkout-helpers) are provided to help create custom checkout flows and handle all common commerce logic that would otherwise be complex. Below are some examples of various checkpoints during the checkout process:
 
 * Check if a requested variant, quantity, or shipping option is available
 * Check if an entered *"Pay What You Want"* amount or discount code is valid
@@ -115,52 +99,15 @@ We created Commerce.js to make it seamless to handle all common commerce logic t
 
 All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#checkout) resource update the live object. E.g. If you select a variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most responses contain a [live object](https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object) which gives you the live running totals and other information relevant to the current checkout session so you can update displayed totals (and more) straight away.
 
-Helper functions are not required. All totals are recalculated during capture using the checkout data sent.
+<div class="highlight highlight--warn">
+    <span>Important</span>
+    <p>Helper functions are not required. All totals are recalculated during capture using the checkout data sent.</p>
+</div>
 
-<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
-[Warning highight block] Helper functions are not required. All totals are recalculated during capture using the checkout data sent. -->
-
-<!-- TO-ADD WHEN HIGHLIGHT BLOCKS ARE AVAILABLE [CHEC-834]:
-[Info highight block] For a full list of checkout helpers, see the API reference [here](https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object) -->
-
-##### Example requests using cURL
-
-```bash
-# Get the buyers location from their IP (for preselecting address fields or EU VAT MOSS evidence)
-$ curl -X GET
-    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/helper/location_from_ip
-    -H "X-Authorization: {key}"
-
-# Example - Is the quantity selected valid?
-$ curl -X GET
-    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/check/{line_item_id}/quantity?amount={amount}
-    -H "X-Authorization: {key}"
-
-# Example - Is this order now free? (i.e. after a discount code is entered)
-$ curl -X GET
-    -G https://api.chec.io/v1/checkouts/{checkout_token_id}/check/is_free
-    -H "X-Authorization: {key}"
-
-```
-
-##### Example requests using Commerce.js
-
-```js
-// Get the buyers location from their ip (for pre-selecting address fields or EU VAT MOSS evidence)
-Commerce.checkout.getLocationFromIP('{checkout_token_id}').then(response => {
-
-});
-
-// Example - Is the quantity selected valid?
-Commerce.checkout.checkQuantity('{checkout_token_id}', '{requested-quantity}').then(response => {
-
-});
-
-// Example - Is this order now free? (i.e. after a discount code is entered)
-Commerce.checkout.isFree('{checkout_token_id}').then(response => {
-
-});
-```
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>For a full list of checkout helpers, see the API reference <a href="https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object">here</a>.</p>
+</div>
 
 ---
 
@@ -171,6 +118,28 @@ The [live object](https://commercejs.com/docs/api/?shell#get-the-live-object) is
 We create the live object to help you (and us!) display up-to-date totals, tax prices, and other dynamic variables which change during the checkout process and need to displayed back to the customer. You should use the data in the live object to update the displayed totals on your checkout pages when the customer selects a new variant, enters a discount, or selects a different shipping option.\
 \
 At Chec we do this on our own checkouts by feeding the live object returned from each helper function into a JavaScript function which then associates the data with the correct element.
+
+---
+
+## Tax support
+
+Tax support with Chec/Commerce.js is automatic. We calculate the tax based on the shipping address submitted. If you're not submitting an address for the customer, you can supply the tax region with these arguments:
+
+| Parameter | Status | Description |
+| -------------------- | ----------- | ----------- |
+| `tax[ip_address]`  | required | If only using an IP address to set the tax location. Chec will set the tax location to the estimated location of this IP address. |
+| `tax[country]`  | required | If *not* using an IP address to set the tax location. If provided, this must be a valid ISO 3166-1 alpha-2 country code (e.g. `GB` for the United Kingdom). |
+| `tax[region]`  | required | If in Canada or the USA. Must be a valid short code for the region, e.g. `CA` for California, or `QB` for Quebec. |
+| `tax[postal_zip_code]`  | required | If "Auto US Sales Tax" is enabled for your account. |
+
+#### EU VAT MOSS
+
+If you have EU VAT MOSS enabled for your account, you can use the helper function "Get buyer's location from IP" (see the full API reference), and use this value to set `tax[ip_address]`.
+
+<div class="highlight highlight--warn">
+    <span>Important</span>
+    <p>If you're working with PayPal, you should sent both tax[ip_address] and tax[country] (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code </p>.
+</div>
 
 ---
 
@@ -237,22 +206,4 @@ We return all conditionals in the `conditionals` array in most objects. We also 
 
 We created this `conditionals` property to hopefully provide more legibility and maintainability of your code. By nesting variables under their *"verb key"* your code reads better. E.g. `checkout.conditionals.is_cart_free` vs `checkout.is.cart_free`. This is particularly nicer to work with for developers who are primarily working with JavaScript.
 
-It works well for most verb conditionals.
-
-##### Example using JavaScript
-
-```js
-//Few more examples in different syntax
-checkout.is.cart_free
-$checkout['is']['preorder']
-$checkout->is->sold_out
-
-product.has.product_photos
-$product['has']['physical_delivery']
-$product->has->product_audio
-
-checkout.collects.fullname
-$checkout['collects']['billing_address']
-$checkout->collects->extra_fields
-
-```
+---

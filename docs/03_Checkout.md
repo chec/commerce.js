@@ -2,119 +2,370 @@
 title: "Checkout"
 ---
 
-You've created your storefront, listed your products, built your cart and enabled your "add to cart" functionality, and now you need to capture an order. For this, you'll need to create a checkout page to allow your customers to enter their personal information, shipping details, and payment information.
+The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing flow. A checkout captures data sent from the cart along with the item information, line item IDs, any shipping or billing information as well as tax and shipping rates. The checkout resource is a verbose endpoint that comes with additional helpers eg. [Checkout helpers](#checkout-helpers) and [Services](#services) to fully manage your customer's purchasing experience. See [here](/docs/sdk/concepts#checkout-tokens) for more high-level concepts on the Checkout resource.
 
-By default when you create an account with Chec, we'll enable the "Test Gateway" for payments. This is the gateway we'll use in these examples.
+---
 
-### Background
+## Generate token
 
-By now we assume you're reasonably familiar with creating a new Commerce instance. Just in case, here's a refresher. You'll want to put this somewhere you can re-use it eventually.
+The `.generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart. `generateTokenFrom()` gets a new checkout token from a specific identifier type. See below for the example request.\
+\
+**Example request using Commerce.js**:
+
 ```js
 import Commerce from '@chec/commerce.js';
 
-const commerce = new Commerce('your_public_key', true);
-```
-### Create a checkout token
+const commerce = new Commerce('{your_public_key}');
 
-We've already created a test product with the permalink `commerce-js-example`, set up some variants for it and now we're ready to use it in our test store. Let's go ahead and create a "checkout token" for it. This token represents your customer's order before it has been placed/captured.
+commerce.checkout.generateToken('permalink', 'white-shirt')
+  .then((checkout) => console.log(checkout.id))
+
+// Gets a new checkout token from a specific identifier type
+commerce.checkout.generateTokenFrom('permalink', 'white-shirt')
+  .then((checkout) => console.log(checkout.id))
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `generateToken(identifier, data)` | Gets a new checkout token |
+
+Upon a successful request, a checkout token object will be returned which contains everything you need to create your checkout page.
+
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for generating a checkout token <a href="/docs/api/?shell#checkout">here</a>.</p>
+</div>
+
+---
+
+## Capture order
+
+The `.capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture an order and payment by providing the checkout token and necessary data for the order to be completed. The resolved promise returns an order object which can be used for receipt.\
+\
+**Example request using Commerce.js**:
+
 ```js
-commerce.checkout.generateToken('commerce-js-example', { type: 'permalink' })
-  .then(response => {
-    const checkoutTokenId = response.id; // e.g. chkt_959gvxcZ6lnJ7
-    // Grab your order confirmation data from `response` and show your customer something nice!
-  })
-  .catch(error => console.error('Uh oh, something went wrong! Did you know you can use the Chec CLI to monitor your error logs?', error);
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.capture({
+  "line_items": {
+      "item_7RyWOwmK5nEa2V": {
+          "quantity": 1,
+          "variants": {
+              "vrnt_p6dP5g0M4ln7kA": "optn_DeN1ql93doz3ym"
+          }
+      }
+  },
+  "customer": {
+      "firstname": "John",
+      "lastname": "Doe",
+      "email": "john.doe@example.com"
+  },
+  "shipping": {
+      "name": "John Doe",
+      "street": "123 Fake St",
+      "town_city": "San Francisco",
+      "county_state": "California",
+      "postal_zip_code": "94103",
+      "country": "US"
+  },
+  "fulfillment": {
+      "shipping_method": "ship_7RyWOwmK5nEa2V"
+  },
+  "billing": {
+      "name": "John Doe",
+      "street": "234 Fake St",
+      "town_city": "San Francisco",
+      "county_state": "California",
+      "postal_zip_code": "94103",
+      "country": "US"
+  },
+  "payment": {
+      "gateway": "stripe",
+      "card": {
+          "token": "irh98298g49"
+      }
+  },
+  "pay_what_you_want": "149.99"
+}).then(response => console.log(response));
 ```
-As you can see in the example above, we're generating a checkout token from a particular product permalink. Chec will add the product to the cart for the checkout token you are given in the response. You may also want to use `commerce.cart.*` methods to add a product, or multiple products, to the cart before you get to the checkout stage. If this is the case, you can pass your cart ID instead of the product permalink, and use `{ type: 'cart' }` as your options:
-```js
-commerce.checkout.generateToken(this.state.cart.id, { type: 'cart' })
-  .then(...);
-```
-The response from this call will contain all the information you'll need to create your checkout page, such as the checkout token ID, conditionals (whether various pieces of information are required to be collected), the line items in the cart, the merchant information, the available payment gateways, shipping methods, etc.
 
-### Capturing the order
+| Method | Description |
+| -------------------- | ----------- |
+| `capture(token, data)`  | Capture a checkout by its token ID  |
 
-Okay, you've created your checkout form, connected up the data you get from `commerce.checkout.generateToken()` (or `commerce.checkout.getToken()` if you created the token earlier), now you need to hook up your logic to capture the checkout!
-
-Capturing the checkout validates the order: the product, selected variants, stock availability, shipping methods, customer information, and payment information. It then captures the payment, issues order confirmation emails and notifications, and returns you the receipt object.
-
-We use key-value multi-dimensional arrays/objects/hashes to immediately associate values with their parent(s) ID when submitting data. For example with line items, the key would be the `line_item_id` and the related values would be nested under that key.
+In response to a successful checkout capture, you'll get all the information for the order you need to show a confirmation page to your customer, including the `id` (the order ID), the `customer_reference` (customer's order reference), and much more. Note that you may want to store the response in local state since fetching the data again would require a secret key.\
+\
+Key-value multi-dimensional arrays/objects/hashes are used to immediately associate values with their parent(s) ID when submitting data. For example with line items, the key would be the `line_item_id` and the related values would be nested under that key.
 
 * Line item's quantity: `line_items[{line_item_id}][quantity]`
 * Line item's variant and selected option: `line_items[{line_item_id}][variants][{variant_id}] = {option_id}`
 
-#### Tax support
+<div class="highlight highlight--warn">
+    <span>Important</span>
+    <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="">here</a> for required parameters to send when using PayPal.</p>
+</div>
 
-Tax support with Chec/Commerce.js is automatic. We calculate the tax based on the shipping address submitted. If you're not submitting an address for the customer, you can supply the tax region with these arguments:
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for capturing a checkout <a href="/docs/api/?shell#checkout">here</a>.</p>
+</div>
 
-* `tax[ip_address]` **Required** if only using an IP address to set the tax location. Chec will set the tax location to the estimated location of this IP address.
-* `tax[country]` **Required** if _not_ using an IP address to set the tax location. If provided, this must be a valid ISO 3166-1 alpha-2 country code (e.g. `GB` for the United Kingdom).
-* `tax[region]` **Required** if in Canada or the USA. Must be a valid short code for the region, e.g. `CA` for California, or `QB` for Quebec.
-* `tax[postal_zip_code]` **Required** if "Auto US Sales Tax" is enabled for your account.
+---
 
-#### EU VAT MOSS
+## Get existing token
 
-If you have EU VAT MOSS enabled for your account, you can use the helper function "Get buyer's location from IP" (see the full API reference), and use this value to set `tax[ip_address]`.
+The `.getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to return an existing checkout token by it's ID. The output from this request will be the same as that of `.generateToken()`.\
+\
+**Example request using Commerce.js**:
 
-#### Important
-
-If you're working with PayPal, you should sent both `tax[ip_address]` and `tax[country]` (by asking the customer to select their tax country from a dropdown).
-
-You can also set tax information for your checkout before you capture it using the `commerce.checkout.setTaxZone()` helper function.
-
-#### Make the request
-
-Okay, we're ready to make the request. For this example we are simply going to use the shipping address to calculate tax for the order. We'll use the checkout token we generated earlier - let's dive in:
 ```js
-commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
-  line_items: {
-    // Key is the line item ID for our test product
-    item_7RyWOwmK5nEa2V: {
-      quantity: 1
-      variants: {
-        // Key is the variant ID for "Color", value is the option ID for "Blue"
-        vrnt_bO6J5apWnVoEjp: 'optn_Op1YoVppylXLv9',
-        // Key is the variant ID for "Size", value is the option ID for "Small"
-        vrnt_4WJvlKpg7pwbYV: 'optn_zkK6oL99G5Xn0Q',
-      }
-    }
-  },
-  customer: {
-    firstname: 'John',
-    lastname: 'Doe',
-    email: 'john.doe@example.com',
-  },
-  shipping: {
-    name: 'John Doe',
-    street: '123 Fake St',
-    town_city: 'San Francisco',
-    county_state: 'CA',
-    postal_zip_code: '94103',
-    country: 'US',
-  },
-  fulfillment: {
-    // The shipping method ID for "USPS Ground" (for example)
-    // You can use commerce.checkout.getShippingOptions() to get a list
-    shipping_method: 'ship_1ypbroE658n4ea',
-  },
-  payment: {
-    // Test Gateway is enabled by default, and is used when you submit orders with
-    // your sandbox API key
-    gateway: 'test_gateway',
-    card: {
-      number: '4242 4242 4242 4242',
-      expiry_month: '01',
-      expiry_year': '2023',
-      cvc: '123',
-      postal_zip_code: '94103,
-    },
-  },
-})
-  .then(response => {
-    console.log('Great, your checkout was captured successfully! Checkout the response object for receipt info.');
-  })
-  .catch(error => console.error(error));
-```
-In response to a successful checkout capture, you'll get all the information for the order you need to show a confirmation page to your customer, including the `id` (the order ID), the `customer_reference` (customer's order reference), and much more.
+import Commerce from '@chec/commerce.js';
 
-That's it! You've got a working checkout integration with Commerce.js! Play around, and when you're finished you can clear all your test orders from the Chec Dashboard if you want to.
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(token));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getToken(token)`  | Gets information about the checkout token  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for getting an existing checkout token <a href="/docs/api/?shell#get-existing-token">here</a>.</p>
+</div>
+
+---
+
+# Checkout helpers
+
+[Checkout helper](/docs/sdk/concepts#checkout-helpers) functions are provided to help create custom checkout flows and handle all common commerce logic that would otherwise be complex. Every time a checkout helper endpoint is called, an object called the [live object](/docs/sdk/concepts#the-live-object) will be updated and the returned data is then typically used to update the checkout UI. All checkout helpers that affect price (e.g. check quantity, check variant, check discount etc) will return the live object.
+
+## Get the live object
+
+The live object is a living object which udpates to show the live tax rates, prices, and totals for a checkout token. The `getLive()` method uses `GET v1/checkouts/{checkout_token_id}/live` to return the current checkout live object.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce({})
+
+Commerce.checkout.getLive('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getLive(token)`  | Gets the current "live" object  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the live object <a href="/docs/api/?shell#get-the-live-object">here</a>.</p>
+</div>
+
+---
+
+## Check "Pay What You Want"
+
+If you have enabled "Pay What You Want" pricing, your customers are able to choose the amount they pay. The `checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves the desired "Pay What You Want" amount for the provided checkout token, if enabled. If the amount is too low, an invalid response will be returned with the minimum amount required.
+
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
+  customer_set_price: '100.00',
+}).then((response) => console.log(response));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `checkPayWhatYouWant(token, data)`  | Checks whether a checkout has "pay what you want" enabled  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check Pay What You Want" request <a href="/docs/api/?shell#check-quot-pay-what-you-want-quot-amount">here</a>.</p>
+</div>
+
+---
+
+## Check discount code
+
+The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate a discount code for the provided checkout token, and applies it to the order if it is valid.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
+  customer_set_price: '100.00',
+}).then((response) => console.log(response));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `checkDiscount(token, data)`  | Checks whether a discount code is valid  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check discount code" <a href="/docs/api/?shell#check-discount-code">here</a>.</p>
+</div>
+
+---
+
+## Check shipping method
+
+The `checkShippingOption()` method uses `GET v1/checkouts/{checkout_token_id}/check/shipping` to validate a shipping method for the provided checkout token, and applies it to the order.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
+  shipping_option_id: 'ship_31q0o3e21lDdjR',
+  country: 'US',
+  region: 'CA',
+}).then((response) => console.log(response));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `checkShippingOption(token, data)`  | Checks whether a shipping method is valid  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check Shipping Method <a href="/docs/api/?shell#check-shipping-method">here</a>.</p>
+</div>
+
+
+---
+
+## Set tax zone
+
+The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided in the request arguments.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
+  country: 'US',
+  region: 'CA',
+  postal_zip_code: '94107',
+}).then((response) => console.log(response));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `setTaxZone(identifier, data)`  | Sets the geographic zone for tax calculation  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for setting the tax zone <a href="/docs/api/?shell#set-tax-zone">here</a>.</p>
+</div>
+
+### Cart features
+
+Refer to the full list of checkout and checkout helpers features [here](/docs/sdk/commerce/#checkout-checkout).
+
+---
+
+# Services
+
+The **Services** endpoint are additional checkout helpers service methods.
+
+## List all countries
+
+The `localeListCountries()` method uses `GET v1/services/locale/countries`to return a list of all countries registered in the platform. See [List available shipping countries](#list-available-shipping-countries) for an equivalent list of countries that can be shipped to your account.
+
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.services.localeListCountries().then((response) => console.log(response));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `localeListCountries()` | List all countries |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "List all countries" request <a href="/docs/api/?shell#list-all-countries">here</a>.</p>
+</div>
+
+---
+
+## List all subdivisions for a country
+
+The `localeListSubdivisions()` method uses `GET v1/services/locale/{country_code}/subdivisions` to return a list of all subdivisions (states, provinces, or regions) for that country, given a valid country code is provided. See [List available shipping subdivions for country](#list-available-shipping-subdivisions)" for an equivalent list of subdivisions that can be shipped to for your account.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.services.localeListSubdivisions('US').then((response) => console.log(response));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `localeListCountries()` | List all countries |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for "List all Subdivisions for a Country" request <a href="/docs/api/?shell#list-all-subdivisions-for-a-country">here</a>.</p>
+</div>
+
+---
+
+## List available shipping countries
+
+The `localeListShippingCountries()` method at `GET v1/services/locale/{country_code}/subdivisions` returns only the countries which can be shipped to the current checkout.\
+\
+**Example request using Commerce.js**:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `localeListShippingCountries(token)` | List all countries that can be shipped to for a checkout token |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "List available shipping countries" request <a href="docs/api/?shell#list-available-shipping-countries">here</a>.</p>
+</div>
+
+---
