@@ -21,12 +21,12 @@ class Products {
   /**
    * Get a specific product for the current merchant
    *
-   * @param {string} permalink
+   * @param {string} id
    * @param {object} data
    * @return {Promise}
    */
-  retrieve(permalink, data) {
-    return this.commerce.request(`products/${permalink}`, 'get', data);
+  retrieve(id, data = {}) {
+    return this.commerce.request(`products/${id}`, 'get', data);
   }
 }
 
