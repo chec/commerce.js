@@ -23,14 +23,15 @@ class Categories {
   }
 
   /**
-   * Get a specific category by its slug
+   * Get a specific category by its ID. You may also provide `{ type: 'slug' }`
+   * as data and use a category slug instead of an ID.
    *
-   * @param {string} slug
+   * @param {string} id
    * @param {object} data
    * @return {Promise}
    */
-  retrieve(slug, data) {
-    return this.commerce.request(`categories/${slug}`, 'get', data);
+  retrieve(id, data = {}) {
+    return this.commerce.request(`categories/${id}`, 'get', data);
   }
 }
 
