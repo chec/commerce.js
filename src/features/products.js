@@ -25,7 +25,7 @@ class Products {
    * @param {object} data
    * @return {Promise}
    */
-  retrieve(permalink, data) {
+  retrieve(permalink, data = {}) {
     return this.commerce.request(`products/${permalink}`, 'get', data);
   }
 }
