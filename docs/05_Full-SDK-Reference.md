@@ -2,13 +2,13 @@
 title: "Full SDK Reference"
 ---
 
-**Commerce.js** is a JavaScript SDK built on top of the **Chec platform** to allow for easy interfacing with the **Chec API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that work on any modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce logic of an application. Here you will find the full Commerce.js SDK reference. All features are accessible from your Commerce object instance and requests to these endpoints are received as JSON objects.
+**Commerce.js** is a JavaScript SDK built on top of the **Chec platform** to allow for easy interfacing with the **Chec API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that work on any modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce logic of an application. Here you will find the full Commerce.js SDK reference. All features are accessible from your Commerce object instance.
 
 ---
 
 #### Products `products`
 
-**Methods for getting product data, including variant information, shipping settings, assets, etc.**
+Methods for getting product data, including variant information, shipping settings, assets, etc.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -17,7 +17,7 @@ title: "Full SDK Reference"
 
 #### Categories `categories`
 
-**Manage product categories in order to group your products.**
+Manage product categories in order to group your products.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -26,7 +26,7 @@ title: "Full SDK Reference"
 
 #### Cart `cart`
 
-**All aspects of managing a cart for your customer.**
+All aspects of managing a cart for your customer.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -42,7 +42,7 @@ title: "Full SDK Reference"
 
 #### Checkout `checkout`
 
-**All aspects of managing your checkout, including helper functions.**
+All aspects of managing your checkout, including helper functions.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -68,7 +68,7 @@ title: "Full SDK Reference"
 
 #### Services `services`
 
-**Additional checkout helper service methods.**
+Additional checkout helper service methods.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -80,7 +80,7 @@ title: "Full SDK Reference"
 
 #### Merchants
 
-**Access information about your merchant account, e.g. business name, etc.**
+Access information about your merchant account, e.g. business name, etc.
 
 | Method | Description |
 | -------------------- | ----------- |

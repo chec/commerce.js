@@ -33,7 +33,7 @@ Upon a successful request, a checkout token object will be returned which contai
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>Checkout tokens can only be used once and expire after 48 hours.</p>
+    <p>Checkout tokens can only be used once and expire after 7 days.</p>
 </div>
 
 
@@ -376,10 +376,5 @@ Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((respo
 ### Services SDK reference
 
 Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services-services).
-
-<div class="highlight highlight--info">
-    <span>Tip</span>
-    <p>Want to see an real-world implementation of checkout functionalities? Check out a step-by-step guide <a href="">here</a>.</p>
-</div>
 
 ---
