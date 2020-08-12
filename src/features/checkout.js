@@ -275,19 +275,6 @@ class Checkout {
       data,
     );
   }
-
-  /**
-   * Registers a new Stripe Payment Intent, and returns that Intent's secret.
-   *
-   * @param {string} token
-   * @returns {Promise}
-   */
-  registerStripePaymentIntent(token) {
-    return this.commerce.request(
-      `checkouts/${token}/helper/registerStripePaymentIntent`,
-      'post',
-    );
-  }
 }
 
 export default Checkout;
