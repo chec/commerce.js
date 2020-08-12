@@ -282,8 +282,8 @@ curl -X DELETE \
     <p>Want to see an real-world implementation of cart functionalities? Check out a step-by-step guide <a href="">here</a>.</p>
 </div>
 
-### Cart features
+### Cart SDK reference
 
-Refer to the full list of cart features [here](/docs/sdk/commerce/#cart-cart).
+Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart-cart).
 
 ---
