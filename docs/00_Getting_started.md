@@ -17,7 +17,7 @@ This documentation will walk you through how to:
 Before installing Commerce.js, you will first need to create a Chec account to get your API credentials.
 1. Sign up for a Chec account [here](https://dashboard.chec.io/signup).
 2. Navigate to the developer section under settings [here](https://dashboard.chec.io/settings/developer).
-3. Obtain your generated [public](/docs/sdk/concepts/#public-keys) and [secret keys](/docs/sdk/concepts/#secret-keys).
+3. Obtain your generated [public](/docs/sdk/concepts#public-keys) and [secret keys](/docs/sdk/concepts#secret-keys).
 
 ---
 
@@ -55,7 +55,7 @@ Another option would be to install the SDK via our CDN, you will want to include
     <p>We recommend installing Commerce.js as a package to have access to all the methods included.</p>
 </div>
 
-We're almost ready to go! We just need to create a new Commerce instance and give it our [public key](/docs/sdk/concepts/#scope) (you can get your API keys from [Chec Dashboard > Settings > Developer](https://dashboard.chec.io/settings/developer)).
+We're almost ready to go! We just need to create a new Commerce instance and give it our [public key](/docs/sdk/concepts#scope) (you can get your API keys from [Chec Dashboard > Settings > Developer](https://dashboard.chec.io/settings/developer)).
 
 <div class="highlight highlight--info">
     <span>Tip</span>
@@ -81,7 +81,7 @@ Awesome, you just set up your Chec account, installed the Commerce.js SDK and cr
 
 ### Next steps
 
-Browse through the rest of our documentation to explore all the features of Commerce.js - [listing products](/docs/sdk/products#list-products), [add products to cart](/docs/sdk/cart#add-to-cart), or [capture an order](/docs/sdk/checkout#capture-order). Note that all requests made using the Commerce.js SDK will have responses that are returned asynchronously in a promise. Alternatively, if you want to dive more into reading a high-level overview of Commerce.js and its features, read more [here](/docs/sdk/full-sdk-reference/#introduction).
+Browse through the rest of our documentation to explore all the features of Commerce.js - [listing products](/docs/sdk/products#list-products), [add products to cart](/docs/sdk/cart#add-to-cart), or [capture an order](/docs/sdk/checkout#capture-order). Note that all requests made using the Commerce.js SDK will have responses that are returned asynchronously in a promise. Alternatively, if you want to dive more into reading a high-level overview of Commerce.js and its features, read more [here](/docs/sdk/full-sdk-reference#introduction).
 
 
 <div class="highlight highlight--warn">

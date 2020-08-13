@@ -44,11 +44,6 @@ curl -X GET \
 
 Once you've got your product data you can populate your product listing view. The response here will include everything you need to build this view, such as metadata, assets, variants and options, conditionals, and prices.
 
-<div class="highlight highlight--info">
-    <span>Tip</span>
-    <p>See <a href="">here</a> for a full guide on listing products using modern frameworks React and Vue.</p>
-</div>
-
 ---
 
 ## Retrieve product
