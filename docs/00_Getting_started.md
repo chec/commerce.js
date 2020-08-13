@@ -72,7 +72,7 @@ const commerce = new Commerce('{public_api_key}');
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>We've built in a console debugger into the Commerce.js SDK to help with debugging during development . To enable the debugger you can include the second argument <code>true</code> when you create your Commerce instance like so: <code>const commerce = new Commerce('{public_api_key}', true);</code>. Note that only a test API key has to be provided as the first argument and not the live API key for the console to show messages.</p>
+    <p>We've built in a console debugger into the Commerce.js SDK to help with debugging during development. To enable the debugger you can include the second argument <code>true</code> when you create your Commerce instance like so: <code>const commerce = new Commerce('{public_api_key}', true);</code>. Note that a test API key has to be provided as the first argument for the console to show messages - it won't work with a live key.</p>
 </div>
 
 Awesome, you just set up your Chec account, installed the Commerce.js SDK and created your first Commerce instance! You now have access to the `Commerce` object in your application to build out a truly unique frontend presentation layer!
