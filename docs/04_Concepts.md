@@ -15,7 +15,7 @@ While using Commerce.js, the Chec API is limited to [public key scoped]() reques
 
 <div class="highlight highlight--warn">
     <span>Note</span>
-    <p>All API requests using live API keys must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
+    <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
 </div>
 
 ---
