@@ -8,7 +8,7 @@ When you [create a Chec account](https://dashboard.chec.io/signup), two sets of 
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>To obtain your API keys, navigate to the developer section from your Chec dashboard (<a href="https://www.dashboard.chec.io/settings/developer">Settings > Developer</a>).</p>
+    <p>To obtain your API keys, navigate to the developer section from your Chec Dashboard (<a href="https://dashboard.chec.io/settings/developer">Settings > Developer</a>).</p>
 </div>
 
 While using Commerce.js, the Chec API is limited to [public key scoped]() requests. We developed Commerce.js to to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve non-sensitive data such from [products](), [cart](), and [checkout]() endpoints. It can also be used to capture orders although you will be unable to access the order resource for security reasons.
