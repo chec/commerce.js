@@ -277,13 +277,8 @@ curl -X DELETE \
     <p>Refer to the full response for emptying a cart's contents <a href="/docs/api/?shell#empty-cart">here</a>.</p>
 </div>
 
-<div class="highlight highlight--info">
-    <span>Tip</span>
-    <p>Want to see an real-world implementation of cart functionalities? Check out a step-by-step guide <a href="">here</a>.</p>
-</div>
+### Cart SDK reference
 
-### Cart features
-
-Refer to the full list of cart features [here](/docs/sdk/commerce/#cart-cart).
+Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart-cart).
 
 ---

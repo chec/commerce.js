@@ -31,6 +31,11 @@ commerce.checkout.generateTokenFrom('permalink', 'white-shirt')
 
 Upon a successful request, a checkout token object will be returned which contains everything you need to create your checkout page.
 
+<div class="highlight highlight--warn">
+    <span>Important</span>
+    <p>Checkout tokens can only be used once and expire after 7 days.</p>
+</div>
+
 
 <div class="highlight highlight--note">
     <span>Note</span>
@@ -90,7 +95,7 @@ commerce.checkout.capture({
       }
   },
   "pay_what_you_want": "149.99"
-}).then(response => console.log(response));
+}).then((response) => console.log(response));
 ```
 
 | Method | Description |
@@ -106,7 +111,7 @@ Key-value multi-dimensional arrays/objects/hashes are used to immediately associ
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="">here</a> for required parameters to send when using PayPal.</p>
+    <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="/docs/sdk/concepts#tax-support">here</a> for required parameters to send when using PayPal.</p>
 </div>
 
 <div class="highlight highlight--note">
@@ -287,9 +292,9 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
     <p>Refer to the full response for setting the tax zone <a href="/docs/api/?shell#set-tax-zone">here</a>.</p>
 </div>
 
-### Cart features
+### Checkout SDK reference
 
-Refer to the full list of checkout and checkout helpers features [here](/docs/sdk/commerce/#checkout-checkout).
+Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout-checkout).
 
 ---
 
@@ -367,5 +372,9 @@ Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((respo
     <span>Note</span>
     <p>Refer to the full response for the "List available shipping countries" request <a href="docs/api/?shell#list-available-shipping-countries">here</a>.</p>
 </div>
+
+### Services SDK reference
+
+Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services-services).
 
 ---

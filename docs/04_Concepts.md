@@ -7,13 +7,15 @@ title: "Concepts"
 When you [create a Chec account](https://dashboard.chec.io/signup), two sets of API authentication keys are generated, a **public key** and a **secret key**. The public key is used with Commerce.js to access all core resource endpoints. You can manage your API keys from your dashboard under the developer section.
 
 <div class="highlight highlight--note">
-  To obtain your API keys, navigate to the developer section from your Chec dashboard (<a href="https://www.dashboard.chec.io/settings/developer">Settings > Developer</a>).
+    <span>Note</span>
+    <p>To obtain your API keys, navigate to the developer section from your Chec Dashboard (<a href="https://dashboard.chec.io/settings/developer">Settings > Developer</a>).</p>
 </div>
 
 While using Commerce.js, the Chec API is limited to [public key scoped]() requests. We developed Commerce.js to to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve non-sensitive data such from [products](), [cart](), and [checkout]() endpoints. It can also be used to capture orders although you will be unable to access the order resource for security reasons.
 
 <div class="highlight highlight--warn">
-  All API requests using live API keys must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.
+    <span>Note</span>
+    <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
 </div>
 
 ---
@@ -22,9 +24,9 @@ While using Commerce.js, the Chec API is limited to [public key scoped]() reques
 
 Scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the resources. Scope provides a way to constrain and consider the granular access a client might need. We define our scope using public and secret keys.
 
-#### Public keys
+### Public keys
 
-###### To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason. Authenticating with the public key, you will have read and write access to the below resources.
+To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason. Authenticating with the public key, you will have read and write access to the below resources.
 
 | Read | Write |
 | -------------------- | ----------- |
@@ -37,13 +39,13 @@ Scope defines the varying levels of access a client has to a set of Chec API res
 | Categories    |
 | Fulfillment    |
 
-##### Client side
+#### Client side
 
 The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing projects. An example would be to list your products from the `product` endpoint.
 
-#### Secret keys
+### Secret keys
 
-###### To be used with server side code. These API keys have the power to access sensitive data such as receipts and order data. Authenticating with the secret key will give you read and write access to the below resources.
+To be used with server side code. These API keys have the power to access sensitive data such as receipts and order data. Authenticating with the secret key will give you read and write access to the below resources.
 
 | Read & write |  |
 | -------------------- | ----------- |
@@ -56,32 +58,24 @@ The public key is to be used with requests that don't require any sensitive acti
 | Categories    |
 | Fulfillment    |
 
-##### Server side
+### Server side
 
 The secret key can be used with requests that require sensitive actions or data to be retrieved as well as all client side requests. You'll use your secret key for these requests. The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. An example of a sensitive request would be to make a call to [refund an order](https://commercejs.com/docs/api/?shell#refund-an-order).
 
 <div class="highlight highlight--warn">
-  The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these.
+    <span>Important</span>
+    <p>The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these.</p>
 </div>
 
 When you register for a Chec account, you'll be assigned two sets of these keys: live and sandbox. We highly recommend using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can easily be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
 
 ---
 
-
 ## Checkout tokens
 
 Checkout tokens need to be generated before you are able to **capture an order**. A [checkout token](https://commercejs.com/docs/api/?javascript--cjs#generate-token) contains everything you would need to implement a checkout process and a unqiue purchasing experience for your users. For example, the returned object will contain properties such as shipping options, discount codes available, or other fields that are needed to be collected.\
 \
 To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like to generate a checkout for. See [here](https://commercejs.com/docs/api/#generate-token) for the required parameters.
-
-<div class="highlight highlight--warn">
-  Checkout tokens can only be used once and expire after 48 hours.
-</div>
-
-<div class="highlight highlight--info">
-  Check out an example <a href="">here</a> on how to generate a checkout token.
-</div>
 
 ---
 
@@ -91,13 +85,13 @@ Commerce.js [checkout helper functions](https://commercejs.com/docs/api/?shell#c
 
 * Check if a requested variant, quantity, or shipping option is available
 * Check if an entered *"Pay What You Want"* amount or discount code is valid
-* Retrieve running totals for a checkout (i.e. subtotals, shipping totals, and grand totals) - [the live object](/docs/sdk/concepts#the-live-object)
+* Retrieve running totals for a checkout (i.e. subtotals, shipping totals, and grand totals) - [the live object](#the-live-object)
 * Generate client side validation rules
 * Get a full list of states/provinces for a country to populate a select field
 * Get the buyer's location from an IP address
 * Set a new tax zone for the checkout when the customer changes their shipping address
 
-All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#checkout) resource update the live object. E.g. If you select a variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most responses contain a [live object](https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object) which gives you the live running totals and other information relevant to the current checkout session so you can update displayed totals (and more) straight away.
+All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#checkout) resource update the live object. E.g. If you select a variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most responses contain a [live object](#the-live-object) which gives you the live running totals and other information relevant to the current checkout session so you can update displayed totals (and more) straight away.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
@@ -106,7 +100,7 @@ All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#ch
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>For a full list of checkout helpers, see the API reference <a href="https://commercejs.com/docs/api/?javascript--cjs#get-the-live-object">here</a>.</p>
+    <p>For a full list of checkout helpers, see the full SDK reference <a href="/docs/sdk/full-sdk-reference#checkout-checkout">here</a>.</p>
 </div>
 
 ---
@@ -138,7 +132,7 @@ If you have EU VAT MOSS enabled for your account, you can use the helper functio
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>If you're working with PayPal, you should sent both tax[ip_address] and tax[country] (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code </p>.
+    <p>If you're working with PayPal, you should sent both <code>tax[ip_address]</code> and <code>tax[country]</code> (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code></p>.
 </div>
 
 ---

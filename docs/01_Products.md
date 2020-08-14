@@ -13,7 +13,7 @@ This section of the documentation goes through the core [products](#list-product
 
 ## List products
 
-One of the first things you will want to do when using Commerce.js is list your products in order to make a product catalog page. The `list()` method uses `GET v1/products` to return a list of product details for the current merchant. You may filter this by the optional query parameters listed below.\
+One of the first things you will want to do when using Commerce.js is list your products in order to make a product catalog page. The `list()` method uses `GET v1/products` to return a list of product details for the current merchant. You may filter this by the optional query parameters listed in the [API](/docs/api/?shell#list-all-products).\
 \
 **Example request using Commerce.js**:
 
@@ -43,11 +43,6 @@ curl -X GET \
 </div>
 
 Once you've got your product data you can populate your product listing view. The response here will include everything you need to build this view, such as metadata, assets, variants and options, conditionals, and prices.
-
-<div class="highlight highlight--info">
-    <span>Tip</span>
-    <p>See <a href="">here</a> for a full guide on listing products using modern frameworks React and Vue.</p>
-</div>
 
 ---
 
@@ -111,7 +106,7 @@ $ curl -X GET \
 
 <div class="highlight highlight--note">
 <span>Note</span>
-  <p>Refer to the full response for listing categories <a href="https://commercejs.com/docs/api/?shell#categories">here</a>.</p>
+  <p>Refer to the full response for listing categories <a href="/docs/api/?shell#categories">here</a>.</p>
 </div>
 
 ---
@@ -152,9 +147,9 @@ curl -X GET \
     <p>Refer to the full response for retrieving a category <a href="/docs/api/?shell#retrieve-category">here</a>.</p>
 </div>
 
-### Products and categories features
+### Products and Categories SDK reference
 
-Refer to the full list of products and categories features [here](/docs/sdk/commerce/#products-products).
+Refer to the full list of all the available products and categories methods [here](/docs/sdk/full-sdk-reference#products-products).
 
 ---
 
