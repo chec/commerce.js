@@ -277,7 +277,7 @@ curl -X DELETE \
     <p>Refer to the full response for emptying a cart's contents <a href="/docs/api/?shell#empty-cart">here</a>.</p>
 </div>
 
-### Cart SDK reference
+## Cart SDK reference
 
 Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart).
 
