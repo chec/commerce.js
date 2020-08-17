@@ -13,7 +13,7 @@ The **Cart** resource can hold product data, product variants, quantity, price, 
 
 In order to start adding products to your cart, you'll need to first create a cart. When you first call the method `retrieve()` using `GET v1/carts`, it will automatically create a cart for you if a cart does not exist yet or a current cart will be retrieved if the `cart_id` is passed in as an argument. Commerce.js tracks the current cart ID using a cookie.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -23,7 +23,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.retrieve().then((cart) => console.log(cart));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X GET \
@@ -49,9 +49,9 @@ curl -X GET \
 
 ## Refresh cart
 
-The `refresh()` method uses `GET v1/carts` to create a new cart and update the stored cart ID in Commerce.js.
-
-##### Example request using Commerce.js
+The `refresh()` method uses `GET v1/carts` to create a new cart and update the stored cart ID in Commerce.js.\
+\
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -76,7 +76,7 @@ commerce.cart.refresh().then((cart) => console.log(cart));
 
 The `add()` method uses `POST v1/carts/{cart_id}` to add a product to cart. You will need the ID of the product you want to add e.g. `prod_05389st98t49h`.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -86,7 +86,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.add('prod_R4OANwRqklvYL8', 5).then((response) => console.log(response));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X POST \
@@ -116,7 +116,7 @@ curl -X POST \
 
 The `.update()` method uses `PUT v1/carts/{cart_id}/items/{line_item_id}` to update the quantity or variant for the line item ID in the cart.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -126,7 +126,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.update('item_7RyWOwmK5nEa2V', { quantity: 5 }).then(response => console.log(response));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X PUT \
@@ -151,7 +151,7 @@ curl -X PUT \
 
 The `contents()` method uses `GET v1/carts/{cart_id}/items` to return the contents and items of the cart.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -161,7 +161,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.contents().then((items) => console.log(items));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X GET \
@@ -184,7 +184,7 @@ curl -X GET \
 
 The `.remove()` method uses `DELETE v1/carts/{cart_id}/items/{line_item_id}` to remove a specific line item from the cart.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -194,7 +194,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.remove('item_7RyWOwmK5nEa2V').then((response) => console.log(response));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X DELETE \
@@ -217,7 +217,7 @@ curl -X DELETE \
 
 The `.delete()` method uses `DELETE v1/carts/{cart_id}` to delete a cart entirely.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -227,7 +227,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.delete().then((response) => console.log(response));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X DELETE \
@@ -250,7 +250,7 @@ curl -X DELETE \
 
 The `.empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different from the `.refresh()` method in that it empties the current cart but not create a new cart.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -260,7 +260,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.cart.empty().then((response) => console.log(response));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X DELETE \
@@ -279,6 +279,6 @@ curl -X DELETE \
 
 ### Cart SDK reference
 
-Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart-cart).
+Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart).
 
 ---

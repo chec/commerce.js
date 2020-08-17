@@ -15,7 +15,7 @@ This section of the documentation goes through the core [products](#list-product
 
 One of the first things you will want to do when using Commerce.js is list your products in order to make a product catalog page. The `list()` method uses `GET v1/products` to return a list of product details for the current merchant. You may filter this by the optional query parameters listed in the [API](/docs/api/?shell#list-all-products).\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -25,7 +25,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.products.list().then((product) => console.log(product));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X GET \
@@ -50,7 +50,7 @@ Once you've got your product data you can populate your product listing view. Th
 
 The `retrieve()` method uses `GET v1/products/{product_id}` to retrieve a specific product from the merchant account.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -60,7 +60,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.products.retrieve('prod_7RqEv5xKOoZz4j').then((product) => console.log(product.name));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X GET \
@@ -82,7 +82,7 @@ The categories resource helps to organize products into groups using the `GET v1
 
 The `list()` method uses `GET v1/categories` to return a list of all the merchant's product categories.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -92,7 +92,7 @@ const commerce = new Commerce('{your_public_key}');
 commerce.categories.list().then((category) => console.log(category.name));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 $ curl -X GET \
@@ -115,7 +115,7 @@ $ curl -X GET \
 
 The `retrieve()` method at the `GET v1/categories` API endpoint gets a specific category by permalink or ID.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -130,7 +130,7 @@ commerce.categories.retrieve('category', { type: 'slug' })
   .then((category) => console.log(category.name));
 ```
 
-**Example request using cURL**:
+Example request using cURL:
 
 ```bash
 curl -X GET \
@@ -149,7 +149,7 @@ curl -X GET \
 
 ### Products and Categories SDK reference
 
-Refer to the full list of all the available products and categories methods [here](/docs/sdk/full-sdk-reference#products-products).
+Refer to the full list of all the available products and categories methods [here](/docs/sdk/full-sdk-reference#products).
 
 ---
 

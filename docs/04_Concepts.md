@@ -100,7 +100,7 @@ All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#ch
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>For a full list of checkout helpers, see the full SDK reference <a href="/docs/sdk/full-sdk-reference#checkout-checkout">here</a>.</p>
+    <p>For a full list of checkout helpers, see the full SDK reference <a href="/docs/sdk/full-sdk-reference#checkout">here</a>.</p>
 </div>
 
 ---
@@ -144,9 +144,9 @@ Every price attribute (subtotals, pay what you want minimums, tax totals, etc) r
 - `raw` - No formatting *e.g. 49 or 1234.56*
 - `formatted` - Formatted with no currency symbol or code *e.g. 49.00 or 1,234.56*
 - `formatted_with_symbol` - Formatted with its symbol only *e.g. $49.00 or £1,234.56*
-- `formatted_with_code` -  Formatted with its currency code only *e.g. 49.00 USD or 1,234.56 GBP*
-
-##### Example of a `price` endpoint response
+- `formatted_with_code` -  Formatted with its currency code only *e.g. 49.00 USD or 1,234.56 GBP*\
+\
+Example of a `price` endpoint response:
 
 ```json
 {
@@ -163,9 +163,9 @@ Every price attribute (subtotals, pay what you want minimums, tax totals, etc) r
 
 ## Verb Conditionals
 
-We return all conditionals in the `conditionals` array in most objects. We also return conditionals with their verb as the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.
-
-##### Example of a `conditionals` array
+We return all conditionals in the `conditionals` array in most objects. We also return conditionals with their verb as the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.\
+\
+Example of a `conditionals` array:
 
 ```json
 {
