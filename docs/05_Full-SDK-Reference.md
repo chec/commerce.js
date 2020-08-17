@@ -6,27 +6,27 @@ title: "Full SDK Reference"
 
 ---
 
-#### Products `products`
+## Products
 
-Methods for getting product data, including variant information, shipping settings, assets, etc.
+`products`: Methods for getting product data, including variant information, shipping settings, assets, etc.
 
 | Method | Description |
 | -------------------- | ----------- |
 | `list(params)`       | List products |
 | `retrieve(id, data = {})`  | Get a specific product |
 
-#### Categories `categories`
+## Categories
 
-Manage product categories in order to group your products.
+`categories`: Manage product categories in order to group your products.
 
 | Method | Description |
 | -------------------- | ----------- |
 | `list(params)`       | List all categories, either by filtered params or unfiltered |
 | `retrieve(id, data = {})`  |  Get a specific category by its ID. You may also provide `{ type: 'slug'}` as data and use a category slug instead of an ID.  |
 
-#### Cart `cart`
+## Cart
 
-All aspects of managing a cart for your customer.
+`cart`: All aspects of managing a cart for your customer.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -40,9 +40,9 @@ All aspects of managing a cart for your customer.
 | `empty()` | Clear the cart contents but cart is not deleted |
 | `delete()` | Delete the entire cart |
 
-#### Checkout `checkout`
+## Checkout
 
-All aspects of managing your checkout, including helper functions.
+`checkout`: All aspects of managing your checkout, including helper functions.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -66,9 +66,9 @@ All aspects of managing your checkout, including helper functions.
 | `checkQuantity(token, lineItemId, data)`  | Checks whether the requested quantity is available for a line item  |
 | `helperValidation(token)`  | Gets any applicable validation rules  |
 
-#### Services `services`
+## Services
 
-Additional checkout helper service methods.
+`services`: Additional checkout helper service methods.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -78,9 +78,9 @@ Additional checkout helper service methods.
 | `localeListSubdivisions(countryCode)` | List all subdivisions/regions/states for a country |
 | `localeListShippingSubdivisions(token, countryCode)` | List all subdivisions/regions/states for a country that can be shipped to for a checkout token |
 
-#### Merchants
+## Merchants
 
-Access information about your merchant account, e.g. business name, etc.
+`merchant`: Access information about your merchant account, e.g. business name, etc.
 
 | Method | Description |
 | -------------------- | ----------- |

@@ -10,7 +10,7 @@ The checkout resource is used to navigate your customers through the transaction
 
 The `.generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart. `generateTokenFrom()` gets a new checkout token from a specific identifier type. See below for the example request.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -48,7 +48,7 @@ Upon a successful request, a checkout token object will be returned which contai
 
 The `.capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture an order and payment by providing the checkout token and necessary data for the order to be completed. The resolved promise returns an order object which can be used for receipt.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -125,7 +125,7 @@ Key-value multi-dimensional arrays/objects/hashes are used to immediately associ
 
 The `.getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to return an existing checkout token by it's ID. The output from this request will be the same as that of `.generateToken()`.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -155,7 +155,7 @@ commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(to
 
 The live object is a living object which udpates to show the live tax rates, prices, and totals for a checkout token. The `getLive()` method uses `GET v1/checkouts/{checkout_token_id}/live` to return the current checkout live object.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -179,9 +179,9 @@ Commerce.checkout.getLive('chkt_L5z3kmQpdpkGlA').then((response) => console.log(
 
 ## Check "Pay What You Want"
 
-If you have enabled "Pay What You Want" pricing, your customers are able to choose the amount they pay. The `checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves the desired "Pay What You Want" amount for the provided checkout token, if enabled. If the amount is too low, an invalid response will be returned with the minimum amount required.
-
-**Example request using Commerce.js**:
+If you have enabled "Pay What You Want" pricing, your customers are able to choose the amount they pay. The `checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves the desired "Pay What You Want" amount for the provided checkout token, if enabled. If the amount is too low, an invalid response will be returned with the minimum amount required.\
+\
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -209,7 +209,7 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate a discount code for the provided checkout token, and applies it to the order if it is valid.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -237,7 +237,7 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 The `checkShippingOption()` method uses `GET v1/checkouts/{checkout_token_id}/check/shipping` to validate a shipping method for the provided checkout token, and applies it to the order.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -268,7 +268,7 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided in the request arguments.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -294,7 +294,7 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
 
 ### Checkout SDK reference
 
-Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout-checkout).
+Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout).
 
 ---
 
@@ -304,9 +304,9 @@ The **Services** endpoint are additional checkout helpers service methods.
 
 ## List all countries
 
-The `localeListCountries()` method uses `GET v1/services/locale/countries`to return a list of all countries registered in the platform. See [List available shipping countries](#list-available-shipping-countries) for an equivalent list of countries that can be shipped to your account.
-
-**Example request using Commerce.js**:
+The `localeListCountries()` method uses `GET v1/services/locale/countries`to return a list of all countries registered in the platform. See [List available shipping countries](#list-available-shipping-countries) for an equivalent list of countries that can be shipped to your account.\
+\
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -331,7 +331,7 @@ commerce.services.localeListCountries().then((response) => console.log(response)
 
 The `localeListSubdivisions()` method uses `GET v1/services/locale/{country_code}/subdivisions` to return a list of all subdivisions (states, provinces, or regions) for that country, given a valid country code is provided. See [List available shipping subdivions for country](#list-available-shipping-subdivisions)" for an equivalent list of subdivisions that can be shipped to for your account.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -356,7 +356,7 @@ commerce.services.localeListSubdivisions('US').then((response) => console.log(re
 
 The `localeListShippingCountries()` method at `GET v1/services/locale/{country_code}/subdivisions` returns only the countries which can be shipped to the current checkout.\
 \
-**Example request using Commerce.js**:
+Example request using Commerce.js:
 
 ```js
 import Commerce from '@chec/commerce.js';
@@ -375,6 +375,6 @@ Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((respo
 
 ### Services SDK reference
 
-Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services-services).
+Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services).
 
 ---
