@@ -1,5 +1,5 @@
 ---
-title: "Full SDK Reference"
+title: "Full SDK reference"
 ---
 
 **Commerce.js** is a JavaScript SDK built on top of the **Chec Platform** to allow for easy interfacing with the **Chec API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that work on any modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce logic of an application. Here you will find the full Commerce.js SDK reference. All features are accessible from your Commerce object instance.

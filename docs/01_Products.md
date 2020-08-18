@@ -147,7 +147,7 @@ curl -X GET \
     <p>Refer to the full response for retrieving a category <a href="/docs/api/?shell#retrieve-category">here</a>.</p>
 </div>
 
-### Products and Categories SDK reference
+## Products and Categories SDK reference
 
 Refer to the full list of all the available products and categories methods [here](/docs/sdk/full-sdk-reference#products).
 

@@ -58,7 +58,7 @@ To be used with server side code. These API keys have the power to access sensit
 | Categories    |
 | Fulfillment    |
 
-### Server side
+#### Server side
 
 The secret key can be used with requests that require sensitive actions or data to be retrieved as well as all client side requests. You'll use your secret key for these requests. The Commerce.js SDK does not include any of these endpoints for security reasons, so you'll need to write custom backend logic for handling these. An example of a sensitive request would be to make a call to [refund an order](https://commercejs.com/docs/api/?shell#refund-an-order).
 
@@ -105,7 +105,7 @@ All helper endpoints on the [Checkout](https://commercejs.com/docs/api/?shell#ch
 
 ---
 
-## The Live Object
+## The live object
 
 The [live object](https://commercejs.com/docs/api/?shell#get-the-live-object) is a living object which adjusts to show the live tax rates, prices, and totals for a checkout token. Every time a checkout helper endpoint is called, this object will be updated. The returned data can be used to display information back to the customer on the checkout. All checkout helpers that affect price (e.g. check quantity, check variant, check discount, etc) will return the live object in its payload.\
 \
@@ -126,7 +126,7 @@ Tax support with Chec/Commerce.js is automatic. We calculate the tax based on th
 | `tax[region]`  | required | If in Canada or the USA. Must be a valid short code for the region, e.g. `CA` for California, or `QB` for Quebec. |
 | `tax[postal_zip_code]`  | required | If "Auto US Sales Tax" is enabled for your account. |
 
-#### EU VAT MOSS
+### EU VAT MOSS
 
 If you have EU VAT MOSS enabled for your account, you can use the helper function "Get buyer's location from IP" (see the full API reference), and use this value to set `tax[ip_address]`.
 
@@ -161,7 +161,7 @@ Example of a `price` endpoint response:
 
 ---
 
-## Verb Conditionals
+## Verb conditionals
 
 We return all conditionals in the `conditionals` array in most objects. We also return conditionals with their verb as the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.\
 \

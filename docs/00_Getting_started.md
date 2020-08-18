@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting started
 description: Get started with the Commerce.js SDK with a step-by-step guide
 position: 0
 category: Getting started
