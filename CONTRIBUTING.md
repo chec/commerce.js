@@ -28,11 +28,6 @@ The simplest way to edit the documentation is to do it on GitHub's interface. Al
 7. Give the pull request a descriptive title similar to your branch name and a description
 8. Click **Create pull request** to submit
 
-## Commit messages and branch name
-
-- Commit messages should be in the imperative tense ie. *Edit the intro section of cart* vs. *Edited the intro section of cart*
-- Your branch should be prefixed with either **Feature** for new documentation content or **Bugfix** for typos and other small changes. Ie. Feature/new-cart-content
-
 ## Edit locally
 For more complex changes, you'll want to fork the repo and edit locally:
 
@@ -42,6 +37,10 @@ For more complex changes, you'll want to fork the repo and edit locally:
 4. Commit and push changes to your remote repo
 5. Create a [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) to `chec/commerce.js/master`
 
+## Commit messages and branch name
+
+- Commit messages should be in the imperative tense ie. *Edit the intro section of cart* vs. *Edited the intro section of cart*
+- Your branch should be prefixed with either **Feature** for new documentation content or **Bugfix** for typos and other small changes. Ie. Feature/new-cart-content
 
 ## Contributing to other Chec open source projects
 To contribute to other Chec open source projects, see a full list [here]().
