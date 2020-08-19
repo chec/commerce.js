@@ -132,7 +132,7 @@ If you have EU VAT MOSS enabled for your account, you can use the helper functio
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>If you're working with PayPal, you should sent both <code>tax[ip_address]</code> and <code>tax[country]</code> (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code></p>.
+    <p>If you're working with PayPal, you should sent both <code>tax[ip_address]</code> and <code>tax[country]</code> (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code>.</p>
 </div>
 
 ---
