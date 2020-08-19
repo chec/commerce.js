@@ -8,7 +8,7 @@ The checkout resource is used to navigate your customers through the transaction
 
 ## Generate token
 
-The `.generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart. `generateTokenFrom()` gets a new checkout token from a specific identifier type. See below for the example request.\
+The `generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart. `generateTokenFrom()` gets a new checkout token from a specific identifier type. See below for the example request.\
 \
 Example request using Commerce.js:
 
@@ -46,7 +46,7 @@ Upon a successful request, a checkout token object will be returned which contai
 
 ## Capture order
 
-The `.capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture an order and payment by providing the checkout token and necessary data for the order to be completed. The resolved promise returns an order object which can be used for receipt.\
+The `capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture an order and payment by providing the checkout token and necessary data for the order to be completed. The resolved promise returns an order object which can be used for receipt.\
 \
 Example request using Commerce.js:
 
@@ -123,7 +123,7 @@ Key-value multi-dimensional arrays/objects/hashes are used to immediately associ
 
 ## Get existing token
 
-The `.getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to return an existing checkout token by it's ID. The output from this request will be the same as that of `.generateToken()`.\
+The `getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to return an existing checkout token by it's ID. The output from this request will be the same as that of `.generateToken()`.\
 \
 Example request using Commerce.js:
 

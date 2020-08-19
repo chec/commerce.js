@@ -114,7 +114,7 @@ curl -X POST \
 
 ## Update cart
 
-The `.update()` method uses `PUT v1/carts/{cart_id}/items/{line_item_id}` to update the quantity or variant for the line item ID in the cart.\
+The `update()` method uses `PUT v1/carts/{cart_id}/items/{line_item_id}` to update the quantity or variant for the line item ID in the cart.\
 \
 Example request using Commerce.js:
 
@@ -182,7 +182,7 @@ curl -X GET \
 
 ## Remove from cart
 
-The `.remove()` method uses `DELETE v1/carts/{cart_id}/items/{line_item_id}` to remove a specific line item from the cart.\
+The `remove()` method uses `DELETE v1/carts/{cart_id}/items/{line_item_id}` to remove a specific line item from the cart.\
 \
 Example request using Commerce.js:
 
@@ -215,7 +215,7 @@ curl -X DELETE \
 
 ## Delete cart
 
-The `.delete()` method uses `DELETE v1/carts/{cart_id}` to delete a cart entirely.\
+The `delete()` method uses `DELETE v1/carts/{cart_id}` to delete a cart entirely.\
 \
 Example request using Commerce.js:
 
@@ -248,7 +248,7 @@ curl -X DELETE \
 
 ## Empty cart
 
-The `.empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different from the `.refresh()` method in that it empties the current cart but not create a new cart.\
+The `empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different from the `.refresh()` method in that it empties the current cart but not create a new cart.\
 \
 Example request using Commerce.js:
 
