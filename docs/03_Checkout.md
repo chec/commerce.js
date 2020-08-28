@@ -2,24 +2,20 @@
 title: "Checkout"
 ---
 
-The checkout resource is used to navigate your customers through the transaction
-and shipping stage of a purchasing flow. A checkout captures data sent from the
-cart along with the item information, line item IDs, any shipping or billing
-information as well as tax and shipping rates. The checkout resource is a
-verbose endpoint that comes with additional helpers eg. [Checkout
-helpers](#checkout-helpers) and [Services](#services) to fully manage your
-customer's purchasing experience. See [here](/docs/sdk/concepts#checkout-tokens)
-for more high-level concepts on the Checkout resource.
+The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing
+flow. A checkout captures data sent from the cart along with the item information, line item IDs, any shipping or
+billing information as well as tax and shipping rates. The checkout resource is a verbose endpoint that comes with
+additional helpers eg. [Checkout helpers](#checkout-helpers) and [Services](#services) to fully manage your customer's
+purchasing experience. See [here](/docs/sdk/concepts#checkout-tokens) for more high-level concepts on the Checkout
+resource.
 
 ---
 
 ## Generate token
 
-The `generateToken()` method uses `GET v1/checkouts/{id}` to generate a
-[checkout token](/docs/sdk/concepts#checkout-tokens) which can be used to
-initiate the process of capturing an order from a cart. `generateTokenFrom()`
-gets a new checkout token from a specific identifier type. See below for the
-example request.\
+The `generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout
+token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart.
+`generateTokenFrom()` gets a new checkout token from a specific identifier type. See below for the example request.\
 \
 Example request using Commerce.js:
 
@@ -40,8 +36,8 @@ commerce.checkout.generateTokenFrom('permalink', 'white-shirt')
 | -------------------- | ----------- |
 | `generateToken(identifier, data)` | Gets a new checkout token |
 
-Upon a successful request, a checkout token object will be returned which
-contains everything you need to create your checkout page.
+Upon a successful request, a checkout token object will be returned which contains everything you need to create your
+checkout page.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
@@ -58,10 +54,9 @@ contains everything you need to create your checkout page.
 
 ## Capture order
 
-The `capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture
-an order and payment by providing the checkout token and necessary data for the
-order to be completed. The resolved promise returns an order object which can be
-used for receipt.\
+The `capture()` method uses `POST v1/checkouts/{checkout_token_id}` to capture an order and payment by providing the
+checkout token and necessary data for the order to be completed. The resolved promise returns an order object which can
+be used for receipt.\
 \
 Example request using Commerce.js:
 
@@ -117,20 +112,17 @@ commerce.checkout.capture({
 | -------------------- | ----------- |
 | `capture(token, data)`  | Capture a checkout by its token ID  |
 
-In response to a successful checkout capture, you'll get all the information for
-the order you need to show a confirmation page to your customer, including the
-`id` (the order ID), the `customer_reference` (customer's order reference), and
-much more. Note that you may want to store the response in local state since
-fetching the data again would require a secret key.\
+In response to a successful checkout capture, you'll get all the information for the order you need to show a
+confirmation page to your customer, including the `id` (the order ID), the `customer_reference` (customer's order
+reference), and much more. Note that you may want to store the response in local state since fetching the data again
+would require a secret key.\
 \
-Key-value multi-dimensional arrays/objects/hashes are used to immediately
-associate values with their parent(s) ID when submitting data. For example with
-line items, the key would be the `line_item_id` and the related values would be
-nested under that key.
+Key-value multi-dimensional arrays/objects/hashes are used to immediately associate values with their parent(s) ID when
+submitting data. For example with line items, the key would be the `line_item_id` and the related values would be nested
+under that key.
 
 * Line item's quantity: `line_items[{line_item_id}][quantity]`
-* Line item's variant and selected option:
-  `line_items[{line_item_id}][variants][{variant_id}] = {option_id}`
+* Line item's variant and selected option: `line_items[{line_item_id}][variants][{variant_id}] = {option_id}`
 
 <div class="highlight highlight--warn">
     <span>Important</span>
@@ -146,9 +138,8 @@ nested under that key.
 
 ## Get existing token
 
-The `getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to
-return an existing checkout token by it's ID. The output from this request will
-be the same as that of `.generateToken()`.\
+The `getToken()` method uses `GET v1/checkouts/tokens/{checkout_token_id}` to return an existing checkout token by it's
+ID. The output from this request will be the same as that of `.generateToken()`.\
 \
 Example request using Commerce.js:
 
@@ -174,20 +165,16 @@ commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(to
 
 # Checkout helpers
 
-[Checkout helper](/docs/sdk/concepts#checkout-helpers) functions are provided to
-help create custom checkout flows and handle all common commerce logic that
-would otherwise be complex. Every time a checkout helper endpoint is called, an
-object called the [live object](/docs/sdk/concepts#the-live-object) will be
-updated and the returned data is then typically used to update the checkout UI.
-All checkout helpers that affect price (e.g. check quantity, check variant,
+[Checkout helper](/docs/sdk/concepts#checkout-helpers) functions are provided to help create custom checkout flows and
+handle all common commerce logic that would otherwise be complex. Every time a checkout helper endpoint is called, an
+object called the [live object](/docs/sdk/concepts#the-live-object) will be updated and the returned data is then
+typically used to update the checkout UI. All checkout helpers that affect price (e.g. check quantity, check variant,
 check discount etc) will return the live object.
 
 ## Get the live object
 
-The live object is a living object which udpates to show the live tax rates,
-prices, and totals for a checkout token. The `getLive()` method uses `GET
-v1/checkouts/{checkout_token_id}/live` to return the current checkout live
-object.\
+The live object is a living object which udpates to show the live tax rates, prices, and totals for a checkout token.
+The `getLive()` method uses `GET v1/checkouts/{checkout_token_id}/live` to return the current checkout live object.\
 \
 Example request using Commerce.js:
 
@@ -213,12 +200,10 @@ Commerce.checkout.getLive('chkt_L5z3kmQpdpkGlA').then((response) => console.log(
 
 ## Check "Pay What You Want"
 
-If you have enabled "Pay What You Want" pricing, your customers are able to
-choose the amount they pay. The `checkPayWhatYouWant()` method uses `GET
-v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves
-the desired "Pay What You Want" amount for the provided checkout token, if
-enabled. If the amount is too low, an invalid response will be returned with the
-minimum amount required.\
+If you have enabled "Pay What You Want" pricing, your customers are able to choose the amount they pay. The
+`checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves
+the desired "Pay What You Want" amount for the provided checkout token, if enabled. If the amount is too low, an invalid
+response will be returned with the minimum amount required.\
 \
 Example request using Commerce.js:
 
@@ -246,10 +231,8 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 ## Check discount code
 
-The `checkDiscount()` method uses `GET
-v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate a discount
-code for the provided checkout token, and applies it to the order if it is
-valid.\
+The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate a discount
+code for the provided checkout token, and applies it to the order if it is valid.\
 \
 Example request using Commerce.js:
 
@@ -277,9 +260,8 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 ## Check shipping method
 
-The `checkShippingOption()` method uses `GET
-v1/checkouts/{checkout_token_id}/check/shipping` to validate a shipping method
-for the provided checkout token, and applies it to the order.\
+The `checkShippingOption()` method uses `GET v1/checkouts/{checkout_token_id}/check/shipping` to validate a shipping
+method for the provided checkout token, and applies it to the order.\
 \
 Example request using Commerce.js:
 
@@ -310,10 +292,9 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 ## Set tax zone
 
-The `setTaxZone()` method uses `GET
-v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for
-the provided checkout token's order, either automatically from a provided IP
-address, or by the geographic data provided in the request arguments.\
+The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the
+provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided in
+the request arguments.\
 \
 Example request using Commerce.js:
 
@@ -341,8 +322,7 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
 
 ### Checkout SDK reference
 
-Refer to the full list of all the available checkout methods
-[here](/docs/sdk/full-sdk-reference#checkout).
+Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout).
 
 ---
 
@@ -352,10 +332,9 @@ The **Services** endpoint are additional checkout helpers service methods.
 
 ## List all countries
 
-The `localeListCountries()` method uses `GET v1/services/locale/countries`to
-return a list of all countries registered in the platform. See [List available
-shipping countries](#list-available-shipping-countries) for an equivalent list
-of countries that can be shipped to your account.\
+The `localeListCountries()` method uses `GET v1/services/locale/countries`to return a list of all countries registered
+in the platform. See [List available shipping countries](#list-available-shipping-countries) for an equivalent list of
+countries that can be shipped to your account.\
 \
 Example request using Commerce.js:
 
@@ -380,11 +359,9 @@ commerce.services.localeListCountries().then((response) => console.log(response)
 
 ## List all subdivisions for a country
 
-The `localeListSubdivisions()` method uses `GET
-v1/services/locale/{country_code}/subdivisions` to return a list of all
-subdivisions (states, provinces, or regions) for that country, given a valid
-country code is provided. See [List available shipping subdivisions for
-country](#list-available-shipping-subdivisions)" for an equivalent list of
+The `localeListSubdivisions()` method uses `GET v1/services/locale/{country_code}/subdivisions` to return a list of all
+subdivisions (states, provinces, or regions) for that country, given a valid country code is provided. See [List
+available shipping subdivisions for country](#list-available-shipping-subdivisions)" for an equivalent list of
 subdivisions that can be shipped to for your account.\
 \
 Example request using Commerce.js:
@@ -410,9 +387,8 @@ commerce.services.localeListSubdivisions('US').then((response) => console.log(re
 
 ## List available shipping countries
 
-The `localeListShippingCountries()` method at `GET
-v1/services/locale/{country_code}/subdivisions` returns only the countries which
-can be shipped to the current checkout.\
+The `localeListShippingCountries()` method at `GET v1/services/locale/{country_code}/subdivisions` returns only the
+countries which can be shipped to the current checkout.\
 \
 Example request using Commerce.js:
 
@@ -434,9 +410,8 @@ Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((respo
 ## List available shipping subdivisions
 
 The `localeListShippingSubdivisions()` method at `GET
-v1/services/locale/{checkout_token_id}/countries/{country_code}/subdivisions`
-returns only the subdivisions (states, provinces, or regions) in a country which
-can be shipped to for the current checkout.\
+v1/services/locale/{checkout_token_id}/countries/{country_code}/subdivisions` returns only the subdivisions (states,
+provinces, or regions) in a country which can be shipped to for the current checkout.\
 \
 Example request using Commerce.js:
 
@@ -457,7 +432,6 @@ Commerce.services.localeListShippingSubdivisions('chkt_L5z3kmQpdpkGlA', 'US').th
 
 ### Services SDK reference
 
-Refer to the full list of all the available services methods
-[here](/docs/sdk/full-sdk-reference#services).
+Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services).
 
 ---
