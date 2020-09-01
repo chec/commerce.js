@@ -1,18 +1,23 @@
 ---
 title: Cart
-description: ''
+description: 'The Cart endpoint in Commerce.js.'
 position: 2
 category: Cart
 ---
 
-The **Cart** resource can hold product data, product variants, quantity, price, and other meta data to be used to [generate a checkout token](/docs/sdk/checkout#generate-token) and [capture an order](/docs/sdk/checkout#capture-order). This feature comes equipped with multiple intuitive endpoints to help develop a seamless shopping cart experience.
+The **Cart** resource can hold product data, product variants, quantity, price, and other meta data to be used to
+[generate a checkout token](/docs/sdk/checkout#generate-token) and [capture an order](/docs/sdk/checkout#capture-order).
+This feature comes equipped with multiple intuitive endpoints to help develop a seamless shopping cart experience.
 
 ---
 
 ## Retrieve cart
 
-In order to start adding products to your cart, you'll need to first create a cart. When you first call the method `retrieve()` using `GET v1/carts`, it will automatically create a cart for you if a cart does not exist yet or a current cart will be retrieved if the `cart_id` is passed in as an argument. Commerce.js tracks the current cart ID using a cookie.\
-\
+In order to start adding products to your cart, you'll need to first create a cart. When you first call the method
+`retrieve()` using `GET v1/carts`, it will automatically create a cart for you if a cart does not exist yet or a current
+cart will be retrieved if the `cart_id` is passed in as an argument. Commerce.js tracks the current cart ID using a
+cookie.
+
 Example request using Commerce.js:
 
 ```js
@@ -49,8 +54,8 @@ curl -X GET \
 
 ## Refresh cart
 
-The `refresh()` method uses `GET v1/carts` to create a new cart and update the stored cart ID in Commerce.js.\
-\
+The `refresh()` method uses `GET v1/carts` to create a new cart and update the stored cart ID in Commerce.js.
+
 Example request using Commerce.js:
 
 ```js
@@ -74,8 +79,9 @@ commerce.cart.refresh().then((cart) => console.log(cart));
 
 ## Add to cart
 
-The `add()` method uses `POST v1/carts/{cart_id}` to add a product to cart. You will need the ID of the product you want to add e.g. `prod_05389st98t49h`.\
-\
+The `add()` method uses `POST v1/carts/{cart_id}` to add a product to cart. You will need the ID of the product you want
+to add e.g. `prod_05389st98t49h`.
+
 Example request using Commerce.js:
 
 ```js
@@ -114,8 +120,9 @@ curl -X POST \
 
 ## Update cart
 
-The `update()` method uses `PUT v1/carts/{cart_id}/items/{line_item_id}` to update the quantity or variant for the line item ID in the cart.\
-\
+The `update()` method uses `PUT v1/carts/{cart_id}/items/{line_item_id}` to update the quantity or variant for the line
+item ID in the cart.
+
 Example request using Commerce.js:
 
 ```js
@@ -149,8 +156,8 @@ curl -X PUT \
 
 ## Get cart contents
 
-The `contents()` method uses `GET v1/carts/{cart_id}/items` to return the contents and items of the cart.\
-\
+The `contents()` method uses `GET v1/carts/{cart_id}/items` to return the contents and items of the cart.
+
 Example request using Commerce.js:
 
 ```js
@@ -182,8 +189,9 @@ curl -X GET \
 
 ## Remove from cart
 
-The `remove()` method uses `DELETE v1/carts/{cart_id}/items/{line_item_id}` to remove a specific line item from the cart.\
-\
+The `remove()` method uses `DELETE v1/carts/{cart_id}/items/{line_item_id}` to remove a specific line item from the
+cart.
+
 Example request using Commerce.js:
 
 ```js
@@ -215,8 +223,8 @@ curl -X DELETE \
 
 ## Delete cart
 
-The `delete()` method uses `DELETE v1/carts/{cart_id}` to delete a cart entirely.\
-\
+The `delete()` method uses `DELETE v1/carts/{cart_id}` to delete a cart entirely.
+
 Example request using Commerce.js:
 
 ```js
@@ -248,8 +256,9 @@ curl -X DELETE \
 
 ## Empty cart
 
-The `empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different from the `.refresh()` method in that it empties the current cart but not create a new cart.\
-\
+The `empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different
+from the `.refresh()` method in that it empties the current cart but not create a new cart.
+
 Example request using Commerce.js:
 
 ```js

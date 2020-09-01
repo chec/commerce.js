@@ -1,5 +1,8 @@
 ---
-title: "Concepts"
+title: Concepts
+description: 'Concepts in Commerce.js.'
+position: 4
+category: Concepts
 ---
 
 ## Authentication
@@ -84,8 +87,8 @@ be cleared from the Chec Dashboard, and will automatically use the "Test Gateway
 Checkout tokens need to be generated before you are able to **capture an order**. A [checkout
 token](/docs/api/?javascript--cjs#generate-token) contains everything you would need to implement a checkout process and
 a unqiue purchasing experience for your users. For example, the returned object will contain properties such as shipping
-options, discount codes available, or other fields that are needed to be collected.\
-\
+options, discount codes available, or other fields that are needed to be collected.
+
 To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like
 to generate a checkout for. See [here](/docs/api/#generate-token) for the required parameters.
 
@@ -128,13 +131,13 @@ relevant to the current checkout session so you can update displayed totals (and
 The [live object](/docs/api/?shell#get-the-live-object) is a living object which adjusts to show the live tax rates,
 prices, and totals for a checkout token. Every time a checkout helper endpoint is called, this object will be updated.
 The returned data can be used to display information back to the customer on the checkout. All checkout helpers that
-affect price (e.g. check quantity, check variant, check discount, etc) will return the live object in its payload.\
-\
+affect price (e.g. check quantity, check variant, check discount, etc) will return the live object in its payload.
+
 We create the live object to help you (and us!) display up-to-date totals, tax prices, and other dynamic variables which
 change during the checkout process and need to displayed back to the customer. You should use the data in the live
 object to update the displayed totals on your checkout pages when the customer selects a new variant, enters a discount,
-or selects a different shipping option.\
-\
+or selects a different shipping option.
+
 At Chec we do this on our own checkouts by feeding the live object returned from each helper function into a JavaScript
 function which then associates the data with the correct element.
 
@@ -172,8 +175,8 @@ four formats:
 - `raw` - No formatting *e.g. 49 or 1234.56*
 - `formatted` - Formatted with no currency symbol or code *e.g. 49.00 or 1,234.56*
 - `formatted_with_symbol` - Formatted with its symbol only *e.g. $49.00 or£1,234.56*
-- `formatted_with_code` -  Formatted with its currency code only *e.g. 49.00 USD or 1,234.56 GBP*\
-  \
+- `formatted_with_code` -  Formatted with its currency code only *e.g. 49.00 USD or 1,234.56 GBP*
+
 Example of a `price` endpoint response:
 
 ```json
@@ -192,8 +195,8 @@ Example of a `price` endpoint response:
 ## Verb conditionals
 
 We return all conditionals in the `conditionals` array in most objects. We also return conditionals with their verb as
-the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.\
-\
+the array key name e.g. `is.cart_free` or `has.physical_delivery` or `collects.shipping_address`.
+
 Example of a `conditionals` array:
 
 ```json
