@@ -1,5 +1,8 @@
 ---
-title: "Concepts"
+title: Concepts
+description: 'Concepts in Commerce.js.'
+position: 4
+category: Concepts
 ---
 
 ## Authentication

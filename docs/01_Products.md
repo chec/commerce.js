@@ -1,5 +1,8 @@
 ---
-title: Products description: '' position: 1 category: Products
+title: Products
+description: 'The Products and Categories endpoints in Commerce.js.'
+position: 1
+category: Products
 ---
 
 This section of the documentation goes through the core [products](#list-products) resource and
