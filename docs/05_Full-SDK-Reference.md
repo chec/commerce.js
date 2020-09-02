@@ -39,7 +39,7 @@ object instance.
 | -------------------- | ----------- |
 | `id()`       | Get the current cart ID, generating a new one if necessary |
 | `refresh()`  | Request a new cart ID |
-| `add(data)`  | Add an item to the cart |
+| `add(productId, quantity)`  | Add an item to the cart |
 | `retrieve()` | Get the cart object, including contents |
 | `contents()` | Get the contents of the cart |
 | `update(lineItemId, data)` | Update an existing item in the cart |
