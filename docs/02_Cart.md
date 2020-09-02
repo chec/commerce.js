@@ -104,7 +104,7 @@ curl -X POST \
 
 | Method | Description |
 | -------------------- | ----------- |
-| `add(data)`  | Add an item to the cart |
+| `add(productId, quantity)`  | Add an item to the cart |
 
 <div class="highlight highlight--info">
     <span>Tip</span>
