@@ -293,6 +293,27 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 ---
 
+## Get shipping methods
+
+The `getShippingOptions()` method uses `GET v1/checkouts/{checkout_token_id}/helper/shipping_options` to return a list of available shipping methods for the provided checkout token.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.getShippingOptions('chkt_L5z3kmQpdpkGlA', {
+  country: 'US',
+  region: 'CA',
+}).then((response) => console.log(response));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getShippingOptions(token, data)`  | Gets the available shipping options |
+
 ## Set tax zone
 
 The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the
@@ -379,7 +400,7 @@ commerce.services.localeListSubdivisions('US').then((response) => console.log(re
 
 | Method | Description |
 | -------------------- | ----------- |
-| `localeListCountries()` | List all countries |
+| `localeListSubdivisions()` | List all subdivisions (states, provinces, or regions) |
 
 <div class="highlight highlight--note">
     <span>Note</span>
@@ -390,7 +411,7 @@ commerce.services.localeListSubdivisions('US').then((response) => console.log(re
 
 ## List available shipping countries
 
-The `localeListShippingCountries()` method at `GET v1/services/locale/{country_code}/subdivisions` returns only the
+The `localeListShippingCountries()` method at `GET v1/services/locale/{checkout_token_id}/countries` returns only the
 countries which can be shipped to the current checkout.
 
 Example request using Commerce.js:
@@ -426,11 +447,11 @@ Commerce.services.localeListShippingSubdivisions('chkt_L5z3kmQpdpkGlA', 'US').th
 
 | Method | Description |
 | -------------------- | ----------- |
-| `localeListSubdivisions(countryCode)` | List all subdivisions/regions/states for a country |
+| `localeListShippingSubdivisions(token, countryCode)` | List all subdivisions/regions/states in a country which can be shipped to for the current checkout. |
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>Refer to the full response for the "List available shipping countries" request <a href="/docs/api/?shell#list-available-shipping-countries">here</a>.</p>
+    <p>Refer to the full response for the "List available shipping subdivisions" request <a href="/docs/api/#list-available-shipping-subdivisions-for-country">here</a>.</p>
 </div>
 
 ### Services SDK reference
