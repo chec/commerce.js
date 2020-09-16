@@ -49,6 +49,11 @@ The `cart.add()` method now separates its arguments:
 
 ## Contributing
 
+### Compilation
+
+The lib files are automatically compiled by our continuous integration pipeline. You only need to commit changes
+to the `src` files.
+
 ### Running the tests
 
 You can run the unit tests for this library from your command line using `npm run test`, or `npm run test:watch`
