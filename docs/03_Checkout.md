@@ -129,7 +129,7 @@ under that key.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="/docs/sdk/concepts#tax-support">here</a> for required parameters to send when using PayPal.</p>
+    <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="/docs/sdk/concepts#tax-support">here</a> for required parameters to send when using PayPal, or <a href="https://developer.paypal.com/docs/archive/checkout/how-to/customize-flow/"> see here</a> for the PayPal documentation.</p>
 </div>
 
 <div class="highlight highlight--note">

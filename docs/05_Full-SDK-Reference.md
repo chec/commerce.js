@@ -65,8 +65,6 @@ object instance.
 | `setTaxZone(identifier, data)`  | Sets the geographic zone for tax calculation  |
 | `checkDiscount(token, data)`  | Checks whether a discount code is valid  |
 | `checkGiftcard(token, data)`  | Checks whether a gift card (code) is valid  |
-| `checkPaypalStatus(token)`  | Checks the status of a PayPal payment  |
-| `checkPaypalOrderCaptured(token)`  | Checks whether the status of a PayPal payment is captured  |
 | `checkPayWhatYouWant(token, data)`  | Checks whether a checkout has "pay what you want" enabled  |
 | `checkShippingOption(token, data)`  | Checks whether a shipping method is valid  |
 | `checkVariant(token, lineItemId, data)`  | Checks whether the specified line item ID is still valid/available  |
