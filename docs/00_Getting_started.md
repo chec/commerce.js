@@ -47,7 +47,7 @@ yarn add @chec/commerce.js
 Another option would be to install the SDK via our CDN, you will want to include this script tag in your point of entry file, for instance in your `index.html`.
 
 ```
-<script type="text/javascript" src="https://assets.chec-cdn.com/v2/commerce.js"></script>
+<script type="text/javascript" src="https://cdn.chec.io/v2/commerce.js"></script>
 ```
 
 <div class="highlight highlight--info">
