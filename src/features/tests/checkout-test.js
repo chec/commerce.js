@@ -93,36 +93,6 @@ describe('Checkout', () => {
     });
   });
 
-  describe('checkPaypalStatus', () => {
-    it('proxies the request method', async () => {
-      const checkout = new Checkout(mockCommerce);
-      const returnValue = checkout.checkPaypalStatus(
-        'abc123',
-        mockCallback,
-        mockErrorCallback,
-      );
-
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'checkouts/abc123/check/paypal/payment',
-      );
-      const result = await returnValue;
-      expect(result).toBe('return');
-    });
-  });
-
-  describe('checkPaypalOrderCaptured', () => {
-    it('proxies the request method', async () => {
-      const checkout = new Checkout(mockCommerce);
-      const returnValue = checkout.checkPaypalOrderCaptured('abc123');
-
-      expect(requestMock).toHaveBeenLastCalledWith(
-        'checkouts/abc123/check/paypal/captured',
-      );
-      const result = await returnValue;
-      expect(result).toBe('return');
-    });
-  });
-
   describe('receipt', () => {
     it('proxies the request method', async () => {
       const checkout = new Checkout(mockCommerce);

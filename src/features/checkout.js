@@ -63,26 +63,6 @@ class Checkout {
   }
 
   /**
-   * Checks the status of a PayPal payment for the provided checkout token
-   *
-   * @param {string} token
-   * @return {Promise}
-   */
-  checkPaypalStatus(token) {
-    return this.commerce.request(`checkouts/${token}/check/paypal/payment`);
-  }
-
-  /**
-   * Checks whether the status a PayPal payment for the provided checkout token is captured
-   *
-   * @param {string} token
-   * @return {Promise}
-   */
-  checkPaypalOrderCaptured(token) {
-    return this.commerce.request(`checkouts/${token}/check/paypal/captured`);
-  }
-
-  /**
    * Gets the receipt for the provided checkout token
    *
    * @param {string} token
