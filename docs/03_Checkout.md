@@ -68,7 +68,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.capture({
+commerce.checkout.capture('token', {
   "line_items": {
       "item_7RyWOwmK5nEa2V": {
           "quantity": 1,
