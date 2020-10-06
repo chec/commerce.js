@@ -16,12 +16,11 @@ const consoleHelper = (color = 'black', a, b, c) => {
       emoji = '';
       break;
     case 'error':
+      color = 'rgba(244, 67, 54, 1)';
       if (c.error.type === 'validation') {
-        color = 'rgba(244, 67, 54, 1)';
         emoji = '🚫 Validation/Missing Fields';
         a = '';
       } else {
-        color = 'rgba(244, 67, 54, 1)';
         emoji = '❌ HTTP ERROR ';
       }
       isError = true;
