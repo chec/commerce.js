@@ -176,7 +176,7 @@ check discount etc) will return the live object.
 
 ## Get the live object
 
-The live object is a living object which udpates to show the live tax rates, prices, and totals for a checkout token.
+The live object is a living object which updates to show the live tax rates, prices, and totals for a checkout token.
 The `getLive()` method uses `GET v1/checkouts/{checkout_token_id}/live` to return the current checkout live object.
 
 Example request using Commerce.js:

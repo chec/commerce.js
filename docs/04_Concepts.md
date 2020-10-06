@@ -86,7 +86,7 @@ be cleared from the Chec Dashboard, and will automatically use the "Test Gateway
 
 Checkout tokens need to be generated before you are able to **capture an order**. A [checkout
 token](/docs/api/?javascript--cjs#generate-token) contains everything you would need to implement a checkout process and
-a unqiue purchasing experience for your users. For example, the returned object will contain properties such as shipping
+a unique purchasing experience for your users. For example, the returned object will contain properties such as shipping
 options, discount codes available, or other fields that are needed to be collected.
 
 To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like
