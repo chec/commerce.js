@@ -1,5 +1,4 @@
 const consoleHelper = (color = 'black', a, b, c) => {
-  let bgc = 'White';
   let emoji;
   let i;
   let isError = false;
@@ -24,7 +23,6 @@ const consoleHelper = (color = 'black', a, b, c) => {
       } else {
         color = 'rgba(244, 67, 54, 1)';
         emoji = '❌ HTTP ERROR ';
-        bgc = 'rgba(244, 67, 54, 0.15)';
       }
       isError = true;
       break;
@@ -38,9 +36,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
       '%c' + emoji + a,
       'color:' +
         color +
-        ';display:block; width: 100%;padding:2px 2px 2px 0px;font-family: Open Sans, Helvetica, Sans-serif;font-weight:bold;background-color:' +
-        bgc +
-        ';',
+        ';display:block; width: 100%;padding:2px 2px 2px 0px;font-family: Open Sans, Helvetica, Sans-serif;font-weight:bold;background-color:rgba(244, 67, 54, 0.15);',
     );
     if (typeof c.error.message === 'object') {
       messages = c.error.message;
@@ -77,9 +73,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
     '%c' + emoji + a,
     'color:' +
       color +
-      ';display:block;font-family: Open Sans, Helvetica, Sans-serif;line-height:28px; width: 100%;padding:2px 2px 2px 0px;font-weight:bold;background-color:' +
-      bgc +
-      ';',
+      ';display:block;font-family: Open Sans, Helvetica, Sans-serif;line-height:28px; width: 100%;padding:2px 2px 2px 0px;font-weight:bold;',
   );
   if (b) {
     console.log(
