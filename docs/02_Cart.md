@@ -5,7 +5,7 @@ position: 2
 category: Cart
 ---
 
-The **Cart** resource can hold product data, product variants, quantity, price, and other meta data to be used to
+The **Cart** resource can hold product data, product variants, quantity, price, and other metadata to be used to
 [generate a checkout token](/docs/sdk/checkout#generate-token) and [capture an order](/docs/sdk/checkout#capture-order).
 This feature comes equipped with multiple intuitive endpoints to help develop a seamless shopping cart experience.
 
@@ -113,7 +113,7 @@ curl -X POST \
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>Refer to the full response for adding item to cart <a href="/docs/api/?shell#add-item-to-cart">here</a>.</p>
+    <p>Refer to the full response for adding an item to the cart <a href="/docs/api/?shell#add-item-to-cart">here</a>.</p>
 </div>
 
 ---
@@ -257,7 +257,7 @@ curl -X DELETE \
 ## Empty cart
 
 The `empty()` method uses `DELETE v1/carts/{cart_id}/items` to clear the contents of the current cart. This is different
-from the `.refresh()` method in that it empties the current cart but not create a new cart.
+from the `.refresh()` method in that it empties the current cart but does not create a new cart.
 
 Example request using Commerce.js:
 

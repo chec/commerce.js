@@ -172,7 +172,7 @@ commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(to
 handle all common commerce logic that would otherwise be complex. Every time a checkout helper endpoint is called, an
 object called the [live object](/docs/sdk/concepts#the-live-object) will be updated and the returned data is then
 typically used to update the checkout UI. All checkout helpers that affect price (e.g. check quantity, check variant,
-check discount etc) will return the live object.
+check discount, etc) will return the live object.
 
 ## Get the live object
 
