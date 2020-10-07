@@ -7,7 +7,7 @@ category: Products
 
 This section of the documentation goes through the core [products](#list-products) resource and
 [categories](#categories) which can be associated with products. Anytime we indicate **product catalog**, we are
-referring to entities that you would work with when developing your product listing or product details pages.
+referring to entities that you would work with when developing your product listing or product detail pages.
 
 [Products](/docs/api/?shell#products) in **Chec** are one of the core resources with all the data properties to out your
 frontend. A product is something you sell eg. physical items, services or digital goods and downloads. Requests to the
