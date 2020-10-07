@@ -17,7 +17,7 @@ can manage your API keys from your dashboard under the developer section.
 </div>
 
 While using Commerce.js, the Chec API is limited to [public key scoped](#public-keys) requests. We developed Commerce.js
-to to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve
+to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve
 non-sensitive data such from [products](/docs/sdk/products), [cart](/docs/sdk/cart), and [checkout](/docs/sdk/checkout)
 endpoints. It can also be used to capture orders although you will be unable to access the order resource for security
 reasons.
