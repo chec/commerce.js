@@ -4,11 +4,13 @@
 [![Codecov](https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg)](https://codecov.io/gh/chec/commerce.js)
 [![Version](https://img.shields.io/npm/v/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
 [![Downloads/week](https://img.shields.io/npm/dw/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
-[![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/LICENSE.md)
+
+<a href="https://commercejs.com/" target="_blank"><img src="https://scontent.fktm10-1.fna.fbcdn.net/v/t1.0-9/70330987_903476190037606_2979455745658978304_n.jpg?_nc_cat=102&_nc_sid=174925&_nc_ohc=I7s-sIayvzIAX8CB1st&_nc_ht=scontent.fktm10-1.fna&oh=d8ac2413e91b35c66dea37861eb8b575&oe=5FA29CE0" height="300" /></a>
 
 An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API.
 
-https://commercejs.com
+For more details, please feel free to visit our website: https://commercejs.com
 
 ## Installation
 
@@ -63,4 +65,7 @@ to watch for changed and re-run the tests automatically.
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
+
+## License
+This project is licensed under the BSD 3-Clause License - read [LICENSE](https://github.com/chec/commerce.js/blob/master/LICENSE.md) file for details.
 
