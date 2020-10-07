@@ -10,13 +10,13 @@ An easy to use JavaScript SDK for building and managing carts, checkouts and rec
 
 https://commercejs.com
 
-## Installation
+## Installation :computer:
 
-### With NPM
+### With NPM :vhs:
 
 `npm install @chec/commerce.js`
 
-## Documentation
+## Documentation :closed_book:
 
 See the [documentation webpage](https://commercejs.com/docs).
 
@@ -24,7 +24,7 @@ Our documentation module source code resides in `commerce.js/docs`
 
 If you would like to make contributions to the Commerce.js documentation source, here is a [guide](https://github.com/chec/commerce.js/blob/master/CONTRIBUTING.md) in doing so.
 
-## Upgrading
+## Upgrading :chart_with_downwards_trend:
 
 The major change in Commerce.js v2 is that most methods now return a
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled
@@ -47,19 +47,19 @@ The `cart.add()` method now separates its arguments:
 + Commerce.cart.add(1, 2, {foo: 'bar'})
 ```
 
-## Contributing
+## Contributing :heart:
 
-### Compilation
+### Compilation  :hourglass:
 
 The lib files are automatically compiled by our continuous integration pipeline. You only need to commit changes
 to the `src` files.
 
-### Running the tests
+### Running the tests :bulb:
 
 You can run the unit tests for this library from your command line using `npm run test`, or `npm run test:watch`
 to watch for changed and re-run the tests automatically.
 
-### Code style
+### Code style :pushpin:
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
