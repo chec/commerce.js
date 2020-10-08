@@ -86,7 +86,7 @@ curl -X GET \
 # Categories
 
 The categories resource helps to organize products into groups using the `GET v1/categories` API endpoint. Categories
-can be associated to products and also accessed from the products object.
+can be associated with products and also accessed from the products object.
 
 ## List categories
 

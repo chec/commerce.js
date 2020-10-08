@@ -29,7 +29,7 @@ The only requirement for using Commerce.js is to have Node.js (version 10 or hig
 
 ### Install the SDK with a package manager
 
-If you're using npm or yarn, then adding the Commerce.js SDK to your project is real simple. Once you've created a directory for your project, navigate into your project's root folder in your terminal `cd your-project-folder`, and type the following:
+If you're using npm or yarn, then adding the Commerce.js SDK to your project is really simple. Once you've created a directory for your project, navigate into your project's root folder in your terminal `cd your-project-folder`, and type the following:
 
 ```bash
 npm install @chec/commerce.js
