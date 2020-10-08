@@ -29,7 +29,7 @@ The only requirement for using Commerce.js is to have Node.js (version 10 or hig
 
 ### Install the SDK with a package manager
 
-If you're using npm or yarn, then adding the Commerce.js SDK to your project is real simple. Once you've created a directory for your project, navigate into your project's root folder in your terminal `cd your-project-folder`, and type the following:
+If you're using npm or yarn, then adding the Commerce.js SDK to your project is really simple. Once you've created a directory for your project, navigate into your project's root folder in your terminal `cd your-project-folder`, and type the following:
 
 ```bash
 npm install @chec/commerce.js
@@ -44,7 +44,7 @@ yarn add @chec/commerce.js
 
 ### Installing the SDK via our CDN
 
-Another option would be to install the SDK via our CDN, you will want to include this script tag in your point of entry file, for instance in your `index.html`.
+Another option would be to install the SDK via our CDN, you will need to include this script tag in your point of entry file, for instance in your `index.html`.
 
 ```
 <script type="text/javascript" src="https://cdn.chec.io/v2/commerce.js"></script>
@@ -75,7 +75,7 @@ const commerce = new Commerce('{public_api_key}');
     <p>We've built in a console debugger into the Commerce.js SDK to help with debugging during development. To enable the debugger you can include the second argument <code>true</code> when you create your Commerce instance like so: <code>const commerce = new Commerce('{public_api_key}', true);</code>. Note that a test API key has to be provided as the first argument for the console to show messages - it won't work with a live key.</p>
 </div>
 
-Awesome, you just set up your Chec account, installed the Commerce.js SDK and created your first Commerce instance! You now have access to the `Commerce` object in your application to build out a truly unique frontend presentation layer!
+Awesome, you have just set up your Chec account, installed the Commerce.js SDK and created your first Commerce instance! You now have access to the `Commerce` object in your application to build out a truly unique frontend presentation layer!
 
 ---
 
