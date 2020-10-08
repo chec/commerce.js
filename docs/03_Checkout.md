@@ -356,7 +356,7 @@ The **Services** endpoint are additional checkout helpers service methods.
 
 ## List all countries
 
-The `localeListCountries()` method uses `GET v1/services/locale/countries`to return a list of all countries registered
+The `localeListCountries()` method uses `GET v1/services/locale/countries` to return a list of all countries registered
 in the platform. See [List available shipping countries](#list-available-shipping-countries) for an equivalent list of
 countries that can be shipped to your account.
 
@@ -385,7 +385,7 @@ commerce.services.localeListCountries().then((response) => console.log(response)
 
 The `localeListSubdivisions()` method uses `GET v1/services/locale/{country_code}/subdivisions` to return a list of all
 subdivisions (states, provinces, or regions) for that country, given a valid country code is provided. See [List
-available shipping subdivisions for country](#list-available-shipping-subdivisions)" for an equivalent list of
+available shipping subdivisions for country](#list-available-shipping-subdivisions) for an equivalent list of
 subdivisions that can be shipped to for your account.
 
 Example request using Commerce.js:

@@ -110,7 +110,7 @@ checkpoints during the checkout process:
 * Set a new tax zone for the checkout when the customer changes their shipping address
 
 All helper endpoints on the [Checkout](/docs/api/?shell#checkout) resource update the live object. E.g. If you select a
-variant that is available or a quantity that is available, the live object will be adjusted to reflect this. Most
+variant that is available, or a quantity that is available, the live object will be adjusted to reflect this. Most
 responses contain a [live object](#the-live-object) which gives you the live running totals and other information
 relevant to the current checkout session so you can update displayed totals (and more) straight away.
 
@@ -152,7 +152,7 @@ not submitting an address for the customer, you can supply the tax region with t
 | -------------------- | ----------- | ----------- |
 | `tax[ip_address]`  | required | If only using an IP address to set the tax location. Chec will set the tax location to the estimated location of this IP address. |
 | `tax[country]`  | required | If *not* using an IP address to set the tax location. If provided, this must be a valid ISO 3166-1 alpha-2 country code (e.g. `GB` for the United Kingdom). |
-| `tax[region]`  | required | If in Canada or the USA. Must be a valid short code for the region, e.g. `CA` for California, or `QB` for Quebec. |
+| `tax[region]`  | required | If in Canada or the USA. Must be a valid shortcode for the region, e.g. `CA` for California, or `QB` for Quebec. |
 | `tax[postal_zip_code]`  | required | If "Auto US Sales Tax" is enabled for your account. |
 
 ### EU VAT MOSS
