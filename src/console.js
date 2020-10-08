@@ -18,7 +18,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
     case 'error':
       color = 'rgba(244, 67, 54, 1)';
       if (c.error.type === 'validation') {
-        emoji = '🚫 Validation/Missing Fields';
+        emoji = '🚫 Validation/missing fields';
         a = '';
       } else {
         emoji = '❌ HTTP ERROR ';
@@ -95,7 +95,7 @@ const debuggerOnNotice = () => {
     'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #488f5a; line-height:28px; font-size: 14px',
   );
   console.log(
-    '%c💬   Need some help? Join our Slack channel - https://chec-commercejs-community.herokuapp.com \r\n',
+    '%c💬   Need some help? Join our Slack channel - http://slack.commercejs.com \r\n',
     'text-align:center; display:block; font-family: Open Sans, Helvetica, Sans-serif; color: #515D6D; line-height:20px; font-size: 12px',
   );
 };
