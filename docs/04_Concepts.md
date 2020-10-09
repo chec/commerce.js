@@ -51,7 +51,7 @@ Fulfillment    |
 #### Client side
 
 The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The
-Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing
+Commerce.js SDK includes all client side endpoints, so you can use them in your client-facing
 projects. An example would be to list your products from the `product` endpoint.
 
 ### Secret keys
@@ -77,8 +77,7 @@ sensitive request would be to make a call to [refund an order](/docs/api/?shell#
 </div>
 
 When you register for a Chec account, you'll be assigned two sets of these keys: live and sandbox. We highly recommend
-using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can easily
-be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
+using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
 
 ---
 

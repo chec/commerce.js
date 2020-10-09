@@ -55,7 +55,7 @@ Another option would be to install the SDK via our CDN, you will need to include
     <p>We recommend installing Commerce.js as a package to have access to all the methods included.</p>
 </div>
 
-We're almost ready to go! We just need to create a new Commerce instance and give it our [public key](/docs/sdk/concepts#scope) (you can get your API keys from [Chec Dashboard > Settings > Developer](https://dashboard.chec.io/settings/developer)).
+We're almost ready to go! We need to create a new Commerce instance and give it our [public key](/docs/sdk/concepts#scope) (you can get your API keys from [Chec Dashboard > Settings > Developer](https://dashboard.chec.io/settings/developer)).
 
 <div class="highlight highlight--info">
     <span>Tip</span>
@@ -75,7 +75,7 @@ const commerce = new Commerce('{public_api_key}');
     <p>We've built in a console debugger into the Commerce.js SDK to help with debugging during development. To enable the debugger you can include the second argument <code>true</code> when you create your Commerce instance like so: <code>const commerce = new Commerce('{public_api_key}', true);</code>. Note that a test API key has to be provided as the first argument for the console to show messages - it won't work with a live key.</p>
 </div>
 
-Awesome, you have just set up your Chec account, installed the Commerce.js SDK and created your first Commerce instance! You now have access to the `Commerce` object in your application to build out a truly unique frontend presentation layer!
+Awesome, you have set up your Chec account, installed the Commerce.js SDK and created your first Commerce instance! You now have access to the `Commerce` object in your application to build out a truly unique frontend presentation layer!
 
 ---
 
