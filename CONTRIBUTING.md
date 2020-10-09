@@ -1,6 +1,6 @@
 # Contributing to Commerce.js SDK Documentation
 
-At Chec/Commerce.js, we believe open source developer tools documentation is a collaborative effort to be continuously improved on. We welcome and encourage all contributions to the Commerce.js documentation from the community, be it small or big. Contributing to the documentation source will require basic knowledge of Markdown formatting and styling.
+At Chec/Commerce.js, we believe open-source developer tools documentation is a collaborative effort to be continuously improved on. We welcome and encourage all contributions to the Commerce.js documentation from the community, be it small or big. Contributing to the documentation source will require basic knowledge of Markdown formatting and styling.
 
 The SDK documentation module source code resides in `commerce.js/docs`. The docs source is fetched and added to a root directory in the [Commerce.js website](https://commercejs.com/).
 
@@ -17,10 +17,10 @@ The SDK documentation module source code resides in `commerce.js/docs`. The docs
   - [Contributing to Chec open source](#contributing-to-other-chec-open-source-projects)
 
 ## Edit online
-The simplest way to edit the documentation is to do it on GitHub's interface. All documentation source is located in `commerce.js/docs`, so all you'll need to do is locate the appropriate `.md` file in [chec/commerce.js/docs](https://github.com/chec/commerce.js/tree/master/docs) and edit.
+The simplest way to edit the documentation is to do it on GitHub's interface. All documentation source is located in `commerce.js/docs`, so all you'll need to do is find the appropriate `.md` file in [chec/commerce.js/docs](https://github.com/chec/commerce.js/tree/master/docs) and edit.
 
 1. Navigate to the file in GitHub in [chec/commerce.js/docs](https://github.com/chec/commerce.js/tree/master/docs)
-2. Click the **pencil** icon in the top right corner and it will switch the document to an edit mode
+2. Click the **pencil** icon in the top right corner, and it will switch the document to an edit mode
 3. Type a [commit message](#commit-messages-and-branch-name) and any necessary description after making your edit
 4. Select **Create a new branch for this commit and start a pull request**
 5. Give your branch name a prefix and a description. See [here](#commit-messages-and-branch-name).
@@ -31,15 +31,15 @@ The simplest way to edit the documentation is to do it on GitHub's interface. Al
 ## Edit locally
 For more complex changes, you'll want to fork the repo and edit locally:
 
-1. Fork `chec/commerce.js`
+1. Fork `chec/commerce.js.`
 2. `git clone` the fork to your local machine
-3. Make edits in your favorite code editor on a new branch
+3. Make edits in your favourite code editor on a new branch
 4. Commit and push changes to your remote repo
 5. Create a [pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork) to `chec/commerce.js/master`
 
 ## Commit messages and branch name
 
-- Commit messages should be in the imperative tense ie. *Edit the intro section of cart* vs. *Edited the intro section of cart*
+- Commit messages should be in the imperative tense, i.e. *Edit the intro section of cart* vs *Edited the intro section of cart*
 - Your branch should be prefixed with either **Feature** for new documentation content or **Bugfix** for typos and other small changes. Ie. Feature/new-cart-content
 
 ## Contributing to other Chec open source projects
