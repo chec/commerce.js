@@ -26,7 +26,7 @@ If you would like to make contributions to the Commerce.js documentation source,
 
 ## Upgrading
 
-The major change in Commerce.js v2 is that most methods now return a
+The significant change in Commerce.js v2 is that most methods now return a
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled
 when the HTTP request is completed. Instead of providing callbacks to the methods in this module, you will have to use
 promise syntax instead.
@@ -57,10 +57,10 @@ to the `src` files.
 ### Running the tests
 
 You can run the unit tests for this library from your command line using `npm run test`, or `npm run test:watch`
-to watch for changed and re-run the tests automatically.
+To watch for changed and re-run the tests automatically.
 
 ### Code style
 
-We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
+We use the Airbnb JavaScript style guide and Prettier as our linting tool. To lint, your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
 
