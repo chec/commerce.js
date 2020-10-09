@@ -42,7 +42,7 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "prettier": "^1.18.2",
-    "rollup": "^1.23.1",
+    "rollup": "^2.29.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-babel-minify": "^10.0.0",
     "rollup-plugin-commonjs": "^10.1.0",
