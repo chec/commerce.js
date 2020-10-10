@@ -2,7 +2,7 @@ import babel from "rollup-plugin-babel";
 import rollupNodeResolve from 'rollup-plugin-node-resolve';
 import rollupJson from 'rollup-plugin-json';
 import rollupCommonJs from 'rollup-plugin-commonjs';
-import rollupMinify from 'rollup-plugin-babel-minify';
+import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
@@ -17,9 +17,14 @@ export default [
         runtimeHelpers: true,
         plugins: ["@babel/plugin-transform-runtime"]
       }),
-      rollupMinify({
-        comments: false,
-      }),
+      terser({
+        format: {
+          comments: false
+        },
+        compress: {
+          module: true
+        }
+      })
     ]
   },
   {
@@ -36,13 +41,20 @@ export default [
       rollupNodeResolve({ browser: true }),
       rollupJson(),
       babel({
-        presets: [['minify', {
-          builtIns: false
-        }]],
-        comments: false,
         runtimeHelpers: true,
         plugins: ["@babel/plugin-transform-runtime"]
       }),
+      terser({
+        mangle: {
+          properties: {
+            builtins: false
+          }
+        },
+        format: {
+          comments: false
+        },
+        compress: false
+      })
     ]
   }
 ];
