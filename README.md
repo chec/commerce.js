@@ -1,9 +1,8 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" left="100px"/>
     <br>
-    <h3 align="center">
+
     An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API.
-  </h3>
 </p>
 <p align="center">
   <a href="https://circleci.com/gh/chec/commerce.js/tree/master">
