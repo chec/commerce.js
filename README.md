@@ -1,15 +1,31 @@
-# commerce.js
+<p align="center">
+  <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" left="100px"/>
+    <br>
+    <h3 align="center">
+    An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API.
+  </h3>
+</p>
+<p align="center">
+  <a href="https://circleci.com/gh/chec/commerce.js/tree/master">
+    <img src="https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield" alt="CircleCI" />
+  </a>
+  <a href="https://codecov.io/gh/chec/commerce.js">
+    <img src="https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg" alt="Codecov" />
+  </a>
+  <a href="https://npmjs.org/package/@chec/commerce.js">
+    <img src="https://img.shields.io/npm/v/@chec/commerce.js.svg" alt="Version" />
+  </a>
+  <a href="https://npmjs.org/package/@chec/commerce.js">
+    <img src="https://img.shields.io/npm/dw/@chec/commerce.js.svg" alt="Downloads/week" />
+  </a>
+    <a href="https://github.com/chec/commerce.js/blob/master/package.json">
+    <img src="https://img.shields.io/npm/l/@chec/commerce.js.svg" alt="License" />
+  </a>
+  <br>
+  <a href="https://commercejs.com">commercejs.com</a> | <a href="http://slack.commercejs.com">Slack</a>
+</p>
 
-[![CircleCI](https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield)](https://circleci.com/gh/chec/commerce.js/tree/master)
-[![Codecov](https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg)](https://codecov.io/gh/chec/commerce.js)
-[![Version](https://img.shields.io/npm/v/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
-[![Downloads/week](https://img.shields.io/npm/dw/@chec/commerce.js.svg)](https://npmjs.org/package/@chec/commerce.js)
-[![License](https://img.shields.io/npm/l/@chec/commerce.js.svg)](https://github.com/chec/commerce.js/blob/master/package.json)
-
-An easy to use JavaScript SDK for building and managing carts, checkouts and receipts. Build custom eCommerce experiences to sell physical and digital products from the Chec API.
-
-https://commercejs.com
-
+-------------------
 ## Installation
 
 ### With NPM
