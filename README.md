@@ -57,7 +57,7 @@ to the `src` files.
 ### Running the tests
 
 You can run the unit tests for this library from your command line using `npm run test`, or `npm run test:watch`
-to watch for changed and re-run the tests automatically.
+To watch for changed and re-run the tests automatically.
 
 ### Code style
 
