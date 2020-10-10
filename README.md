@@ -26,7 +26,7 @@ Build custom eCommerce experiences to sell physical and digital products from th
   <a href="https://commercejs.com">commercejs.com</a> | <a href="http://slack.commercejs.com">Slack</a>
 </p>
 
--------------------
+
 ## Installation
 
 ### With NPM
