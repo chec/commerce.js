@@ -23,7 +23,7 @@ Build custom eCommerce experiences to sell physical and digital products from th
     <img src="https://img.shields.io/npm/l/@chec/commerce.js.svg" alt="License" />
   </a>
   <br>
-  <a href="https://commercejs.com">commercejs.com</a> | <a href="http://slack.commercejs.com">Slack</a>
+  <a href="https://commercejs.com">commercejs.com</a> | <a href="https://twitter.com/commercejs">@commercejs</a> | <a href="http://slack.commercejs.com">Slack</a>
 </p>
 
 
@@ -65,6 +65,11 @@ The `cart.add()` method now separates its arguments:
 ```
 
 ## Contributing
+Check out the [contributing guide](CONTRIBUTING.md)
+
+### Get Help
+
+Commerce.js is a project by [many contributors](https://github.com/chec/commerce.js/graphs/contributors). Reach us on [slack](https://github.com/chec/commerce.js/graphs/contributors) and [twitter](https://twitter.com/commercejs)
 
 ### Compilation
 
