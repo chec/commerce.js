@@ -101,6 +101,30 @@ class Cart {
     });
   }
 
+  /**
+   * Check whether the no. of items in cart are available
+   *
+   * @return {Promise}
+   */
+  checkQuantity() {
+    return new Promise(async (resolve, reject) => {
+      const items = this.contents();
+
+      for (item of items) {
+        try {
+          const product = await this.commerce.request(`products/${id}`);
+
+          item.available = item.quantity <= product.quantity;
+          item.max_quantity = product.quantity;
+        } catch (err) {
+          reject(err);
+        }
+      }
+
+      resolve(items);
+    });
+  }
+
   remove(lineId) {
     return this.request(`items/${lineId}`, 'delete');
   }
