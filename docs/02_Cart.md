@@ -47,7 +47,7 @@ curl -X GET \
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>Cart has a lifetime 30 days once they've been created. After that time they will automatically be cleared.</p>
+    <p>Cart has a lifetime of 30 days once they've been created. After that time they will automatically be cleared.</p>
 </div>
 
 ---
@@ -80,7 +80,7 @@ commerce.cart.refresh().then((cart) => console.log(cart));
 ## Add to cart
 
 The `add()` method uses `POST v1/carts/{cart_id}` to add a product to cart. You will need the ID of the product you want
-to add e.g. `prod_05389st98t49h`.
+to add, e.g. `prod_05389st98t49h`.
 
 Example request using Commerce.js:
 
