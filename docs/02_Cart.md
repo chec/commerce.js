@@ -13,7 +13,7 @@ This feature comes equipped with multiple intuitive endpoints to help develop a 
 
 ## Retrieve cart
 
-In order to start adding products to your cart, you'll need to first create a cart. When you first call the method
+To start adding products to your cart, you'll need first to create a cart. When you first call the method
 `retrieve()` using `GET v1/carts`, it will automatically create a cart for you if a cart does not exist yet or a current
 cart will be retrieved if the `cart_id` is passed in as an argument. Commerce.js tracks the current cart ID using a
 cookie.
@@ -279,7 +279,7 @@ curl -X DELETE \
 
 | Method | Description |
 | -------------------- | ----------- |
-| `empty()` | Clear the cart contents but cart is not deleted |
+| `empty()` | Clear the cart contents, but cart is not deleted |
 
 <div class="highlight highlight--note">
     <span>Note</span>
@@ -291,3 +291,5 @@ curl -X DELETE \
 Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart).
 
 ---
+
+

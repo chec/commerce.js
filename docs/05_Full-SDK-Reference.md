@@ -6,8 +6,8 @@ category: Full SDK reference
 ---
 
 **Commerce.js** is a JavaScript SDK built on top of the **Chec Platform** to allow for easy interfacing with the **Chec
-API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that work on any
-modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce logic
+API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that works on any
+modern domain. The SDK comes packed with helper functions that are essential to managing complexity in the commerce logic
 of an application. Here you will find the full Commerce.js SDK reference. All features are accessible from your Commerce
 object instance.
 
@@ -24,7 +24,7 @@ object instance.
 
 ## Categories
 
-`categories`: Manage product categories in order to group your products.
+`categories`: Manage product categories to group your products.
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -44,7 +44,7 @@ object instance.
 | `contents()` | Get the contents of the cart |
 | `update(lineItemId, data)` | Update an existing item in the cart |
 | `remove(lineItemId)` | Remove a line item from the cart |
-| `empty()` | Clear the cart contents but cart is not deleted |
+| `empty()` | Clear the cart contents, but cart is not deleted |
 | `delete()` | Delete the entire cart |
 
 ## Checkout
@@ -91,5 +91,6 @@ object instance.
 | -------------------- | ----------- |
 | `about()`       | Gets information about the merchant |
 
-
 ---
+
+

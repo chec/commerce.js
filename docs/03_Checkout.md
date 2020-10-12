@@ -8,8 +8,8 @@ category: Checkout
 The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing
 flow. A checkout captures data sent from the cart along with the item information, line item IDs, any shipping or
 billing information as well as tax and shipping rates. The checkout resource is a verbose endpoint that comes with
-additional helpers eg. [Checkout helpers](#checkout-helpers) and [Services](#services) to fully manage your customer's
-purchasing experience. See [here](/docs/sdk/concepts#checkout-tokens) for more high-level concepts on the Checkout
+additional helpers, e.g. [Checkout helpers](#checkout-helpers) and [Services](#services) to fully manage your customer's
+purchasing experience. See [here](/docs/SDK/concepts#checkout-tokens) for more high-level concepts on the Checkout
 resource.
 
 ---
@@ -46,7 +46,6 @@ checkout page.
     <span>Important</span>
     <p>Checkout tokens can only be used once and expire after 7 days.</p>
 </div>
-
 
 <div class="highlight highlight--note">
     <span>Note</span>
@@ -117,11 +116,11 @@ commerce.checkout.capture('token', {
 
 In response to a successful checkout capture, you'll get all the information for the order you need to show a
 confirmation page to your customer, including the `id` (the order ID), the `customer_reference` (customer's order
-reference), and much more. Note that you may want to store the response in local state since fetching the data again
+reference), and much more. Note that you may want to store the response in the local state since fetching the data again
 would require a secret key.
 
 Key-value multi-dimensional arrays/objects/hashes are used to immediately associate values with their parent(s) ID when
-submitting data. For example with line items, the key would be the `line_item_id` and the related values would be nested
+submitting data. For example, with line items, the key would be the `line_item_id` and the corresponding values would be nested
 under that key.
 
 * Line item's quantity: `line_items[{line_item_id}][quantity]`
@@ -168,15 +167,15 @@ commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(to
 
 # Checkout helpers
 
-[Checkout helper](/docs/sdk/concepts#checkout-helpers) functions are provided to help create custom checkout flows and
+[Checkout helper](/docs/SDK/concepts#checkout-helpers) functions are provided to help create custom checkout flows and
 handle all common commerce logic that would otherwise be complex. Every time a checkout helper endpoint is called, an
-object called the [live object](/docs/sdk/concepts#the-live-object) will be updated and the returned data is then
+object called the [live object](/docs/SDK/concepts#the-live-object) will be updated. The returned data is then
 typically used to update the checkout UI. All checkout helpers that affect price (e.g. check quantity, check variant,
-check discount, etc) will return the live object.
+check discount, etc.) will return the live object.
 
 ## Get the live object
 
-The live object is a living object which updates to show the live tax rates, prices, and totals for a checkout token.
+A live object is a living object which updates to show the live tax rates, prices, and totals for a checkout token.
 The `getLive()` method uses `GET v1/checkouts/{checkout_token_id}/live` to return the current checkout live object.
 
 Example request using Commerce.js:
@@ -203,9 +202,9 @@ Commerce.checkout.getLive('chkt_L5z3kmQpdpkGlA').then((response) => console.log(
 
 ## Check "Pay What You Want"
 
-If you have enabled "Pay What You Want" pricing, your customers are able to choose the amount they pay. The
-`checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate and saves
-the desired "Pay What You Want" amount for the provided checkout token, if enabled. If the amount is too low, an invalid
+If you have enabled "Pay What You Want" pricing, your customers can choose the amount they pay. The
+`checkPayWhatYouWant()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate. It saves
+the desired "Pay What You Want" amount for the provided checkout token if enabled. If the amount is too low, an invalid
 response will be returned with the minimum amount required.
 
 Example request using Commerce.js:
@@ -290,7 +289,6 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
     <p>Refer to the full response for the "Check Shipping Method <a href="/docs/api/?shell#check-shipping-method">here</a>.</p>
 </div>
 
-
 ---
 
 ## Get shipping methods
@@ -352,7 +350,7 @@ Refer to the full list of all the available checkout methods [here](/docs/sdk/fu
 
 # Services
 
-The **Services** endpoint are additional checkout helpers service methods.
+The **Services** endpoint is additional checkout helpers service methods.
 
 ## List all countries
 
@@ -459,3 +457,5 @@ Commerce.services.localeListShippingSubdivisions('chkt_L5z3kmQpdpkGlA', 'US').th
 Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services).
 
 ---
+
+

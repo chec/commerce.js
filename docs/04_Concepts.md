@@ -18,8 +18,8 @@ can manage your API keys from your dashboard under the developer section.
 
 While using Commerce.js, the Chec API is limited to [public key scoped](#public-keys) requests. We developed Commerce.js
 to work alongside future server-side SDKs. Commerce.js utilizes your public API key which is required to retrieve
-non-sensitive data such from [products](/docs/sdk/products), [cart](/docs/sdk/cart), and [checkout](/docs/sdk/checkout)
-endpoints. It can also be used to capture orders although you will be unable to access the order resource for security
+non-sensitive data such from [products](/docs/SDK/products), [cart](/docs/SDK/cart), and [checkout](/docs/SDK/checkout)
+endpoints. It can also be used to capture orders. However, you will be unable to access the order resource for security
 reasons.
 
 <div class="highlight highlight--warn">
@@ -31,13 +31,13 @@ reasons.
 
 ## Scope
 
-Scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the
+A scope defines the varying levels of access a client has to a set of Chec API resources or operations performed on the
 resources. Scope provides a way to constrain and consider the granular access a client might need. We define our scope
 using public and secret keys.
 
 ### Public keys
 
-To be used with Commerce.js's JavaScript SDK & any client-side code. Public APIs are limited by scope for this reason.
+To be used with Commerce.js's JavaScript SDK & any client-side code. The scope limits public APIs for this reason.
 Authenticating with the public key, you will have read and write access to the below resources.
 
 | Read | Write |
@@ -51,12 +51,12 @@ Fulfillment    |
 #### Client side
 
 The public key is to be used with requests that don't require any sensitive actions or data to be retrieved. The
-Commerce.js SDK includes all client side endpoints, so you can use them quickly and easily in your client-facing
+Commerce.js SDK includes all client-side endpoints so that you can use them quickly and easily in your client-facing
 projects. An example would be to list your products from the `product` endpoint.
 
 ### Secret keys
 
-To be used with server side code. These API keys have the power to access sensitive data such as receipts and order
+To be used with server-side code. These API keys have the power to access sensitive data such as receipts and order
 data. Authenticating with the secret key will give you read and write access to the below resources.
 
 | Read & write |  |
@@ -78,18 +78,18 @@ sensitive request would be to make a call to [refund an order](/docs/api/?shell#
 
 When you register for a Chec account, you'll be assigned two sets of these keys: live and sandbox. We highly recommend
 using your sandbox key until you're ready to deploy your new project live. Orders created with sandbox keys can easily
-be cleared from the Chec Dashboard, and will automatically use the "Test Gateway" for payment processing.
+be cleared from the Chec Dashboard. They will automatically use the "Test Gateway" for payment processing.
 
 ---
 
 ## Checkout tokens
 
-Checkout tokens need to be generated before you are able to **capture an order**. A [checkout
+Checkout tokens need to be generated before you can **capture an order**. A [checkout
 token](/docs/api/?javascript--cjs#generate-token) contains everything you would need to implement a checkout process and
-a unique purchasing experience for your users. For example, the returned object will contain properties such as shipping
+a unique purchasing experience for your users. For example, the returned object will have properties such as shipping
 options, discount codes available, or other fields that are needed to be collected.
 
-To generate a checkout token, all you need to provide is the permalink or ID of the product, or the cart ID you'd like
+To generate a checkout token, all you need to provide is the permalink or ID of the product or the cart ID you'd like
 to generate a checkout for. See [here](/docs/api/#generate-token) for the required parameters.
 
 ---
@@ -104,13 +104,13 @@ checkpoints during the checkout process:
 * Check if an entered *"Pay What You Want"* amount or discount code is valid
 * Retrieve running totals for a checkout (i.e. subtotals, shipping totals, and grand totals) - [the live
   object](#the-live-object)
-* Generate client side validation rules
+* Generate client-side validation rules
 * Get a full list of states/provinces for a country to populate a select field
 * Get the buyer's location from an IP address
 * Set a new tax zone for the checkout when the customer changes their shipping address
 
 All helper endpoints on the [Checkout](/docs/api/?shell#checkout) resource update the live object. E.g. If you select a
-variant that is available, or a quantity that is available, the live object will be adjusted to reflect this. Most
+variant that is available, or an available quantity, the live object will be adjusted to reflect this. Most
 responses contain a [live object](#the-live-object) which gives you the live running totals and other information
 relevant to the current checkout session so you can update displayed totals (and more) straight away.
 
@@ -131,15 +131,15 @@ relevant to the current checkout session so you can update displayed totals (and
 The [live object](/docs/api/?shell#get-the-live-object) is a living object which adjusts to show the live tax rates,
 prices, and totals for a checkout token. Every time a checkout helper endpoint is called, this object will be updated.
 The returned data can be used to display information back to the customer on the checkout. All checkout helpers that
-affect price (e.g. check quantity, check variant, check discount, etc) will return the live object in its payload.
+affect price (e.g. check quantity, check variant, check discount, etc.) will return the live object in its payload.
 
 We create the live object to help you (and us!) display up-to-date totals, tax prices, and other dynamic variables which
-change during the checkout process and need to displayed back to the customer. You should use the data in the live
+change during the checkout process and need to display back to the customer. You should use the data in the live
 object to update the displayed totals on your checkout pages when the customer selects a new variant, enters a discount,
 or selects a different shipping option.
 
-At Chec we do this on our own checkouts by feeding the live object returned from each helper function into a JavaScript
-function which then associates the data with the correct element.
+At Chec we do this on our checkouts by feeding the live object returned from each helper function into a JavaScript
+function, which then associates the data with the correct element.
 
 ---
 
@@ -169,7 +169,7 @@ the full API reference), and use this value to set `tax[ip_address]`.
 
 ## Multiple price formats
 
-Every price attribute (subtotals, pay what you want minimums, tax totals, etc) returned from Chec will be an array with
+Every price attribute (subtotals, pay what you want minimums, tax totals, etc.) returned from Chec will be an array with
 four formats:
 
 - `raw` - No formatting *e.g. 49 or 1234.56*
@@ -230,9 +230,11 @@ Example of a `conditionals` array:
 }
 ```
 
-We created this `conditionals` property to hopefully provide more legibility and maintainability of your code. By
+We created this `conditionals` property to provide more legibility and maintainability of your code hopefully. By
 nesting variables under their *"verb key"* your code reads better. E.g. `checkout.conditionals.is_cart_free` vs
 `checkout.is.cart_free`. This is particularly nicer to work with for developers who are primarily working with
 JavaScript.
 
 ---
+
+

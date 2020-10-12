@@ -51,7 +51,7 @@ The `cart.add()` method now separates its arguments:
 
 ### Compilation
 
-The lib files are automatically compiled by our continuous integration pipeline. You only need to commit changes
+Our continuous integration pipeline automatically compiles the lib files. You only need to commit changes
 to the `src` files.
 
 ### Running the tests
@@ -63,4 +63,5 @@ to watch for changed and re-run the tests automatically.
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
+
 
