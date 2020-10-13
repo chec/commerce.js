@@ -103,14 +103,12 @@ class Cart {
 
   /**
    * Check whether the no. of items in cart are available
-   * @param {Object|number} productId
+   * @param {number} id
    * @param {number} quantity
    * @returns {Promise}
    */
 
-  checkQuantity(productId, quantity) {
-    const id = typeof productId === 'object' ? productId.id : productId;
-
+  checkQuantity(id) {
     return this.commerce.request(`products/${id}`).then(response => ({
       is_available: quantity <= response.quantity,
       quantity: response.quantity,
