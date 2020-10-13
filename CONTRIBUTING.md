@@ -16,6 +16,12 @@ The SDK documentation module source code resides in `commerce.js/docs`. The docs
   - [Edit locally](#edit-locally)
   - [Contributing to Chec open source](#contributing-to-other-chec-open-source-projects)
 
+## Get Help
+Do reach out on Slack or Twitter and we are happy to help.
+
+1. Drop by the [Slack channel](http://slack.commercejs.com).
+2. Say hi on [Twitter](https://twitter.com/commercejs).
+
 ## Edit online
 The simplest way to edit the documentation is to do it on GitHub's interface. All documentation source is located in `commerce.js/docs`, so all you'll need to do is locate the appropriate `.md` file in [chec/commerce.js/docs](https://github.com/chec/commerce.js/tree/master/docs) and edit.
 
@@ -43,4 +49,4 @@ For more complex changes, you'll want to fork the repo and edit locally:
 - Your branch should be prefixed with either **Feature** for new documentation content or **Bugfix** for typos and other small changes. Ie. Feature/new-cart-content
 
 ## Contributing to other Chec open source projects
-To contribute to other Chec open source projects, see a full list [here]().
+To contribute to other Chec open source projects, see a full list [here](https://github.com/chec).
