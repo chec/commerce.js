@@ -103,26 +103,18 @@ class Cart {
 
   /**
    * Check whether the no. of items in cart are available
-   *
-   * @return {Promise}
+   * @param {Object|number} productId
+   * @param {number} quantity
+   * @returns {Promise}
    */
-  checkQuantity() {
-    return new Promise(async (resolve, reject) => {
-      const items = this.contents();
 
-      for (item of items) {
-        try {
-          const product = await this.commerce.request(`products/${id}`);
+  checkQuantity(productId, quantity) {
+    const id = typeof productId === 'object' ? productId.id : productId;
 
-          item.available = item.quantity <= product.quantity;
-          item.max_quantity = product.quantity;
-        } catch (err) {
-          reject(err);
-        }
-      }
-
-      resolve(items);
-    });
+    return this.commerce.request(`products/${id}`).then(response => ({
+      is_available: quantity <= response.quantity,
+      quantity: response.quantity,
+    }));
   }
 
   remove(lineId) {
