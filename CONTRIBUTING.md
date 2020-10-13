@@ -9,7 +9,6 @@ The SDK documentation module source code resides in `commerce.js/docs`. The docs
 - Errors, typos, or any other improvements to current documentation
 - A full-page new documentation to highlight a feature or resource
 
-
 #### Here are some basic guidelines to start making contributions to the SDK documentation:
 
   - [Edit online](#edit-online)
@@ -20,8 +19,8 @@ The SDK documentation module source code resides in `commerce.js/docs`. The docs
 ## Get Help
 Do reach out on Slack or Twitter and we are happy to help.
 
-1. Drop by the [slack channel](http://slack.commercejs.com).
-2. Say hi on [twitter](https://twitter.com/commercejs).
+1. Drop by the [Slack channel](http://slack.commercejs.com).
+2. Say hi on [Twitter](https://twitter.com/commercejs).
 
 ## Edit online
 The simplest way to edit the documentation is to do it on GitHub's interface. All documentation source is located in `commerce.js/docs`, so all you'll need to do is locate the appropriate `.md` file in [chec/commerce.js/docs](https://github.com/chec/commerce.js/tree/master/docs) and edit.

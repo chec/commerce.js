@@ -69,7 +69,7 @@ Check out the [contributing guide](CONTRIBUTING.md)
 
 ### Get Help
 
-Commerce.js is a project by [many contributors](https://github.com/chec/commerce.js/graphs/contributors). Reach us on [slack](http://slack.commercejs.com) and [twitter](https://twitter.com/commercejs)
+Commerce.js is a project by [many contributors](https://github.com/chec/commerce.js/graphs/contributors). Reach us on [Slack](http://slack.commercejs.com) and [Twitter](https://twitter.com/commercejs).
 
 ### Compilation
 
@@ -85,4 +85,3 @@ to watch for changed and re-run the tests automatically.
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
-
