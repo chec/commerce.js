@@ -108,7 +108,7 @@ class Cart {
    * @returns {Promise}
    */
 
-  checkQuantity(id) {
+  checkQuantity(id, quantity) {
     return this.commerce.request(`products/${id}`).then(response => ({
       is_available: quantity <= response.quantity,
       quantity: response.quantity,
