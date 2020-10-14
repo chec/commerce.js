@@ -19,7 +19,7 @@ object instance.
 
 | Method | Description |
 | -------------------- | ----------- |
-| `list(params)`       | List products |
+| `list(params)`       | List products. You may also provide `{ category_slug: '...' }`, or `{ category_id: '...' }` to list products by category. |
 | `retrieve(id, data = {})`  | Get a specific product |
 
 ## Categories
