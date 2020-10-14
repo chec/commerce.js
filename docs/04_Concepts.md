@@ -45,8 +45,11 @@ Authenticating with the public key, you will have read and write access to the b
 | Products       | Carts  |
 | Carts               | Checkout   |
 | Checkout            | Checkout helpers  |
-| Checkout helpers    | | Spaces    | | Settings    | | Categories    | |
-Fulfillment    |
+| Checkout helpers    |
+| Spaces    |
+| Settings    |
+| Categories    |
+| Fulfillment    |
 
 #### Client side
 
@@ -61,8 +64,14 @@ data. Authenticating with the secret key will give you read and write access to 
 
 | Read & write |  |
 | -------------------- | ----------- |
-| Products       | | Carts               | | Checkout            | | Checkout
-helpers    | | Spaces    | | Settings    | | Categories    | | Fulfillment    |
+| Products       |
+| Carts               |
+| Checkout            |
+| Checkout helpers    |
+| Spaces    |
+| Settings    |
+| Categories    |
+| Fulfillment    |
 
 #### Server side
 
