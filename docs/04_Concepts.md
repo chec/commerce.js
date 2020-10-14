@@ -45,11 +45,11 @@ Authenticating with the public key, you will have read and write access to the b
 | Products       | Carts  |
 | Carts               | Checkout   |
 | Checkout            | Checkout helpers  |
-| Checkout helpers    |
-| Spaces    |
-| Settings    |
-| Categories    |
-| Fulfillment    |
+| Checkout helpers |  |
+| Spaces |  |
+| Settings |  |
+| Categories |  |
+| Fulfillment |  |
 
 #### Client side
 
