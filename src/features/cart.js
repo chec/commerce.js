@@ -103,7 +103,7 @@ class Cart {
 
   /**
    * Check whether the no. of items in cart are available
-   * @param {number} id
+   * @param {string} id
    * @param {number} quantity
    * @returns {Promise}
    */
