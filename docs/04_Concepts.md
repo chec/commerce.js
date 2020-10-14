@@ -45,8 +45,11 @@ Authenticating with the public key, you will have read and write access to the b
 | Products       | Carts  |
 | Carts               | Checkout   |
 | Checkout            | Checkout helpers  |
-| Checkout helpers    | | Spaces    | | Settings    | | Categories    | |
-Fulfillment    |
+| Checkout helpers |  |
+| Spaces |  |
+| Settings |  |
+| Categories |  |
+| Fulfillment |  |
 
 #### Client side
 
@@ -59,10 +62,16 @@ projects. An example would be to list your products from the `product` endpoint.
 To be used with server side code. These API keys have the power to access sensitive data such as receipts and order
 data. Authenticating with the secret key will give you read and write access to the below resources.
 
-| Read & write |  |
-| -------------------- | ----------- |
-| Products       | | Carts               | | Checkout            | | Checkout
-helpers    | | Spaces    | | Settings    | | Categories    | | Fulfillment    |
+| Read & write |
+| -------------|
+| Products |
+| Carts |
+| Checkout
+| Checkout helpers |
+| Spaces |
+| Settings |
+| Categories |
+| Fulfillment |
 
 #### Server side
 
