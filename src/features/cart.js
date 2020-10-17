@@ -101,6 +101,18 @@ class Cart {
     });
   }
 
+  /**
+   * Check whether the specified quantity is in stock/available for the specified product ID.
+   *
+   * @param {string} productId
+   * @param {number} quantity
+   * @returns {Promise}
+   */
+  checkQuantity(productId, quantity) {
+    return this.commerce.request(`products/${id}`)
+      .then(response => (quantity <= response.quantity));
+  }
+
   remove(lineId) {
     return this.request(`items/${lineId}`, 'delete');
   }
