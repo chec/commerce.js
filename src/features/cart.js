@@ -102,17 +102,15 @@ class Cart {
   }
 
   /**
-   * Check whether the no. of items in cart are available
-   * @param {string} id
+   * Check whether the specified quantity is in stock/available for the specified product ID.
+   *
+   * @param {string} productId
    * @param {number} quantity
    * @returns {Promise}
    */
-
-  checkQuantity(id, quantity) {
-    return this.commerce.request(`products/${id}`).then(response => ({
-      is_available: quantity <= response.quantity,
-      quantity: response.quantity,
-    }));
+  checkQuantity(productId, quantity) {
+    return this.commerce.request(`products/${id}`)
+      .then(response => (quantity <= response.quantity));
   }
 
   remove(lineId) {
