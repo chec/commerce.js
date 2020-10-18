@@ -14,7 +14,7 @@ This documentation will walk you through how to:
 
 ## Account setup
 
-Before installing Commerce.js, you will first need to create a Chec account to get your API credentials.
+Before installing Commerce.js, you will first need to create a Chec account to get your API credentials:
 1. Sign up for a Chec account [here](https://dashboard.chec.io/signup).
 2. Navigate to the developer section under settings [here](https://dashboard.chec.io/settings/developer).
 3. Obtain your generated [public](/docs/sdk/concepts#public-keys) and [secret keys](/docs/sdk/concepts#secret-keys).
