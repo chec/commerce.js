@@ -19,7 +19,7 @@ layer for your customers and users.
 
 ## List products
 
-One of the first things you will want to do when using Commerce.js is list your products in order to make a product
+One of the first things you will want to do when using Commerce.js is to list your products in order to make a product
 catalog page. The `list()` method uses `GET v1/products` to return a list of product details for the current merchant.
 You may filter this by the optional query parameters listed in the [API](/docs/api/?shell#list-all-products).
 
