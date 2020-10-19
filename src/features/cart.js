@@ -109,8 +109,9 @@ class Cart {
    * @returns {Promise}
    */
   checkQuantity(productId, quantity) {
-    return this.commerce.request(`products/${id}`)
-      .then(response => (quantity <= response.quantity));
+    return this.commerce
+      .request(`products/${id}`)
+      .then(response => quantity <= response.quantity);
   }
 
   remove(lineId) {
