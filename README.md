@@ -33,6 +33,7 @@ Build custom eCommerce experiences to sell physical and digital products from th
 
 `npm install @chec/commerce.js`
 
+
 ## Documentation
 
 See the [documentation webpage](https://commercejs.com/docs).
@@ -65,7 +66,10 @@ The `cart.add()` method now separates its arguments:
 ```
 
 ## Contributing
-Check out the [contributing guide](CONTRIBUTING.md)
+All you need to know for contributing to this project is basic **JavaScript**.
+
+You can visit the issues page to find some relevant issues to contribute to or feel free to open a new issue for something that you think can be improved.
+Check out the [contributing guide](CONTRIBUTING.md) for more details.
 
 ### Get Help
 
