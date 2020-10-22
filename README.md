@@ -86,7 +86,7 @@ to watch for changed and re-run the tests automatically.
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
 
-### License
+## License
 ```groovy
 Copyright (c) 2020 Chec Platform LLC, All rights reserved.
 
