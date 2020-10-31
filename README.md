@@ -76,12 +76,12 @@ Commerce.js is a project by [many contributors](https://github.com/chec/commerce
 The lib files are automatically compiled by our continuous integration pipeline. You only need to commit changes
 to the `src` files.
 
-### Running the tests
+### Running the Tests
 
 You can run the unit tests for this library from your command line using `npm run test`, or `npm run test:watch`
 to watch for changed and re-run the tests automatically.
 
-### Code style
+### Code Style
 
 We use the Airbnb JavaScript style guide, and Prettier as our linting tool. To lint your code, use `npm run lint`
 or `npm run lint:fix` to automatically fix violations.
