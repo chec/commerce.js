@@ -171,7 +171,7 @@ describe('Commerce', () => {
     it('should return the full response promise when specified', async () => {
       const commerce = new Commerce('foo');
 
-      const response = await commerce.request('test', 'get', null, true);
+      const response = await commerce.request('test', 'get', null, {}, true);
 
       expect(response.status).toBe(200);
     });
