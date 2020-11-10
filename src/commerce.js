@@ -36,6 +36,7 @@ class Commerce {
     this.storage = new Storage(this);
     this.cart = new Features.Cart(this);
     this.checkout = new Features.Checkout(this);
+    this.customer = new Features.Customer(this);
     this.products = new Features.Products(this);
     this.services = new Features.Services(this);
     this.categories = new Features.Categories(this);
@@ -60,7 +61,13 @@ class Commerce {
     return this.consoleHelper('error', type, msg, innerResponse.data);
   }
 
-  request(endpoint, method = 'get', data = null, returnFullResponse = false) {
+  request(
+    endpoint,
+    method = 'get',
+    data = null,
+    extraHeaders = {},
+    returnFullResponse = false,
+  ) {
     const headers = {
       'X-Authorization': this.options.publicKey,
       'X-Chec-Agent': 'commerce.js/v2',
@@ -87,7 +94,7 @@ class Commerce {
       data: requestBody,
       timeout,
       ...axiosConfig,
-      headers: { ...headers, ...axiosConfig.headers },
+      headers: { ...headers, ...axiosConfig.headers, ...extraHeaders },
     });
 
     if (returnFullResponse) {
