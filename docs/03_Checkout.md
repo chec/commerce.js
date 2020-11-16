@@ -234,7 +234,7 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 ## Check discount code
 
-The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/pay_what_you_want` to validate a discount
+The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/discount?code=ABC123ZYX` to validate a discount
 code for the provided checkout token, and applies it to the order if it is valid.
 
 Example request using Commerce.js:
