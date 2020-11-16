@@ -28,17 +28,13 @@ class Customer {
    * Get access token
    *
    * @see https://commercejs.com/docs/api/#exchange-login-token-for-jwt
-   * @param {string} email The customer's email address
    * @param {string} token The login token from the email sent when using login()
    * @param {boolean} save Whether to save the user in session
    * @returns {Promise}
    */
-  getToken(email, token, save = true) {
+  getToken(token, save = true) {
     return this.commerce
-      .request('customers/exchange-token', 'post', {
-        email,
-        token,
-      })
+      .request('customers/exchange-token', 'post', { token })
       .then(result => {
         if (save && (result.customer_id || result.jwt)) {
           this.data = {
@@ -95,6 +91,15 @@ class Customer {
       {},
       token,
     );
+  }
+
+  /**
+   * Gets information about the currently authorized customer
+   *
+   * @return {Promise}
+   */
+  about() {
+    return this._request(`customers/${this.id()}`);
   }
 
   /**
