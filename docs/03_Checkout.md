@@ -244,8 +244,8 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
-  customer_set_price: '100.00',
+commerce.checkout.checkDiscount('chkt_L5z3kmQpdpkGlA', {
+  code: 'ABC123ZYX',
 }).then((response) => console.log(response));
 
 ```
