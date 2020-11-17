@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="380" height="100" />
 </p>
 <p align="center">
-Powerful, easy to use JavaScript SDK for building and managing carts, checkouts and receipts. 
+Fast, powerful, and easy to use JavaScript SDK for building and managing carts, checkouts and receipts. 
 Build custom eCommerce experiences to sell physical and digital products from the Chec API.
 </p>
 
