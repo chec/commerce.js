@@ -45,19 +45,36 @@ describe('Customer', () => {
     });
   });
 
+  describe('about', () => {
+    it('proxies the request method', () => {
+      const customer = new Customer(mockCommerce);
+      customer.data.id = 'cstmr_QWERTY';
+      customer.data.token = 'ABC-123-ZYX-234';
+      customer.about();
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'customers/cstmr_QWERTY',
+        'get',
+        null,
+        {
+          'X-Authorization': undefined,
+          Authorization: 'Bearer ABC-123-ZYX-234',
+        },
+        'ABC-123-ZYX-234',
+      );
+    });
+  });
+
   describe('getToken', () => {
     it('proxies the request method', () => {
       requestMock.mockReturnValue(Promise.resolve({}));
       const customer = new Customer(mockCommerce);
-      customer.getToken('foo@example.com', 'ABC-123-ZYX-234');
+      customer.getToken('ABC-123-ZYX-234');
 
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/exchange-token',
         'post',
-        {
-          email: 'foo@example.com',
-          token: 'ABC-123-ZYX-234',
-        },
+        { token: 'ABC-123-ZYX-234' },
       );
     });
   });
