@@ -2,10 +2,9 @@
   <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="380" height="100" />
 </p>
 <p align="center">
-Fast, powerful, and easy to use JavaScript SDK for building and managing carts, checkouts and receipts. 
+Fast, powerful, and easy to use JavaScript SDK for building and managing carts, checkouts and receipts.
 Build custom eCommerce experiences to sell physical and digital products from the Chec API.
 </p>
-
 <p align="center">
   <a href="https://circleci.com/gh/chec/commerce.js/tree/master">
     <img src="https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield" alt="CircleCI" />
@@ -25,7 +24,9 @@ Build custom eCommerce experiences to sell physical and digital products from th
   <br>
   <a href="https://commercejs.com">commercejs.com</a> | <a href="https://twitter.com/commercejs">@commercejs</a> | <a href="http://slack.commercejs.com">Slack</a>
 </p>
-
+<p align="center">
+  <img src="https://cdn.chec.io/chec-assets/commercejs-demo.gif" alt="" />
+</p>
 
 ## Installation
 
