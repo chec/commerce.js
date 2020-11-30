@@ -64,18 +64,16 @@ class Customer {
   getOrders(customerId = null, token = null, params = {}) {
     this._assertArgsProvided(customerId, token);
 
-    if (!params.sortBy) {
-      params.sortBy = 'created';
-    }
-
-    if (!params.sortDirection) {
-      params.sortDirection = 'desc';
-    }
+    const requestParams = {
+      sortBy: 'created',
+      sortDirection: 'desc',
+      ...params,
+    };
 
     return this._request(
       `customers/${customerId || this.id()}/orders`,
       'get',
-      params,
+      requestParams,
       {},
       token,
     );
