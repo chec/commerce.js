@@ -82,12 +82,18 @@ describe('Customer', () => {
   describe('getOrders', () => {
     it('proxies the request method', () => {
       const customer = new Customer(mockCommerce);
-      customer.getOrders('cstmr_FOO123', 'ABC-123-ZYX-234');
+      customer.getOrders('cstmr_FOO123', 'ABC-123-ZYX-234', {
+        sortBy: 'created',
+        sortDirection: 'desc',
+      });
 
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/cstmr_FOO123/orders',
         'get',
-        {},
+        {
+          sortBy: 'created',
+          sortDirection: 'desc',
+        },
         {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
@@ -122,7 +128,10 @@ describe('Customer', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/cstmr_QWERTY/orders',
         'get',
-        {},
+        {
+          sortBy: 'created',
+          sortDirection: 'desc',
+        },
         {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
@@ -139,7 +148,10 @@ describe('Customer', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/cstmr_QWERTY/orders',
         'get',
-        {},
+        {
+          sortBy: 'created',
+          sortDirection: 'desc',
+        },
         {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',

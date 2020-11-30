@@ -58,15 +58,22 @@ class Customer {
    * @see https://commercejs.com/docs/api/#list-orders-for-customer
    * @param {string|null} customerId Optional: the customer's ID e.g. cstmr_ABC123, or null to use session
    * @param {string|null} token Optional: access token for the customer, or null to use session
+   * @param {object|null} params Optional
    * @returns {Promise}
    */
-  getOrders(customerId = null, token = null) {
+  getOrders(customerId = null, token = null, params = {}) {
     this._assertArgsProvided(customerId, token);
+
+    const requestParams = {
+      sortBy: 'created',
+      sortDirection: 'desc',
+      ...params,
+    };
 
     return this._request(
       `customers/${customerId || this.id()}/orders`,
       'get',
-      {},
+      requestParams,
       {},
       token,
     );
