@@ -86,7 +86,7 @@ commerce.checkout.capture('token', {
       "name": "John Doe",
       "street": "123 Fake St",
       "town_city": "San Francisco",
-      "county_state": "California",
+      "county_state": "US-CA",
       "postal_zip_code": "94103",
       "country": "US"
   },
@@ -97,7 +97,7 @@ commerce.checkout.capture('token', {
       "name": "John Doe",
       "street": "234 Fake St",
       "town_city": "San Francisco",
-      "county_state": "California",
+      "county_state": "US-CA",
       "postal_zip_code": "94103",
       "country": "US"
   },
