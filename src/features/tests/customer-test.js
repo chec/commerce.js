@@ -87,7 +87,11 @@ describe('Customer', () => {
         lastname: 'Doe',
         email: 'johndoe@test.com',
       };
-      const returnValue = customer.update(data, 'cstmr_FOO123', 'ABC-123-ZYX-234');
+      const returnValue = customer.update(
+        data,
+        'cstmr_FOO123',
+        'ABC-123-ZYX-234',
+      );
 
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/cstmr_FOO123',
