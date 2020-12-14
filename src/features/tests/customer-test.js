@@ -79,6 +79,92 @@ describe('Customer', () => {
     });
   });
 
+  describe('update', () => {
+    it('proxies the request method', async () => {
+      const customer = new Customer(mockCommerce);
+      const data = {
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'johndoe@test.com',
+      };
+      const returnValue = customer.update(
+        data,
+        'cstmr_FOO123',
+        'ABC-123-ZYX-234',
+      );
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'customers/cstmr_FOO123',
+        'PUT',
+        {
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'johndoe@test.com',
+        },
+        {
+          'X-Authorization': undefined,
+          Authorization: 'Bearer ABC-123-ZYX-234',
+        },
+        'ABC-123-ZYX-234',
+      );
+
+      const result = await returnValue;
+      expect(result).toBe('return');
+    });
+
+    it('throws error when customer is not logged in and no customer ID was provided', () => {
+      const customer = new Customer(mockCommerce);
+      expect(() => {
+        customer.update();
+      }).toThrow(
+        'A customer ID must be provided when customer is not logged in',
+      );
+    });
+
+    it('throws error when customer is not logged in and no token was provided', () => {
+      const customer = new Customer(mockCommerce);
+      expect(() => {
+        customer.update({}, 'cstmr_FOO123');
+      }).toThrow(
+        'A customer access token must be provided when customer is not logged in',
+      );
+    });
+
+    it('gathers customer ID from session if not provided', () => {
+      const customer = new Customer(mockCommerce);
+      customer.data.id = 'cstmr_QWERTY';
+      customer.update({}, null, 'ABC-123-ZYX-234');
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'customers/cstmr_QWERTY',
+        'PUT',
+        {},
+        {
+          'X-Authorization': undefined,
+          Authorization: 'Bearer ABC-123-ZYX-234',
+        },
+        'ABC-123-ZYX-234',
+      );
+    });
+
+    it('gathers customer token from session if not provided', () => {
+      const customer = new Customer(mockCommerce);
+      customer.data.token = 'ABC-123-ZYX-234';
+      customer.update({}, 'cstmr_QWERTY');
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'customers/cstmr_QWERTY',
+        'PUT',
+        {},
+        {
+          'X-Authorization': undefined,
+          Authorization: 'Bearer ABC-123-ZYX-234',
+        },
+        'ABC-123-ZYX-234',
+      );
+    });
+  });
+
   describe('getOrders', () => {
     it('proxies the request method', () => {
       const customer = new Customer(mockCommerce);
