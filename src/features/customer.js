@@ -53,6 +53,26 @@ class Customer {
   }
 
   /**
+   * Update customer
+   *
+   * @see https://commercejs.com/docs/api/#update-customer
+   * @param {string|null} customerId Optional: the customer's ID e.g. cstmr_ABC123, or null to use session
+   * @param {string|null} token Optional: access token for the customer, or null to use session
+   * @returns {Promise}
+   */
+  update(data = {}, customerId = null, token = null) {
+    this._assertArgsProvided(customerId, token);
+
+    return this._request(
+      `customers/${customerId || this.id()}`,
+      'PUT',
+      data,
+      {},
+      token,
+    );
+  }
+
+  /**
    * List orders for a customer
    *
    * @see https://commercejs.com/docs/api/#list-orders-for-customer
