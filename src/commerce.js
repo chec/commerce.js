@@ -71,6 +71,7 @@ class Commerce {
     const headers = {
       'X-Authorization': this.options.publicKey,
       'X-Chec-Agent': 'commerce.js/v2',
+      'Content-Type': 'application/json'
     };
 
     // Let axios serialize get request payloads as JSON
