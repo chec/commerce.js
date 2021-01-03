@@ -24,7 +24,7 @@ class Commerce {
     };
 
     if (typeof publicKey !== 'string' || publicKey.length === 0) {
-      console.warn('⚠️ Invalid public key given to Commerce.js client');
+      throw new Error('⚠️ Invalid public key given to Commerce.js client');
     }
 
     if (publicKey.toLowerCase().substring(0, 3) === 'sk_') {
