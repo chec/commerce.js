@@ -27,7 +27,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.generateToken('permalink', 'white-shirt')
+commerce.checkout.generateToken('white-shirt', { type: 'permalink' })
   .then((checkout) => console.log(checkout.id))
 
 // Gets a new checkout token from a specific identifier type
@@ -38,6 +38,7 @@ commerce.checkout.generateTokenFrom('permalink', 'white-shirt')
 | Method | Description |
 | -------------------- | ----------- |
 | `generateToken(identifier, data)` | Gets a new checkout token |
+| `generateTokenFrom(type, identifier)` | Gets a new checkout token using a specified type of identifier |
 
 Upon a successful request, a checkout token object will be returned which contains everything you need to create your
 checkout page.
