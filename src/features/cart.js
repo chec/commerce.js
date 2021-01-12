@@ -110,7 +110,7 @@ class Cart {
    */
   checkQuantity(productId, quantity) {
     return this.commerce
-      .request(`products/${id}`)
+      .request(`products/${productId}`)
       .then(response => quantity <= response.quantity);
   }
 
