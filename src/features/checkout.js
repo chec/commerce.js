@@ -118,7 +118,8 @@ class Checkout {
    * @return {Promise}
    */
   getLocationFromIP(token, ipAddress = '') {
-    const urlSuffix = ipAddress.length ? `?ip_address=${ipAddress}` : '';
+    const urlSuffix =
+      ipAddress && ipAddress.length ? `?ip_address=${ipAddress}` : '';
     return this.commerce.request(
       `checkouts/${token}/helper/location_from_ip${urlSuffix}`,
     );
