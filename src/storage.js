@@ -9,6 +9,10 @@ class Storage {
   }
 
   set(key, value, days) {
+    if (!document) {
+      return null;
+    }
+
     let path;
     let expires = '';
 
@@ -30,6 +34,10 @@ class Storage {
   }
 
   get(key) {
+    if (!document) {
+      return null;
+    }
+
     key = key + '=';
 
     for (let c of Array.from(document.cookie.split(';'))) {
