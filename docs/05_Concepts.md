@@ -1,8 +1,8 @@
 ---
 title: Concepts
 description: 'Concepts in Commerce.js.'
-position: 4
 category: Concepts
+position: 5
 ---
 
 ## Authentication
@@ -23,7 +23,7 @@ endpoints. It can also be used to capture orders although you will be unable to 
 reasons.
 
 <div class="highlight highlight--warn">
-    <span>Note</span>
+    <span>Important</span>
     <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
 </div>
 
@@ -171,7 +171,7 @@ the full API reference), and use this value to set `tax[ip_address]`.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>If you're working with PayPal, you should send both <code>tax[ip_address]</code> and <code>tax[country]</code> (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code>.</p>
+    <p>If you're working with PayPal, you should sent both <code>tax[ip_address]</code> and <code>tax[country]</code> (by asking the customer to select their tax country from a dropdown). You can also set tax information for your checkout before you capture it using the <code>setTaxZone()</code>.</p>
 </div>
 
 ---

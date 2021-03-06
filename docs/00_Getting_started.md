@@ -1,8 +1,8 @@
 ---
 title: Getting started
 description: Get started with the Commerce.js SDK with a step-by-step guide
-position: 0
 category: Getting started
+position: 0
 ---
 
 This documentation will walk you through how to:

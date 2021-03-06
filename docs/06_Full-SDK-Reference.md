@@ -1,8 +1,8 @@
 ---
 title: Full SDK reference
 description: 'The full SDK reference of Commerce.js.'
-position: 5
 category: Full SDK reference
+position: 6
 ---
 
 **Commerce.js** is a JavaScript SDK built on top of the **Chec Platform** to allow for easy interfacing with the **Chec
