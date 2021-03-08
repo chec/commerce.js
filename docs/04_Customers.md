@@ -7,7 +7,7 @@ position: 4
 
 This section of the documentation goes through the core [Customers](/docs/sdk/customers#send-login-token) endpoint. This
 endpoint allows you to handle customer authentication as well as manage and update customers' information such as
-contact name, email address and meta data.
+contact name, email address and metadata.
 
 A customer in **Chec** is anyone who makes a purchase and has the ability to create an account. Requests to the
 customers endpoint will return the full customers object with data to create a customer's authorized view containing
