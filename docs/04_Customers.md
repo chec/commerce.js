@@ -19,7 +19,7 @@ information such as their contact name and list of orders.
 ## Send login token
 
 This endpoint helps to authenticate and resolve a customer in the merchant account by accepting an email address as an
-argument and send a one-click login email. The email contains a short-lived magic link for the user to access a
+argument and sending a one-click login email. The email contains a short-lived magic link for the user to access a
 protected route only permitted with the token. The `login()` method uses `POST v1/customers/email-token` to log a
 customer in to an authorized route to access the customers resource. The [method
 below](/docs/sdk/customers#get-access-token) will exchange the token for a JSON web token (JWT) which is scoped to that
@@ -32,7 +32,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.login('leslie.lawless@example.com', 'commodi').then((token) => console.log(token));
+commerce.customers.login('leslie.lawless@example.com', 'https://yourwebsite.com/login/callback').then((token) => console.log(token));
 ```
 
 Example request using cURL:
@@ -41,7 +41,7 @@ Example request using cURL:
 curl -X POST \
     "https://api.chec.io/v1/customers/email-token" \
     -H "Content-Type: application/json" \
-    -d '{"email":"leslie.lawless@example.com","base_url":"commodi"}'
+    -d '{"email":"leslie.lawless@example.com","base_url":"https://yourwebsite.com/login/callback"}'
 ```
 
 | Method | Description |
@@ -59,6 +59,8 @@ web token to log the customer in to a protected route.
 ---
 
 ## Get access token
+
+Once a customer has entered their email address in the previous step and clicked on the one-time login link they received in their email, the link will send them back to your server (see https://yourwebsite.com/login/callback in the example above). In that callback handler, you can use the "get access token" method to exchange the token in the URL for a JSON web token.
 
 The `getToken()` method uses `POST /v1/customers/exchange-token` to obtain a JSON web token scoped to the customer the
 provided token (returned from the `login()` method) belongs to. The returned JWT will be valid for 24 hours, and may be
@@ -91,7 +93,7 @@ curl -X POST \
 
 <div class="highlight highlight--info">
     <span>Info</span>
-    <p>If you want to save the customer in local session storage to persist the data, pass in the optional <code>save = true</code> argument.</p>
+    <p>If you do not want to save the customer in local session storage, pass false for the second argument <code>save</code>.</p>
 </div>
 
 <div class="highlight highlight--note">
@@ -114,13 +116,12 @@ import Commerce from '@chec/commerce.js';
 const commerce = new Commerce('{your_public_key}');
 
 commerce.customers.update({
-        "email":"leslie.lawless@example.com",
-        "firstname":"Leslie",
-        "lastname":"Lawless",
-        "external_id":"MY_CRM_USER_123"
-    },
-    'cstmr_K1YDR2qy29Qem6'
-).then((customer) => console.log(customer));
+  email: 'leslie.lawless@example.com',
+  firstname: 'Leslie',
+  lastname: 'Lawless',
+  external_id: 'MY_CRM_USER_123',
+}, 'cstmr_K1YDR2qy29Qem6')
+  .then((customer) => console.log(customer));
 ```
 
 Example request using cURL:
@@ -128,7 +129,7 @@ Example request using cURL:
 ```bash
 curl -X PUT \
     "https://api.chec.io/v1/customers/cstmr_K1YDR2qy29Qem6" \
-    -H "X-Authorization: {token}" \
+    -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
     -d '{"email":"leslie.lawless@example.com","firstname":"Leslie","lastname":"Lawless","external_id":"MY_CRM_USER_123"}'
 ```
@@ -169,7 +170,7 @@ Example request using cURL:
 ```bash
 curl -X GET \
     -G "https://api.chec.io/v1/customers/cstmr_f89398fs489g/orders" \
-    -H "X-Authorization: {token}"
+    -H "Authorization: Bearer {token}"
 ```
 
 | Method | Description |
@@ -201,7 +202,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.getOrders('cstmr_f89398fs489g').then((order) => console.log(order));
+commerce.customers.getOrders('ord_Kvg9l6zvnl1bB7').then((order) => console.log(order));
 ```
 
 Example request using cURL:
@@ -209,7 +210,7 @@ Example request using cURL:
 ```bash
 curl -X GET \
     -G "https://api.chec.io/v1/customers/cstmr_f89398fs489g/orders/ord_Kvg9l6zvnl1bB7" \
-    -H "X-Authorization: {token}"
+    -H "Authorization: Bearer {token}"
 ```
 
 | Method | Description |
@@ -231,7 +232,7 @@ curl -X GET \
 ## Get customer
 
 The `about()` method uses `GET /v1/customers/{customer_id}` to return information about the currently authorized
-customer by it's ID.
+customer by its ID.
 
 Example request using Commerce.js:
 
@@ -240,7 +241,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.about('cstmr_K1YDR2qy29Qem6').then((customer) => console.log(customer));
+commerce.customers.about().then((customer) => console.log(customer));
 ```
 
 Example request using cURL:
@@ -248,7 +249,7 @@ Example request using cURL:
 ```bash
 curl -X GET \
     -G "https://api.chec.io/v1/customers/cstmr_K1YDR2qy29Qem6" \
-    -H "X-Authorization: {token}"
+    -H "Authorization: Bearer {token}"
 ```
 
 | Method | Description |
@@ -257,7 +258,7 @@ curl -X GET \
 
 <div class="highlight highlight--note">
     <span>Note</span>
-    <p>Refer to the full response for retrieving a customer by it's ID <a href="/docs/api/?shell#get-customer">here</a>.</p>
+    <p>Refer to the full response for retrieving a customer by its ID <a href="/docs/api/?shell#get-customer">here</a>.</p>
 </div>
 
 ---
@@ -273,7 +274,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.id().then((customerId) => console.log(customerId));
+console.log(commerce.customers.id());
 ```
 
 | Method | Description |
@@ -284,7 +285,7 @@ commerce.customers.id().then((customerId) => console.log(customerId));
 
 ## Get customer token
 
-The `token()` method returns the customer token used during a successful login from local storage.
+The `token()` method returns the customer's JSON web token from local storage, if logged in.
 
 Example request using Commerce.js:
 
@@ -293,12 +294,12 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.token().then((token) => console.log(token));
+console.log(commerce.customers.token());
 ```
 
 | Method | Description |
 | -------------------- | ----------- |
-| `token()`  | Gets the customer token used during a successful login |
+| `token()`  | Gets the customer's JSON web token, if logged in |
 
 ---
 
@@ -313,7 +314,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.isLoggedIn().then((response) => console.log(response));
+console.log(commerce.customers.isLoggedIn());
 ```
 
 | Method | Description |
@@ -333,7 +334,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.logout().then((response) => console.log(response));
+commerce.customers.logout();
 ```
 
 | Method | Description |
