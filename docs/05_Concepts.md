@@ -1,8 +1,8 @@
 ---
 title: Concepts
 description: 'Concepts in Commerce.js.'
-position: 4
 category: Concepts
+position: 5
 ---
 
 ## Authentication
@@ -23,7 +23,7 @@ endpoints. It can also be used to capture orders although you will be unable to 
 reasons.
 
 <div class="highlight highlight--warn">
-    <span>Note</span>
+    <span>Important</span>
     <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
 </div>
 

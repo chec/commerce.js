@@ -1,8 +1,8 @@
 ---
 title: Cart
 description: 'The Cart endpoint in Commerce.js.'
-position: 2
 category: Cart
+position: 2
 ---
 
 The **Cart** resource can hold product data, product variants, quantity, price, and other metadata to be used to
