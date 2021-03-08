@@ -202,7 +202,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.customers.getOrders('ord_Kvg9l6zvnl1bB7').then((order) => console.log(order));
+commerce.customers.getOrder('ord_Kvg9l6zvnl1bB7').then((order) => console.log(order));
 ```
 
 Example request using cURL:
