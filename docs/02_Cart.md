@@ -126,7 +126,7 @@ See our [release notes](https://commercejs.com/docs/release-notes/) for more inf
 
 | Method | Description |
 | -------------------- | ----------- |
-| `add(productId, quantity, variandData)`  | Add an item to the cart |
+| `add(productId, quantity, variantData)`  | Add an item to the cart |
 
 <div class="highlight highlight--info">
     <span>Tip</span>
