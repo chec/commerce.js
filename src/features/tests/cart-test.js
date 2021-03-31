@@ -185,12 +185,12 @@ describe('Cart', () => {
       expect(lastData.id).toBe('bar');
     });
 
-    it('builds a request from given args', async () => {
+    it('builds a request from given args with variant ID', async () => {
       storageGetMock.mockReturnValue('12345');
 
       const cart = new Cart(mockCommerce, '12345');
 
-      await cart.add('id', 6, { variant: 'option' });
+      await cart.add('id', 6, 'vrnt_123');
 
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -202,7 +202,27 @@ describe('Cart', () => {
       const lastData = axios.mock.calls.pop()[0].data;
       expect(lastData.id).toBe('id');
       expect(lastData.quantity).toEqual(6);
-      expect(lastData.variant.variant).toBe('option');
+      expect(lastData.variant_id).toBe('vrnt_123');
+    });
+
+    it('builds a request from given args with variant options', async () => {
+      storageGetMock.mockReturnValue('12345');
+
+      const cart = new Cart(mockCommerce, '12345');
+
+      await cart.add('id', 6, { vgrp_123: 'optn_123' });
+
+      expect(axios).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'carts/12345',
+          method: 'post',
+        }),
+      );
+
+      const lastData = axios.mock.calls.pop()[0].data;
+      expect(lastData.id).toBe('id');
+      expect(lastData.quantity).toEqual(6);
+      expect(lastData.options.vgrp_123).toBe('optn_123');
     });
   });
 

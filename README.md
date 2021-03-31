@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="380" height="100" />
 </p>
 <p align="center">
-Fast, powerful, and easy to use JavaScript SDK for building and managing carts, checkouts and receipts. 
+Fast, powerful, and easy to use JavaScript SDK for building and managing carts, checkouts and receipts.
 Build custom eCommerce experiences to sell physical and digital products from the Chec API.
 </p>
 
@@ -42,6 +42,14 @@ Our documentation module source code resides in `commerce.js/docs`
 If you would like to make contributions to the Commerce.js documentation source, here is a [guide](https://github.com/chec/commerce.js/blob/master/CONTRIBUTING.md) in doing so.
 
 ## Upgrading
+
+### Upgrading to 2.4.0
+
+Commerce.js 2.4.0 only supports API version 2021-03-31 when adding products to a cart with variants. Please consider
+updating your API version, using the changes listed in the [API docs](https://commercejs.com/docs/api/#versioning) as
+a guide.
+
+### Upgrading to 2.0.0
 
 The major change in Commerce.js v2 is that most methods now return a
 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that is fulfilled
