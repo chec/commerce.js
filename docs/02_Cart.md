@@ -102,9 +102,31 @@ curl -X POST \
     -d '{"id":"prod_R4OANwRqklvYL8","quantity":5}'
 ```
 
+If you'd like to specify variant information during this call, you can do so by providing a third argument which may be one of the following:
+1. A specific variant ID (string)
+2. An object which maps variant group IDs to variant option IDs
+
+Example request adding a variant to cart using a specific variant ID:
+
+```js
+commerce.cart.add('prod_R4OANwRqklvYL8', 5, 'vrnt_KE50NKbjqKNwdg');
+```
+
+Example request adding a variant to cart by specifying variant groups and options:
+
+```js
+commerce.cart.add('prod_R4OANwRqklvYL8', 5, {
+  'vgrp_NqKE50ap1ldgBL': 'optn_NqKE50y601ldgB',
+  // ... any other group -> options here
+});
+```
+
+**Please note:** the structure of the variants request arguments in these examples were changed with our 2021-03-31 release.
+See our [release notes](https://commercejs.com/docs/release-notes/) for more information, including backwards compatibility suggestions.
+
 | Method | Description |
 | -------------------- | ----------- |
-| `add(productId, quantity)`  | Add an item to the cart |
+| `add(productId, quantity, variantData)`  | Add an item to the cart |
 
 <div class="highlight highlight--info">
     <span>Tip</span>
