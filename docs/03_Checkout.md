@@ -233,10 +233,101 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 
 ---
 
+## Check variant
+
+The `checkVariant()` method uses `GET /v1/checkouts/{checkout_token_id}/check/{line_item_id}/variant` to validate that
+the provided variant ID or group ID and variant option IDs are valid and available for the specified checkout token and
+line item ID.
+
+Example request checking if a variant is valid using a specific variant ID:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', { variant_id: 'vrnt_Kvg9l6Apq51bB7' })
+  .then(response => console.log(response.available));
+```
+
+Example request checking if a variant is valid by specifying variant group and option:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
+  group_id: 'vgrp_Kvg9l6Apq51bB7',
+  option_id: 'optn_3BkyN5YDRo0b69',
+}).then(response => console.log(response.available));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `checkVariant(checkoutTokenId, lineItemId, variantData)`  | Checks whether the provided variant is valid or available  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check variant" request <a href="/docs/api/?shell#check-variant">here</a>.</p>
+</div>
+
+---
+
+## Check requested quantity
+
+The `checkQuantity()` method uses `GET /v1/checkouts/{checkout_token_id}/check/{line_item_id}/quantity` to validate that
+the requested quantity is available for the provided line item ID, and adjusts it in the order. If your line item has
+variants, then the variant ID, or variant group ID and selected option ID for it, must have either been added to the
+checkout already (using the "check variant" helper, or when you create your cart), or must be provided as request
+parameters.
+
+Example request checking if an item or item variant is available by specifying the line item ID and/or variant:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
+  amount: 2,
+  variant_id: 'vrnt_3BkyN5YDRo0b69',
+})
+  .then((response) => console.log(response.available));
+```
+
+Example request checking if an item or item variant is available by specifying the line item ID and/or variant group and
+option:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
+  amount: 2,
+  variants: {
+    'vgrp_NqKE50ap1ldgBL': 'optn_NqKE50y601ldgB',
+  },
+})
+  .then((response) => console.log(response.available));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `checkQuantity(checkoutTokenId, lineItemId, variantData)`  | Checks whether the requested quantity for the line item or item variant is available |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check requested quantity" request <a href="/docs/api/?shell#check-requested-quantity">here</a>.</p>
+</div>
+
+---
+
 ## Check discount code
 
-The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/discount?code=ABC123ZYX` to validate a discount
-code for the provided checkout token, and applies it to the order if it is valid.
+The `checkDiscount()` method uses `GET v1/checkouts/{checkout_token_id}/check/discount?code=ABC123ZYX` to validate a
+discount code for the provided checkout token, and applies it to the order if it is valid.
 
 Example request using Commerce.js:
 
@@ -296,7 +387,8 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 ## Get shipping methods
 
-The `getShippingOptions()` method uses `GET v1/checkouts/{checkout_token_id}/helper/shipping_options` to return a list of available shipping methods for the provided checkout token.
+The `getShippingOptions()` method uses `GET v1/checkouts/{checkout_token_id}/helper/shipping_options` to return a list
+of available shipping methods for the provided checkout token.
 
 Example request using Commerce.js:
 
