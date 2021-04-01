@@ -1,5 +1,8 @@
 ---
-title: Checkout description: 'The Checkout endpoint in Commerce.js.' category: Checkout position: 3
+title: Checkout
+description: 'The Checkout endpoint in Commerce.js.'
+category: Checkout
+position: 3
 ---
 
 The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing
