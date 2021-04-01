@@ -246,7 +246,7 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', 'vrnt_Kvg9l6Apq51bB7')
+commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', { variant_id: 'vrnt_Kvg9l6Apq51bB7' })
     .then(response => console.log(response.available));
 ```
 
@@ -289,7 +289,10 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', 2, 'vrnt_3BkyN5YDRo0b69')
+commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
+  amount: 2,
+  variant_id: 'vrnt_3BkyN5YDRo0b69',
+})
     .then((response) => console.log(response.available));
 ```
 
@@ -301,9 +304,13 @@ import Commerce from '@chec/commerce.js';
 
 const commerce = new Commerce('{your_public_key}');
 
-commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', 2, {
+commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
+  amount: 2,
+  variants: {
     'vgrp_NqKE50ap1ldgBL': 'optn_NqKE50y601ldgB',
-}).then((response) => console.log(response.available));
+  },
+})
+  .then((response) => console.log(response.available));
 ```
 
 | Method | Description |
