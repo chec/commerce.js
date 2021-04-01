@@ -247,7 +247,7 @@ import Commerce from '@chec/commerce.js';
 const commerce = new Commerce('{your_public_key}');
 
 commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', { variant_id: 'vrnt_Kvg9l6Apq51bB7' })
-    .then(response => console.log(response.available));
+  .then(response => console.log(response.available));
 ```
 
 Example request checking if a variant is valid by specifying variant group and option:
@@ -258,8 +258,8 @@ import Commerce from '@chec/commerce.js';
 const commerce = new Commerce('{your_public_key}');
 
 commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
-    group_id: 'vrnt_Kvg9l6Apq51bB7',
-    option_id: 'optn_3BkyN5YDRo0b69',
+  group_id: 'vgrp_Kvg9l6Apq51bB7',
+  option_id: 'optn_3BkyN5YDRo0b69',
 }).then(response => console.log(response.available));
 ```
 
@@ -293,7 +293,7 @@ commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
   amount: 2,
   variant_id: 'vrnt_3BkyN5YDRo0b69',
 })
-    .then((response) => console.log(response.available));
+  .then((response) => console.log(response.available));
 ```
 
 Example request checking if an item or item variant is available by specifying the line item ID and/or variant group and
