@@ -74,7 +74,7 @@ commerce.checkout.capture('token', {
       "item_7RyWOwmK5nEa2V": {
           "quantity": 1,
           "variants": {
-              "vrnt_p6dP5g0M4ln7kA": "optn_DeN1ql93doz3ym"
+              "vgrp_p6dP5g0M4ln7kA": "optn_DeN1ql93doz3ym"
           }
       }
   },
@@ -126,7 +126,16 @@ submitting data. For example with line items, the key would be the `line_item_id
 under that key.
 
 * Line item's quantity: `line_items[{line_item_id}][quantity]`
-* Line item's variant and selected option: `line_items[{line_item_id}][variants][{variant_id}] = {option_id}`
+* Line item's variant and selected option: `line_items[{line_item_id}][variants][{group_id}] = {option_id}`
+
+Note that specifying the `line_items` is optional in the checkout capture payload unless you have either:
+
+* Changed the quantity of a line item at the checkout level or
+* Want to specify variants that have not yet been applied or checked.
+
+Providing `variants` in the line items is optional as well. If your product does not have variants or if you've used the
+[check variant](/docs/sdk/checkout#check-variant) checkout helper method, then you do not need to specify the variants
+in your checkout capture payload.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
