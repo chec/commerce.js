@@ -215,7 +215,7 @@ describe('Customer', () => {
         'customers/cstmr_QWERTY/orders',
         'get',
         {
-          sortBy: 'created',
+          sortBy: 'created_at',
           sortDirection: 'desc',
         },
         {
@@ -235,7 +235,7 @@ describe('Customer', () => {
         'customers/cstmr_QWERTY/orders',
         'get',
         {
-          sortBy: 'created',
+          sortBy: 'created_at',
           sortDirection: 'desc',
         },
         {
