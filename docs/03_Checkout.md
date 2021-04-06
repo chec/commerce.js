@@ -74,41 +74,41 @@ commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
     item_7RyWOwmK5nEa2V: {
       quantity: 1,
       variants: {
-        vgrp_p6dP5g0M4ln7kA: "optn_DeN1ql93doz3ym"
+        vgrp_p6dP5g0M4ln7kA: 'optn_DeN1ql93doz3ym'
       }
     }
   },
   customer: {
-    firstname: "John",
-    lastname: "Doe",
-    email: "john.doe@example.com"
+    firstname: 'John',
+    lastname: 'Doe',
+    email: 'john.doe@example.com'
   },
   shipping: {
-    name: "John Doe",
-    street: "123 Fake St",
-    town_city: "San Francisco",
-    county_state: "US-CA",
-    postal_zip_code: "94103",
-    country: "US"
+    name: 'John Doe',
+    street: '123 Fake St',
+    town_city: 'San Francisco',
+    county_state: 'US-CA',
+    postal_zip_code: '94103',
+    country: 'US'
   },
   fulfillment: {
-    shipping_method: "ship_7RyWOwmK5nEa2V"
+    shipping_method: 'ship_7RyWOwmK5nEa2V'
   },
   billing: {
-    name: "John Doe",
-    street: "234 Fake St",
-    town_city: "San Francisco",
-    county_state: "US-CA",
-    postal_zip_code: "94103",
-    country: "US"
+    name: 'John Doe',
+    street: '234 Fake St',
+    town_city: 'San Francisco',
+    county_state: 'US-CA',
+    postal_zip_code: '94103',
+    country: 'US'
   },
   payment: {
-    gateway: "stripe",
+    gateway: 'stripe',
     card: {
-      token: "irh98298g49"
+      token: 'irh98298g49'
     }
   },
-  pay_what_you_want: "149.99"
+  pay_what_you_want: '149.99'
 }).then((response) => console.log(response));
 ```
 
@@ -150,7 +150,7 @@ commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
   line_items: {
     item_7RyWOwmK5nEa2V: {
       quantity: 1,
-      variant_id: "vrnt_bO6J5apWnVoEjp"
+      variant_id: 'vrnt_bO6J5apWnVoEjp'
     }
   },
   // ...
