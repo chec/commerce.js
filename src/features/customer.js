@@ -85,7 +85,7 @@ class Customer {
     this._assertArgsProvided(customerId, token);
 
     const requestParams = {
-      sortBy: 'created',
+      sortBy: 'created_at',
       sortDirection: 'desc',
       ...params,
     };
