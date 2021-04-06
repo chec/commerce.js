@@ -127,7 +127,7 @@ under that key.
 
 * Line item's quantity: `line_items[{line_item_id}][quantity]`
 * Line item's variant group and selected option: `line_items[{line_item_id}][variants][{group_id}] = {option_id}` *OR*
-* Line items's requested variant id: `line_items[{line_item_id}][variant_id][{variant_id}]`
+* Line items's requested variant id: `line_items[{line_item_id}][variant_id] = {variant_id}`
 
 Note that specifying the `line_items` is optional in the checkout capture payload unless you have either:
 
