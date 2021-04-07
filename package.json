@@ -11,6 +11,10 @@
     "chec",
     "chec.io",
     "sdk"
+    "headless"
+    "jamstack"
+    "api"
+    "checkout"
   ],
   "repository": {
     "type": "git",
