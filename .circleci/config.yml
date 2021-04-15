@@ -15,9 +15,6 @@ jobs:
       - run: npm run lint
       - run: npm run test:coverage
 
-      # Upload coverage
-      - run: bash <(curl -s https://codecov.io/bash) -F js
-
   deploy:
     docker:
       - image: circleci/node:10
