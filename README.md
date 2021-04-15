@@ -10,9 +10,6 @@ Build custom eCommerce experiences to sell physical and digital products from th
   <a href="https://circleci.com/gh/chec/commerce.js/tree/master">
     <img src="https://circleci.com/gh/chec/commerce.js/tree/master.svg?style=shield" alt="CircleCI" />
   </a>
-  <a href="https://codecov.io/gh/chec/commerce.js">
-    <img src="https://codecov.io/gh/chec/commerce.js/branch/master/graph/badge.svg" alt="Codecov" />
-  </a>
   <a href="https://npmjs.org/package/@chec/commerce.js">
     <img src="https://img.shields.io/npm/v/@chec/commerce.js.svg" alt="Version" />
   </a>
