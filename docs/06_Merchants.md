@@ -37,9 +37,9 @@ $ curl -X GET \
 | -------------------- | ----------- |
 | `about()`       | Gets information about the current authorized merchant |
 
-<div class="highlight highlight--note">
-<span>Note</span>
-  <p>Refer to the full response for retrieving the merchant details <a href="/docs/api/?shell#get-merchant-details">here</a>.</p>
+<div class="highlight highlight--info">
+<span>Info</span>
+  <p>For more information, refer to <a href="/docs/api/?shell#get-merchant-details">the full response for retrieving the merchant details</a>.</p>
 </div>
 
 ---

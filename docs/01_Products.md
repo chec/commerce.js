@@ -97,13 +97,13 @@ commerce.products.list({
 }).then(response => response.data); // Returns all products that contains the string in either the product name or permalink
 ```
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for listing products <a href="/docs/api/?shell#products">here</a>.</p>
-</div>
-
 Once you've got your product data you can populate your product listing view. The response here will include everything
 you need to build this view, such as metadata, assets, variant groups and variant options, conditionals, and prices.
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#products">the full response for listing products</a>.</p>
+</div>
 
 ---
 
@@ -141,5 +141,10 @@ Example request retrieving the product using the type parameter:
 commerce.products.retrieve('ABC123', { type: 'permalink' })
   .then((product) => console.log(product.name));
 ```
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#get-product">the full response for retrieving a product</a>.</p>
+</div>
 
 ---

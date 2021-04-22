@@ -7,8 +7,8 @@ position: 2
 
 This section of the documentation goes through the [categories](#list-categories) resource which can be associated with
 products. The categories resource helps to organize products into groups. By creating categories and associating them to
-your products, you can pass optional parameters to filter the products by the `category_slug` or `category_id` in
-the products endpoint. Category data can also accessed from the product object.
+your products, you can pass optional parameters to filter the products by the `category_slug` or `category_id` in the
+products endpoint. Category data can also accessed from the product object.
 
 ---
 
@@ -38,9 +38,9 @@ $ curl -X GET \
 | -------------------- | ----------- |
 | `list(params)`       | List all categories, either by filtered params or unfiltered |
 
-<div class="highlight highlight--note">
-<span>Note</span>
-  <p>Refer to the full response for listing categories <a href="/docs/api/?shell#categories">here</a>.</p>
+<div class="highlight highlight--info">
+<span>Info</span>
+  <p>For more information, refer to <a href="/docs/api/?shell#categories">the full response for listing categories</a>.</p>
 </div>
 
 ---
@@ -76,9 +76,9 @@ curl -X GET \
 | -------------------- | ----------- |
 | `retrieve(id, data = {})`  |  Get a specific category by its ID. You may also provide `{ type: 'slug'}` as data and use a category slug instead of an ID.  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for retrieving a category <a href="/docs/api/?shell#retrieve-category">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#retrieve-category">the full response for retrieving a category</a>.</p>
 </div>
 
 ---

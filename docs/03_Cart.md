@@ -40,14 +40,14 @@ curl -X GET \
 | -------------------- | ----------- |
 | `retrieve()` | Get the cart object, including contents |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response and response of the cart object <a href="/docs/api/?shell#carts">here</a>.</p>
-</div>
-
 <div class="highlight highlight--warn">
     <span>Important</span>
     <p>Cart has a lifetime of 30 days once they've been created. After that time they will automatically be cleared.</p>
+</div>
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#carts">the full response of the cart object</a>.</p>
 </div>
 
 ---
@@ -70,9 +70,9 @@ commerce.cart.refresh().then((cart) => console.log(cart));
 | -------------------- | ----------- |
 | `refresh()`  | Request a new cart ID |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response and response of the cart object <a href="/docs/api/?shell#carts">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#carts">the full response for requesting a new cart</a>.</p>
 </div>
 
 ---
@@ -102,7 +102,12 @@ curl -X POST \
     -d '{"id":"prod_R4OANwRqklvYL8","quantity":5}'
 ```
 
-If you'd like to specify variant information during this call, you can do so by providing a third argument which may be one of the following:
+| Method | Description |
+| -------------------- | ----------- |
+| `add(productId, quantity, variantData)`  | Add an item to the cart |
+
+If you'd like to specify variant information during this call, you can do so by providing a third argument which may be
+one of the following:
 1. A specific variant ID (string)
 2. An object which maps variant group IDs to variant option IDs
 
@@ -126,18 +131,14 @@ commerce.cart.add('prod_R4OANwRqklvYL8', 5, {
     <p>The structure of the variants request arguments in these examples were changed with our 2021-03-31 release. See our <a href="/docs/release-notes/">release notes</a> for more information, including backwards compatibility suggestions.</p>
 </div>
 
-| Method | Description |
-| -------------------- | ----------- |
-| `add(productId, quantity, variantData)`  | Add an item to the cart |
-
-<div class="highlight highlight--info">
-    <span>Tip</span>
+<div class="highlight highlight--note">
+    <span>Note</span>
     <p>When you add a product to cart, the response you get back contains the updated cart object, and each product in the cart has been assigned a "line item ID".</p>
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for adding an item to the cart <a href="/docs/api/?shell#add-item-to-cart">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#add-item-to-cart">the full response for adding an item to the cart</a>.</p>
 </div>
 
 ---
@@ -171,9 +172,9 @@ curl -X PUT \
 | -------------------- | ----------- |
 | `update(lineItemId, data)` | Update an existing item in the cart |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for update the cart <a href="/docs/api/?shell#update-item-in-cart">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#update-item-in-cart">the full response for updating the cart line item</a>.</p>
 </div>
 
 ---
@@ -204,9 +205,9 @@ curl -X GET \
 | -------------------- | ----------- |
 | `contents()` | Get the contents of the cart |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for getting the cart contents <a href="/docs/api/?shell#get-cart-contents">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#get-cart-contents">the full response for getting the cart contents</a>.</p>
 </div>
 
 ---
@@ -238,9 +239,9 @@ curl -X DELETE \
 | -------------------- | ----------- |
 | `remove(lineItemId)` | Remove a line item from the cart |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for removing items from cart <a href="/docs/api/?shell#remove-item-from-cart">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#remove-item-from-cart">the full response for removing items from the cart</a>.</p>
 </div>
 
 ---
@@ -269,11 +270,11 @@ curl -X DELETE \
 
 | Method | Description |
 | -------------------- | ----------- |
-| `remove(lineItemId)` | Remove a line item from the cart |
+| `delete()` | Delete the entire cart |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for deleting a cart <a href="/docs/api/?shell#delete-cart">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#delete-cart">the full response for deleting the cart</a>.</p>
 </div>
 
 ---
@@ -305,9 +306,9 @@ curl -X DELETE \
 | -------------------- | ----------- |
 | `empty()` | Clear the cart contents but cart is not deleted |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for emptying a cart's contents <a href="/docs/api/?shell#empty-cart">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#empty-cart">the full response for emptying the cart's contents</a>.</p>
 </div>
 
 ---
