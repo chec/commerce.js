@@ -2,8 +2,14 @@
 title: Concepts
 description: 'Concepts in Commerce.js.'
 category: Concepts
-position: 5
+position: 7
 ---
+
+**Commerce.js** is a JavaScript SDK built on top of the **Chec Platform** to allow for easy interfacing with the **Chec
+API**. The Commerce.js SDK provides all the features you need to build a custom commerce web experience that works on
+any modern domain. The SDK comes packed with helper functions that are essential to manage complexity in the commerce
+logic of an application. You will find some Commerce.js concepts outlined below such as what checkout tokens are or what
+access public or secret keys provide you.
 
 ## Authentication
 

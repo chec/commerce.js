@@ -2,7 +2,7 @@
 title: Cart
 description: 'The Cart endpoint in Commerce.js.'
 category: Cart
-position: 2
+position: 3
 ---
 
 The **Cart** resource can hold product data, product variants, quantity, price, and other metadata to be used to
@@ -121,8 +121,10 @@ commerce.cart.add('prod_R4OANwRqklvYL8', 5, {
 });
 ```
 
-**Please note:** the structure of the variants request arguments in these examples were changed with our 2021-03-31 release.
-See our [release notes](https://commercejs.com/docs/release-notes/) for more information, including backwards compatibility suggestions.
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>The structure of the variants request arguments in these examples were changed with our 2021-03-31 release. See our <a href="/docs/release-notes/">release notes</a> for more information, including backwards compatibility suggestions.</p>
+</div>
 
 | Method | Description |
 | -------------------- | ----------- |
@@ -308,8 +310,19 @@ curl -X DELETE \
     <p>Refer to the full response for emptying a cart's contents <a href="/docs/api/?shell#empty-cart">here</a>.</p>
 </div>
 
-## Cart SDK reference
+---
 
-Refer to the full list of all the available cart methods [here](/docs/sdk/full-sdk-reference#cart).
+## Retrieve cart ID
 
+The `id()` method returns the cart identifier being used in the current request, or null if there is no stored cart ID.
+
+Example request:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.cart.id().then((cartId) => console.log(cartId));
+```
 ---

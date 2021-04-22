@@ -2,7 +2,7 @@
 title: Customers
 description: 'The Customers endpoints in Commerce.js.'
 category: Customers
-position: 4
+position: 5
 ---
 
 This section of the documentation goes through the core [Customers](/docs/sdk/customers#send-login-token) endpoint. This

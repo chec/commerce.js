@@ -2,7 +2,7 @@
 title: Checkout
 description: 'The Checkout endpoint in Commerce.js.'
 category: Checkout
-position: 3
+position: 4
 ---
 
 The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing
@@ -411,6 +411,32 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
     <p>Refer to the full response for the "Check Shipping Method <a href="/docs/api/?shell#check-shipping-method">here</a>.</p>
 </div>
 
+---
+
+## Check is free
+
+The `isFree()` method uses `GET /v1/checkouts/{checkout_token_id}/check/is_free` to determine whether the provided
+checkout token's order has a zero payable balance.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.isFree('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response.is_free));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `isFree(token)`  | Checks whether a checkout has a zero payable balance  |
+
+<div class="highlight highlight--note">
+    <span>Note</span>
+    <p>Refer to the full response for the "Check if order if free <a href="/docs/api/?shell#check-if-order-is-free">here</a>.</p>
+</div>
 
 ---
 
@@ -436,11 +462,14 @@ commerce.checkout.getShippingOptions('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `getShippingOptions(token, data)`  | Gets the available shipping options |
 
+
+---
+
 ## Set tax zone
 
-The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the
-provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided in
-the request arguments.
+The `setTaxZone()` helper method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for
+the provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided
+in the request arguments.
 
 Example request using Commerce.js:
 
@@ -462,13 +491,68 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
 | `setTaxZone(identifier, data)`  | Sets the geographic zone for tax calculation  |
 
 <div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for setting the tax zone <a href="/docs/api/?shell#set-tax-zone">here</a>.</p>
+  <span>Note</span>
+  <p>Refer to the full response for setting the tax zone <a href="/docs/api/?shell#set-tax-zone">here</a>.</p>
 </div>
 
-### Checkout SDK reference
+---
 
-Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout).
+## Get location from IP
+
+The `getLocationFromIP()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/location_from_ip` to
+determine the buyer's physical location based on their IP address. This can be used to automatically select an
+appropriate shipping method during checkout. An IP address can either be provided to be resolved, or it will be detected
+automatically. Please note that if the endpoint is called from a server-side request, the resolved IP will be that of
+your web server. In this case you must provide the IP address of the customer yourself.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.getLocationFromIP('chkt_L5z3kmQpdpkGlA', '123.45.67.89').then((address) => console.log(address));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getLocationFromIP(token, ipAddress)`  | Gets a location from the provided (or your own) IP address |
+
+<div class="highlight highlight--note">
+  <span>Note</span>
+  <p>Refer to the full response for getting the buyer's location from the IP address <a href="/docs/api/?shell#get-buyer-039-s-location-from-ip">here</a>.</p>
+</div>
+
+
+---
+
+## Get validation rules
+
+The `helperValidation()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/validation` to generate
+client-side validation rules which can be passed directly into most JavaScript validation libraries. Ensure the form
+input names match the names in the response e.g. `shipping[name]` is used as the value for the `name` attribute in your
+shipping name input field.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.helperValidation('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response.rules));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `helperValidation(token)`  | Gets any applicable validation rules  |
+
+<div class="highlight highlight--note">
+  <span>Note</span>
+  <p>Refer to the full response for getting client-side validation rules <a href="/docs/api/?shell#get-client-side-validation-rules">here</a>.</p>
+</div>
+
 
 ---
 
@@ -575,9 +659,5 @@ Commerce.services.localeListShippingSubdivisions('chkt_L5z3kmQpdpkGlA', 'US').th
     <span>Note</span>
     <p>Refer to the full response for the "List available shipping subdivisions" request <a href="/docs/api/#list-available-shipping-subdivisions-for-country">here</a>.</p>
 </div>
-
-### Services SDK reference
-
-Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services).
 
 ---
