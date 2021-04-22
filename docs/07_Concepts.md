@@ -2,8 +2,14 @@
 title: Concepts
 description: 'Concepts in Commerce.js.'
 category: Concepts
-position: 5
+position: 7
 ---
+
+**Commerce.js** is a JavaScript SDK built on top of the **Chec Platform** to allow for easy interfacing with the **Chec
+API**. The Commerce.js SDK provides all the features you need to build a custom commerce experience that works on
+any modern frontend systems such as web, mobile, or any IoT devices. The SDK comes packed with helper functions that are essential to manage complexity in the commerce
+logic of an application. You will find some Commerce.js concepts outlined below such as what checkout tokens are or what
+access public or secret keys provide you.
 
 ## Authentication
 
@@ -24,7 +30,7 @@ reasons.
 
 <div class="highlight highlight--warn">
     <span>Important</span>
-    <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. Read more on authentication methods <a href="https://commercejs.com/docs/api/#authentication">here</a> in our API source.</p>
+    <p>All API requests must be made over HTTPS, calls made over plain HTTP will fail. For more information, refer to our <a href="https://commercejs.com/docs/api/#authentication">authentication methods</a> in our API source.</p>
 </div>
 
 ---
@@ -126,11 +132,6 @@ relevant to the current checkout session so you can update displayed totals (and
 <div class="highlight highlight--warn">
     <span>Important</span>
     <p>Helper functions are not required. All totals are recalculated during capture using the checkout data sent.</p>
-</div>
-
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>For a full list of checkout helpers, see the full SDK reference <a href="/docs/sdk/full-sdk-reference#checkout">here</a>.</p>
 </div>
 
 ---

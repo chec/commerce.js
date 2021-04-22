@@ -1,13 +1,13 @@
 ---
 title: Products
-description: 'The Products and Categories endpoints in Commerce.js.'
+description: 'The Products endpoint in Commerce.js.'
 category: Products
 position: 1
 ---
 
-This section of the documentation goes through the core [products](#list-products) resource and
-[categories](#categories) which can be associated with products. Anytime we indicate **product catalog**, we are
-referring to entities that you would work with when developing your product listing or product detail pages.
+This section of the documentation goes through the core [products](#list-products) resource. Any time we indicate
+**product catalog**, we are referring to entities that you would work with when developing your product listing or
+product detail pages.
 
 [Products](/docs/api/?shell#products) in **Chec** are one of the core resources with all the data properties to out your
 frontend. A product is something you sell eg. physical items, services or digital goods and downloads. Requests to the
@@ -45,13 +45,65 @@ curl -X GET \
 | -------------------- | ----------- |
 | `list(params)`       | List products |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for listing products <a href="/docs/api/?shell#products">here</a>.</p>
-</div>
+You can filter your products list by passing these optional parameters below:
+
+| Parameter | Description |
+| -------------------- | ----------- |
+| `category_slug` | Filter by an array of category slugs, where all categories apply to the product |
+| `category_id` | Filter by an array of category IDs, where all categories apply to the product |
+| `limit` | The maximum number of products that will be returned (default: 25, maximum: 200) |
+| `query` | Filter by a term that will be matched against the product's ID (exactly), permalink, and name |
+
+
+Example request listing products filtered by the category slug:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+// Fetch products specifying a category slug
+commerce.products.list({
+  category_slug: 'shoes',
+}).then(response => response.data);
+
+// Fetch products specifying multiple category slugs
+commerce.products.list({
+  category_slug: ['shoes', 'black'],
+}).then(response => response.data);
+```
+
+Example request listing products filtered by a products list limit:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.list({
+  limit: 100,
+}).then((response) => console.log(response.data));
+```
+
+Example request listing products with a query parameter:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.list({
+  query: 'bag',
+}).then(response => response.data); // Returns all products that contains the string in either the product name or permalink
+```
 
 Once you've got your product data you can populate your product listing view. The response here will include everything
-you need to build this view, such as metadata, assets, variants and options, conditionals, and prices.
+you need to build this view, such as metadata, assets, variant groups and variant options, conditionals, and prices.
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#products">the full response for listing products</a>.</p>
+</div>
 
 ---
 
@@ -81,87 +133,18 @@ curl -X GET \
 | -------------------- | ----------- |
 | `retrieve(id, data = {})`  | Get a specific product |
 
----
-
-# Categories
-
-The categories resource helps to organize products into groups using the `GET v1/categories` API endpoint. Categories
-can be associated with products and also accessed from the products object.
-
-## List categories
-
-The `list()` method uses `GET v1/categories` to return a list of all the merchant's product categories.
-
-Example request using Commerce.js:
+Example request retrieving the product using the type parameter:
 
 ```js
-import Commerce from '@chec/commerce.js';
-
-const commerce = new Commerce('{your_public_key}');
-
-commerce.categories.list().then((category) => console.log(category.name));
+// By passing the product permalink as param.
+// `id`, `sku`, or  `permalink` are optional `type` values to pass in (default is `id`).
+commerce.products.retrieve('ABC123', { type: 'permalink' })
+  .then((product) => console.log(product.name));
 ```
 
-Example request using cURL:
-
-```bash
-$ curl -X GET \
-    -G "https://api.chec.io/v1/categories" \
-    -H "X-Authorization: {key}"
-```
-
-| Method | Description |
-| -------------------- | ----------- |
-| `list(params)`       | List all categories, either by filtered params or unfiltered |
-
-<div class="highlight highlight--note">
-<span>Note</span>
-  <p>Refer to the full response for listing categories <a href="/docs/api/?shell#categories">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#get-product">the full response for retrieving a product</a>.</p>
 </div>
 
 ---
-
-## Retrieve category
-
-The `retrieve()` method at the `GET v1/categories` API endpoint gets a specific category by permalink or ID.
-
-Example request using Commerce.js:
-
-```js
-import Commerce from '@chec/commerce.js';
-
-const commerce = new Commerce('{your_public_key}');
-
-// By passing category as param
-commerce.categories.retrieve('cat_7RqEv5xKOoZz4j').then((category) => console.log(category.name));
-
-// By passing slug/permalink as param
-commerce.categories.retrieve('category', { type: 'slug' })
-  .then((category) => console.log(category.name));
-```
-
-Example request using cURL:
-
-```bash
-curl -X GET \
-    -G "https://api.chec.io/v1/categories/cat_7RqEv5xKOoZz4j?type=slug" \
-    -H "X-Authorization: {key}"
-```
-
-| Method | Description |
-| -------------------- | ----------- |
-| `retrieve(id, data = {})`  |  Get a specific category by its ID. You may also provide `{ type: 'slug'}` as data and use a category slug instead of an ID.  |
-
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for retrieving a category <a href="/docs/api/?shell#retrieve-category">here</a>.</p>
-</div>
-
-## Products and Categories SDK reference
-
-Refer to the full list of all the available products and categories methods
-[here](/docs/sdk/full-sdk-reference#products).
-
----
-
-

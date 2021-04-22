@@ -59,7 +59,7 @@ We're almost ready to go! We need to create a new Commerce instance and give it 
 
 <div class="highlight highlight--info">
     <span>Tip</span>
-    <p>To read more about how we authenticate Chec's core endpoints, see <a href="/docs/sdk/concepts#authentication">here</a>.</p>
+    <p>For more information on API keys authentication, read more on <a href="/docs/sdk/concepts#authentication">how we authenticate Chec's core endpoints</a>.</p>
 </div>
 
 ```js

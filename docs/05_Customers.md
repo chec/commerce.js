@@ -2,7 +2,7 @@
 title: Customers
 description: 'The Customers endpoints in Commerce.js.'
 category: Customers
-position: 4
+position: 5
 ---
 
 This section of the documentation goes through the core [Customers](/docs/sdk/customers#send-login-token) endpoint. This
@@ -48,9 +48,9 @@ curl -X POST \
 | -------------------- | ----------- |
 | `login(email, baseUrl)`       | Issue and send login token |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for issuing and sending a login token <a href="/docs/api/?shell#issue-and-send-login-token">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#issue-and-send-login-token">the full response for issuing and sending a login token</a>.</p>
 </div>
 
 When this endpoint is called in a login flow, the subsequent method below to call would exchange the token for a JSON
@@ -60,7 +60,10 @@ web token to log the customer in to a protected route.
 
 ## Get access token
 
-Once a customer has entered their email address in the previous step and clicked on the one-time login link they received in their email, the link will send them back to your server (see https://yourwebsite.com/login/callback in the example above). In that callback handler, you can use the "get access token" method to exchange the token in the URL for a JSON web token.
+Once a customer has entered their email address in the previous step and clicked on the one-time login link they
+received in their email, the link will send them back to your server (see https://yourwebsite.com/login/callback in the
+example above). In that callback handler, you can use the "get access token" method to exchange the token in the URL for
+a JSON web token.
 
 The `getToken()` method uses `POST /v1/customers/exchange-token` to obtain a JSON web token scoped to the customer the
 provided token (returned from the `login()` method) belongs to. The returned JWT will be valid for 24 hours, and may be
@@ -91,14 +94,14 @@ curl -X POST \
 | -------------------- | ----------- |
 | `getToken(token, save = true)`  | Get access token |
 
-<div class="highlight highlight--info">
-    <span>Info</span>
+<div class="highlight highlight--note">
+    <span>Note</span>
     <p>If you do not want to save the customer in local session storage, pass false for the second argument <code>save</code>.</p>
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for getting an access token <a href="/docs/api/?shell#exchange-login-token-for-jwt">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#exchange-login-token-for-jwt">the full response for getting an access token</a>.</p>
 </div>
 
 ---
@@ -138,14 +141,14 @@ curl -X PUT \
 | -------------------- | ----------- |
 | `update(data = {}, customerId = null, token = null)`  | Update customer |
 
-<div class="highlight highlight--info">
-    <span>Info</span>
+<div class="highlight highlight--note">
+    <span>Note</span>
     <p>The <code>customerId</code> is optional - the customer's ID e.g. cstmr_ABC123, or <code>null</code> to use session. The <code>token</code> is also optional - access token for the customer, or <code>null</code> to use session.</p>
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for updating a customer <a href="/docs/api/?shell#update-customer">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#update-customer">the full response for updating a customer</a>.</p>
 </div>
 
 ---
@@ -177,14 +180,14 @@ curl -X GET \
 | -------------------- | ----------- |
 | `getOrders(customerId = null, token = null, params = {})`  | List orders for a customer |
 
-<div class="highlight highlight--info">
-    <span>Info</span>
+<div class="highlight highlight--note">
+    <span>Note</span>
     <p>The <code>customerId</code> is optional - the customer's ID e.g. cstmr_ABC123, or <code>null</code> to use session. The <code>token</code> is also optional - access token for the customer, or <code>null</code> to use session</p>. The <code>params</code> object is also optional.
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for listing orders for a customer <a href="/docs/api/?shell#list-orders-for-customer">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#list-orders-for-customer">the full response for listing orders for a customer</a>.</p>
 </div>
 
 ---
@@ -217,14 +220,14 @@ curl -X GET \
 | -------------------- | ----------- |
 | `getOrder(orderId, customerId = null, token = null)`  | Get order for customer |
 
-<div class="highlight highlight--info">
-    <span>Info</span>
+<div class="highlight highlight--note">
+    <span>Note</span>
     <p>The <code>customerId</code> is optional - the customer's ID e.g. cstmr_ABC123, or <code>null</code> to use session. The <code>token</code> is also optional - access token for the customer, or <code>null</code> to use session.</p>
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for retrieving an order for a customer <a href="/docs/api/?shell#get-order-for-customer">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#get-order-for-customer">the full response for retrieving an order for a customer</a>.</p>
 </div>
 
 ---
@@ -256,9 +259,9 @@ curl -X GET \
 | -------------------- | ----------- |
 | `about()`  | Gets information about the currently authorized customer |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for retrieving a customer by its ID <a href="/docs/api/?shell#get-customer">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#get-customer">the full response for retrieving a customer by its ID</a>.</p>
 </div>
 
 ---

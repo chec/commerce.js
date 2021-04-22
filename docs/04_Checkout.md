@@ -2,7 +2,7 @@
 title: Checkout
 description: 'The Checkout endpoint in Commerce.js.'
 category: Checkout
-position: 3
+position: 4
 ---
 
 The checkout resource is used to navigate your customers through the transaction and shipping stage of a purchasing
@@ -49,9 +49,9 @@ checkout page.
 </div>
 
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for generating a checkout token <a href="/docs/api/?shell#checkout">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#checkout">the full response for generating a checkout token</a>.</p>
 </div>
 
 ---
@@ -162,9 +162,9 @@ commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
     <p>When using PayPal, the response returned will contain the information required for you to redirect your customer to PayPal in order to complete their transaction. Read more <a href="/docs/sdk/concepts#tax-support">here</a> for required parameters to send when using PayPal, or <a href="https://developer.paypal.com/docs/archive/checkout/how-to/customize-flow/"> see here</a> for the PayPal documentation.</p>
 </div>
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for capturing a checkout <a href="/docs/api/?shell#checkout">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#checkout">the full response for capturing a checkout</a>.</p>
 </div>
 
 ---
@@ -189,9 +189,9 @@ commerce.checkout.getToken('chkt_L5z3kmQpdpkGlA').then((token) => console.log(to
 | -------------------- | ----------- |
 | `getToken(token)`  | Gets information about the checkout token  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for getting an existing checkout token <a href="/docs/api/?shell#get-existing-token">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#get-existing-token">the full response for getting an existing checkout token</a>.</p>
 </div>
 
 ---
@@ -224,9 +224,9 @@ Commerce.checkout.getLive('chkt_L5z3kmQpdpkGlA').then((response) => console.log(
 | -------------------- | ----------- |
 | `getLive(token)`  | Gets the current "live" object  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the live object <a href="/docs/api/?shell#get-the-live-object">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#get-the-live-object">the full response for getting the live object</a>.</p>
 </div>
 
 ---
@@ -255,9 +255,9 @@ commerce.checkout.checkPayWhatYouWant('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `checkPayWhatYouWant(token, data)`  | Checks whether a checkout has "pay what you want" enabled  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "Check Pay What You Want" request <a href="/docs/api/?shell#check-quot-pay-what-you-want-quot-amount">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-quot-pay-what-you-want-quot-amount">the full response for checking if "pay what you want" is enabled</a>.</p>
 </div>
 
 ---
@@ -294,11 +294,11 @@ commerce.checkout.checkVariant('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
 
 | Method | Description |
 | -------------------- | ----------- |
-| `checkVariant(checkoutTokenId, lineItemId, variantData)`  | Checks whether the provided variant is valid or available  |
+| `checkVariant(checkoutTokenId, lineItemId, variantData)`  | Checks whether the provided variant or variant group and variant option is valid or available  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "Check variant" request <a href="/docs/api/?shell#check-variant">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-variant">the full response for checking if the variant or variant group and variant option is valid</a>.</p>
 </div>
 
 ---
@@ -344,11 +344,11 @@ commerce.checkout.checkQuantity('chkt_L5z3kmQpdpkGlA', 'item_7RyWOwmK5nEa2V', {
 
 | Method | Description |
 | -------------------- | ----------- |
-| `checkQuantity(checkoutTokenId, lineItemId, variantData)`  | Checks whether the requested quantity for the line item or item variant is available |
+| `checkQuantity(checkoutTokenId, lineItemId, variantData)`  | Checks whether the requested quantity for the line item or item variant/variant group and option is available |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "Check requested quantity" request <a href="/docs/api/?shell#check-requested-quantity">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-requested-quantity">the full response for checking if requested quantity for the line item or variant/variant group and variant option is available</a>.</p>
 </div>
 
 ---
@@ -375,9 +375,9 @@ commerce.checkout.checkDiscount('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `checkDiscount(token, data)`  | Checks whether a discount code is valid  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "Check discount code" <a href="/docs/api/?shell#check-discount-code">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-discount-code">the full response for checking if a discount code is valid</a>.</p>
 </div>
 
 ---
@@ -406,11 +406,37 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `checkShippingOption(token, data)`  | Checks whether a shipping method is valid  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "Check Shipping Method <a href="/docs/api/?shell#check-shipping-method">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-shipping-method">the full response for checking if a shipping method is valid</a>.</p>
 </div>
 
+---
+
+## Check if checkout is free
+
+The `isFree()` method uses `GET /v1/checkouts/{checkout_token_id}/check/is_free` to determine whether the provided
+checkout token has a zero payable balance.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.isFree('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response.is_free));
+
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `isFree(token)`  | Checks whether a checkout has a zero payable balance  |
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#check-if-order-is-free">the full response for checking if a checkout is free</a>.</p>
+</div>
 
 ---
 
@@ -436,11 +462,18 @@ commerce.checkout.getShippingOptions('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `getShippingOptions(token, data)`  | Gets the available shipping options |
 
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#get-available-shipping-methods">the full response for getting the available shipping options</a>.</p>
+</div>
+
+---
+
 ## Set tax zone
 
-The `setTaxZone()` method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for the
-provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided in
-the request arguments.
+The `setTaxZone()` helper method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for
+the provided checkout token, either automatically from a provided IP address, or by the geographic data provided in the
+request arguments.
 
 Example request using Commerce.js:
 
@@ -461,14 +494,69 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
 | -------------------- | ----------- |
 | `setTaxZone(identifier, data)`  | Sets the geographic zone for tax calculation  |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for setting the tax zone <a href="/docs/api/?shell#set-tax-zone">here</a>.</p>
+<div class="highlight highlight--info">
+  <span>Info</span>
+  <p>For more information, refer to <a href="/docs/api/?shell#set-tax-zone">the full response for setting the tax zone</a>.</p>
 </div>
 
-### Checkout SDK reference
+---
 
-Refer to the full list of all the available checkout methods [here](/docs/sdk/full-sdk-reference#checkout).
+## Get location from IP
+
+The `getLocationFromIP()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/location_from_ip` to
+determine the buyer's physical location based on their IP address. This can be used to automatically select an
+appropriate shipping method during checkout. An IP address can either be provided, or it will be detected automatically.
+Please note that if the endpoint is called from a server-side request, the resolved IP will be that of your web server.
+In this case you must provide the IP address of the customer yourself.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.getLocationFromIP('chkt_L5z3kmQpdpkGlA', '123.45.67.89').then((address) => console.log(address));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getLocationFromIP(token, ipAddress = '')`  | Gets a location from the provided (or your own) IP address |
+
+<div class="highlight highlight--info">
+  <span>Info</span>
+  <p>For for information, refer to <a href="/docs/api/?shell#get-buyer-039-s-location-from-ip">the full response for getting the buyer's location from the IP address</a>.</p>
+</div>
+
+
+---
+
+## Get validation rules
+
+The `helperValidation()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/validation` to generate
+client-side validation rules which can be passed directly into most JavaScript validation libraries. Ensure the form
+input names match the names in the response e.g. `shipping[name]` is used as the value for the `name` attribute in your
+shipping name input field.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.checkout.helperValidation('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response.rules));
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `helperValidation(token)`  | Gets any applicable validation rules  |
+
+<div class="highlight highlight--info">
+  <span>Info</span>
+  <p>For more information, refer to <a href="/docs/api/?shell#get-client-side-validation-rules">the full response for getting client-side validation rules</a>.</p>
+</div>
+
 
 ---
 
@@ -496,9 +584,9 @@ commerce.services.localeListCountries().then((response) => console.log(response)
 | -------------------- | ----------- |
 | `localeListCountries()` | List all countries |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "List all countries" request <a href="/docs/api/?shell#list-all-countries">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#list-all-countries">the full response for listing all countries registered in the Chec platform</a>.</p>
 </div>
 
 ---
@@ -506,9 +594,9 @@ commerce.services.localeListCountries().then((response) => console.log(response)
 ## List all subdivisions for a country
 
 The `localeListSubdivisions()` method uses `GET v1/services/locale/{country_code}/subdivisions` to return a list of all
-subdivisions (states, provinces, or regions) for that country, given a valid country code is provided. See [List
-available shipping subdivisions for country](#list-available-shipping-subdivisions) for an equivalent list of
-subdivisions that can be shipped to for your account.
+subdivisions (states, provinces, or regions) for a country, given a valid country code is provided. See [List available
+shipping subdivisions for country](#list-available-shipping-subdivisions) for an equivalent list of subdivisions that
+can be shipped to for your account.
 
 Example request using Commerce.js:
 
@@ -524,9 +612,9 @@ commerce.services.localeListSubdivisions('US').then((response) => console.log(re
 | -------------------- | ----------- |
 | `localeListSubdivisions()` | List all subdivisions (states, provinces, or regions) |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for "List all Subdivisions for a Country" request <a href="/docs/api/?shell#list-all-subdivisions-for-a-country">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#list-all-subdivisions-for-a-country">the full response for listing all subdivisions for a country</a>.</p>
 </div>
 
 ---
@@ -548,9 +636,9 @@ Commerce.services.localeListShippingCountries('chkt_L5z3kmQpdpkGlA').then((respo
 | -------------------- | ----------- |
 | `localeListShippingCountries(token)` | List all countries that can be shipped to for a checkout token |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "List available shipping countries" request <a href="/docs/api/?shell#list-available-shipping-countries">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/?shell#list-available-shipping-countries">the full response for listing available shipping countries</a>.</p>
 </div>
 
 ## List available shipping subdivisions
@@ -571,13 +659,9 @@ Commerce.services.localeListShippingSubdivisions('chkt_L5z3kmQpdpkGlA', 'US').th
 | -------------------- | ----------- |
 | `localeListShippingSubdivisions(token, countryCode)` | List all subdivisions/regions/states in a country which can be shipped to for the current checkout. |
 
-<div class="highlight highlight--note">
-    <span>Note</span>
-    <p>Refer to the full response for the "List available shipping subdivisions" request <a href="/docs/api/#list-available-shipping-subdivisions-for-country">here</a>.</p>
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#list-available-shipping-subdivisions-for-country">the full response for listing all subdivisions in a shipping country</a>.</p>
 </div>
-
-### Services SDK reference
-
-Refer to the full list of all the available services methods [here](/docs/sdk/full-sdk-reference#services).
 
 ---
