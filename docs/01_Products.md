@@ -5,7 +5,7 @@ category: Products
 position: 1
 ---
 
-This section of the documentation goes through the core [products](#list-products) resource. Anytime we indicate
+This section of the documentation goes through the core [products](#list-products) resource. Any time we indicate
 **product catalog**, we are referring to entities that you would work with when developing your product listing or
 product detail pages.
 
@@ -49,7 +49,6 @@ You can filter your products list by passing these optional parameters below:
 
 | Parameter | Description |
 | -------------------- | ----------- |
-| `active` | Filter products by their active status (either 1 or 0) |
 | `category_slug` | Filter by an array of category slugs, where all categories apply to the product |
 | `category_id` | Filter by an array of category IDs, where all categories apply to the product |
 | `limit` | The maximum number of products that will be returned (default: 25, maximum: 200) |
@@ -86,18 +85,6 @@ commerce.products.list({
 }).then((response) => console.log(response.data));
 ```
 
-Example request listing products with the active parameter:
-
-```js
-import Commerce from '@chec/commerce.js';
-
-const commerce = new Commerce('{your_public_key}');
-
-commerce.products.list({
-  active: 1,
-}).then(response => response.data);
-```
-
 Example request listing products with a query parameter:
 
 ```js
@@ -116,7 +103,7 @@ commerce.products.list({
 </div>
 
 Once you've got your product data you can populate your product listing view. The response here will include everything
-you need to build this view, such as metadata, assets, variants and options, conditionals, and prices.
+you need to build this view, such as metadata, assets, variant groups and variant options, conditionals, and prices.
 
 ---
 

@@ -413,10 +413,10 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 ---
 
-## Check is free
+## Check if checkout is free
 
 The `isFree()` method uses `GET /v1/checkouts/{checkout_token_id}/check/is_free` to determine whether the provided
-checkout token's order has a zero payable balance.
+checkout token has a zero payable balance.
 
 Example request using Commerce.js:
 
@@ -468,7 +468,7 @@ commerce.checkout.getShippingOptions('chkt_L5z3kmQpdpkGlA', {
 ## Set tax zone
 
 The `setTaxZone()` helper method uses `GET v1/checkouts/{checkout_token_id}/helper/set_tax_zone` to set the tax zone for
-the provided checkout token's order, either automatically from a provided IP address, or by the geographic data provided
+the provided checkout token, either automatically from a provided IP address, or by the geographic data provided
 in the request arguments.
 
 Example request using Commerce.js:
@@ -501,7 +501,7 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
 
 The `getLocationFromIP()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/location_from_ip` to
 determine the buyer's physical location based on their IP address. This can be used to automatically select an
-appropriate shipping method during checkout. An IP address can either be provided to be resolved, or it will be detected
+appropriate shipping method during checkout. An IP address can either be provided, or it will be detected
 automatically. Please note that if the endpoint is called from a server-side request, the resolved IP will be that of
 your web server. In this case you must provide the IP address of the customer yourself.
 
@@ -517,7 +517,7 @@ commerce.checkout.getLocationFromIP('chkt_L5z3kmQpdpkGlA', '123.45.67.89').then(
 
 | Method | Description |
 | -------------------- | ----------- |
-| `getLocationFromIP(token, ipAddress)`  | Gets a location from the provided (or your own) IP address |
+| `getLocationFromIP(token, ipAddress = '')`  | Gets a location from the provided (or your own) IP address |
 
 <div class="highlight highlight--note">
   <span>Note</span>
