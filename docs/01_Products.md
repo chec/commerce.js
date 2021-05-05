@@ -64,7 +64,7 @@ const commerce = new Commerce('{your_public_key}');
 
 // Fetch products specifying a category slug
 commerce.products.list({
-  category_slug: 'shoes',
+  category_slug: ['shoes'],
 }).then(response => response.data);
 
 // Fetch products specifying multiple category slugs
