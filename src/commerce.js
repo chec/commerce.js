@@ -18,6 +18,7 @@ class Commerce {
       version: 'v1',
       url: 'https://api.chec.io/',
       eventCallback: defaultEventCallback,
+      disableStorage: false,
       ...config,
       publicKey: publicKey,
       debug: debug,

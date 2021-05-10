@@ -38,6 +38,15 @@ Our documentation module source code resides in `commerce.js/docs`
 
 If you would like to make contributions to the Commerce.js documentation source, here is a [guide](https://github.com/chec/commerce.js/blob/master/CONTRIBUTING.md) in doing so.
 
+## Configuration
+
+The following configuration options are available to be defined as the third argument in the Commerce constructor:
+
+* `disableStorage`: Whether to disable persistent storage (e.g. cookies). Enable for use in server-side environments. Default: false.
+* `timeoutMs`: The number of milliseconds before a request will time out. Default: 60000.
+* `axiosConfig`: An optional object containing configuration options for axios, if used.
+  * `headers`: A list of request headers. Defining headers here will override the defaults.
+
 ## Upgrading
 
 ### Upgrading to 2.4.0
