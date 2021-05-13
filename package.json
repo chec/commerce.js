@@ -38,7 +38,6 @@
     "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
-    "@babel/runtime": "^7.7.4",
     "caniuse-lite": "^1.0.30001228",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.3.0",
@@ -65,6 +64,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "@babel/runtime": "^7.7.4"
   }
 }
