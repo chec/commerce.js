@@ -137,6 +137,12 @@ class Commerce {
         // Run our own error handler, then wrap the promise rejection in our own error object
         .catch(error => {
           this.error(error);
+
+          // If the request wasn't even sent, then throw the error as it could be something environmental
+          if (!error.response) {
+            throw error;
+          }
+
           throw {
             message: `Unsuccessful response (${error.response.status}: ${error.response.statusText}) received`,
             statusCode: error.response.status,
