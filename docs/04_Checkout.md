@@ -73,8 +73,8 @@ commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
   line_items: {
     item_7RyWOwmK5nEa2V: {
       quantity: 1,
-      variants: {
-        [selected_options[0].group_id]: selected_options[0].option_id
+      selected_options: {
+        vgrp_p6dP5g0M4ln7kA: 'optn_DeN1ql93doz3ym'
       }
     }
   },
