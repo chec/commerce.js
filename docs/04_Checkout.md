@@ -74,7 +74,7 @@ commerce.checkout.capture('chkt_959gvxcZ6lnJ7', {
     item_7RyWOwmK5nEa2V: {
       quantity: 1,
       variants: {
-        vgrp_p6dP5g0M4ln7kA: 'optn_DeN1ql93doz3ym'
+        [selected_options[0].group_id]: selected_options[0].option_id
       }
     }
   },
