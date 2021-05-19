@@ -28,6 +28,35 @@ class Products {
   retrieve(id, data = {}) {
     return this.commerce.request(`products/${id}`, 'get', data);
   }
+
+  /**
+   * List variants for a product
+   *
+   * @param {string} productId
+   * @param {object|null} params
+   * @returns {Promise}
+   */
+  getVariants(productId, params = null) {
+    return this.commerce.request(
+      `products/${productId}/variants`,
+      'get',
+      params,
+    );
+  }
+
+  /**
+   * Get variant for a product
+   *
+   * @param {string} productId
+   * @param {string} variantId
+   * @returns {Promise}
+   */
+  getVariant(productId, variantId) {
+    return this.commerce.request(
+      `products/${productId}/variants/${variantId}`,
+      'get',
+    );
+  }
 }
 
 // TODO: Search by ID or Permalink

@@ -148,3 +148,74 @@ commerce.products.retrieve('ABC123', { type: 'permalink' })
 </div>
 
 ---
+
+## Get variants
+
+The `getVariants()` method uses `GET v1/products/{product_id}/variants` to list the available variants for a specific
+product. You can use standard pagination parameters such as `limit` and `page` to control the paginated results.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.getVariants('prod_7RqEv5xKOoZz4j', {
+  limit: 150,
+  page: 3,
+}).then((variants) => console.log(variants.data));
+```
+
+Example request using cURL:
+
+```bash
+curl -X GET \
+    -G "https://api.chec.io/v1/products/prod_7RqEv5xKOoZz4j/variants?limit=150&page=3" \
+    -H "X-Authorization: {key}"
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getVariants(productId, params = {})`  | Get a list of variants for a specific product |
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#list-variants">the full response for getting the list of variants for a product</a>.</p>
+</div>
+
+
+---
+
+## Get variant
+
+The `getVariant()` method uses `GET v1/products/{product_id}/variants/{variant_id}` to get a variant for a product.
+
+Example request using Commerce.js:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.getVariant('prod_7RqEv5xKOoZz4j', 'vrnt_G6kVw73vaw2eDx').then((variant) => console.log(variant));
+```
+
+Example request using cURL:
+
+```bash
+curl -X GET \
+    -G "https://api.chec.io/v1/products/prod_7RqEv5xKOoZz4j/variants/vrnt_G6kVw73vaw2eDx" \
+    -H "X-Authorization: {key}"
+```
+
+| Method | Description |
+| -------------------- | ----------- |
+| `getVariant(productId, variantId)`  | Get a variant for a specific product |
+
+<div class="highlight highlight--info">
+    <span>Info</span>
+    <p>For more information, refer to <a href="/docs/api/#get-variant">the full response for getting a variant for a product</a>.</p>
+</div>
+
+---

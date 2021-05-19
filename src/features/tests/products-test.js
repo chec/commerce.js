@@ -48,4 +48,31 @@ describe('Products', () => {
       expect(returnValue).toBe('return');
     });
   });
+
+  describe('getVariants', () => {
+    it('proxies the request method', () => {
+      const products = new Products(mockCommerce);
+      const returnValue = products.getVariants('SKU-123', { page: 12 });
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'products/SKU-123/variants',
+        'get',
+        { page: 12 },
+      );
+      expect(returnValue).toBe('return');
+    });
+  });
+
+  describe('getVariant', () => {
+    it('proxies the request method', () => {
+      const products = new Products(mockCommerce);
+      const returnValue = products.getVariant('SKU-123', 'vrnt_ABC123');
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'products/SKU-123/variants/vrnt_ABC123',
+        'get',
+      );
+      expect(returnValue).toBe('return');
+    });
+  });
 });
