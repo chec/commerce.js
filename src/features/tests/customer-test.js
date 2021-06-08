@@ -60,7 +60,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
   });
@@ -105,7 +104,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
 
       const result = await returnValue;
@@ -143,7 +141,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
 
@@ -160,7 +157,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
   });
@@ -184,7 +180,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
 
@@ -222,7 +217,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
 
@@ -242,7 +236,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
   });
@@ -260,7 +253,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
 
@@ -295,7 +287,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
 
@@ -312,7 +303,6 @@ describe('Customer', () => {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
         },
-        'ABC-123-ZYX-234',
       );
     });
   });
