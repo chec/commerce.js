@@ -199,7 +199,6 @@ class Customer {
         Authorization: `Bearer ${authToken}`,
         ...extraHeaders,
       },
-      authToken,
     );
   }
 
