@@ -27,6 +27,7 @@ beforeEach(() => {
       url: 'http://localhost/',
       publicKey: 'test',
       version: 'v1',
+      cartLifetime: 30,
     },
     cart: {
       cart_id: null,
@@ -160,6 +161,19 @@ describe('Cart', () => {
         'commercejs_cart_id',
         '12345',
         30,
+      );
+      expect(newCart).toHaveProperty('id');
+    });
+
+    it('respects custom cartLifetime config', async () => {
+      mockCommerce.options.cartLifetime = 5;
+      const cart = new Cart(mockCommerce);
+      const newCart = await cart.refresh();
+
+      expect(storageSetMock).toHaveBeenCalledWith(
+        'commercejs_cart_id',
+        '12345',
+        5,
       );
       expect(newCart).toHaveProperty('id');
     });
