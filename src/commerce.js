@@ -19,6 +19,7 @@ class Commerce {
       url: 'https://api.chec.io/',
       eventCallback: defaultEventCallback,
       disableStorage: false,
+      cartLifetime: 30,
       ...config,
       publicKey: publicKey,
       debug: debug,
@@ -31,6 +32,12 @@ class Commerce {
     if (publicKey.toLowerCase().substring(0, 3) === 'sk_') {
       throw new Error(
         'Secret key provided. You must use a public key with Commerce.js!',
+      );
+    }
+
+    if (this.options.cartLifetime <= 0 || this.options.cartLifetime > 30) {
+      throw new Error(
+        'cartLifetime configuration option must be between 1 and 30 days',
       );
     }
 

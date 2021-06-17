@@ -17,7 +17,11 @@ class Cart {
   refresh() {
     return this.commerce.request('carts').then(cart => {
       const { id } = cart;
-      this.commerce.storage.set('commercejs_cart_id', id, 30);
+      this.commerce.storage.set(
+        'commercejs_cart_id',
+        id,
+        this.commerce.options.cartLifetime,
+      );
       this.cartId = id;
       return cart;
     });

@@ -43,6 +43,7 @@ If you would like to make contributions to the Commerce.js documentation source,
 The following configuration options are available to be defined as the third argument in the Commerce constructor:
 
 * `disableStorage`: Whether to disable persistent storage (e.g. cookies). Enable for use in server-side environments. Default: false.
+* `cartLifetime`: Number of days that a cart should be stored for (between 1 and 30). Default: 30.
 * `timeoutMs`: The number of milliseconds before a request will time out. Default: 60000.
 * `axiosConfig`: An optional object containing configuration options for axios, if used.
   * `headers`: A list of request headers. Defining headers here will override the defaults.
