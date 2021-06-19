@@ -83,7 +83,7 @@ const consoleHelper = (color = 'black', a, b, c) => {
 
 const debuggerOnNotice = () => {
   // Do not run the console debugger notice when in CLI/node context
-  if (window === undefined) {
+  if (typeof window === 'undefined') {
     return;
   }
   const ascii =
