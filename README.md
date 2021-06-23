@@ -28,7 +28,16 @@ Build custom eCommerce experiences to sell physical and digital products from th
 
 ### With NPM
 
-`npm install @chec/commerce.js`
+`npm install @chec/commerce.js` or `yarn add @chec/commerce.js`
+
+### TypeScript
+
+You may also install our TypeScript definitions:
+
+`npm install @types/chec__commerce.js` or `yarn add @types/chec__commerce.js`
+
+Note that when using TypeScript, the definitions are always compliant with our latest version of the API. If you specify a custom API version, or your API
+key uses an older version, you may get type errors.
 
 ## Documentation
 
@@ -82,7 +91,7 @@ The `cart.add()` method now separates its arguments:
 ## Contributing
 Check out the [contributing guide](CONTRIBUTING.md)
 
-### Get Help
+### Get help
 
 Commerce.js is a project by [many contributors](https://github.com/chec/commerce.js/graphs/contributors). Reach us on [Slack](http://slack.commercejs.com) and [Twitter](https://twitter.com/commercejs).
 
