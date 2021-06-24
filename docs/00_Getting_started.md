@@ -62,6 +62,8 @@ yarn add @chec/commerce.js @types/chec__commerce.js
 key uses an older version, you may get type errors.</p>
 </div>
 
+### Instantiate Commerce with your API key
+
 We're almost ready to go! We need to create a new Commerce instance and give it our [public
 key](/docs/sdk/concepts#scope) (you can get your API keys from [Chec Dashboard > Settings >
 Developer](https://dashboard.chec.io/settings/developer)).
