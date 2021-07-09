@@ -15,7 +15,10 @@ class Storage {
    * @returns {null}
    */
   set(key, value, days) {
-    if (!document || this.commerce.options.disableStorage) {
+    if (
+      typeof document === 'undefined' ||
+      this.commerce.options.disableStorage
+    ) {
       return null;
     }
 
@@ -46,7 +49,10 @@ class Storage {
    * @returns {string|null}
    */
   get(key) {
-    if (!document || this.commerce.options.disableStorage) {
+    if (
+      typeof document === 'undefined' ||
+      this.commerce.options.disableStorage
+    ) {
       return null;
     }
 
