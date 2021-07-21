@@ -51,7 +51,7 @@ You can filter your products list by passing these optional parameters below:
 | -------------------- | ----------- |
 | `category_slug` | Filter by an array of category slugs, where all categories apply to the product |
 | `category_id` | Filter by an array of category IDs, where all categories apply to the product |
-| `limit` | The maximum number of products that will be returned (default: 25, maximum: 200) |
+| `limit` | The maximum number of products that will be returned (default: 20, maximum: 200) |
 | `query` | Filter by a term that will be matched against the product's ID (exactly), permalink, and name |
 
 
