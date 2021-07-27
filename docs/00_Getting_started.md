@@ -97,7 +97,7 @@ Browse through the rest of our documentation to explore all the features of Comm
 products](/docs/sdk/products#list-products), [add products to cart](/docs/sdk/cart#add-to-cart), or [capture an
 order](/docs/sdk/checkout#capture-order). Note that all requests made using the Commerce.js SDK will have responses that
 are returned asynchronously in a promise. Alternatively, if you want to dive more into reading a high-level overview of
-Commerce.js and its features, read more [here](/docs/sdk/full-sdk-reference#introduction).
+Commerce.js and its features, read more [here](/product/features).
 
 
 <div class="highlight highlight--warn">
