@@ -26,8 +26,14 @@ describe('Commerce', () => {
       expect(() => {
         new Commerce('sk_9w8h598s4t9st');
       }).toThrowError(
-        'Secret key provided. You must use a public key with Commerce.js!',
+        'Secret key provided. You must use a public key with Commerce.js, or use `allowSecretKey` in the config object.',
       );
+    });
+
+    it('allows use of a secret key', () => {
+      expect(() => {
+        new Commerce('sk_9w8h598s4t9st', false, { allowSecretKey: true });
+      }).not.toThrowError();
     });
 
     it('ensures that cart lifetime is positive', () => {

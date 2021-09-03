@@ -25,7 +25,7 @@ beforeEach(() => {
   const commerceImpl = {
     options: {
       url: 'http://localhost/',
-      publicKey: 'test',
+      apiKey: 'test',
       version: 'v1',
       cartLifetime: 30,
     },

@@ -56,6 +56,7 @@ The following configuration options are available to be defined as the third arg
 * `timeoutMs`: The number of milliseconds before a request will time out. Default: 60000.
 * `axiosConfig`: An optional object containing configuration options for axios, if used.
   * `headers`: A list of request headers. Defining headers here will override the defaults.
+* `allowSecretKey`: Commerce.js will prevent you from using a secret API key for authorization. Use this option to override. Default: false.
 
 ## Upgrading
 

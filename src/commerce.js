@@ -30,9 +30,12 @@ class Commerce {
       throw new Error('⚠️ Invalid public key given to Commerce.js client');
     }
 
-    if (!config.allowSecretKey && apiKey.toLowerCase().substring(0, 3) === 'sk_') {
+    if (
+      !config.allowSecretKey &&
+      apiKey.toLowerCase().substring(0, 3) === 'sk_'
+    ) {
       throw new Error(
-        'Secret key provided. You must use a public key with Commerce.js, or explicitly allow secret keys in the config object.',
+        'Secret key provided. You must use a public key with Commerce.js, or use `allowSecretKey` in the config object.',
       );
     }
 
