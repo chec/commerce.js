@@ -13,7 +13,7 @@ const defaultEventCallback = e => {
 };
 
 class Commerce {
-  constructor(publicKey, debug = false, config = {}) {
+  constructor(apiKey, debug = false, config = {}) {
     this.options = {
       version: 'v1',
       url: 'https://api.chec.io/',
@@ -21,18 +21,20 @@ class Commerce {
       disableStorage: false,
       cartLifetime: 30,
       ...config,
-      publicKey: publicKey,
-      debug: debug,
+      apiKey,
+      debug,
     };
 
-    if (typeof publicKey !== 'string' || publicKey.length === 0) {
+    if (typeof apiKey !== 'string' || apiKey.length === 0) {
       throw new Error('⚠️ Invalid public key given to Commerce.js client');
     }
 
-    if (publicKey.toLowerCase().substring(0, 3) === 'sk_') {
-      throw new Error(
-        'Secret key provided. You must use a public key with Commerce.js!',
-      );
+    if (apiKey.toLowerCase().substring(0, 3) === 'sk_') {
+      if (!config.allowSecretKey) {
+        throw new Error(
+          'Secret key provided. You must use a public key with Commerce.js, or explicitly allow secret keys in the config object.',
+        );
+      }
     }
 
     if (this.options.cartLifetime <= 0 || this.options.cartLifetime > 30) {
@@ -77,7 +79,7 @@ class Commerce {
     returnFullResponse = false,
   ) {
     const headers = {
-      'X-Authorization': this.options.publicKey,
+      'X-Authorization': this.options.apiKey,
       'X-Chec-Agent': 'commerce.js/v2',
       'Content-Type': 'application/json',
     };
