@@ -20,6 +20,7 @@ class Commerce {
       eventCallback: defaultEventCallback,
       disableStorage: false,
       cartLifetime: 30,
+      allowSecretKey: false,
       ...config,
       apiKey,
       debug,
@@ -29,12 +30,10 @@ class Commerce {
       throw new Error('⚠️ Invalid public key given to Commerce.js client');
     }
 
-    if (apiKey.toLowerCase().substring(0, 3) === 'sk_') {
-      if (!config.allowSecretKey) {
-        throw new Error(
-          'Secret key provided. You must use a public key with Commerce.js, or explicitly allow secret keys in the config object.',
-        );
-      }
+    if (!config.allowSecretKey && apiKey.toLowerCase().substring(0, 3) === 'sk_') {
+      throw new Error(
+        'Secret key provided. You must use a public key with Commerce.js, or explicitly allow secret keys in the config object.',
+      );
     }
 
     if (this.options.cartLifetime <= 0 || this.options.cartLifetime > 30) {
