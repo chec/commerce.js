@@ -9,13 +9,12 @@ class Checkout {
   }
 
   /**
+   * @deprecated This API no longer exists, the method will be removed in Commerce.js 3.0
    * @param {string} token
    * @return {Promise}
    */
   protect(token) {
-    return this.commerce.request(`checkouts/${token}/protect`).then(
-      data => eval(data.sift_js), // todo remove this, or document if it is safe
-    );
+    return new Promise(resolve => resolve(null));
   }
 
   /**
