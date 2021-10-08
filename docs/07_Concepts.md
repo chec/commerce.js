@@ -97,6 +97,36 @@ be cleared from the Chec Dashboard, and will automatically use the "Test Gateway
 
 ---
 
+## Versioning
+
+The underlying Chec API that powers Commerce.js is versioned. As time passes, new versions of the API are released that
+cause changes to the way that Commerce.js accepts requests and responds to them. For example, a version may change the name of a field
+in the response so that it's more consistent with other responses.
+
+Not keeping up to date might mean that the performance of Commerce.js is degraded, and you are not able to take
+advantage of new features as they are released. It should be relatively trivial to update your implementation to use a
+new version, but leaving it might mean that you will have to update several versions in one go that can increase the
+complexity. In general, we recommend spending a little time more often to keep up to date, rather than spending a lot of
+effort less often.
+
+In order to update the version of the API that Commerce.js uses, you may either:
+
+- Update the version that is tied to your API key in the [Chec dashboard](https://dashboard.chec.io/developer/api-keys),
+or
+- Specify the version of the API to use when creating you Commerce instance:
+
+```js
+const commerce = new Commerce('{public_api_key}', false, {
+  axiosConfig: {
+    headers: {
+      'Chec-Version': '2021-09-29'
+    },
+  },
+});
+```
+
+---
+
 ## Checkout tokens
 
 Checkout tokens need to be generated before you are able to **capture an order**. A [checkout
