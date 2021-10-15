@@ -22,16 +22,24 @@ class Storage {
       return null;
     }
 
-    let path;
+    let path = '/';
     let expires = '';
+    let samesite = 'lax';
+    let secure = '';
 
-    if (
-      !this.commerce.options.config ||
-      typeof this.commerce.options.config.cookie_path === 'undefined'
-    ) {
-      path = '/';
-    } else {
-      path = this.commerce.options.config.cookie_path;
+    if (this.commerce.options.config) {
+      if (typeof this.commerce.options.config.cookie_path !== 'undefined') {
+        path = this.commerce.options.config.cookie_path;
+      }
+      if (typeof this.commerce.options.config.cookie_samesite !== 'undefined') {
+        samesite = this.commerce.options.config.cookie_samesite;
+      }
+      if (
+        typeof this.commerce.options.config.cookie_secure !== 'undefined' &&
+        this.commerce.options.config.cookie_secure
+      ) {
+        secure = '; secure';
+      }
     }
 
     if (days) {
@@ -39,7 +47,17 @@ class Storage {
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = '; expires=' + date.toUTCString();
     }
-    return (document.cookie = key + '=' + value + expires + '; path=' + path);
+
+    document.cookie =
+      key +
+      '=' +
+      value +
+      expires +
+      '; path=' +
+      path +
+      '; samesite=' +
+      samesite +
+      secure;
   }
 
   /**
