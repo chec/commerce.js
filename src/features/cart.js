@@ -55,7 +55,11 @@ class Cart {
       typeof endpoint === 'string' && endpoint.length ? `/${endpoint}` : '';
 
     if (!this.id()) {
-      await this.refresh();
+      const refreshedCart = await this.refresh();
+      // If we are retrieving a cart we can return the refreshed cart now
+      if (method === 'get' && endpoint === '') {
+        return refreshedCart;
+      }
     }
 
     return this.commerce
