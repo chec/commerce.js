@@ -246,11 +246,20 @@ describe('Cart', () => {
       storageGetMock.mockReturnValue('12345');
       await cart.retrieve();
 
+      expect(axios).toHaveBeenCalledTimes(1);
       expect(axios).toHaveBeenCalledWith(
         expect.objectContaining({
           url: 'carts/12345',
         }),
       );
+    });
+
+    it('only asks for a fresh cart once', async () => {
+      const cart = new Cart(mockCommerce);
+      storageGetMock.mockReturnValue(null);
+      await cart.retrieve();
+
+      expect(axios).toHaveBeenCalledTimes(1);
     });
 
     it('uses a given cart ID', async () => {
