@@ -109,7 +109,7 @@ you need to build this view, such as metadata, assets, variant groups and varian
 
 ## Retrieve product
 
-![Products diagram](https://cdn.chec.io/chec-assets/Product%20diagram.svg)
+![Products diagram](https://cdn.chec.io/chec-assets/Product%20diagram.png)
 
 The `retrieve()` method uses `GET v1/products/{product_id}` to retrieve a specific product from the merchant account.
 
@@ -153,7 +153,7 @@ commerce.products.retrieve('ABC123', { type: 'permalink' })
 
 ## Get variants
 
-![Product variants diagram](https://cdn.chec.io/chec-assets/Product%20diagram.svg)
+![Product variants diagram](https://cdn.chec.io/chec-assets/Product%20diagram.png)
 
 The `getVariants()` method uses `GET v1/products/{product_id}/variants` to list the available variants for a specific
 product. You can use standard pagination parameters such as `limit` and `page` to control the paginated results.

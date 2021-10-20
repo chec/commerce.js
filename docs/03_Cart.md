@@ -13,7 +13,7 @@ This feature comes equipped with multiple intuitive endpoints to help develop a 
 
 ## Retrieve cart
 
-![Cart diagram](https://cdn.chec.io/chec-assets/Cart%20diagram.svg)
+![Cart diagram](https://cdn.chec.io/chec-assets/Cart%20diagram.png)
 
 In order to start adding products to your cart, you'll need to first create a cart. When you first call the method
 `retrieve()` using `GET v1/carts`, it will automatically create a cart for you if a cart does not exist yet or a current
