@@ -14,9 +14,9 @@ A customer in **Chec** is anyone who makes a purchase and has the ability to cre
 customers endpoint will return the full customers object with data to create a customer's authorized view containing
 information such as their contact name and list of orders.
 
+![Customers diagram](https://cdn.chec.io/chec-assets/Customer%20diagram.svg)
+
 ---
-
-
 ## Send login token
 
 This endpoint helps to authenticate and resolve a customer in the merchant account by accepting an email address as an

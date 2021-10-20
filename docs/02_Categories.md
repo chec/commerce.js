@@ -47,6 +47,8 @@ $ curl -X GET \
 
 ## Retrieve category
 
+![Categories diagram](https://cdn.chec.io/chec-assets/Category%20diagram.svg)
+
 The `retrieve()` method uses the `GET /v1/categories/{id}` API endpoint to get a specific category by permalink or ID.
 
 Example request using Commerce.js:
