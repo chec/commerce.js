@@ -16,7 +16,7 @@ resource.
 
 ## Generate token
 
-![Checkout diagram](https://cdn.chec.io/chec-assets/Checkout%20diagram.svg)
+![Checkout diagram](https://cdn.chec.io/chec-assets/Checkout%20diagram.png)
 
 The `generateToken()` method uses `GET v1/checkouts/{id}` to generate a [checkout
 token](/docs/sdk/concepts#checkout-tokens) which can be used to initiate the process of capturing an order from a cart.
