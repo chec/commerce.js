@@ -55,10 +55,25 @@ describe('Customer', () => {
       expect(requestMock).toHaveBeenLastCalledWith(
         'customers/cstmr_QWERTY',
         'get',
-        null,
+        {},
         {
           'X-Authorization': undefined,
           Authorization: 'Bearer ABC-123-ZYX-234',
+        },
+      );
+    });
+
+    it('accepts ID and token arguments', () => {
+      const customer = new Customer(mockCommerce);
+      customer.about('cstmr_ABC123', 'BCD-234-CBD-345');
+
+      expect(requestMock).toHaveBeenLastCalledWith(
+        'customers/cstmr_ABC123',
+        'get',
+        {},
+        {
+          'X-Authorization': undefined,
+          Authorization: 'Bearer BCD-234-CBD-345',
         },
       );
     });
