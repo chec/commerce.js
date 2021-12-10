@@ -1,7 +1,8 @@
 {
   "name": "@chec/commerce.js",
-  "version": "2.8.0",
-  "main": "lib/index.js",
+  "version": "3.0.0-alpha1",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "description": "Easy to use JavaScript SDK for managing carts and selling products from your Chec store",
   "homepage": "https://commercejs.com",
   "keywords": [
@@ -24,47 +25,24 @@
     "url": "https://github.com/chec/commerce.js/issues/new"
   },
   "scripts": {
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "prepublishOnly": "rollup -c"
+    "lint": "eslint src --max-warnings 0 --ext .ts",
+    "build": "yarn lint && rimraf dist/* && tsc --declaration --declarationDir \"dist\" && rollup -c"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/plugin-transform-runtime": "^7.7.4",
-    "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.2",
-    "caniuse-lite": "^1.0.30001228",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "jest": "^26.5.2",
-    "jest-cli": "^24.9.0",
-    "prettier": "^1.18.2",
-    "rollup": "^2.29.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@types/jest": "^27.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.4.1",
+    "jest": "^27.4.3",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.61.0",
+    "ts-jest": "^27.1.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.3"
   },
-  "jest": {
-    "testRegex": ".*-test.jsx?$",
-    "setupFiles": [
-      "<rootDir>/jest.init.js"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.7.4",
-    "axios": "^0.21.1"
-  }
+  "dependencies": {}
 }
