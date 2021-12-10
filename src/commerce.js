@@ -3,6 +3,7 @@ import Storage from './storage';
 import Features from './features';
 import { consoleHelper, debuggerOnNotice } from './console';
 import axios from 'axios';
+import qs from 'qs';
 
 const defaultEventCallback = e => {
   const _e = new CustomEvent(`Commercejs.${e}`, {
@@ -107,6 +108,7 @@ class Commerce {
       data: requestBody,
       timeout,
       ...axiosConfig,
+      paramsSerializer: params => qs.stringify(params),
       headers: { ...headers, ...axiosConfig.headers, ...extraHeaders },
     });
 
