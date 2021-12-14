@@ -415,33 +415,6 @@ commerce.checkout.checkShippingOption('chkt_L5z3kmQpdpkGlA', {
 
 ---
 
-## Check if checkout is free
-
-The `isFree()` method uses `GET /v1/checkouts/{checkout_token_id}/check/is_free` to determine whether the provided
-checkout token has a zero payable balance.
-
-Example request using Commerce.js:
-
-```js
-import Commerce from '@chec/commerce.js';
-
-const commerce = new Commerce('{your_public_key}');
-
-commerce.checkout.isFree('chkt_L5z3kmQpdpkGlA').then((response) => console.log(response.is_free));
-
-```
-
-| Method | Description |
-| -------------------- | ----------- |
-| `isFree(token)`  | Checks whether a checkout has a zero payable balance  |
-
-<div class="highlight highlight--info">
-    <span>Info</span>
-    <p>For more information, refer to <a href="/docs/api/?shell#check-if-order-is-free">the full response for checking if a checkout is free</a>.</p>
-</div>
-
----
-
 ## Get shipping methods
 
 The `getShippingOptions()` method uses `GET v1/checkouts/{checkout_token_id}/helper/shipping_options` to return a list
@@ -500,36 +473,6 @@ commerce.checkout.setTaxZone('chkt_L5z3kmQpdpkGlA', {
   <span>Info</span>
   <p>For more information, refer to <a href="/docs/api/?shell#set-tax-zone">the full response for setting the tax zone</a>.</p>
 </div>
-
----
-
-## Get location from IP
-
-The `getLocationFromIP()` helper method uses `GET /v1/checkouts/{checkout_token_id}/helper/location_from_ip` to
-determine the buyer's physical location based on their IP address. This can be used to automatically select an
-appropriate shipping method during checkout. An IP address can either be provided, or it will be detected automatically.
-Please note that if the endpoint is called from a server-side request, the resolved IP will be that of your web server.
-In this case you must provide the IP address of the customer yourself.
-
-Example request using Commerce.js:
-
-```js
-import Commerce from '@chec/commerce.js';
-
-const commerce = new Commerce('{your_public_key}');
-
-commerce.checkout.getLocationFromIP('chkt_L5z3kmQpdpkGlA', '123.45.67.89').then((address) => console.log(address));
-```
-
-| Method | Description |
-| -------------------- | ----------- |
-| `getLocationFromIP(token, ipAddress = '')`  | Gets a location from the provided (or your own) IP address |
-
-<div class="highlight highlight--info">
-  <span>Info</span>
-  <p>For for information, refer to <a href="/docs/api/?shell#get-buyer-039-s-location-from-ip">the full response for getting the buyer's location from the IP address</a>.</p>
-</div>
-
 
 ---
 
