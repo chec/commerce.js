@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
@@ -27,3 +29,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: 'git push origin master;git push --tags'
+      # Create a release with a changelog
+      - name: Create changelog from git log
+        run: git log --oneline --pretty=format:"* %s (%an) - %h" --no-merges $(git describe --abbrev=0 HEAD^)..HEAD~1 >> .github/workflows/changelog-template.txt
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          body_path: .github/workflows/changelog-template.txt
