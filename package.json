@@ -23,13 +23,16 @@
   "bugs": {
     "url": "https://github.com/chec/commerce.js/issues/new"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublishOnly": "rollup -c"
+    "build": "rollup -c"
   },
   "author": "Chec Platform Inc",
   "license": "BSD-3-Clause",
