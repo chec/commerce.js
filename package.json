@@ -37,12 +37,14 @@
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "eslint": "^8.4.1",
-    "jest": "^27.4.3",
+    "jest": "^27.4.7",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.0",
     "ts-jest": "^27.1.1",
     "tslib": "^2.3.1",
     "typescript": "^4.5.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "qs": "^6.10.3"
+  }
 }
