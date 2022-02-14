@@ -1,3 +1,5 @@
 export default interface CommerceOptions {
-  debug?: boolean
+  baseUrl?: string,
+  debug?: boolean,
+  allowSecretKey?: boolean
 }
