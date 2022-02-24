@@ -3,22 +3,17 @@ type ApiCart = any;
 
 export interface StateStorage {
   get<T>(key: string): Promise<T|null>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set(key: string, value: any): void
   supportsJson(): boolean
 }
 
 export class NullStorage implements StateStorage {
-  storage: Storage;
-
-  constructor(storage: Storage = window.localStorage) {
-    this.storage = storage;
-  }
-
-  get<T>(key: string) {
+  get() {
     return Promise.resolve(null);
   }
 
-  set(key: string, value: any) {
+  set() {
     // noop
   }
 
@@ -42,6 +37,7 @@ export class LocalStorage implements StateStorage {
     return Promise.resolve(JSON.parse(data));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   set(key: string, value: any) {
     const data = typeof value !== 'string' ? value : JSON.stringify(value);
 
@@ -72,7 +68,7 @@ export class State {
     return this.storage.get<ApiCart>(`cart_${id}`);
   }
 
-  setCartData(id: string, value: any) {
+  setCartData(id: string, value: ApiCart) {
     return this.storage.set(`cart_${id}`, value);
   }
 }

@@ -12,11 +12,11 @@ export const DEFAULT_API_VERSION = '2021-10-06';
 export default class Commerce {
   key: string;
   options: CommerceOptions;
-  state:  any;
+  state: State;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   constructor(key: string, options: CommerceOptions = {}, state: StateStorage) {
-    let defaultStorage: LocalStorage;
+    let defaultStorage: StateStorage;
 
     if(window.localStorage) {
       defaultStorage = new LocalStorage();
