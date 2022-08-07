@@ -112,6 +112,19 @@ commerce.products.list({
 }).then(response => response.data); // Returns all products sorted by highest price first.
 ```
 
+Example request listing products for pagination:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.list({
+  limit: 20,
+  page: 1, // The page number defaults to 1 if it is not specified
+}).then(response => response.data); // Returns 20 products for page 1
+```
+
 Once you've got your product data you can populate your product listing view. The response here will include everything
 you need to build this view, such as metadata, assets, variant groups and variant options, conditionals, and prices.
 
