@@ -55,6 +55,7 @@ You can filter your products list by passing these optional parameters below:
 | `query` | Filter by a term that will be matched against the product's ID (exactly), permalink, and name |
 | `sortBy` | The column to sort by. Valid options are sort_order, name, created, and price |
 | `sortDirection` | The direction to sort in, either asc or desc |
+| `page` | The page number to return (default: 1) |
 
 
 Example request listing products filtered by the category slug:
