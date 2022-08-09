@@ -55,6 +55,7 @@ You can filter your products list by passing these optional parameters below:
 | `query` | Filter by a term that will be matched against the product's ID (exactly), permalink, and name |
 | `sortBy` | The column to sort by. Valid options are sort_order, name, created, and price |
 | `sortDirection` | The direction to sort in, either asc or desc |
+| `page` | The page number to return (default: 1) |
 
 
 Example request listing products filtered by the category slug:
@@ -110,6 +111,19 @@ commerce.products.list({
   sortBy: 'price',
   sortOrder: 'desc',
 }).then(response => response.data); // Returns all products sorted by highest price first.
+```
+
+Example request listing products for pagination:
+
+```js
+import Commerce from '@chec/commerce.js';
+
+const commerce = new Commerce('{your_public_key}');
+
+commerce.products.list({
+  limit: 20,
+  page: 1, // The page number defaults to 1 if it is not specified
+}).then(response => response.data); // Returns 20 products for page 1
 ```
 
 Once you've got your product data you can populate your product listing view. The response here will include everything
